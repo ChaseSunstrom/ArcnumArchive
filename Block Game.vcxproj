@@ -133,10 +133,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Desktop\CLIBRARIES\glad\src\glad.c" />
+    <ClCompile Include="src\game\game.c" />
+    <ClCompile Include="src\game\terminate.c" />
     <ClCompile Include="src\game\user\window.c" />
     <ClCompile Include="src\main.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\game\game.h" />
+    <ClInclude Include="src\game\terminate.h" />
     <ClInclude Include="src\game\user\window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

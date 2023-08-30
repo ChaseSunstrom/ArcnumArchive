@@ -8,7 +8,7 @@
 #define WINDOW_WIDTH 1200
 #define WINDOW_HEIGHT 720
 
-void create_window()
+GLFWwindow* create_window()
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -36,13 +36,7 @@ void create_window()
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    while (!glfwWindowShouldClose(window))
-    {
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-
-    glfwTerminate();
+    return window;
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
