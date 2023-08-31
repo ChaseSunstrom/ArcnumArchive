@@ -18,15 +18,27 @@
     <ClCompile Include="src\main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Desktop\CLIBRARIES\glad\src\glad.c">
+    <ClCompile Include="src\game\user\window.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\user\window.c">
+    <ClCompile Include="src\game\game.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\terminate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\user\window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\terminate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
