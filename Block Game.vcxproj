@@ -134,14 +134,20 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="src\game\game.c" />
+    <ClCompile Include="src\game\shader.c" />
     <ClCompile Include="src\game\terminate.c" />
     <ClCompile Include="src\game\user\window.c" />
     <ClCompile Include="src\main.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\game.h" />
+    <ClInclude Include="src\game\shader.h" />
     <ClInclude Include="src\game\terminate.h" />
     <ClInclude Include="src\game\user\window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\game\triangle.glfs" />
+    <None Include="src\game\triangle.glvs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
