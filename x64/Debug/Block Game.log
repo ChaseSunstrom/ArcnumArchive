@@ -2,6 +2,11 @@
 C:\Users\Chase\source\repos\Block Game\src\game\game.c(51,9): warning C4013: 'printf' undefined; assuming extern returning int
 C:\Users\Chase\source\repos\Block Game\src\game\game.c(28,18): warning C4101: 'fragment_shader': unreferenced local variable
   shader.c
-C:\Users\Chase\source\repos\Block Game\src\game\shader.c(25,2): warning C4047: 'return': 'char *' differs in levels of indirection from 'char'
-C:\Users\Chase\source\repos\Block Game\src\game\shader.c(12,9): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Chase\source\repos\Block Game\src\game\shader.c(13,17): warning C4047: 'function': 'FILE **' differs in levels of indirection from 'char *'
+C:\Users\Chase\source\repos\Block Game\src\game\shader.c(13,17): warning C4024: 'fopen_s': different types for formal and actual parameter 1
+C:\Users\Chase\source\repos\Block Game\src\game\shader.c(13,33): warning C4047: 'function': 'const char *' differs in levels of indirection from 'int'
+C:\Users\Chase\source\repos\Block Game\src\game\shader.c(13,33): warning C4024: 'fopen_s': different types for formal and actual parameter 3
+C:\Users\Chase\source\repos\Block Game\src\game\shader.c(13,7): warning C4047: '=': 'FILE *' differs in levels of indirection from 'errno_t'
+C:\Users\Chase\source\repos\Block Game\src\game\shader.c(26,2): warning C4047: 'return': 'char *' differs in levels of indirection from 'char'
   Generating Code...
+  Block Game.vcxproj -> C:\Users\Chase\source\repos\Block Game\x64\Debug\Block Game.exe

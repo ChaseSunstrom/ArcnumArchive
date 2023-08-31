@@ -5,11 +5,12 @@
 
 #include "shader.h"
 
-char* read_shader_file(FILE* file, char* file_name)
+char* read_shader_file(char* file_name)
 {
+	FILE* file;
 	char contents;
 
-	file = fopen(file_name, "r");
+	file = fopen_s(file_name, "r", 100);
 
 	if (file == NULL)
 	{

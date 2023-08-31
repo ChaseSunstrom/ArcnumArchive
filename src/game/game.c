@@ -31,8 +31,8 @@ void render_triangle()
         0.5f, -0.5f, 0.0f,
         0.0f, 0.5f, 0.0f,
     };
-    char* vertex_shader_source = read_shader_file();
-    char* fragment_shader_source = read_shader_file();
+    char* vertex_shader_source = read_shader_file("triagnel.glvs");
+    char* fragment_shader_source = read_shader_file("triangle.glfs");
     
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -50,5 +50,4 @@ void render_triangle()
         glGetShaderInfoLog(vertex_shader, 512, NULL, info_log);
         printf("ERROR: Shader/Vertex compilation failed! \n%s", info_log);
     }
-
 }
