@@ -1,12 +1,4 @@
 ﻿  game.c
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(51,9): warning C4013: 'printf' undefined; assuming extern returning int
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(28,18): warning C4101: 'fragment_shader': unreferenced local variable
-  shader.c
-C:\Users\Chase\source\repos\Block Game\src\game\shader.c(13,17): warning C4047: 'function': 'FILE **' differs in levels of indirection from 'char *'
-C:\Users\Chase\source\repos\Block Game\src\game\shader.c(13,17): warning C4024: 'fopen_s': different types for formal and actual parameter 1
-C:\Users\Chase\source\repos\Block Game\src\game\shader.c(13,33): warning C4047: 'function': 'const char *' differs in levels of indirection from 'int'
-C:\Users\Chase\source\repos\Block Game\src\game\shader.c(13,33): warning C4024: 'fopen_s': different types for formal and actual parameter 3
-C:\Users\Chase\source\repos\Block Game\src\game\shader.c(13,7): warning C4047: '=': 'FILE *' differs in levels of indirection from 'errno_t'
-C:\Users\Chase\source\repos\Block Game\src\game\shader.c(26,2): warning C4047: 'return': 'char *' differs in levels of indirection from 'char'
-  Generating Code...
+C:\Users\Chase\source\repos\Block Game\src\game\game.c(37,18): warning C4047: 'function': 'GLuint' differs in levels of indirection from 'unsigned int *'
+C:\Users\Chase\source\repos\Block Game\src\game\game.c(37,18): warning C4024: 'glad_glUseProgram': different types for formal and actual parameter 1
   Block Game.vcxproj -> C:\Users\Chase\source\repos\Block Game\x64\Debug\Block Game.exe

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #include <glad.h>
 #include <glfw3.h>
@@ -8,46 +9,44 @@
 #include "terminate.h"
 #include "shader.h"
 
-void game_main(GLFWwindow* main_window)
-{
-    while (!glfwWindowShouldClose(main_window))
-    {
-        glfwSwapBuffers(main_window);
-        glfwPollEvents();
-    }
-
-    game_terminate(main_window);
-}
-
 void render_triangle()
 {
-    int success;
-    char info_log[512];
     unsigned int VBO;
-    unsigned int vertex_shader;
-    unsigned int fragment_shader;
+    unsigned int VAO;
+    unsigned int* shader_program = handle_shaders();
     float vertices[] = {
         -0.5f, -0.5f, 0.0f,
         0.5f, -0.5f, 0.0f,
         0.0f, 0.5f, 0.0f,
     };
-    char* vertex_shader_source = read_shader_file("triagnel.glvs");
-    char* fragment_shader_source = read_shader_file("triangle.glfs");
-    
+
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    
-    vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 
-    glShaderSource(vertex_shader, 1, &vertex_shader_source, NULL);
-    glCompileShader(vertex_shader);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
 
-    glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &success);
+    glGenVertexArrays(1, &VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    if (!success)
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    glUseProgram(shader_program);
+    glBindVertexArray(VAO);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
+void game_main(GLFWwindow* main_window)
+{
+    while (!glfwWindowShouldClose(main_window))
     {
-        glGetShaderInfoLog(vertex_shader, 512, NULL, info_log);
-        printf("ERROR: Shader/Vertex compilation failed! \n%s", info_log);
+        render_triangle();
+        glfwSwapBuffers(main_window);
+        glfwPollEvents();
     }
+
+    game_terminate(main_window);
 }
