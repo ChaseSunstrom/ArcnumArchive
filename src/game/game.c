@@ -11,41 +11,35 @@
 
 void render_triangle()
 {
-    unsigned int VBO;
-    unsigned int VAO;
-    unsigned int* shader_program = handle_shaders();
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
+void game_main(GLFWwindow* main_window)
+{
     float vertices[] = {
         -0.5f, -0.5f, 0.0f,
         0.5f, -0.5f, 0.0f,
         0.0f, 0.5f, 0.0f,
     };
 
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    unsigned int VBO = setup_vertex_buffer(vertices);
+    unsigned int VAO = setup_vertex_array(vertices, &VBO);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
+    int* VBO_PTR = &VBO;
+    int* VAO_PTR = &VAO;
 
-    glGenVertexArrays(1, &VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    printf("VBO: %p\n", VBO_PTR);
+    printf("VAO: %p\n", VAO_PTR);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
+    unsigned int shader_program = handle_shaders();
 
-    glUseProgram(shader_program);
-    glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-}
-
-void game_main(GLFWwindow* main_window)
-{
     while (!glfwWindowShouldClose(main_window))
     {
-        render_triangle();
         glfwSwapBuffers(main_window);
         glfwPollEvents();
+        glUseProgram(shader_program);
+        glBindVertexArray(VAO);
+        render_triangle();
     }
 
     game_terminate(main_window);

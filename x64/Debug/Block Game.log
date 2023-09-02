@@ -1,4 +1,2 @@
 ﻿  game.c
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(37,18): warning C4047: 'function': 'GLuint' differs in levels of indirection from 'unsigned int *'
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(37,18): warning C4024: 'glad_glUseProgram': different types for formal and actual parameter 1
   Block Game.vcxproj -> C:\Users\Chase\source\repos\Block Game\x64\Debug\Block Game.exe
