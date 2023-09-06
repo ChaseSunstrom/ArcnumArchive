@@ -1,13 +1,12 @@
 ﻿  game.c
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(44,36): warning C4047: 'function': 'GLuint' differs in levels of indirection from 'unsigned int *'
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(44,36): warning C4024: 'glad_glAttachShader': different types for formal and actual parameter 2
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(45,36): warning C4047: 'function': 'GLuint' differs in levels of indirection from 'unsigned int *'
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(45,36): warning C4024: 'glad_glAttachShader': different types for formal and actual parameter 2
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(56,44): warning C4047: 'function': 'float **' differs in levels of indirection from 'float (*)[9]'
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(56,44): warning C4024: 'setup_vertex_buffer': different types for formal and actual parameter 1
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(57,40): warning C4047: 'function': 'float **' differs in levels of indirection from 'float (*)[9]'
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(57,40): warning C4024: 'setup_vertex_array': different types for formal and actual parameter 1
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(57,51): warning C4020: 'setup_vertex_array': too many actual parameters
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(39,16): warning C4047: 'initializing': 'unsigned int *' differs in levels of indirection from 'unsigned int'
-C:\Users\Chase\source\repos\Block Game\src\game\game.c(40,16): warning C4047: 'initializing': 'unsigned int *' differs in levels of indirection from 'unsigned int'
+C:\Users\Chase\source\repos\Block Game\src\game\game.c(49,36): warning C4047: 'function': 'GLuint' differs in levels of indirection from 'unsigned int *'
+C:\Users\Chase\source\repos\Block Game\src\game\game.c(49,36): warning C4024: 'glad_glAttachShader': different types for formal and actual parameter 2
+C:\Users\Chase\source\repos\Block Game\src\game\game.c(50,36): warning C4047: 'function': 'GLuint' differs in levels of indirection from 'unsigned int *'
+C:\Users\Chase\source\repos\Block Game\src\game\game.c(50,36): warning C4024: 'glad_glAttachShader': different types for formal and actual parameter 2
+C:\Users\Chase\source\repos\Block Game\src\game\game.c(61,35): warning C4047: 'function': 'float **' differs in levels of indirection from 'float (*)[12]'
+C:\Users\Chase\source\repos\Block Game\src\game\game.c(61,35): warning C4024: 'setup_objects': different types for formal and actual parameter 1
+C:\Users\Chase\source\repos\Block Game\src\game\game.c(61,46): warning C4047: 'function': 'unsigned int **' differs in levels of indirection from 'unsigned int (*)[6]'
+C:\Users\Chase\source\repos\Block Game\src\game\game.c(61,46): warning C4024: 'setup_objects': different types for formal and actual parameter 2
+C:\Users\Chase\source\repos\Block Game\src\game\game.c(44,16): warning C4047: 'initializing': 'unsigned int *' differs in levels of indirection from 'unsigned int'
+C:\Users\Chase\source\repos\Block Game\src\game\game.c(45,16): warning C4047: 'initializing': 'unsigned int *' differs in levels of indirection from 'unsigned int'
   Block Game.vcxproj -> C:\Users\Chase\source\repos\Block Game\x64\Debug\Block Game.exe

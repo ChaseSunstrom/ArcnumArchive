@@ -5,8 +5,8 @@
 
 #include "window.h"
 
-#define WINDOW_WIDTH 1200
-#define WINDOW_HEIGHT 720
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
 
 GLFWwindow* create_window()
 {

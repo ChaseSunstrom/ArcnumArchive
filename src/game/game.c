@@ -22,7 +22,7 @@ const char* fragment_shader_source = "#version 330 core\n"
 
 void render_triangle()
 {
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
 void game_main(GLFWwindow* main_window)
@@ -31,9 +31,14 @@ void game_main(GLFWwindow* main_window)
 	unsigned int shader_program;
     char info_log[512];
     float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.0f, 0.5f, 0.0f,
+        0.5f,  0.5f, 0.0f,  // top right
+        0.5f, -0.5f, 0.0f,  // bottom right
+       -0.5f, -0.5f, 0.0f,  // bottom left
+       -0.5f,  0.5f, 0.0f   // top left 
+    };
+    unsigned int indices[] = {
+        0, 1, 3, //first triangle
+        1, 2, 3  //second triangle
     };
 
 	unsigned int* vertex_shader = setup_vertex_shader(vertex_shader_source);
@@ -53,8 +58,7 @@ void game_main(GLFWwindow* main_window)
         printf("ERROR: Program linking failed!\n%s", info_log);
     }
 
-    unsigned int VBO = setup_vertex_buffer(&vertices);
-	unsigned int VAO = setup_vertex_array(&vertices, &VBO);
+	unsigned int VAO = setup_objects(&vertices, &indices);
 
     while (!glfwWindowShouldClose(main_window))
     {
