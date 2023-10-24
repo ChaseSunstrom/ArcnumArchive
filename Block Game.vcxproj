@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>../Block Game/include/glad;../Block Game/include/SDL;../Block Game/include/GLEW;../Block Game/include/GLFW;$(IncludePath)</IncludePath>
-    <LibraryPath>../Block Game/lib/SDL;../Block Game/lib/GLFW;../Block Game/lib/GLEW;$(LibraryPath)</LibraryPath>
+    <IncludePath>../Block-Game/include/glad;../Block-Game/include/SDL;../Block-Game/include/GLEW;../Block-Game/include/GLFW;$(IncludePath)</IncludePath>
+    <LibraryPath>../Block-Game/lib/SDL;../Block-Game/lib/GLFW;../Block-Game/lib/GLEW;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
