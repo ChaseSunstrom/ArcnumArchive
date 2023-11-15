@@ -1,9 +1,8 @@
-#include <iostream>
+#include <core/window/window.hpp>
 
 int main()
 {
-    std::cout << "Build successful!\n";
-    
+	arc_core::window window;
 
-    return 0;
+	return 0;
 }
