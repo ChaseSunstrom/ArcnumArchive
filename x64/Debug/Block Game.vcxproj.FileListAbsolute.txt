@@ -1,3 +1,1 @@
-C:\Users\Chase\source\repos\Block Game\x64\Debug\Block Game.exe
-C:\Users\casun\source\repos\Block-Game\x64\Debug\Block Game.exe
-C:\Users\casun\source\repos\Linked-GL\x64\Debug\Block Game.exe
+C:\Users\Chase\source\repos\Linked-GL\x64\Debug\Linked-GL.exe
