@@ -27,6 +27,7 @@ namespace arc_core
 
 
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+	void error_callback(int id, const char* description);
 }
 
 #endif

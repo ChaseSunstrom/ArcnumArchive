@@ -8,22 +8,14 @@
 #define SCR_WIDTH 800
 #define SCR_HEIGHT 800
 
-const char* vertexShaderSource = "#version 330 core\n"
-"layout (location = 0) in vec3 aPos;\n"
-"void main()\n"
-"{\n"
-"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-"}\0";
-const char* fragmentShaderSource = "#version 330 core\n"
-"out vec4 FragColor;\n"
-"void main()\n"
-"{\n"
-"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-"}\n\0";
+
+
 
 
 namespace arc_core
 {
+
+
 	window::window()
 	{
 	}
@@ -45,25 +37,43 @@ namespace arc_core
 
 	void window::update()
 	{
-        glfwInit();
-        if (!glfwInit()) {
-            // Initialization failed
-            // Handle the error
-			exit(-1);
-        }
+        const char* vertexShaderSource = "#version 330 core\n"
+            "layout (location = 0) in vec3 aPos;\n"
+            "void main()\n"
+            "{\n"
+            "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+            "}\0";
+        const char* fragmentShaderSource = "#version 330 core\n"
+            "out vec4 FragColor;\n"
+            "void main()\n"
+            "{\n"
+            "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+            "}\n\0";
+        const char* desc;
+		//std::cout << glGetString(GL_VERSION) << std::endl;
+		glfwSetErrorCallback(&error_callback);
+		glfwInit();
+        
+
         // Set GLFW to use the OpenGL Core Profile
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        // Create a windowed mode window and its OpenGL context
-        GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Your Window Title", NULL, NULL);
-        if (!window) {
-            // Handle window creation failure
+        //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+        // Create a windowed mode window and its OpenGL contex
+
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+
+        GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
+        if (window == NULL)
+        {
+            std::cout << "Failed to create GLFW window" << std::endl;
             glfwTerminate();
             exit(-1);
         }
-        // Make the window's context current
         glfwMakeContextCurrent(window);
         glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+        glewInit();
 
+       
         // glad: load all OpenGL function pointers
         // ---------------------------------------
 
@@ -190,6 +200,11 @@ namespace arc_core
         // make sure the viewport matches the new window dimensions; note that width and 
         // height will be significantly larger than specified on retina displays.
         glViewport(0, 0, width, height);
+    }
+
+    void error_callback(int id, const char* description)
+    {
+        std::cout << description << std::endl;
     }
 
 	void window::render()
