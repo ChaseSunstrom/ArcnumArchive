@@ -109,13 +109,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)/include/GLAD;$(ProjectDir)/include/GLEW;$(ProjectDir)/include/GLFW;$(ProjectDir)/include/SDL;$(SolutionDir)ArcnumCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ArcnumCore/include/GLAD;$(SolutionDir)ArcnumCore/include/GLEW;$(SolutionDir)ArcnumCore)/include/GLFW;$(SolutionDir)ArcnumCore/include/SDL;$(SolutionDir)ArcnumCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)ArcnumCore\$(Platform)\$(Configuration)\*.obj;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)/lib/GLFW;$(ProjectDir)/lib/GLEW;$(ProjectDir)/lib/GLAD;$(ProjectDir)/lib/SDL;$(SolutionDir)ArcnumCore;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SolutionDir)ArcnumCore\$(Platform)\$(Configuration)\*.obj;SDL2.lib;SDL2main.lib;glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ArcnumCore/lib/GLFW;$(SolutionDir)ArcnumCore/lib/GLEW;$(SolutionDir)ArcnumCore/lib/GLAD;$(SolutionDir)ArcnumCore/lib/SDL;$(SolutionDir)ArcnumCore;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
