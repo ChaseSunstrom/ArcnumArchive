@@ -138,11 +138,13 @@
   <ItemGroup>
     <ClInclude Include="core\window\window.hpp" />
     <ClInclude Include="core\window\renderer.hpp" />
+    <ClInclude Include="core\window\shader.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\window\window.cpp" />
     <ClCompile Include="lib\GLAD\glad.c" />
     <ClCompile Include="core\window\renderer.cpp" />
+    <ClCompile Include="core\window\shader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
