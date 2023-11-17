@@ -5,6 +5,7 @@
 #include <glfw3.h>
 
 #include "renderer.hpp"
+#include "entity.hpp"
 
 namespace arc_core
 {
@@ -14,10 +15,12 @@ namespace arc_core
 		window();
 		~window();
 		void init_gl();
-		void update();
+		void update(std::vector<entity*> entity);
+		bool is_running();
+	public:
+		renderer* _renderer;
 	private:
 		bool _running = true;
-		renderer* _renderer;
 		GLFWwindow* _window;
 	};
 

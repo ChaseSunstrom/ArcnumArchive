@@ -19,8 +19,8 @@ namespace arc_core
 	{
 		shader();
 		~shader();
-		void compile_shaders(std::vector<const char*> vertex_source, std::vector<const char*> fragment_source);
-		void bind_objects();
+		void compile_shaders(const char* vertex_source, const char* fragment_source);
+		void bind_objects(float vertices[]);
 
 		gl_objects* _gl_objects;
 		GLuint _gl_vertex_shader = 0;

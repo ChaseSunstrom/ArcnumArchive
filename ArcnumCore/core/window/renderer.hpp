@@ -6,7 +6,7 @@
 #include <glew.h>
 #include <glfw3.h>
 
-#include "shader.hpp"
+#include "entity.hpp"
 
 namespace arc_core
 {
@@ -17,10 +17,11 @@ namespace arc_core
 		~renderer();
 		void render();
 		void attach_shaders();
-	private:
-		std::vector<shader*> _shaders;
-		GLuint _gl_program     = 0;
+	public:
 		GLuint _shader_program = 0;
+	private:
+		std::vector<entity*> _entities;
+		GLuint _gl_program = 0;
 	};
 }
 
