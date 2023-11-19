@@ -22,14 +22,22 @@ int main()
 			 0.5f,  0.5f, 0.0f,  // top right
 			 0.5f, -0.5f, 0.0f,  // bottom right
 			-0.5f, -0.5f, 0.0f,  // bottom left
-			-0.5f,  0.5f, 0.0f   // top left 
+			-0.5f,  0.5f, 0.0f   // top left
 	};
 
+	std::vector<int> indices = {
+		0, 1, 3,
+		1, 2, 3
+	};
+
+
 	arc_core::window* window = new arc_core::window();
-	arc_core::entity* entity = new arc_core::entity(&window->_renderer->_shader_program, vertex_source, fragment_source, vertices);
+	arc_core::entity* entity = new arc_core::entity(&window->_renderer->_shader_program, vertex_source, fragment_source, vertices, indices);
+	//arc_core::entity* entity2 = new arc_core::entity(&window->_renderer->_shader_program, vertex_source, fragment_source, vertices, indices);
 
 	std::vector<arc_core::entity*> entities;
 	entities.emplace_back(entity);
+	//entities.emplace_back(entity2);
 
 	while (window->is_running())
 	{

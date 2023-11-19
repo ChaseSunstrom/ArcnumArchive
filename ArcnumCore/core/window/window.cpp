@@ -37,9 +37,9 @@ namespace arc_core
 		glewInit();
 	}
 
-	void window::update(std::vector<entity*> entity)
+	void window::update(std::vector<entity*> entities)
 	{
-		for (auto e : entity)
+		for (auto e : entities)
 		{
 			e->render();
 		}

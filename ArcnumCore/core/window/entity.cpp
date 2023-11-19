@@ -6,12 +6,12 @@
 
 namespace arc_core
 {
-	entity::entity(GLuint* shader_program, const char* vertex_source, const char* fragment_source, std::vector<float> vertices)
+	entity::entity(GLuint* shader_program, const char* vertex_source, const char* fragment_source, std::vector<float> vertices, std::vector<int> indices)
 	{
 		this->_vertices = vertices;
+		this->_indices = indices;
 		this->_shader_program = shader_program;
-		this->_shader = new shader();
-		this->_shader->compile_shaders(vertex_source, fragment_source);
+		this->_shader = new shader(vertex_source, fragment_source);
 		this->attach_shaders();
 		this->bind_objects();
 	}
@@ -35,21 +35,17 @@ namespace arc_core
 
 	void  entity::bind_objects()
 	{
-		unsigned int indices[] = {  // note that we start from 0!
-			0, 1, 3,  // first Triangle
-			1, 2, 3   // second Triangle
-		};
-
+		
 		glGenVertexArrays(1, &this->_shader->_gl_objects->_VAO);
 		glGenBuffers(1, &this->_shader->_gl_objects->_VBO);
 		glGenBuffers(1, &this->_shader->_gl_objects->_EBO);
 		glBindVertexArray(this->_shader->_gl_objects->_VAO);
 
 		glBindBuffer(GL_ARRAY_BUFFER, this->_shader->_gl_objects->_VBO);
-		glBufferData(GL_ARRAY_BUFFER, this->_vertices.capacity() * 3 * sizeof(float), &this->_vertices, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, 3 * sizeof(this->_vertices), this->_vertices.data(), GL_STATIC_DRAW);
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->_shader->_gl_objects->_EBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->_indices), this->_indices.data(), GL_STATIC_DRAW);
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), NULL);
 		glEnableVertexAttribArray(0);

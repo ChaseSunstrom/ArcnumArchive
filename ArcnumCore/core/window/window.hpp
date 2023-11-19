@@ -15,7 +15,7 @@ namespace arc_core
 		window();
 		~window();
 		void init_gl();
-		void update(std::vector<entity*> entity);
+		void update(std::vector<entity*> entities);
 		bool is_running();
 	public:
 		renderer* _renderer;

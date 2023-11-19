@@ -8,10 +8,11 @@
 
 namespace arc_core
 {
+
 	class entity
 	{
 	public:
-		entity(GLuint* shader_program, const char* vertex_source, const char* fragment_source, std::vector<float> vertices);
+		entity(GLuint* shader_program, const char* vertex_source, const char* fragment_source, std::vector<float> vertices, std::vector<int> indices);
 		~entity();
 		void attach_shaders();
 		void render();
@@ -20,6 +21,7 @@ namespace arc_core
 		shader* _shader;
 		GLuint* _shader_program;
 		std::vector<float> _vertices;
+		std::vector<int> _indices;
 	};
 }
 

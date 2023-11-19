@@ -17,9 +17,8 @@ namespace arc_core
 
 	struct shader
 	{
-		shader();
+		shader(const char* vertex_source, const char* fragment_source);
 		~shader();
-		void compile_shaders(const char* vertex_source, const char* fragment_source);
 		void bind_objects(float vertices[]);
 
 		gl_objects* _gl_objects;
