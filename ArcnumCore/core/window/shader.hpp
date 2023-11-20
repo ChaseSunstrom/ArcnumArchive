@@ -7,15 +7,15 @@ namespace arc_core
 {
 	struct shader
 	{
-		shader(const char* vertex_source, const char* fragment_source);
+		shader(std::filesystem::path vertex_path, std::filesystem::path fragment_path);
 		~shader();
+		std::string read_file(std::filesystem::path path);
 
 		GLuint _gl_vertex_shader = 0;
 		GLuint _gl_fragment_shader = 0;
 
 		GLuint _VBO = 0;
 		GLuint _VAO = 0;
-		GLuint _EBO = 0;
 	};
 }
 

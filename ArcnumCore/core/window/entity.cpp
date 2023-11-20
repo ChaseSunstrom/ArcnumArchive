@@ -1,3 +1,5 @@
+#include <cstdint>
+
 #include <glew.h>
 #include <glfw3.h>
 
@@ -6,13 +8,18 @@
 
 namespace arc_core
 {
-	entity::entity(GLuint* shader_program, const char* vertex_source, const char* fragment_source, std::vector<float> vertices, std::vector<int> indices)
+	entity::entity(GLuint* shader_program, std::filesystem::path vertex_source, std::filesystem::path fragment_source, std::vector<float> vertices)
 	{
 		this->_vertices = vertices;
-		this->_indices = indices;
 		this->_shader_program = glCreateProgram();
 		this->_shader = new shader(vertex_source, fragment_source);
 		this->attach_shaders();
+	}
+
+	entity::~entity()
+	{
+		this->_shader->~shader();
+		glDeleteProgram(this->_shader_program);
 	}
 
 	void entity::attach_shaders()
@@ -23,11 +30,19 @@ namespace arc_core
 		this->_shader->~shader();
 	}
 
-	entities::entities(std::vector<entity*> entities)
+	entities::entities()
 	{
-		this->_entities = entities;
-		this->_VAOs = new GLuint[entities.size()];
-		this->_VBOs = new GLuint[entities.size()];
+		this->_entities = std::vector<entity*>();
+		this->_VAOs = std::vector<GLuint>();
+		this->_VBOs = std::vector<GLuint>();
+	}
+
+	entities::~entities()
+	{
+		for (auto entity : this->_entities)
+		{
+			entity->~entity();
+		}
 	}
 
 	void entity::render()
@@ -59,8 +74,8 @@ namespace arc_core
 	{
 		uint64_t iterator = 0;
 
-		glGenVertexArrays(this->_entities.size(), this->_VAOs);
-		glGenBuffers(this->_entities.size(), this->_VBOs);
+		glGenVertexArrays(this->_entities.size(), &this->_VAOs[0]);
+		glGenBuffers(this->_entities.size(), &this->_VBOs[0]);
 
 		for (auto entity : this->_entities)
 		{
@@ -70,6 +85,21 @@ namespace arc_core
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), NULL);	
 			glEnableVertexAttribArray(0);
 			iterator++;
+		}
+	}
+
+	void entities::add_entity(entity* entity)
+	{
+		this->_VAOs.emplace_back(0);
+		this->_VBOs.emplace_back(0);
+
+		if (this->_entities.capacity() > sizeof(uint64_t))
+		{
+			this->_entities.emplace_back(entity);
+		}
+		else
+		{
+			this->_entities.push_back(entity);
 		}
 	}
 }

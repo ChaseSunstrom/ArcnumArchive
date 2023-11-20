@@ -68,6 +68,5 @@ namespace arc_core
 		float delta_time = current_time - last_time;
 		last_time = current_time;
 		std::cout << "FPS: " << (1 / delta_time) << std::endl;
-
 	}
 }

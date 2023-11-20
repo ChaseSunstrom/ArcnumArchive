@@ -3,6 +3,7 @@
 #define CORE_ENTITY_HPP
 
 #include <vector>
+#include <filesystem>
 
 #include "shader.hpp"
 
@@ -12,7 +13,7 @@ namespace arc_core
 	class entity
 	{
 	public:
-		entity(GLuint* shader_program, const char* vertex_source, const char* fragment_source, std::vector<float> vertices, std::vector<int> indices);
+		entity(GLuint* shader_program, std::filesystem::path vertex_source, std::filesystem::path fragment_source, std::vector<float> vertices);
 		~entity();
 		void attach_shaders();
 		void render();
@@ -20,20 +21,20 @@ namespace arc_core
 		shader* _shader;
 		GLuint _shader_program;
 		std::vector<float> _vertices;
-		std::vector<int> _indices;
 	};
 
 	class entities
 	{
 	public:
-		entities(std::vector<entity*> entities);
+		entities();
 		~entities();
 		void bind_objects();
 		void render();
+		void add_entity(entity* entity);
 	private:
 		std::vector<entity*> _entities;
-		GLuint* _VAOs;
-		GLuint* _VBOs;
+		std::vector<GLuint> _VAOs;
+		std::vector<GLuint> _VBOs;
 	};
 
 }
