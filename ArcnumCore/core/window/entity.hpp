@@ -16,13 +16,26 @@ namespace arc_core
 		~entity();
 		void attach_shaders();
 		void render();
-		void bind_objects();
 	public:
 		shader* _shader;
-		GLuint* _shader_program;
+		GLuint _shader_program;
 		std::vector<float> _vertices;
 		std::vector<int> _indices;
 	};
+
+	class entities
+	{
+	public:
+		entities(std::vector<entity*> entities);
+		~entities();
+		void bind_objects();
+		void render();
+	private:
+		std::vector<entity*> _entities;
+		GLuint* _VAOs;
+		GLuint* _VBOs;
+	};
+
 }
 
 #endif

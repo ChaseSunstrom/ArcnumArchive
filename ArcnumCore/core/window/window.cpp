@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 
 #include <glew.h>
 #include <glfw3.h>
@@ -29,7 +30,7 @@ namespace arc_core
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
-		this->_window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
+		this->_window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Arcnum", NULL, NULL);
 
 		glfwMakeContextCurrent(this->_window);
 		glfwSetFramebufferSizeCallback(this->_window, framebuffer_size_callback);
@@ -37,12 +38,14 @@ namespace arc_core
 		glewInit();
 	}
 
-	void window::update(std::vector<entity*> entities)
+	void window::update(entities* entities)
 	{
-		for (auto e : entities)
-		{
-			e->render();
-		}
+		entities->bind_objects();
+
+		entities->render();
+
+		calculate_framerate();
+
 		glfwPollEvents();
 		glfwSwapBuffers(this->_window);
 	}
@@ -55,5 +58,16 @@ namespace arc_core
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	{
 		glViewport(0, 0, width, height);
+	}
+
+	float last_time = 0.0f;
+
+	void calculate_framerate()
+	{
+		float current_time = glfwGetTime();
+		float delta_time = current_time - last_time;
+		last_time = current_time;
+		std::cout << "FPS: " << (1 / delta_time) << std::endl;
+
 	}
 }

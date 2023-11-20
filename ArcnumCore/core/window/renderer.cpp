@@ -22,7 +22,6 @@ namespace arc_core
         for (auto entity : this->_entities)
         {
             entity->_shader->~shader();
-            entity->_shader->_gl_objects->~gl_objects();
         }
     }
 }

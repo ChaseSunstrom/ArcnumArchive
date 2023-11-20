@@ -15,7 +15,7 @@ namespace arc_core
 		window();
 		~window();
 		void init_gl();
-		void update(std::vector<entity*> entities);
+		void update(entities* entities);
 		bool is_running();
 	public:
 		renderer* _renderer;
@@ -26,7 +26,7 @@ namespace arc_core
 
 
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-	void error_callback(int id, const char* description);
+	void calculate_framerate();
 }
 
 #endif
