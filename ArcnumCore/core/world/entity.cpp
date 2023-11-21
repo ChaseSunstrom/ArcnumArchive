@@ -1,5 +1,6 @@
 #include <cstdint>
 #include <filesystem>
+#include <cstdlib>
 
 #include <glew.h>
 #include <glfw3.h>
@@ -50,10 +51,7 @@ namespace arcnum_core
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-
 		glUseProgram(this->_shader_program);
-
-
 		glBindVertexArray(this->_shader->_VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 	}
@@ -69,10 +67,18 @@ namespace arcnum_core
 		{
 			glUseProgram(entity->_shader_program);
 			glBindVertexArray(this->_VAOs[iterator]);
+
+			srand((unsigned)time(NULL));
+
+			// Get a random number
+			int random = rand() % 10;
+
 			float time = glfwGetTime();
-			float green = static_cast<float>(sin(time) / 2.0f + 0.5f);
+			float green = static_cast<float>(sin(time) / random);
+			float blue = static_cast<float>(cos(time) / random);
+			float red = static_cast<float>(tan(time) / random);
 			int vertex_color_location = glGetUniformLocation(entity->_shader_program, "my_color");
-			glUniform4f(vertex_color_location, 0.0f, green, 0.0f, 1.0f);
+			glUniform4f(vertex_color_location, red, green, blue, 1.0f);
 
 			glDrawArrays(GL_TRIANGLES, 0, 3);
 			iterator++;

@@ -4,8 +4,8 @@
 #include <filesystem>
 
 #include <core/window/window.hpp>
-#include <core/window/entity.hpp>
-#include "world/triangle.hpp"
+#include <core/world/entity.hpp>
+#include <core/world/geometry.hpp>
 #include "arcnum.hpp"
 
 #define TOP_RIGHT 0.5f,  0.5f, 0.0f
@@ -13,6 +13,9 @@
 #define BOTTOM_LEFT -0.5f, -0.5f, 0.0f
 #define TOP_LEFT -0.5f,  0.5f, 0.0f
 
+#define WORLD_POS_X 0
+#define WORLD_POS_Y 0
+#define WORLD_POS_Z 0
 
 namespace arcnum_main 
 {
@@ -42,17 +45,19 @@ namespace arcnum_main
 			TOP_LEFT,
 		};
 
-		triangle* triangle1 = new triangle(vertices, new float[3] {0, 0, 0});
-		triangle* triangle2 = new triangle(vertices2, new float[3] {0, 0, 2});
-		triangle* triangle3 = new triangle(vertices, new float[3] {0, 0.5, 0});
+		for (int i = 0; i < 100; i++)
+		{
+			srand((unsigned)time(0));
 
-		arcnum_core::entity* entity = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, "shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl", triangle1->_vertices);
-		arcnum_core::entity* entity2 = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, "shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl", triangle2->_vertices);
-		arcnum_core::entity* entity3 = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, "shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl", triangle3->_vertices);
+			// Get a random number
+			float random_x = rand() / 10000;
+			float random_y = rand() / 10000;
+			float random_z = rand() / 10000;
 
-		this->_main_entities->add_entity(entity);
-		this->_main_entities->add_entity(entity2);
-		this->_main_entities->add_entity(entity3);
+			arcnum_core::triangle* triangle1 = new arcnum_core::triangle(vertices, new float[3] {random_x*2/i, random_y*2/i, random_z*2/i});
+			arcnum_core::entity* entity = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, "shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl", triangle1->_vertices);
+			this->_main_entities->add_entity(entity);
+		}
 
 		this->main_loop();
 	}

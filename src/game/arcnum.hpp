@@ -2,7 +2,7 @@
 #define ARCNUM_HPP
 
 #include <core/window/window.hpp>
-#include <core/window/entity.hpp>
+#include <core/world/entity.hpp>
 
 namespace arcnum_main
 {

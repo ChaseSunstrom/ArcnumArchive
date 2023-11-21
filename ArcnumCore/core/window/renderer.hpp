@@ -6,7 +6,7 @@
 #include <glew.h>
 #include <glfw3.h>
 
-#include "entity.hpp"
+#include "../world/entity.hpp"
 
 namespace arcnum_core
 {

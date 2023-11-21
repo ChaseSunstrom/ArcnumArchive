@@ -21,13 +21,16 @@
     <ClInclude Include="core\window\renderer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\window\shader.hpp">
+    <ClInclude Include="core\world\shader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\window\entity.hpp">
+    <ClInclude Include="core\world\entity.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\window\camera.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\world\geometry.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,13 +44,16 @@
     <ClCompile Include="core\window\renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\window\shader.cpp">
+    <ClCompile Include="core\world\shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\window\entity.cpp">
+    <ClCompile Include="core\world\entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\window\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\world\geometry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

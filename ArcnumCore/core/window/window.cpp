@@ -5,7 +5,7 @@
 #include <glfw3.h>
 
 #include "window.hpp"
-#include "entity.hpp"
+#include "../world/entity.hpp"
 
 #define SCR_WIDTH 1080
 #define SCR_HEIGHT 1080

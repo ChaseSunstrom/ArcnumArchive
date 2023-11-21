@@ -275,16 +275,18 @@
     <ClInclude Include="core\window\camera.hpp" />
     <ClInclude Include="core\window\window.hpp" />
     <ClInclude Include="core\window\renderer.hpp" />
-    <ClInclude Include="core\window\shader.hpp" />
-    <ClInclude Include="core\window\entity.hpp" />
+    <ClInclude Include="core\world\shader.hpp" />
+    <ClInclude Include="core\world\entity.hpp" />
+    <ClInclude Include="core\world\geometry.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\window\camera.cpp" />
     <ClCompile Include="core\window\window.cpp" />
-    <ClCompile Include="core\window\entity.cpp" />
+    <ClCompile Include="core\world\entity.cpp" />
+    <ClCompile Include="core\world\geometry.cpp" />
     <ClCompile Include="lib\GLAD\glad.c" />
     <ClCompile Include="core\window\renderer.cpp" />
-    <ClCompile Include="core\window\shader.cpp" />
+    <ClCompile Include="core\world\shader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,7 +5,7 @@
 #include <glfw3.h>
 
 #include "renderer.hpp"
-#include "entity.hpp"
+#include "../world/entity.hpp"
 #include "camera.hpp"
 
 namespace arcnum_core

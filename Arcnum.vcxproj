@@ -272,7 +272,6 @@
   <ItemGroup>
     <ClCompile Include="src\game\arcnum.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\game\world\triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\fragment_shader.glsl" />
@@ -280,7 +279,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\arcnum.hpp" />
-    <ClInclude Include="src\game\world\triangle.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
