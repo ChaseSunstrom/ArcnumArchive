@@ -7,8 +7,8 @@
 #include "window.hpp"
 #include "entity.hpp"
 
-#define SCR_WIDTH 800
-#define SCR_HEIGHT 800
+#define SCR_WIDTH 1080
+#define SCR_HEIGHT 1080
 
 namespace arcnum_core
 {
@@ -41,6 +41,8 @@ namespace arcnum_core
 
 	void window::update(entities* entities)
 	{
+		handle_input();
+
 		entities->render();
 
 		calculate_framerate();
@@ -52,6 +54,12 @@ namespace arcnum_core
 	bool window::is_running()
 	{
 		return !glfwWindowShouldClose(this->_window);
+	}
+
+	void window::handle_input()
+	{
+		if (glfwGetKey(this->_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			glfwSetWindowShouldClose(this->_window, true);
 	}
 
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height)

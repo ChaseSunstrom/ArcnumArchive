@@ -210,7 +210,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)ArcnumCore/include/GLAD;$(SolutionDir)ArcnumCore/include/GLEW;$(SolutionDir)ArcnumCore/include/GLM;$(SolutionDir)ArcnumCore/include/GLFW;$(SolutionDir)ArcnumCore/include/SDL;$(SolutionDir)ArcnumCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -272,6 +272,7 @@
   <ItemGroup>
     <ClCompile Include="src\game\arcnum.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\game\world\triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\fragment_shader.glsl" />
@@ -279,6 +280,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\arcnum.hpp" />
+    <ClInclude Include="src\game\world\triangle.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

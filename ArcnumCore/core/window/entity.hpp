@@ -29,12 +29,14 @@ namespace arcnum_core
 		entities();
 		~entities();
 		void bind_objects();
+		void bind_all_objects();
 		void render();
 		void add_entity(entity* entity);
 	private:
 		std::vector<entity*> _entities;
 		std::vector<GLuint> _VAOs;
 		std::vector<GLuint> _VBOs;
+		uint64_t _current_entity = 0;
 	};
 
 }

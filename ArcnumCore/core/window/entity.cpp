@@ -79,22 +79,26 @@ namespace arcnum_core
 		}
 	}
 
+	void entities::bind_all_objects()
+	{
+		for (auto _ : this->_entities)
+		{
+			this->bind_objects();
+		}
+	}
+
 	void entities::bind_objects()
 	{
-		uint64_t iterator = 0;
+		glGenVertexArrays(1, &this->_VAOs[this->_current_entity]);
+		glGenBuffers(1, &this->_VBOs[this->_current_entity]);
 
-		glGenVertexArrays(this->_entities.size(), &this->_VAOs[0]);
-		glGenBuffers(this->_entities.size(), &this->_VBOs[0]);
+		glBindVertexArray(this->_VAOs[this->_current_entity]);
+		glBindBuffer(GL_ARRAY_BUFFER, this->_VBOs[this->_current_entity]);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(this->_entities[this->_current_entity]->_vertices), this->_entities[this->_current_entity]->_vertices.data(), GL_DYNAMIC_DRAW);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), NULL);
+		glEnableVertexAttribArray(0);
 
-		for (auto entity : this->_entities)
-		{
-			glBindVertexArray(this->_VAOs[iterator]);
-			glBindBuffer(GL_ARRAY_BUFFER, this->_VBOs[iterator]);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(entity->_vertices), entity->_vertices.data(), GL_DYNAMIC_DRAW);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), NULL);	
-			glEnableVertexAttribArray(0);
-			iterator++;
-		}
+		this->_current_entity++;
 	}
 
 	void entities::add_entity(entity* entity)
@@ -110,5 +114,7 @@ namespace arcnum_core
 		{
 			this->_entities.push_back(entity);
 		}
+
+		this->bind_objects();
 	}
 }

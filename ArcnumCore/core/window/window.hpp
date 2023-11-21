@@ -18,6 +18,7 @@ namespace arcnum_core
 		void init_gl();
 		void update(entities* entities);
 		bool is_running();
+		void handle_input();
 	public:
 		renderer* _renderer;
 	private:

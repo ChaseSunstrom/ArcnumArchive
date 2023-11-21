@@ -3,9 +3,9 @@
 
 #include <filesystem>
 
-
 #include <core/window/window.hpp>
 #include <core/window/entity.hpp>
+#include "world/triangle.hpp"
 #include "arcnum.hpp"
 
 #define TOP_RIGHT 0.5f,  0.5f, 0.0f
@@ -42,16 +42,17 @@ namespace arcnum_main
 			TOP_LEFT,
 		};
 
-		std::filesystem::path vertex_shader = std::filesystem::path("shaders/vertex_shader.glsl");
-		std::filesystem::path fragment_shader = std::filesystem::path("shaders/fragment_shader.glsl");
+		triangle* triangle1 = new triangle(vertices, new float[3] {0, 0, 0});
+		triangle* triangle2 = new triangle(vertices2, new float[3] {0, 0, 2});
+		triangle* triangle3 = new triangle(vertices, new float[3] {0, 0.5, 0});
 
-		arcnum_core::entity* entity = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, vertex_shader, fragment_shader, vertices);
-		arcnum_core::entity* entity2 = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, vertex_shader, fragment_shader, vertices2);
+		arcnum_core::entity* entity = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, "shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl", triangle1->_vertices);
+		arcnum_core::entity* entity2 = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, "shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl", triangle2->_vertices);
+		arcnum_core::entity* entity3 = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, "shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl", triangle3->_vertices);
 
 		this->_main_entities->add_entity(entity);
 		this->_main_entities->add_entity(entity2);
-
-		this->_main_entities->bind_objects();
+		this->_main_entities->add_entity(entity3);
 
 		this->main_loop();
 	}
