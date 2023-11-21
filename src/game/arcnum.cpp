@@ -51,6 +51,8 @@ namespace arcnum_main
 		this->_main_entities->add_entity(entity);
 		this->_main_entities->add_entity(entity2);
 
+		this->_main_entities->bind_objects();
+
 		this->main_loop();
 	}
 

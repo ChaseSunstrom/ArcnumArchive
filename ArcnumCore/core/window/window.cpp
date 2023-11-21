@@ -41,11 +41,6 @@ namespace arcnum_core
 
 	void window::update(entities* entities)
 	{
-
-		//this->_camera->move_camera();
-
-		entities->bind_objects();
-
 		entities->render();
 
 		calculate_framerate();
