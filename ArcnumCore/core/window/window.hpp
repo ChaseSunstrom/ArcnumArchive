@@ -6,8 +6,9 @@
 
 #include "renderer.hpp"
 #include "entity.hpp"
+#include "camera.hpp"
 
-namespace arc_core
+namespace arcnum_core
 {
 	class window
 	{
@@ -22,6 +23,7 @@ namespace arc_core
 	private:
 		bool _running = true;
 		GLFWwindow* _window;
+		camera* _camera;
 	};
 
 

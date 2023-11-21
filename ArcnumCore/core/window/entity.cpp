@@ -1,4 +1,5 @@
 #include <cstdint>
+#include <filesystem>
 
 #include <glew.h>
 #include <glfw3.h>
@@ -6,7 +7,7 @@
 #include "entity.hpp"
 #include "shader.hpp"
 
-namespace arc_core
+namespace arcnum_core
 {
 	entity::entity(GLuint* shader_program, std::filesystem::path vertex_source, std::filesystem::path fragment_source, std::vector<float> vertices)
 	{
@@ -47,11 +48,14 @@ namespace arc_core
 
 	void entity::render()
 	{
-		glUseProgram(this->_shader_program);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		glUseProgram(this->_shader_program);
+
+
 		glBindVertexArray(this->_shader->_VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 	}
 
 	void entities::render()
@@ -65,6 +69,11 @@ namespace arc_core
 		{
 			glUseProgram(entity->_shader_program);
 			glBindVertexArray(this->_VAOs[iterator]);
+			float time = glfwGetTime();
+			float green = static_cast<float>(sin(time) / 2.0f + 0.5f);
+			int vertex_color_location = glGetUniformLocation(entity->_shader_program, "my_color");
+			glUniform4f(vertex_color_location, 0.0f, green, 0.0f, 1.0f);
+
 			glDrawArrays(GL_TRIANGLES, 0, 3);
 			iterator++;
 		}

@@ -7,7 +7,7 @@
 
 #include "shader.hpp"
 
-namespace arc_core
+namespace arcnum_core
 {
 
 	class entity

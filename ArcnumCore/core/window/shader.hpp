@@ -3,7 +3,7 @@
 
 #include <glfw3.h>
 
-namespace arc_core
+namespace arcnum_core
 {
 	struct shader
 	{

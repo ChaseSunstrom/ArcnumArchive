@@ -12,7 +12,7 @@
 
 
 
-namespace arc_core
+namespace arcnum_core
 {
 	shader::shader(std::filesystem::path vertex_path, std::filesystem::path fragment_path)
 	{

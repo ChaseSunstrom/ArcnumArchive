@@ -18,8 +18,8 @@ namespace arcnum_main
 {
 	arcnum::arcnum()
 	{
-		this->_main_window = new arc_core::window();
-		this->_main_entities = new arc_core::entities();
+		this->_main_window = new arcnum_core::window();
+		this->_main_entities = new arcnum_core::entities();
 	}
 
 	arcnum::~arcnum()
@@ -45,8 +45,8 @@ namespace arcnum_main
 		std::filesystem::path vertex_shader = std::filesystem::path("shaders/vertex_shader.glsl");
 		std::filesystem::path fragment_shader = std::filesystem::path("shaders/fragment_shader.glsl");
 
-		arc_core::entity* entity = new arc_core::entity(&this->_main_window->_renderer->_shader_program, vertex_shader, fragment_shader, vertices);
-		arc_core::entity* entity2 = new arc_core::entity(&this->_main_window->_renderer->_shader_program, vertex_shader, fragment_shader, vertices2);
+		arcnum_core::entity* entity = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, vertex_shader, fragment_shader, vertices);
+		arcnum_core::entity* entity2 = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, vertex_shader, fragment_shader, vertices2);
 
 		this->_main_entities->add_entity(entity);
 		this->_main_entities->add_entity(entity2);

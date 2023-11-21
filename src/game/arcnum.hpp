@@ -15,8 +15,8 @@ namespace arcnum_main
 		void arcnum_main();
 		void main_loop();
 	private:
-		arc_core::window* _main_window;
-		arc_core::entities* _main_entities;
+		arcnum_core::window* _main_window;
+		arcnum_core::entities* _main_entities;
 	};
 }
 

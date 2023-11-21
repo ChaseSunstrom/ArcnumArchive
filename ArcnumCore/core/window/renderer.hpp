@@ -8,7 +8,7 @@
 
 #include "entity.hpp"
 
-namespace arc_core
+namespace arcnum_core
 {
 	class renderer
 	{

@@ -8,7 +8,7 @@
 #include "shader.hpp"
 
 
-namespace arc_core
+namespace arcnum_core
 {
     renderer::renderer()
     {

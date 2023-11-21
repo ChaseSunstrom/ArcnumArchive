@@ -10,12 +10,13 @@
 #define SCR_WIDTH 800
 #define SCR_HEIGHT 800
 
-namespace arc_core
+namespace arcnum_core
 {
 	window::window()
 	{
 		this->init_gl();
 		this->_renderer = new renderer();
+		this->_camera = new camera();
 	}
 
 	window::~window()
@@ -40,6 +41,9 @@ namespace arc_core
 
 	void window::update(entities* entities)
 	{
+
+		//this->_camera->move_camera();
+
 		entities->bind_objects();
 
 		entities->render();
