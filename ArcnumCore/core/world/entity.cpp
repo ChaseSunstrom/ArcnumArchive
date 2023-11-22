@@ -75,9 +75,11 @@ namespace arcnum_core
 			int random = rand() % 10;
 
 			float time = glfwGetTime();
+
 			float green = static_cast<float>(sin(time) / random);
 			float blue = static_cast<float>(cos(time) / random);
 			float red = static_cast<float>(tan(time) / random);
+
 			int vertex_color_location = glGetUniformLocation(entity->_shader_program, "my_color");
 			glUniform4f(vertex_color_location, red, green, blue, 1.0f);
 
@@ -101,8 +103,8 @@ namespace arcnum_core
 
 		glBindVertexArray(this->_VAOs[this->_current_entity]);
 		glBindBuffer(GL_ARRAY_BUFFER, this->_VBOs[this->_current_entity]);
-		glBufferData(GL_ARRAY_BUFFER, 1.1 * sizeof(this->_entities[this->_current_entity]->_vertices), this->_entities[this->_current_entity]->_vertices.data(), GL_DYNAMIC_DRAW);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, (3 * sizeof(float)) * 1.1, NULL);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(this->_entities[this->_current_entity]->_vertices) + 4, this->_entities[this->_current_entity]->_vertices.data(), GL_DYNAMIC_DRAW);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, (3 * sizeof(float)), NULL);
 		CHECK_GL_ERROR()
 		glEnableVertexAttribArray(0);
 

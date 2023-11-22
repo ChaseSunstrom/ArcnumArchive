@@ -47,15 +47,15 @@ namespace arcnum_main
 
 		for (int i = 0; i < 1000; i++)
 		{
-			srand((unsigned)time(0));
+			srand((unsigned)time(0) * i);
 
-			// Get a random number
-			float random_x = rand() / 10000;
-			float random_y = rand() / 10000;
-			float random_z = rand() / 10000;
+			float random_x = (float)rand() / (float)RAND_MAX;
+			float random_y = (float)rand() / (float)RAND_MAX;
+			float random_z = (float)rand() / (float)RAND_MAX;
 
-			arcnum_core::triangle* triangle1 = new arcnum_core::triangle(vertices, new float[3] {(float)i/100*random_x, (float)i/100*random_y, (float)i/100*random_z});
+			arcnum_core::triangle* triangle1 = new arcnum_core::triangle(vertices, new float[3] {random_x/2 * i, random_y / 2 *  i, 1.0f});
 			arcnum_core::entity* entity = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, "shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl", triangle1->_vertices);
+
 			this->_main_entities->add_entity(entity);
 		}
 
