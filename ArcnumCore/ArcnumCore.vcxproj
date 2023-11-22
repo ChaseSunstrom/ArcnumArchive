@@ -272,6 +272,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="core\debug\macros.hpp" />
     <ClInclude Include="core\window\camera.hpp" />
     <ClInclude Include="core\window\window.hpp" />
     <ClInclude Include="core\window\renderer.hpp" />

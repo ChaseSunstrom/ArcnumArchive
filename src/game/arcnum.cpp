@@ -17,7 +17,7 @@
 #define WORLD_POS_Y 0
 #define WORLD_POS_Z 0
 
-namespace arcnum_main
+namespace arcnum_main 
 {
 	arcnum::arcnum()
 	{
@@ -44,13 +44,20 @@ namespace arcnum_main
 			BOTTOM_LEFT,
 			TOP_LEFT,
 		};
-		arcnum_core::triangle* triangle1 = new arcnum_core::triangle(vertices, new float[3] {0, 0, 0});
-		arcnum_core::triangle* triangle2= new arcnum_core::triangle(vertices, new float[3] {-0.5, 0.5, 5});
-		arcnum_core::entity* entity = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, "shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl", vertices2);
-		this->_main_entities->add_entity(entity);
-		arcnum_core::entity* entity2 = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, "shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl", vertices);
-		this->_main_entities->add_entity(entity);
-		this->_main_entities->add_entity(entity2);
+
+		for (int i = 0; i < 1000; i++)
+		{
+			srand((unsigned)time(0));
+
+			// Get a random number
+			float random_x = rand() / 10000;
+			float random_y = rand() / 10000;
+			float random_z = rand() / 10000;
+
+			arcnum_core::triangle* triangle1 = new arcnum_core::triangle(vertices, new float[3] {(float)i/100*random_x, (float)i/100*random_y, (float)i/100*random_z});
+			arcnum_core::entity* entity = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, "shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl", triangle1->_vertices);
+			this->_main_entities->add_entity(entity);
+		}
 
 		this->main_loop();
 	}
