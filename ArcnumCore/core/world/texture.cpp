@@ -13,6 +13,8 @@ namespace arcnum_core
 	texture::texture(std::filesystem::path path)
 	{
 		this->_texture_path = path;
+		this->bind_texture();
+		this->load_texture();
 	}
 
 	void texture::load_texture()

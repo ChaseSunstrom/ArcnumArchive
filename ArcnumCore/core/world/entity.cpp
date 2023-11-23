@@ -79,7 +79,7 @@ namespace arcnum_core
 			glBindVertexArray(this->_VAOs[iterator]);
 
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, entity->_texture->_texture);
+			glBindTexture(GL_TEXTURE_2D, this->_textures[_current_texture - 1]->_texture);
 
 			glDrawArrays(GL_TRIANGLES, 0, 3);
 			iterator++;
@@ -101,20 +101,19 @@ namespace arcnum_core
 
 		glBindVertexArray(this->_VAOs[this->_current_entity]);
 		glBindBuffer(GL_ARRAY_BUFFER, this->_VBOs[this->_current_entity]);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(this->_entities[this->_current_entity]->_vertices) + 12, this->_entities[this->_current_entity]->_vertices.data(), GL_DYNAMIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * this->_entities[this->_current_entity]->_vertices.size(), this->_entities[this->_current_entity]->_vertices.data(), GL_DYNAMIC_DRAW);
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), NULL);
+		// Position attribute
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(0);
+
+		// Color attribute
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 		glEnableVertexAttribArray(1);
+
+		// Texture coordinate attribute
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 		glEnableVertexAttribArray(2);
-
-		this->_entities[this->_current_entity]->_texture->bind_texture();
-		this->_entities[this->_current_entity]->_texture->load_texture();
-
-		glUseProgram(this->_entities[this->_current_entity]->_shader_program);
-		glUniform1i(glGetUniformLocation(this->_entities[this->_current_entity]->_shader_program, "text"), 0);
 
 		this->_current_entity++;
 	}
@@ -134,5 +133,11 @@ namespace arcnum_core
 		}
 
 		this->bind_objects();
+	}
+
+	void entities::add_texture(texture* texture)
+	{
+		this->_textures.push_back(texture);
+		this->_current_texture++;
 	}
 }

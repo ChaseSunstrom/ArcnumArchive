@@ -1,7 +1,7 @@
 
 #include <vector>
-
 #include <filesystem>
+#include <iostream>
 
 #include <core/window/window.hpp>
 #include <core/world/entity.hpp>
@@ -36,20 +36,23 @@ namespace arcnum_main
 	void arcnum::arcnum_main()
 	{
 		std::vector<float> vertices = {
-			TOP_RIGHT,    1.0f, 0.0f, 0.0f,  1.0f, 1.0f,
-			BOTTOM_RIGHT, 0.0f, 1.0f, 0.0f,  1.0f, 0.0f
-			BOTTOM_LEFT,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f
+			// positions          // colors           // texture coords
+		 TOP_RIGHT,      1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 BOTTOM_RIGHT,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		 BOTTOM_LEFT,    0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
 		};
 
 		std::vector<float> vertices2 = {
 			TOP_RIGHT,    1.0f, 0.0f, 0.0f,  1.0f, 1.0f,
-			BOTTOM_LEFT,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f
+			BOTTOM_LEFT,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f,
 			TOP_LEFT,     1.0f, 1.0f, 0.0f,  0.0f, 1.0f
 		};
 
 		arcnum_core::triangle* triangle1 = new arcnum_core::triangle(vertices, new float[3] {0, 0, 0});
 		arcnum_core::triangle* triangle2 = new arcnum_core::triangle(vertices2, new float[3] {0, 0, 0});
 		arcnum_core::texture* texture = new arcnum_core::texture(std::filesystem::absolute("assets/sprites/container.jpg"));
+
+		this->_main_entities->add_texture(texture);
 
 			arcnum_core::entity* entity = new arcnum_core::entity(
 				&this->_main_window->_renderer->_shader_program,
@@ -58,17 +61,8 @@ namespace arcnum_main
 				triangle1->_vertices,
 				texture
 			);
-			arcnum_core::entity* entity2 = new arcnum_core::entity(
-				&this->_main_window->_renderer->_shader_program,
-				"shaders/vertex_shader.glsl",
-				"shaders/fragment_shader.glsl",
-				triangle2->_vertices,
-				texture
-			);
 
-		this->_main_entities->add_entity(entity);
-		this->_main_entities->add_entity(entity2);
-
+			this->_main_entities->add_entity(entity);
 
 		this->main_loop();
 	}

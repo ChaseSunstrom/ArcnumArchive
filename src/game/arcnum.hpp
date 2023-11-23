@@ -17,6 +17,7 @@ namespace arcnum_main
 	private:
 		arcnum_core::window* _main_window;
 		arcnum_core::entities* _main_entities;
+		
 	};
 }
 

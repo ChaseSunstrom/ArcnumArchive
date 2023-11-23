@@ -46,7 +46,7 @@ namespace arcnum_core
 
 		entities->render();
 
-		//calculate_framerate();
+		calculate_framerate();
 
 		glfwSwapBuffers(this->_window);
 		glfwPollEvents();

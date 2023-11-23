@@ -34,11 +34,14 @@ namespace arcnum_core
 		void bind_all_objects();
 		void render();
 		void add_entity(entity* entity);
+		void add_texture(texture* texture);
 	private:
 		std::vector<entity*> _entities;
 		std::vector<GLuint> _VAOs;
 		std::vector<GLuint> _VBOs;
-		uint64_t _current_entity = 0;
+		std::vector<texture*> _textures;
+		uint64_t _current_entity  = 0;
+		uint64_t _current_texture = 0;
 	};
 
 }
