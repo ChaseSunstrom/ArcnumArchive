@@ -1,5 +1,6 @@
-#include <vector>
+#include <map>
 #include <filesystem>
+#include <string>
 
 #include <glew.h>
 #include <glfw3.h>
@@ -7,6 +8,7 @@
 #include <stb_image.h>
 
 #include "texture.hpp"
+#include "entity.hpp"
 
 namespace arcnum_core
 {
@@ -36,5 +38,28 @@ namespace arcnum_core
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	}
+
+	void texture_manager::insert(entity_type key, texture* value)
+	{
+		this->_textures[key] = std::unique_ptr<texture>(value);
+	}
+
+	texture_manager::texture_manager()
+	{
+		for (const auto& entry : std::filesystem::directory_iterator(std::filesystem::absolute("assets/sprites")))
+		{
+			std::string file_string = entry.path().filename().string();
+			std::string file_without_extension = file_string.erase(file_string.find_last_of("."), std::string::npos);
+
+			entity_type type = get_entity_type_from_string(file_without_extension);
+
+			this->insert(type, new texture(entry.path()));
+		}
+	}
+
+	texture* texture_manager::find(entity_type key)
+	{
+		return &*this->_textures[key];
 	}
 }

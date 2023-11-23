@@ -6,14 +6,16 @@
 #include <glfw3.h>
 
 #include "entity.hpp"
+#include "entity_type.hpp"
 #include "shader.hpp"
 #include "texture.hpp"
 #include "../debug/macros.hpp"
 
 namespace arcnum_core
 {
-	entity::entity(GLuint* shader_program, std::filesystem::path vertex_source, std::filesystem::path fragment_source, std::vector<float> vertices, texture* texture)
+	entity::entity(GLuint* shader_program, std::filesystem::path vertex_source, std::filesystem::path fragment_source, std::vector<float> vertices, texture* texture, entity_type type)
 	{
+		this->_type = type;
 		this->_texture = texture;
 		this->_vertices = vertices;
 		this->_shader_program = glCreateProgram();
@@ -32,14 +34,6 @@ namespace arcnum_core
 		glAttachShader(_shader_program, this->_shader->_gl_vertex_shader);
 		glAttachShader(_shader_program, this->_shader->_gl_fragment_shader);
 		glLinkProgram(_shader_program);
-		int success;
-		char infoLog[1024];
-		glGetShaderiv(this->_shader_program, GL_COMPILE_STATUS, &success);
-		if (!success)
-		{
-			glGetShaderInfoLog(this->_shader_program, 1024, NULL, infoLog);
-			std::cout << "ERROR::SHADER_COMPILATION_ERROR: " << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-		}
 		this->_shader->~shader();
 	}
 
@@ -79,7 +73,9 @@ namespace arcnum_core
 			glBindVertexArray(this->_VAOs[iterator]);
 
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, this->_textures[_current_texture - 1]->_texture);
+			
+			//TODO: Add texture finding and or overloaded rendering for every texture type
+			glBindTexture(GL_TEXTURE_2D, this->_texture_manager->find(entity->_type)->_texture);
 
 			glDrawArrays(GL_TRIANGLES, 0, 3);
 			iterator++;
@@ -135,9 +131,8 @@ namespace arcnum_core
 		this->bind_objects();
 	}
 
-	void entities::add_texture(texture* texture)
+	entity_type get_entity_type_from_string(std::string string)
 	{
-		this->_textures.push_back(texture);
-		this->_current_texture++;
+		return (entity_type)hash(string.c_str());
 	}
 }

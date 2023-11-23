@@ -5,6 +5,7 @@
 
 #include <core/window/window.hpp>
 #include <core/world/entity.hpp>
+#include <core/world/entity_type.hpp>
 #include <core/world/geometry.hpp>
 #include <core/world/texture.hpp>
 
@@ -18,6 +19,8 @@
 #define WORLD_POS_X 0
 #define WORLD_POS_Y 0
 #define WORLD_POS_Z 0
+
+#define SHADERS "shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl"
 
 namespace arcnum_main
 {
@@ -35,6 +38,9 @@ namespace arcnum_main
 
 	void arcnum::arcnum_main()
 	{
+
+		this->_main_entities->_texture_manager = new arcnum_core::texture_manager();
+
 		std::vector<float> vertices = {
 			// positions          // colors           // texture coords
 		 TOP_RIGHT,      1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
@@ -51,18 +57,26 @@ namespace arcnum_main
 		arcnum_core::triangle* triangle1 = new arcnum_core::triangle(vertices, new float[3] {0, 0, 0});
 		arcnum_core::triangle* triangle2 = new arcnum_core::triangle(vertices2, new float[3] {0, 0, 0});
 		arcnum_core::texture* texture = new arcnum_core::texture(std::filesystem::absolute("assets/sprites/container.jpg"));
+		arcnum_core::texture* texture2 = new arcnum_core::texture(std::filesystem::absolute("assets/sprites/wall.jpg"));
 
-		this->_main_entities->add_texture(texture);
+		arcnum_core::entity* entity = new arcnum_core::entity(
+			&this->_main_window->_renderer->_shader_program,
+			SHADERS,
+			triangle1->_vertices,
+			texture,
+			arcnum_core::entity_type::test_container
+		);
 
-			arcnum_core::entity* entity = new arcnum_core::entity(
-				&this->_main_window->_renderer->_shader_program,
-				"shaders/vertex_shader.glsl",
-				"shaders/fragment_shader.glsl",
-				triangle1->_vertices,
-				texture
-			);
+		arcnum_core::entity* entity2 = new arcnum_core::entity(
+			&this->_main_window->_renderer->_shader_program,
+			SHADERS,
+			triangle2->_vertices,
+			texture2,
+			arcnum_core::entity_type::test_brick
+		);
 
-			this->_main_entities->add_entity(entity);
+		this->_main_entities->add_entity(entity);
+		this->_main_entities->add_entity(entity2);
 
 		this->main_loop();
 	}

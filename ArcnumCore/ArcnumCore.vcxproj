@@ -276,6 +276,7 @@
     <ClInclude Include="core\window\camera.hpp" />
     <ClInclude Include="core\window\window.hpp" />
     <ClInclude Include="core\window\renderer.hpp" />
+    <ClInclude Include="core\world\entity_type.hpp" />
     <ClInclude Include="core\world\shader.hpp" />
     <ClInclude Include="core\world\entity.hpp" />
     <ClInclude Include="core\world\geometry.hpp" />
