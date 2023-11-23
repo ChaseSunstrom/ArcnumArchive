@@ -7,12 +7,14 @@
 
 #include "entity.hpp"
 #include "shader.hpp"
+#include "texture.hpp"
 #include "../debug/macros.hpp"
 
 namespace arcnum_core
 {
-	entity::entity(GLuint* shader_program, std::filesystem::path vertex_source, std::filesystem::path fragment_source, std::vector<float> vertices)
+	entity::entity(GLuint* shader_program, std::filesystem::path vertex_source, std::filesystem::path fragment_source, std::vector<float> vertices, texture* texture)
 	{
+		this->_texture = texture;
 		this->_vertices = vertices;
 		this->_shader_program = glCreateProgram();
 		this->_shader = new shader(vertex_source, fragment_source);
@@ -30,6 +32,14 @@ namespace arcnum_core
 		glAttachShader(_shader_program, this->_shader->_gl_vertex_shader);
 		glAttachShader(_shader_program, this->_shader->_gl_fragment_shader);
 		glLinkProgram(_shader_program);
+		int success;
+		char infoLog[1024];
+		glGetShaderiv(this->_shader_program, GL_COMPILE_STATUS, &success);
+		if (!success)
+		{
+			glGetShaderInfoLog(this->_shader_program, 1024, NULL, infoLog);
+			std::cout << "ERROR::SHADER_COMPILATION_ERROR: " << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+		}
 		this->_shader->~shader();
 	}
 
@@ -61,7 +71,6 @@ namespace arcnum_core
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-
 		uint64_t iterator = 0;
 
 		for (auto entity : this->_entities)
@@ -69,19 +78,8 @@ namespace arcnum_core
 			glUseProgram(entity->_shader_program);
 			glBindVertexArray(this->_VAOs[iterator]);
 
-			srand((unsigned)time(NULL));
-
-			// Get a random number
-			int random = rand() % 10;
-
-			float time = glfwGetTime();
-
-			float green = static_cast<float>(sin(time) / random);
-			float blue = static_cast<float>(cos(time) / random);
-			float red = static_cast<float>(tan(time) / random);
-
-			int vertex_color_location = glGetUniformLocation(entity->_shader_program, "my_color");
-			glUniform4f(vertex_color_location, red, green, blue, 1.0f);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, entity->_texture->_texture);
 
 			glDrawArrays(GL_TRIANGLES, 0, 3);
 			iterator++;
@@ -103,10 +101,20 @@ namespace arcnum_core
 
 		glBindVertexArray(this->_VAOs[this->_current_entity]);
 		glBindBuffer(GL_ARRAY_BUFFER, this->_VBOs[this->_current_entity]);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(this->_entities[this->_current_entity]->_vertices) + 4, this->_entities[this->_current_entity]->_vertices.data(), GL_DYNAMIC_DRAW);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, (3 * sizeof(float)), NULL);
-		CHECK_GL_ERROR()
+		glBufferData(GL_ARRAY_BUFFER, sizeof(this->_entities[this->_current_entity]->_vertices) + 12, this->_entities[this->_current_entity]->_vertices.data(), GL_DYNAMIC_DRAW);
+
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), NULL);
 		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+		glEnableVertexAttribArray(2);
+
+		this->_entities[this->_current_entity]->_texture->bind_texture();
+		this->_entities[this->_current_entity]->_texture->load_texture();
+
+		glUseProgram(this->_entities[this->_current_entity]->_shader_program);
+		glUniform1i(glGetUniformLocation(this->_entities[this->_current_entity]->_shader_program, "text"), 0);
 
 		this->_current_entity++;
 	}

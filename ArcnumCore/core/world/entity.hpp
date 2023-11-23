@@ -6,6 +6,7 @@
 #include <filesystem>
 
 #include "shader.hpp"
+#include "texture.hpp"
 
 namespace arcnum_core
 {
@@ -13,12 +14,13 @@ namespace arcnum_core
 	class entity
 	{
 	public:
-		entity(GLuint* shader_program, std::filesystem::path vertex_source, std::filesystem::path fragment_source, std::vector<float> vertices);
+		entity(GLuint* shader_program, std::filesystem::path vertex_source, std::filesystem::path fragment_source, std::vector<float> vertices, texture* texture);
 		~entity();
 		void attach_shaders();
 		void render();
 	public:
 		shader* _shader;
+		texture* _texture;
 		GLuint _shader_program;
 		std::vector<float> _vertices;
 	};

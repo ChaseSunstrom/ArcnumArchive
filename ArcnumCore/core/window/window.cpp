@@ -30,6 +30,7 @@ namespace arcnum_core
 
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 
 		this->_window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Arcnum", NULL, NULL);
 
@@ -45,10 +46,10 @@ namespace arcnum_core
 
 		entities->render();
 
-		calculate_framerate();
+		//calculate_framerate();
 
-		glfwPollEvents();
 		glfwSwapBuffers(this->_window);
+		glfwPollEvents();
 	}
 
 	bool window::is_running()
@@ -67,12 +68,12 @@ namespace arcnum_core
 		glViewport(0, 0, width, height);
 	}
 
-	float last_time = 0.0f;
+	double last_time = 0.0f;
 
 	void calculate_framerate()
 	{
-		float current_time = glfwGetTime();
-		float delta_time = current_time - last_time;
+		double current_time = glfwGetTime();
+		double delta_time = current_time - last_time;
 		last_time = current_time;
 		std::cout << "FPS: " << (1 / delta_time) << std::endl;
 	}

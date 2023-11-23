@@ -6,6 +6,8 @@
 #include <core/window/window.hpp>
 #include <core/world/entity.hpp>
 #include <core/world/geometry.hpp>
+#include <core/world/texture.hpp>
+
 #include "arcnum.hpp"
 
 #define TOP_RIGHT 0.5f,  0.5f, 0.0f
@@ -17,7 +19,7 @@
 #define WORLD_POS_Y 0
 #define WORLD_POS_Z 0
 
-namespace arcnum_main 
+namespace arcnum_main
 {
 	arcnum::arcnum()
 	{
@@ -34,30 +36,39 @@ namespace arcnum_main
 	void arcnum::arcnum_main()
 	{
 		std::vector<float> vertices = {
-			TOP_RIGHT,
-			BOTTOM_RIGHT,
-			BOTTOM_LEFT,
+			TOP_RIGHT,    1.0f, 0.0f, 0.0f,  1.0f, 1.0f,
+			BOTTOM_RIGHT, 0.0f, 1.0f, 0.0f,  1.0f, 0.0f
+			BOTTOM_LEFT,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f
 		};
 
 		std::vector<float> vertices2 = {
-			TOP_RIGHT,
-			BOTTOM_LEFT,
-			TOP_LEFT,
+			TOP_RIGHT,    1.0f, 0.0f, 0.0f,  1.0f, 1.0f,
+			BOTTOM_LEFT,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f
+			TOP_LEFT,     1.0f, 1.0f, 0.0f,  0.0f, 1.0f
 		};
 
-		for (int i = 0; i < 1000; i++)
-		{
-			srand((unsigned)time(0) * i);
+		arcnum_core::triangle* triangle1 = new arcnum_core::triangle(vertices, new float[3] {0, 0, 0});
+		arcnum_core::triangle* triangle2 = new arcnum_core::triangle(vertices2, new float[3] {0, 0, 0});
+		arcnum_core::texture* texture = new arcnum_core::texture(std::filesystem::absolute("assets/sprites/container.jpg"));
 
-			float random_x = (float)rand() / (float)RAND_MAX;
-			float random_y = (float)rand() / (float)RAND_MAX;
-			float random_z = (float)rand() / (float)RAND_MAX;
+			arcnum_core::entity* entity = new arcnum_core::entity(
+				&this->_main_window->_renderer->_shader_program,
+				"shaders/vertex_shader.glsl",
+				"shaders/fragment_shader.glsl",
+				triangle1->_vertices,
+				texture
+			);
+			arcnum_core::entity* entity2 = new arcnum_core::entity(
+				&this->_main_window->_renderer->_shader_program,
+				"shaders/vertex_shader.glsl",
+				"shaders/fragment_shader.glsl",
+				triangle2->_vertices,
+				texture
+			);
 
-			arcnum_core::triangle* triangle1 = new arcnum_core::triangle(vertices, new float[3] {random_x/2 * i, random_y / 2 *  i, 1.0f});
-			arcnum_core::entity* entity = new arcnum_core::entity(&this->_main_window->_renderer->_shader_program, "shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl", triangle1->_vertices);
+		this->_main_entities->add_entity(entity);
+		this->_main_entities->add_entity(entity2);
 
-			this->_main_entities->add_entity(entity);
-		}
 
 		this->main_loop();
 	}
