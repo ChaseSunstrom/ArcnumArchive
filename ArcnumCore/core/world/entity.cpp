@@ -9,7 +9,6 @@
 #include "entity_type.hpp"
 #include "shader.hpp"
 #include "texture.hpp"
-#include "../debug/macros.hpp"
 
 namespace arcnum_core
 {
