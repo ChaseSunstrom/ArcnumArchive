@@ -30,13 +30,16 @@ namespace arcnum_core
 
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 
 		this->_window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Arcnum", NULL, NULL);
 
 		glfwMakeContextCurrent(this->_window);
 		glfwSetFramebufferSizeCallback(this->_window, framebuffer_size_callback);
 		glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
+		glEnable(GL_DEPTH_TEST);
+
 		glewInit();
 	}
 

@@ -8,7 +8,7 @@ namespace arcnum_core
 	class triangle
 	{
 	public:
-		triangle(std::vector<float> vertices, float world_position[3]);
+		triangle(std::vector<float> vertices);
 		~triangle();
 
 		void flip_over_x_axis();
@@ -21,7 +21,7 @@ namespace arcnum_core
 	class square
 	{
 	public:
-		square(float world_position[3]);
+		square();
 		~square();
 	public:
 		std::vector<float> _vertices;

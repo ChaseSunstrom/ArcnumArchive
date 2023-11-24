@@ -15,7 +15,7 @@ namespace arcnum_core
 
 	enum class entity_type
 	{
-		test_brick     = "wall"_hash,
+		test_brick = "wall"_hash,
 		test_container = "container"_hash,
 	};
 }

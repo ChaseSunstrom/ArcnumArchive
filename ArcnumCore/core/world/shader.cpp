@@ -56,4 +56,10 @@ namespace arcnum_core
             std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
         }
 	}
+
+	void shader::set_mat4(const GLuint& shader_program, const std::string& name, const glm::mat4& mat)
+	{
+		int location = glGetUniformLocation(shader_program, name.c_str());
+		glProgramUniformMatrix4fv(shader_program, location, 1, GL_FALSE, &mat[0][0]);
+	}
 }

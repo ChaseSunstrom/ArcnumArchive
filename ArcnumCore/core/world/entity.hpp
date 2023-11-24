@@ -19,7 +19,7 @@ namespace arcnum_core
 	class entity
 	{
 	public:
-		entity(GLuint* shader_program, std::filesystem::path vertex_source, std::filesystem::path fragment_source, std::vector<float> vertices, texture* texture, entity_type type);
+		entity(GLuint* shader_program, std::filesystem::path vertex_source, std::filesystem::path fragment_source, std::vector<float> vertices, entity_type type);
 		~entity();
 		void attach_shaders();
 		void render();
