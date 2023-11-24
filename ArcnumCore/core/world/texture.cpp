@@ -1,6 +1,7 @@
 #include <map>
 #include <filesystem>
 #include <string>
+#include <iostream>
 
 #include <glew.h>
 #include <glfw3.h>
@@ -47,6 +48,14 @@ namespace arcnum_core
 
 	texture_manager::texture_manager()
 	{
+		uint32_t file_count = 0;
+		uint32_t texture_count = 1;
+			
+		for (const auto& entry : std::filesystem::directory_iterator(std::filesystem::absolute("assets/sprites")))
+		{
+			file_count++;
+		}
+
 		for (const auto& entry : std::filesystem::directory_iterator(std::filesystem::absolute("assets/sprites")))
 		{
 			std::string file_string = entry.path().filename().string();
@@ -55,6 +64,9 @@ namespace arcnum_core
 			entity_type type = get_entity_type_from_string(file_without_extension);
 
 			this->insert(type, new texture(entry.path()));
+
+			std::cout << "[TEXTURES LOADED]    " << texture_count << "/" << file_count << std::endl;
+			texture_count++;
 		}
 	}
 
