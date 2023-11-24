@@ -3,6 +3,8 @@
 
 #include <glew.h>
 #include <glfw3.h>
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
 
 #include "window.hpp"
 #include "../world/entity.hpp"
@@ -12,6 +14,9 @@
 
 namespace arcnum_core
 {
+	double delta_time = 0.0;
+	double last_frame = 0.0;
+
 	window::window()
 	{
 		this->init_gl();
@@ -32,7 +37,6 @@ namespace arcnum_core
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-
 		this->_window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Arcnum", NULL, NULL);
 
 		glfwMakeContextCurrent(this->_window);
@@ -43,11 +47,11 @@ namespace arcnum_core
 		glewInit();
 	}
 
-	void window::update(entities* entities)
+	void window::update(entity_manager* entities, camera* player_camera)
 	{
-		handle_input();
+		handle_input(player_camera);
 
-		entities->render();
+		entities->render(player_camera);
 
 		calculate_framerate();
 
@@ -60,10 +64,20 @@ namespace arcnum_core
 		return !glfwWindowShouldClose(this->_window);
 	}
 
-	void window::handle_input()
+	void window::handle_input(camera* player_camera)
 	{
+		player_camera->_camera_speed = 2.5 * delta_time;
+
 		if (glfwGetKey(this->_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			glfwSetWindowShouldClose(this->_window, true);
+		if (glfwGetKey(this->_window, GLFW_KEY_W) == GLFW_PRESS)
+			player_camera->camera_up();
+		if (glfwGetKey(this->_window, GLFW_KEY_S) == GLFW_PRESS)
+			player_camera->camera_down();
+		if (glfwGetKey(this->_window, GLFW_KEY_A) == GLFW_PRESS)
+			player_camera->camera_left();
+		if (glfwGetKey(this->_window, GLFW_KEY_D) == GLFW_PRESS)
+			player_camera->camera_right();
 	}
 
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -71,13 +85,11 @@ namespace arcnum_core
 		glViewport(0, 0, width, height);
 	}
 
-	double last_time = 0.0f;
-
 	void calculate_framerate()
 	{
 		double current_time = glfwGetTime();
-		double delta_time = current_time - last_time;
-		last_time = current_time;
+		delta_time = current_time - last_frame;
+		last_frame = current_time;
 		std::cout << "FPS: " << (1 / delta_time) << std::endl;
 	}
 }

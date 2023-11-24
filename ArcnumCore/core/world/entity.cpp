@@ -9,6 +9,7 @@
 #include <gtc/type_ptr.hpp>
 
 #include "entity.hpp"
+#include "texture_type.hpp"
 #include "entity_type.hpp"
 #include "shader.hpp"
 #include "texture.hpp"
@@ -16,9 +17,10 @@
 
 namespace arcnum_core
 {
-	entity::entity(GLuint* shader_program, std::filesystem::path vertex_source, std::filesystem::path fragment_source, std::vector<float> vertices,  entity_type type)
+	entity::entity(GLuint* shader_program, std::filesystem::path vertex_source, std::filesystem::path fragment_source, std::vector<float> vertices, texture_type texture_type, entity_type entity_type)
 	{
-		this->_type = type;
+		this->_texture_type = texture_type;
+		this->_entity_type = entity_type;
 		this->_vertices = vertices;
 		this->_shader_program = glCreateProgram();
 		this->_shader = new shader(vertex_source, fragment_source);
@@ -39,14 +41,14 @@ namespace arcnum_core
 		this->_shader->~shader();
 	}
 
-	entities::entities()
+	entity_manager::entity_manager()
 	{
 		this->_entities = std::vector<entity*>();
 		this->_VAOs = std::vector<GLuint>();
 		this->_VBOs = std::vector<GLuint>();
 	}
 
-	entities::~entities()
+	entity_manager::~entity_manager()
 	{
 		for (auto entity : this->_entities)
 		{
@@ -76,7 +78,7 @@ namespace arcnum_core
 		glm::vec3(-1.3f,  1.0f, -1.5f)
 	};
 
-	void entities::render()
+	void entity_manager::render(camera* player_camera)
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -85,23 +87,14 @@ namespace arcnum_core
 		for (auto entity : this->_entities)
 		{
 			glm::mat4 view = glm::mat4(1.0f);
-			float radius = 10.0f;
-			float camX = static_cast<float>(sin(glfwGetTime()) * radius);
-			float camY = static_cast<float>(sin(glfwGetTime()) * radius);
-			float camZ = static_cast<float>(cos(glfwGetTime()) * radius);
-			view = glm::lookAt(glm::vec3(camX, camY, camZ), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-			entity->_shader->set_mat4(entity->_shader_program, "view", view);
-
 			glm::mat4 projection = glm::mat4(1.0f);
-
-			view = glm::translate(view, glm::vec3(0.0f, 0.0f, -1.0f));
+			view = glm::lookAt(player_camera->_camera_position, player_camera->_camera_position + player_camera->_camera_front, player_camera->_camera_up);
 			projection = glm::perspective(glm::radians(45.0f), (float)1080 / (float)1080, 0.1f, 100.0f);
-
 			entity->_shader->set_mat4(entity->_shader_program, "view", view);
 			entity->_shader->set_mat4(entity->_shader_program, "projection", projection);
 
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, this->_texture_manager->find(entity->_type)->_texture);
+			glBindTexture(GL_TEXTURE_2D, this->_texture_manager->find(entity->_texture_type)->_texture);
 
 			glUseProgram(entity->_shader_program);
 			glBindVertexArray(this->_VAOs[iterator]);
@@ -121,7 +114,7 @@ namespace arcnum_core
 		}
 	}
 
-	void entities::bind_all_objects()
+	void entity_manager::bind_all_objects()
 	{
 		for (auto _ : this->_entities)
 		{
@@ -129,7 +122,7 @@ namespace arcnum_core
 		}
 	}
 
-	void entities::bind_objects()
+	void entity_manager::bind_objects()
 	{
 		glGenVertexArrays(1, &this->_VAOs[this->_current_entity]);
 		glGenBuffers(1, &this->_VBOs[this->_current_entity]);
@@ -149,7 +142,7 @@ namespace arcnum_core
 		this->_current_entity++;
 	}
 
-	void entities::add_entity(entity* entity)
+	void entity_manager::add_entity(entity* entity)
 	{
 		this->_VAOs.emplace_back(0);
 		this->_VBOs.emplace_back(0);
@@ -166,8 +159,8 @@ namespace arcnum_core
 		this->bind_objects();
 	}
 
-	entity_type get_entity_type_from_string(std::string string)
+	texture_type get_entity_type_from_string(std::string string)
 	{
-		return (entity_type)hash(string.c_str());
+		return (texture_type)hash(string.c_str());
 	}
 }

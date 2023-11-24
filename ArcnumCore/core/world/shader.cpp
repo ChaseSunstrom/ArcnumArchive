@@ -10,8 +10,6 @@
 
 #include "shader.hpp"
 
-
-
 namespace arcnum_core
 {
 	shader::shader(std::filesystem::path vertex_path, std::filesystem::path fragment_path)
@@ -40,21 +38,14 @@ namespace arcnum_core
 
 	std::string shader::read_file(std::filesystem::path file_path)
 	{
-		try
-		{
-			std::string code;
-			std::ifstream file_stream;
-			file_stream.open(file_path);
-			std::stringstream stream;
-			stream << file_stream.rdbuf();
-			file_stream.close();
-			code = stream.str();
-			return code;
-		}
-        catch (std::ifstream::failure& e)
-        {
-            std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
-        }
+		std::string code;
+		std::ifstream file_stream;
+		file_stream.open(file_path);
+		std::stringstream stream;
+		stream << file_stream.rdbuf();
+		file_stream.close();
+		code = stream.str();
+		return code;
 	}
 
 	void shader::set_mat4(const GLuint& shader_program, const std::string& name, const glm::mat4& mat)

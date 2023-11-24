@@ -13,10 +13,10 @@ namespace arcnum_main
 		~arcnum();
 
 		void arcnum_main();
-		void main_loop();
+		void main_loop(arcnum_core::camera* player_camera);
 	private:
 		arcnum_core::window* _main_window;
-		arcnum_core::entities* _main_entities;
+		arcnum_core::entity_manager* _main_entities;
 		
 	};
 }

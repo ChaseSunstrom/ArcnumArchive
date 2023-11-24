@@ -9,7 +9,7 @@
 #include <glew.h>
 #include <glfw3.h>
 
-#include "entity_type.hpp"
+#include "texture_type.hpp"
 
 namespace arcnum_core
 {
@@ -32,10 +32,10 @@ namespace arcnum_core
 	{
 	public:
 		texture_manager();
-		void insert(entity_type key, texture* value);
-		texture* find(entity_type key);
+		void insert(texture_type key, texture* value);
+		texture* find(texture_type key);
 	private:
-		std::unordered_map<entity_type, std::unique_ptr<texture>> _textures;
+		std::unordered_map<texture_type, std::unique_ptr<texture>> _textures;
 	};
 }
 

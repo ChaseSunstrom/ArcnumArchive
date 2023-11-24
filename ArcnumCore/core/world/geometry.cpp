@@ -11,14 +11,4 @@ namespace arcnum_core
 	{
 		this->_vertices = vertices;
 	}
-
-	square::square()
-	{
-		this->_vertices = {
-			TOP_RIGHT,
-			BOTTOM_RIGHT,
-			BOTTOM_LEFT,
-			TOP_LEFT,
-		};
-	}
 }

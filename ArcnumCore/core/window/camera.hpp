@@ -9,17 +9,17 @@ namespace arcnum_core
 	class camera
 	{
 	public: 			
-		camera() = default;
+		camera()  = default;
 		~camera() = default;
-
-		void move_camera();
+		void camera_up();
+		void camera_down();
+		void camera_left();
+		void camera_right();
 	public:
-		glm::vec3 _position;
-		glm::vec3 _target;
-		glm::vec3 _direction;
-		glm::vec3 _up;
-		glm::vec3 _camera_right;
-		glm::vec3 _camera_up;
+		float       _camera_speed    = 2.5f;
+		glm::vec3   _camera_position = glm::vec3(0.0f,  0.0f,  3.0f);
+		glm::vec3   _camera_front    = glm::vec3(0.0f,  0.0f, -1.0f);
+		glm::vec3   _camera_up		 = glm::vec3(0.0f,  1.0f,  0.0f);
 	};
 }
 

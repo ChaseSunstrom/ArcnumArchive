@@ -16,9 +16,9 @@ namespace arcnum_core
 		window();
 		~window();
 		void init_gl();
-		void update(entities* entities);
+		void update(entity_manager* entities, camera* player_camera);
 		bool is_running();
-		void handle_input();
+		void handle_input(camera* player_camera);
 	public:
 		renderer* _renderer;
 	private:
