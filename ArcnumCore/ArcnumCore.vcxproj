@@ -283,6 +283,8 @@
     <ClInclude Include="core\world\texture.hpp" />
     <ClInclude Include="core\world\entity_type.hpp" />
     <ClInclude Include="include\OTHER\stb_image.h" />
+    <ClInclude Include="core\world\voxel.hpp" />
+    <ClInclude Include="core\world\world.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\window\camera.cpp" />
@@ -293,6 +295,8 @@
     <ClCompile Include="core\window\renderer.cpp" />
     <ClCompile Include="core\world\shader.cpp" />
     <ClCompile Include="core\world\texture.cpp" />
+    <ClCompile Include="core\world\voxel.cpp" />
+    <ClCompile Include="core\world\world.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

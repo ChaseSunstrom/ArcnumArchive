@@ -16,6 +16,7 @@
 #include "texture_type.hpp"
 #include "entity_type.hpp"
 #include "../window/camera.hpp"
+#include "../world/voxel.hpp"
 
 namespace arcnum_core
 {
@@ -47,7 +48,7 @@ namespace arcnum_core
 		~entity_manager();
 		void bind_objects();
 		void bind_all_objects();
-		void render(camera* player_camera);
+		void render(camera* player_camera, std::vector<voxel*> voxel_positions);
 		void add_entity(entity* entity);
 	public:
 		texture_manager* _texture_manager;

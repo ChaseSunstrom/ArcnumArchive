@@ -14,6 +14,7 @@
 #include "shader.hpp"
 #include "texture.hpp"
 #include "../window/camera.hpp"
+#include "../world/voxel.hpp"
 
 namespace arcnum_core
 {
@@ -65,20 +66,7 @@ namespace arcnum_core
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 	}
 
-	glm::vec3 cube_positions[] = {
-		glm::vec3(0.0f,  0.0f,  0.0f),
-		glm::vec3(2.0f,  5.0f, -15.0f),
-		glm::vec3(-1.5f, -2.2f, -2.5f),
-		glm::vec3(-3.8f, -2.0f, -12.3f),
-		glm::vec3(2.4f, -0.4f, -3.5f),
-		glm::vec3(-1.7f,  3.0f, -7.5f),
-		glm::vec3(1.3f, -2.0f, -2.5f),
-		glm::vec3(1.5f,  2.0f, -2.5f),
-		glm::vec3(1.5f,  0.2f, -1.5f),
-		glm::vec3(-1.3f,  1.0f, -1.5f)
-	};
-
-	void entity_manager::render(camera* player_camera)
+	void entity_manager::render(camera* player_camera, std::vector<voxel*> voxel_positions)
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -86,8 +74,36 @@ namespace arcnum_core
 
 		for (auto entity : this->_entities)
 		{
-			glm::mat4 view = glm::mat4(1.0f);
+			glm::mat4 view       = glm::mat4(1.0f);
 			glm::mat4 projection = glm::mat4(1.0f);
+			glm::mat4 model      = glm::mat4(1.0f);
+
+			switch (entity->_entity_type)
+			{
+			case entity_type::PLAYER:
+				glm::vec3 camera_offset = player_camera->_camera_position - player_camera->_camera_offset;
+				view = glm::lookAt(player_camera->_camera_position, player_camera->_camera_position + player_camera->_camera_front, player_camera->_camera_up);
+				projection = glm::perspective(glm::radians(45.0f), (float)1080 / (float)1080, 0.1f, 100.0f);
+				entity->_shader->set_mat4(entity->_shader_program, "view", view);
+				entity->_shader->set_mat4(entity->_shader_program, "projection", projection);
+
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, this->_texture_manager->find(entity->_texture_type)->_texture);
+
+				glUseProgram(entity->_shader_program);
+				glBindVertexArray(this->_VAOs[iterator]);
+
+				model = glm::translate(model, camera_offset);
+				entity->_shader->set_mat4(entity->_shader_program, "model", model);
+				glDrawArrays(GL_TRIANGLES, 0, 36);
+
+				iterator++;
+
+				continue;
+			default:
+				break;
+			}
+
 			view = glm::lookAt(player_camera->_camera_position, player_camera->_camera_position + player_camera->_camera_front, player_camera->_camera_up);
 			projection = glm::perspective(glm::radians(45.0f), (float)1080 / (float)1080, 0.1f, 100.0f);
 			entity->_shader->set_mat4(entity->_shader_program, "view", view);
@@ -99,15 +115,13 @@ namespace arcnum_core
 			glUseProgram(entity->_shader_program);
 			glBindVertexArray(this->_VAOs[iterator]);
 
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < voxel_positions.size(); i++)
 			{
 				glm::mat4 model = glm::mat4(1.0f);
-				model = glm::translate(model, cube_positions[i]);
-				float angle = 20.0f * i;
-				model = glm::rotate(model, (float)glfwGetTime() * glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+				model = glm::translate(model, voxel_positions[i]->_position);
 				entity->_shader->set_mat4(entity->_shader_program, "model", model);
 
-				glDrawArrays(GL_TRIANGLES, 0, 18);
+				glDrawArrays(GL_TRIANGLES, 0, 36);
 			}
 
 			iterator++;

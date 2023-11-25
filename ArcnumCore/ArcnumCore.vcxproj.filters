@@ -48,6 +48,12 @@
     <ClInclude Include="core\world\entity_type.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="core\world\world.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\world\voxel.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\window\window.cpp">
@@ -72,6 +78,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\world\texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\world\world.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\world\voxel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,8 +11,6 @@ namespace arcnum_main
 	public: 
 		using arcnum_core::entity::entity;
 		~player();
-		void move_camera_x();
-		void move_camera_y();
 	public:
 		arcnum_core::camera* _main_camera = new arcnum_core::camera();
 	};

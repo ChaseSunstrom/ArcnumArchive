@@ -38,59 +38,12 @@ namespace arcnum_main
 
 		this->_main_entities->_texture_manager = new arcnum_core::texture_manager();
 
-		std::vector<float> vertices = {
-			-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-			 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-			 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-			-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-
-			-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-			 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-			 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-			 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-			-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-			-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-
-			-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-			-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-			-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		};
-
-		std::vector<float> vertices2 = {
-			 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-			 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-			 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-			-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-			 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-			 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-			-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-			-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-
-			-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-			 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-			 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-			-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-			-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
-		};
-
-		arcnum_core::triangle* triangle1 = new arcnum_core::triangle(vertices);
-		arcnum_core::triangle* triangle2 = new arcnum_core::triangle(vertices2);
+		arcnum_core::voxel* voxel = new arcnum_core::voxel(0.0f, 0.0f, 0.0f);
 
 		player* player = new arcnum_main::player(
 			&this->_main_window->_renderer->_shader_program,
 			SHADERS,
-			vertices,
+			voxel->_vertices,
 			arcnum_core::texture_type::TEST_CONTAINER,
 			arcnum_core::entity_type::PLAYER
 		);
@@ -98,31 +51,34 @@ namespace arcnum_main
 		arcnum_core::entity* entity = new arcnum_core::entity(
 			&this->_main_window->_renderer->_shader_program,
 			SHADERS,
-			vertices,
-			arcnum_core::texture_type::TEST_CONTAINER,
-			arcnum_core::entity_type::BLOCK
-		);
-
-		arcnum_core::entity* entity2 = new arcnum_core::entity(
-			&this->_main_window->_renderer->_shader_program,
-			SHADERS,
-			vertices2,
+			voxel->_vertices,
 			arcnum_core::texture_type::TEST_CONTAINER,
 			arcnum_core::entity_type::BLOCK
 		);
 
 		this->_main_entities->add_entity(player);
 		this->_main_entities->add_entity(entity);
-		this->_main_entities->add_entity(entity2);
 
 		this->main_loop(player->_main_camera);
 	}
 
 	void arcnum::main_loop(arcnum_core::camera* player_camera)
 	{
+		player_camera->rotate_camera();
+
+		std::vector<arcnum_core::voxel*> voxels;
+
+		for (float i = 0; i < 100; i++)
+		{
+			for (int j = 0; j < 100; j++)
+			{
+				voxels.push_back(new arcnum_core::voxel(i, 0.0f, j));
+			}
+		}
+
 		while (this->_main_window->is_running())
 		{
-			this->_main_window->update(this->_main_entities, player_camera);
+			this->_main_window->update(this->_main_entities, player_camera, voxels);
 		}
 	}
 }

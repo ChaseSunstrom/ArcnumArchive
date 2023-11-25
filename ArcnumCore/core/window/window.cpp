@@ -8,6 +8,7 @@
 
 #include "window.hpp"
 #include "../world/entity.hpp"
+#include "../world/voxel.hpp"
 
 #define SCR_WIDTH 1080
 #define SCR_HEIGHT 1080
@@ -47,12 +48,13 @@ namespace arcnum_core
 		glewInit();
 	}
 
-	void window::update(entity_manager* entities, camera* player_camera)
+	void window::update(entity_manager* entities, camera* player_camera, std::vector<voxel*> voxel_positions)
 	{
 		handle_input(player_camera);
 
-		entities->render(player_camera);
+		entities->render(player_camera, voxel_positions);
 
+		std::cout << "( " << player_camera->_camera_position.x << ", " << player_camera->_camera_position.y << ", " << player_camera->_camera_position.z << " )" << std::endl;
 		calculate_framerate();
 
 		glfwSwapBuffers(this->_window);
@@ -71,8 +73,12 @@ namespace arcnum_core
 		if (glfwGetKey(this->_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			glfwSetWindowShouldClose(this->_window, true);
 		if (glfwGetKey(this->_window, GLFW_KEY_W) == GLFW_PRESS)
-			player_camera->camera_up();
+			player_camera->camera_forward();
 		if (glfwGetKey(this->_window, GLFW_KEY_S) == GLFW_PRESS)
+			player_camera->camera_backward();
+		if (glfwGetKey(this->_window, GLFW_KEY_SPACE) == GLFW_PRESS)
+			player_camera->camera_up();
+		if (glfwGetKey(this->_window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
 			player_camera->camera_down();
 		if (glfwGetKey(this->_window, GLFW_KEY_A) == GLFW_PRESS)
 			player_camera->camera_left();
@@ -90,6 +96,6 @@ namespace arcnum_core
 		double current_time = glfwGetTime();
 		delta_time = current_time - last_frame;
 		last_frame = current_time;
-		std::cout << "FPS: " << (1 / delta_time) << std::endl;
+		//std::cout << "FPS: " << (1 / delta_time) << std::endl;
 	}
 }
