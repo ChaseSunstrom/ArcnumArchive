@@ -289,6 +289,7 @@
   <ItemGroup>
     <ClCompile Include="core\window\camera.cpp" />
     <ClCompile Include="core\window\window.cpp" />
+    <ClCompile Include="core\world\color.cpp" />
     <ClCompile Include="core\world\geometry.cpp" />
     <ClCompile Include="lib\GLAD\glad.c" />
     <ClCompile Include="core\window\renderer.cpp" />

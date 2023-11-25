@@ -8,9 +8,8 @@
 
 #include "window.hpp"
 #include "../world/voxel.hpp"
+#include "../util/macros.hpp"
 
-#define SCR_WIDTH 1080
-#define SCR_HEIGHT 1080
 
 namespace arcnum_core
 {

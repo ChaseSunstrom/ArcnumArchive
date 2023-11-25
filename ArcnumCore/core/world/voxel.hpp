@@ -20,7 +20,7 @@ namespace arcnum_core
 	class voxel
 	{
 	public:
-		voxel(world_position world_pos, texture_type texture_type, color color, entity_type entity_type);
+		voxel(world_position world_pos, texture_type texture_type, color_type color, entity_type entity_type);
 		~voxel();
 		void attach_shaders();
 	public:
@@ -28,7 +28,7 @@ namespace arcnum_core
 		texture*           _texture;
 		GLuint             _shader_program;
 		texture_type       _texture_type;
-		color              _color;
+		color_type              _color;
 		entity_type        _entity_type;
 		glm::vec3          _position        = glm::vec3(0.0f, 0.0f, 0.0f);
 		glm::vec3          _rotation        = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -45,6 +45,8 @@ namespace arcnum_core
 		void bind_all_objects();
 		void render(camera* player_camera, std::vector<world_position> voxel_positions);
 		void add_voxel(voxel* entity);
+		void handle_view_and_projection(camera* player_camera, voxel* current_voxel);
+		void handle_color_and_texture(voxel* current_voxel);
 	public:
 		texture_manager*    _texture_manager;
 	private:
