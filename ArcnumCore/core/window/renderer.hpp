@@ -6,7 +6,7 @@
 #include <glew.h>
 #include <glfw3.h>
 
-#include "../world/entity.hpp"
+#include "../world/voxel.hpp"
 
 namespace arcnum_core
 {
@@ -20,7 +20,7 @@ namespace arcnum_core
 	public:
 		GLuint _shader_program = 0;
 	private:
-		std::vector<entity*> _entities;
+		std::vector<voxel*> _voxels;
 		GLuint _gl_program = 0;
 	};
 }

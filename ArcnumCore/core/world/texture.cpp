@@ -8,7 +8,7 @@
 #include <stb_image.h>
 
 #include "texture.hpp"
-#include "entity.hpp"
+#include "voxel.hpp"
 
 namespace arcnum_core
 {

@@ -1,6 +1,7 @@
 #ifndef CORE_SHADER_HPP
 #define CORE_SHADER_HPP
 
+#include <filesystem>
 #include <string>
 
 #include <glm.hpp>

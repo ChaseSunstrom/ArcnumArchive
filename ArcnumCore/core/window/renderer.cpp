@@ -5,23 +5,23 @@
 #include <glfw3.h>
 
 #include "renderer.hpp"
-#include "../world/entity.hpp"
+#include "../world/voxel.hpp"
 
 
 namespace arcnum_core
 {
     renderer::renderer()
     {
-        this->_entities = std::vector<entity*>();
+        this->_voxels = std::vector<voxel*>();
         this->_shader_program = glCreateProgram();
     }
 
     renderer::~renderer()
     {
         glDeleteProgram(this->_shader_program);
-        for (auto entity : this->_entities)
+        for (auto voxel : this->_voxels)
         {
-            entity->_shader->~shader();
+            voxel->_shader->~shader();
         }
     }
 }

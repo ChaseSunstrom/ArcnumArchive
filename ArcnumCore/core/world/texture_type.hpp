@@ -17,6 +17,7 @@ namespace arcnum_core
 	{
 		TEST_BRICK     = "wall"_hash,
 		TEST_CONTAINER = "container"_hash,
+		NONE
 	};
 }
 

@@ -7,7 +7,6 @@
 #include <gtc/matrix_transform.hpp>
 
 #include "window.hpp"
-#include "../world/entity.hpp"
 #include "../world/voxel.hpp"
 
 #define SCR_WIDTH 1080
@@ -48,7 +47,7 @@ namespace arcnum_core
 		glewInit();
 	}
 
-	void window::update(entity_manager* entities, camera* player_camera, std::vector<voxel*> voxel_positions)
+	void window::update(voxel_manager* entities, camera* player_camera, std::vector<world_position> voxel_positions)
 	{
 		handle_input(player_camera);
 

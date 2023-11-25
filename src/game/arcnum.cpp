@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include <core/window/window.hpp>
-#include <core/world/entity.hpp>
+#include <core/util/macros.hpp>
 #include <core/world/texture_type.hpp>
 #include <core/world/entity_type.hpp>
 #include <core/world/geometry.hpp>
@@ -12,24 +12,17 @@
 #include "arcnum.hpp"
 #include "player/player.hpp"
 
-#define TOP_RIGHT 0.5f,  0.5f, 0.0f
-#define BOTTOM_RIGHT 0.5f, -0.5f, 0.0f
-#define BOTTOM_LEFT -0.5f, -0.5f, 0.0f
-#define TOP_LEFT -0.5f,  0.5f, 0.0f
-
-#define SHADERS "shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl"
-
 namespace arcnum_main
 {
 	arcnum::arcnum()
 	{
 		this->_main_window = new arcnum_core::window();
-		this->_main_entities = new arcnum_core::entity_manager();
+		this->_main_entities = new arcnum_core::voxel_manager();
 	}
 
 	arcnum::~arcnum()
 	{
-		this->_main_entities->~entity_manager();
+		this->_main_entities->~voxel_manager();
 		this->_main_window->~window();
 	}
 
@@ -38,47 +31,32 @@ namespace arcnum_main
 
 		this->_main_entities->_texture_manager = new arcnum_core::texture_manager();
 
-		arcnum_core::voxel* voxel = new arcnum_core::voxel(0.0f, 0.0f, 0.0f);
+		player* _player = new player(world_position(0.0f, 0.0f, 0.0f), arcnum_core::texture_type::TEST_CONTAINER, arcnum_core::color::WHITE, arcnum_core::entity_type::PLAYER);
+		arcnum_core::voxel* voxel = new arcnum_core::voxel(world_position(0.0f, 0.0f, 0.0f), arcnum_core::texture_type::TEST_CONTAINER, arcnum_core::color::NONE, arcnum_core::entity_type::BLOCK);
 
-		player* player = new arcnum_main::player(
-			&this->_main_window->_renderer->_shader_program,
-			SHADERS,
-			voxel->_vertices,
-			arcnum_core::texture_type::TEST_CONTAINER,
-			arcnum_core::entity_type::PLAYER
-		);
+		this->_main_entities->add_voxel(_player);
+		this->_main_entities->add_voxel(voxel);
 
-		arcnum_core::entity* entity = new arcnum_core::entity(
-			&this->_main_window->_renderer->_shader_program,
-			SHADERS,
-			voxel->_vertices,
-			arcnum_core::texture_type::TEST_CONTAINER,
-			arcnum_core::entity_type::BLOCK
-		);
-
-		this->_main_entities->add_entity(player);
-		this->_main_entities->add_entity(entity);
-
-		this->main_loop(player->_main_camera);
+		this->main_loop(_player->_main_camera);
 	}
 
 	void arcnum::main_loop(arcnum_core::camera* player_camera)
 	{
 		player_camera->rotate_camera();
 
-		std::vector<arcnum_core::voxel*> voxels;
+		std::vector<world_position> voxel_positions;
 
 		for (float i = 0; i < 100; i++)
 		{
 			for (int j = 0; j < 100; j++)
 			{
-				voxels.push_back(new arcnum_core::voxel(i, 0.0f, j));
+				voxel_positions.push_back(world_position(i, 0.0f, j));
 			}
 		}
 
 		while (this->_main_window->is_running())
 		{
-			this->_main_window->update(this->_main_entities, player_camera, voxels);
+			this->_main_window->update(this->_main_entities, player_camera, voxel_positions);
 		}
 	}
 }
