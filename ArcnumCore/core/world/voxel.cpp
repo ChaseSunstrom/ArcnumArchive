@@ -30,6 +30,7 @@ namespace arcnum_core
 			break;
 		default:
 			this->_shader = new shader(std::filesystem::absolute("ArcnumCore/shaders/texture_shader.vsl"), std::filesystem::absolute("ArcnumCore/shaders/texture_shader.fsl"));
+			break;
 		}
 		this->_texture_type = texture_type;
 		this->_color = color;
@@ -130,7 +131,7 @@ namespace arcnum_core
 	{
 		int vertex_color_location;
 		float green;
-		color _color;
+		color voxel_color;
 
 		switch (current_voxel->_color)
 		{
@@ -144,8 +145,8 @@ namespace arcnum_core
 	BIND_COLOR:
 
 		vertex_color_location = glGetUniformLocation(current_voxel->_shader_program, "color");
-		_color = color(current_voxel->_color);
-		glUniform4f(vertex_color_location, _color._r, _color._g, _color._b, 1.0f);
+		voxel_color = color(current_voxel->_color);
+		glUniform4f(vertex_color_location, voxel_color._r, voxel_color._g, voxel_color._b, voxel_color._a);
 
 		switch (current_voxel->_texture_type)
 		{
@@ -183,11 +184,11 @@ namespace arcnum_core
 			case entity_type::PLAYER:
 				glm::vec3 camera_offset = player_camera->_camera_position - player_camera->_camera_offset;
 
-				this->handle_view_and_projection(player_camera, entity);
-				this->handle_color_and_texture(entity);
-
 				glUseProgram(entity->_shader_program);
 				glBindVertexArray(this->_VAOs[iterator]);
+
+				this->handle_view_and_projection(player_camera, entity);
+				this->handle_color_and_texture(entity);
 
 				model = glm::translate(model, camera_offset);
 				entity->_shader->set_mat4(entity->_shader_program, "model", model);
@@ -208,7 +209,7 @@ namespace arcnum_core
 
 			for (int i = 0; i < voxel_positions.size(); i++)
 			{
-				model = glm::mat4(1.0f);
+				glm::mat4 model = glm::mat4(1.0f);
 				model = glm::translate(model, voxel_positions[i]);
 				entity->_shader->set_mat4(entity->_shader_program, "model", model);
 

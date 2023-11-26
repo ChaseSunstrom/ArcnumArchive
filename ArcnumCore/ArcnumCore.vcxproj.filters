@@ -27,9 +27,6 @@
     <ClInclude Include="core\window\camera.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\world\geometry.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="core\debug\macros.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -69,9 +66,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\window\camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core\world\geometry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\world\texture.cpp">
