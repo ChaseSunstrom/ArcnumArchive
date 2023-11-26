@@ -85,7 +85,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\fragment_shader.glsl" />
-    <None Include="shaders\vertex_shader.glsl" />
+    <None Include="shaders\texture_shader.fsl" />
+    <None Include="shaders\texture_shader.vsl" />
+    <None Include="shaders\color_shader.fsl" />
+    <None Include="shaders\color_shader.vsl" />
   </ItemGroup>
 </Project>

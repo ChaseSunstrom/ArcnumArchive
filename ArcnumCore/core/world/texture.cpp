@@ -21,12 +21,11 @@ namespace arcnum_core
 
 	void texture::load_texture()
 	{
-		unsigned char* image_data = stbi_load(this->_texture_path.string().c_str(), &this->_width, &this->_height, &this->_nrChannels, 0);
+		this->_image_data = stbi_load(this->_texture_path.string().c_str(), &this->_width, &this->_height, &this->_nrChannels, 0);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->_width, this->_height, 0, GL_RGB, GL_UNSIGNED_BYTE, image_data);
-		glGenerateMipmap(GL_TEXTURE_2D);
+		
 
-		stbi_image_free(image_data);
+		//stbi_image_free(image_data);
 	}
 
 	void texture::bind_texture()

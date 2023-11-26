@@ -21,6 +21,7 @@ namespace arcnum_core
 		void load_texture();
 		void bind_texture();
 	public:
+		unsigned char* _image_data;
 		int _width                   = 0;
 		int _height                  = 0;
 		int _nrChannels              = 0;
