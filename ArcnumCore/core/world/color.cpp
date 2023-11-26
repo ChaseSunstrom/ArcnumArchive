@@ -46,11 +46,6 @@ namespace arcnum_core
 			_g = 0.0f;
 			_b = 0.0f;
 			break;
-		default:
-			_r = 0.0f;
-			_g = 0.0f;
-			_b = 0.0f;
-			break;
 		}
 	}
 }

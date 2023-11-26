@@ -51,6 +51,6 @@ namespace arcnum_core
         front.z = sin(glm::radians(this->_yaw)) * cos(glm::radians(this->_pitch));
         this->_camera_front   = glm::normalize(_default);
         this->_camera_offset  = front + this->_camera_position;
-        this->_camera_offset.y = this->_camera_offset.y - 1;
+        this->_camera_offset.y -= 1;
 	}
 }

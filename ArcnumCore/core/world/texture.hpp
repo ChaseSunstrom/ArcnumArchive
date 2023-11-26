@@ -17,14 +17,15 @@ namespace arcnum_core
 	{
 	public:
 		texture(std::filesystem::path path);
+		~texture() = default;
 		void load_texture();
 		void bind_texture();
 	public:
-		GLuint _texture = 0;
+		int _width                   = 0;
+		int _height                  = 0;
+		int _nrChannels              = 0;
+		GLuint _texture              = 0;
 	private:
-		int _width      = 0;
-		int _height     = 0;
-		int _nrChannels = 0;
 		std::filesystem::path _texture_path;
 	};
 

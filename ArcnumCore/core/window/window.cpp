@@ -52,7 +52,6 @@ namespace arcnum_core
 
 		entities->render(player_camera, voxel_positions);
 
-		std::cout << "( " << player_camera->_camera_position.x << ", " << player_camera->_camera_position.y << ", " << player_camera->_camera_position.z << " )" << std::endl;
 		calculate_framerate();
 
 		glfwSwapBuffers(this->_window);
@@ -94,6 +93,6 @@ namespace arcnum_core
 		double current_time = glfwGetTime();
 		delta_time = current_time - last_frame;
 		last_frame = current_time;
-		//std::cout << "FPS: " << (1 / delta_time) << std::endl;
+		std::cout << "FPS: " << (1 / delta_time) << std::endl;
 	}
 }

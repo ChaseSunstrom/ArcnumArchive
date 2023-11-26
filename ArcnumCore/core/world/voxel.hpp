@@ -28,7 +28,7 @@ namespace arcnum_core
 		texture*           _texture;
 		GLuint             _shader_program;
 		texture_type       _texture_type;
-		color_type              _color;
+		color_type         _color;
 		entity_type        _entity_type;
 		glm::vec3          _position        = glm::vec3(0.0f, 0.0f, 0.0f);
 		glm::vec3          _rotation        = glm::vec3(0.0f, 0.0f, 0.0f);

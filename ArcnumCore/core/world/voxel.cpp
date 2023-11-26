@@ -130,7 +130,6 @@ namespace arcnum_core
 			goto BIND_TEXTURE;
 			break;
 		default:
-			goto BIND_COLOR;
 			break;
 		}
 
@@ -138,20 +137,22 @@ namespace arcnum_core
 
 		vertex_color_location = glGetUniformLocation(current_voxel->_shader_program, "color");
 		_color = color(current_voxel->_color);
-		glUniform4f(vertex_color_location, _color._r, _color._g, _color._b, _color._a);
+		glUniform4f(vertex_color_location, _color._r, _color._g, _color._b, 1.0f);
 
 		switch (current_voxel->_texture_type)
 		{
 		case texture_type::NONE:
+			glActiveTexture(GL_TEXTURE0);
 			return;
 		default:
 			goto BIND_TEXTURE;
 		}
-		
+
 	BIND_TEXTURE:
 
-		glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, this->_texture_manager->find(current_voxel->_texture_type)->_texture);
+
 	}
 
 
@@ -165,12 +166,11 @@ namespace arcnum_core
 		{
 			glm::mat4 model = glm::mat4(1.0f);
 
-
 			switch (entity->_entity_type)
 			{
 			case entity_type::PLAYER:
 				glm::vec3 camera_offset = player_camera->_camera_position - player_camera->_camera_offset;
-				
+
 				this->handle_view_and_projection(player_camera, entity);
 				this->handle_color_and_texture(entity);
 
@@ -231,7 +231,7 @@ namespace arcnum_core
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 		glEnableVertexAttribArray(1);
 		// Texture coordinate attribute
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 		glEnableVertexAttribArray(2);
 
 		this->_current_entity++;
