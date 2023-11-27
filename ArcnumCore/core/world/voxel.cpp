@@ -87,7 +87,7 @@ namespace arcnum_core
 
 	voxel::~voxel()
 	{
-		this->_shader->~shader();
+		delete this->_shader;
 		glDeleteProgram(this->_shader_program);
 	}
 
@@ -103,7 +103,7 @@ namespace arcnum_core
 	{
 		for (auto entity : this->_entities)
 		{
-			entity->~voxel();
+			delete entity;
 		}
 	}
 

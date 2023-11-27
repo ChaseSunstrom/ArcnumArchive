@@ -21,7 +21,7 @@ namespace arcnum_core
         glDeleteProgram(this->_shader_program);
         for (auto voxel : this->_voxels)
         {
-            voxel->_shader->~shader();
+            delete voxel->_shader;
         }
     }
 }

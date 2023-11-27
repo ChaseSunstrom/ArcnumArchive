@@ -26,6 +26,8 @@ namespace arcnum_core
 	window::~window()
 	{
 		glfwTerminate();
+		delete this->_renderer;
+		delete this->_camera;
 	}
 
 	void window::init_gl()

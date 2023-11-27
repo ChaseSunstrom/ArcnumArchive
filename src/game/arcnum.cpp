@@ -22,8 +22,8 @@ namespace arcnum_main
 
 	arcnum::~arcnum()
 	{
-		this->_main_entities->~voxel_manager();
-		this->_main_window->~window();
+		delete this->_main_entities;
+		delete this->_main_window;
 	}
 
 	void arcnum::arcnum_main()

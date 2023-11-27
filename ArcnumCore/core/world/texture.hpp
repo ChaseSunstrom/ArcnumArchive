@@ -17,7 +17,7 @@ namespace arcnum_core
 	{
 	public:
 		texture(std::filesystem::path path);
-		~texture() = default;
+		~texture();
 		void load_texture();
 		void bind_texture();
 	public:
@@ -34,6 +34,7 @@ namespace arcnum_core
 	{
 	public:
 		texture_manager();
+		~texture_manager() = default;
 		void insert(texture_type key, texture* value);
 		texture* find(texture_type key);
 	private:

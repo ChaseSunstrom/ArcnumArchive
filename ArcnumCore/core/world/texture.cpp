@@ -19,13 +19,14 @@ namespace arcnum_core
 		this->load_texture();
 	}
 
+	texture::~texture()
+	{
+		stbi_image_free(this->_image_data);
+	}
+
 	void texture::load_texture()
 	{
 		this->_image_data = stbi_load(this->_texture_path.string().c_str(), &this->_width, &this->_height, &this->_nrChannels, 0);
-
-		
-
-		//stbi_image_free(image_data);
 	}
 
 	void texture::bind_texture()
