@@ -7,7 +7,9 @@
 #include <gtc/matrix_transform.hpp>
 
 #include "window.hpp"
+#include "../player/player.hpp"
 #include "../world/voxel.hpp"
+#include "../world/voxel_manager.hpp"
 #include "../util/macros.hpp"
 
 
@@ -48,11 +50,11 @@ namespace arcnum_core
 		glewInit();
 	}
 
-	void window::update(voxel_manager* entities, camera* player_camera, std::vector<world_position> voxel_positions)
+	void window::update(voxel_manager* entities, player* player, std::vector<world_position> voxel_positions)
 	{
-		handle_input(player_camera);
+		handle_input(player->_main_camera);
 
-		entities->render(player_camera, voxel_positions);
+		entities->render(player, voxel_positions);
 
 		calculate_framerate();
 

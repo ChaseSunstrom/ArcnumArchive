@@ -12,7 +12,6 @@
 #include "texture_type.hpp"
 #include "entity_type.hpp"
 #include "color.hpp"
-#include "../window/camera.hpp"
 #include "../util/macros.hpp"
 
 namespace arcnum_core
@@ -34,26 +33,6 @@ namespace arcnum_core
 		glm::vec3          _rotation        = glm::vec3(0.0f, 0.0f, 0.0f);
 		glm::vec3          _scale           = glm::vec3(1.0f, 1.0f, 1.0f);
 		std::vector<float> _vertices;
-	};
-
-	class voxel_manager
-	{
-	public:
-		voxel_manager();
-		~voxel_manager();
-		void bind_objects();
-		void bind_all_objects();
-		void render(camera* player_camera, std::vector<world_position> voxel_positions);
-		void add_voxel(voxel* entity);
-		void handle_view_and_projection(camera* player_camera, voxel* current_voxel);
-		void handle_color_and_texture(voxel* current_voxel);
-	public:
-		texture_manager*    _texture_manager;
-	private:
-		std::vector<voxel*> _entities;
-		std::vector<GLuint> _VAOs;
-		std::vector<GLuint> _VBOs;
-		uint64_t            _current_entity = 0;
 	};
 
 	texture_type get_entity_type_from_string(std::string string);

@@ -270,12 +270,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\game\player\player.cpp" />
     <ClCompile Include="src\game\arcnum.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\game\player\player.hpp" />
     <ClInclude Include="src\game\arcnum.hpp" />
   </ItemGroup>
   <ItemGroup>

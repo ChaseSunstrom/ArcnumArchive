@@ -7,10 +7,10 @@
 #include <core/world/texture_type.hpp>
 #include <core/world/entity_type.hpp>
 #include <core/world/texture.hpp>
-#include "core/world/color.hpp"
+#include <core/world/color.hpp>
+#include <core/player/player.hpp>
 
 #include "arcnum.hpp"
-#include "player/player.hpp"
 
 namespace arcnum_main
 {
@@ -31,18 +31,17 @@ namespace arcnum_main
 
 		this->_main_entities->_texture_manager = new arcnum_core::texture_manager();
 
-		player* _player = new player(world_position(0.0f, 0.0f, 0.0f), arcnum_core::texture_type::NONE, arcnum_core::color_type::WHITE, arcnum_core::entity_type::PLAYER);
-		arcnum_core::voxel* voxel = new arcnum_core::voxel(world_position(0.0f, 0.0f, 0.0f), arcnum_core::texture_type::TEST_CONTAINER, arcnum_core::color_type::NONE, arcnum_core::entity_type::BLOCK);
-
-		this->_main_entities->add_voxel(_player);
+		arcnum_core::player* _player = new arcnum_core::player(world_position(0.0f, 0.0f, 0.0f), arcnum_core::texture_type::TEST_CONTAINER, arcnum_core::color_type::WHITE, arcnum_core::entity_type::PLAYER);
+		arcnum_core::voxel* voxel = new arcnum_core::voxel(world_position(0.0f, 0.0f, 0.0f), arcnum_core::texture_type::TEST_BRICK, arcnum_core::color_type::RED, arcnum_core::entity_type::BLOCK);
+		
 		this->_main_entities->add_voxel(voxel);
 
-		this->main_loop(_player->_main_camera);
+		this->main_loop(_player);
 	}
 
-	void arcnum::main_loop(arcnum_core::camera* player_camera)
+	void arcnum::main_loop(arcnum_core::player* player)
 	{
-		player_camera->rotate_camera();
+		player->_main_camera->rotate_camera();
 
 		std::vector<world_position> voxel_positions;
 
@@ -56,7 +55,7 @@ namespace arcnum_main
 
 		while (this->_main_window->is_running())
 		{
-			this->_main_window->update(this->_main_entities, player_camera, voxel_positions);
+			this->_main_window->update(this->_main_entities, player, voxel_positions);
 		}
 	}
 }

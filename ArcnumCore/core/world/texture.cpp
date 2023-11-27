@@ -27,6 +27,10 @@ namespace arcnum_core
 	void texture::load_texture()
 	{
 		this->_image_data = stbi_load(this->_texture_path.string().c_str(), &this->_width, &this->_height, &this->_nrChannels, 0);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->_width, this->_height, 0, GL_RGB, GL_UNSIGNED_BYTE, this->_image_data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+		glActiveTexture(GL_TEXTURE3);
 	}
 
 	void texture::bind_texture()
@@ -58,7 +62,7 @@ namespace arcnum_core
 		}
 	}
 
-	texture* texture_manager::find(texture_type key)
+	texture* texture_manager::texture_find(texture_type key)
 	{
 		return &*this->_textures[key];
 	}

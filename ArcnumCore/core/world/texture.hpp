@@ -36,7 +36,7 @@ namespace arcnum_core
 		texture_manager();
 		~texture_manager() = default;
 		void insert(texture_type key, texture* value);
-		texture* find(texture_type key);
+		texture* texture_find(texture_type key);
 	private:
 		std::unordered_map<texture_type, std::unique_ptr<texture>> _textures;
 	};

@@ -51,6 +51,12 @@
     <ClInclude Include="core\util\macros.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="core\player\player.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\world\voxel_manager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\window\window.cpp">
@@ -75,6 +81,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\world\color.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\player\player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\world\voxel_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

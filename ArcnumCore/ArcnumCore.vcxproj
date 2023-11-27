@@ -273,6 +273,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="core\debug\macros.hpp" />
+    <ClInclude Include="core\player\player.hpp" />
     <ClInclude Include="core\util\macros.hpp" />
     <ClInclude Include="core\window\camera.hpp" />
     <ClInclude Include="core\window\window.hpp" />
@@ -284,8 +285,10 @@
     <ClInclude Include="core\world\entity_type.hpp" />
     <ClInclude Include="include\OTHER\stb_image.h" />
     <ClInclude Include="core\world\voxel.hpp" />
+    <ClInclude Include="core\world\voxel_manager.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="core\player\player.cpp" />
     <ClCompile Include="core\window\camera.cpp" />
     <ClCompile Include="core\window\window.cpp" />
     <ClCompile Include="core\world\color.cpp" />
@@ -294,6 +297,7 @@
     <ClCompile Include="core\world\shader.cpp" />
     <ClCompile Include="core\world\texture.cpp" />
     <ClCompile Include="core\world\voxel.cpp" />
+    <ClCompile Include="core\world\voxel_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\color_shader.fsl" />
