@@ -302,10 +302,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\color_shader.fsl" />
-    <None Include="shaders\color_shader.vsl" />
     <None Include="shaders\light_shader.fsl" />
     <None Include="shaders\texture_shader.fsl" />
-    <None Include="shaders\texture_shader.vsl" />
+    <None Include="shaders\vertex_shader.vsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

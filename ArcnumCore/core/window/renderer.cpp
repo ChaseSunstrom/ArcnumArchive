@@ -24,39 +24,29 @@ namespace arcnum_core
 		uint64_t iterator = 0;
 
 		this->handle_player();
-
-		
-
-
-		auto light = this->_ecs->_entities[1];
-
-		glUseProgram(light->_shader_program);
-		glBindVertexArray(this->_ecs->_VAOs[1]);
+		glm::mat4 model;
 
 
-		this->handle_view_and_projection(light);
-		//this->handle_color_and_texture(light);
+		for (auto entity : this->_ecs->_entities)
+		{
+			glBindVertexArray(this->_ecs->_VAOs[iterator]);
+			glUseProgram(entity->_shader_program);
 
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, light->_position);
-		light->_shader->set_mat4(light->_shader_program, "model", model);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+			this->handle_view_and_projection(entity);
+			this->handle_color_and_texture(entity);
 
-		auto entity = this->_ecs->_entities[0];
-		glBindVertexArray(this->_ecs->_VAOs[0]);
+			entity->_shader->set_vec3(entity->_shader_program, "light_pos", this->_ecs->_entities[3]->_position);
+			entity->_shader->set_vec3(entity->_shader_program, "light_color", glm::vec3(1.0f, 1.0f, 1.0f));
 
-		glUseProgram(entity->_shader_program);
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, entity->_position);
+			entity->_shader->set_mat4(entity->_shader_program, "model", model);
 
-		this->handle_view_and_projection(entity);
-		this->handle_color_and_texture(entity);
 
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, entity->_position);
-		entity->_shader->set_mat4(entity->_shader_program, "model", model);
-		entity->_shader->set_vec4(entity->_shader_program, "light_color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+			glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-
+			iterator++;
+		}
 	}
 
 	void renderer::handle_view_and_projection(entity* current_voxel)
@@ -74,13 +64,13 @@ namespace arcnum_core
 	void renderer::handle_color_and_texture(entity* current_voxel)
 	{
 		int vertex_color_location;
-		float green;
 		color voxel_color;
 
 		switch (current_voxel->_color_type)
 		{
 		case color_type::NONE:
-			goto BIND_TEXTURE;
+			current_voxel->_color_type = color_type::WHITE;
+			goto BIND_COLOR;
 		default:
 			goto BIND_COLOR;
 		}
@@ -110,6 +100,9 @@ namespace arcnum_core
 	{
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::vec3 camera_offset = this->_player->_main_camera->_camera_position - this->_player->_main_camera->_camera_offset;
+
+		this->_player->_shader->set_vec3(this->_player->_shader_program, "light_pos", this->_ecs->_entities[3]->_position);
+		this->_player->_shader->set_vec3(this->_player->_shader_program, "light_color", glm::vec3(1.0f, 1.0f, 1.0f));
 
 		glUseProgram(this->_player->_shader_program);
 		glBindVertexArray(this->_player->_VAO);

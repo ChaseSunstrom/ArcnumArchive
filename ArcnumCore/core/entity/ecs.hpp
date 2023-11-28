@@ -8,6 +8,7 @@
 
 #include "texture.hpp"
 #include "entity.hpp"	
+#include "../lighting/light.hpp"
 #include "../player/player.hpp"
 
 namespace arcnum_core
@@ -27,6 +28,7 @@ namespace arcnum_core
 	private:
 		std::vector<GLuint> _VBOs;
 		uint64_t            _current_entity = 0;
+		uint64_t            _current_light  = 0;
 	};
 }
 

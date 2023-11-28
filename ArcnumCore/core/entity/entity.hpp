@@ -22,6 +22,10 @@ namespace arcnum_core
 		entity(world_position world_pos, texture_type texture_type, color_type color_type, entity_type entity_type);
 		~entity();
 		void attach_shaders();
+		void bind_vertex_position();
+		void bind_texture();
+		void bind_color();
+		void bind_normal();
 	public:
 		shader*            _shader;
 		texture*           _texture;

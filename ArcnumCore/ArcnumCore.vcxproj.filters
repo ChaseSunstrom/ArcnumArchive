@@ -95,9 +95,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\texture_shader.fsl" />
-    <None Include="shaders\texture_shader.vsl" />
+    <None Include="shaders\vertex_shader.vsl" />
     <None Include="shaders\color_shader.fsl" />
-    <None Include="shaders\color_shader.vsl" />
     <None Include="shaders\light_shader.fsl" />
   </ItemGroup>
 </Project>

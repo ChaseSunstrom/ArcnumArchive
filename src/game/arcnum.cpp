@@ -27,11 +27,19 @@ namespace arcnum_main
 
 	void arcnum::arcnum_main()
 	{
-		this->_main_window->_renderer->_player = new arcnum_core::player(world_position(0.0f, 0.0f, 0.0f), arcnum_core::texture_type::NONE, arcnum_core::color_type::GREEN, arcnum_core::entity_type::PLAYER);
-		arcnum_core::entity* voxel = new arcnum_core::entity(world_position(0.0f, 0.0f, 0.0f), arcnum_core::texture_type::NONE, arcnum_core::color_type::GREEN, arcnum_core::entity_type::BLOCK);
-		arcnum_core::light* light = new arcnum_core::light(world_position(-3.0f, 3.0f, -3.0f), arcnum_core::texture_type::NONE, arcnum_core::color_type::WHITE);
+		this->_main_window->_renderer->_player = new arcnum_core::player(world_position(0.0f, 0.0f, 0.0f), arcnum_core::texture_type::TEST_BRICK, arcnum_core::color_type::GREEN, arcnum_core::entity_type::PLAYER);
 		
-		this->_main_window->_renderer->_ecs->add_entity(voxel);
+		arcnum_core::entity* green_voxel = new arcnum_core::entity(world_position(0.0f, 0.0f, 0.0f), arcnum_core::texture_type::NONE, arcnum_core::color_type::GREEN, arcnum_core::entity_type::BLOCK);
+		
+		arcnum_core::entity* red_voxel = new arcnum_core::entity(world_position(0.0f, 0.0f, 1.0f), arcnum_core::texture_type::NONE, arcnum_core::color_type::RED, arcnum_core::entity_type::BLOCK);
+		
+		arcnum_core::entity* blue_voxel = new arcnum_core::entity(world_position(1.0f, 0.0f, 0.0f), arcnum_core::texture_type::TEST_CONTAINER, arcnum_core::color_type::BLUE, arcnum_core::entity_type::BLOCK);
+		
+		arcnum_core::light* light = new arcnum_core::light(world_position(-3.0f, 3.0f, -3.0f), arcnum_core::texture_type::NONE, arcnum_core::color_type::WHITE);
+
+		this->_main_window->_renderer->_ecs->add_entity(green_voxel);
+		this->_main_window->_renderer->_ecs->add_entity(red_voxel);
+		this->_main_window->_renderer->_ecs->add_entity(blue_voxel);
 		this->_main_window->_renderer->_ecs->add_entity(light);
 
 		this->main_loop();

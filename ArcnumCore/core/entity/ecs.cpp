@@ -42,31 +42,26 @@ namespace arcnum_core
 		glBindBuffer(GL_ARRAY_BUFFER, this->_VBOs[this->_current_entity]);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * this->_entities[this->_current_entity]->_vertices.size(), this->_entities[this->_current_entity]->_vertices.data(), GL_DYNAMIC_DRAW);
 
-		// Position attribute
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
-		// Color attribute
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-		glEnableVertexAttribArray(1);
-		// Texture coordinate attribute
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-		glEnableVertexAttribArray(2);
-
+		this->_entities[this->_current_entity]->bind_vertex_position();
+		this->_entities[this->_current_entity]->bind_color();
+		this->_entities[this->_current_entity]->bind_texture();
+		this->_entities[this->_current_entity]->bind_normal();
 		this->_current_entity++;
+
 	}
 
-	void ecs::add_entity(entity* voxel)
+	void ecs::add_entity(entity* entity)
 	{
 		this->_VAOs.emplace_back(0);
 		this->_VBOs.emplace_back(0);
 
 		if (this->_entities.capacity() > sizeof(uint64_t))
 		{
-			this->_entities.emplace_back(voxel);
+			this->_entities.emplace_back(entity);
 		}
 		else
 		{
-			this->_entities.push_back(voxel);
+			this->_entities.push_back(entity);
 		}
 
 		this->bind_objects();
