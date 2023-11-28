@@ -17,11 +17,11 @@
 #include "../window/camera.hpp"
 #include "../util/macros.hpp"
 
-#include "voxel.hpp"
+#include "entity.hpp"
 
 namespace arcnum_core
 {
-	voxel::voxel(world_position world_pos, texture_type texture_type, color_type color, entity_type entity_type)
+	entity::entity(world_position world_pos, texture_type texture_type, color_type color, entity_type entity_type)
 	{
 		this->_shader_program = glCreateProgram();
 		switch (texture_type)
@@ -37,7 +37,6 @@ namespace arcnum_core
 		this->_color = color;
 		this->_entity_type = entity_type;
 		this->_position = world_pos;
-		;
 
 		this->_vertices = {
 			-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, //bottom left
@@ -86,21 +85,19 @@ namespace arcnum_core
 		this->attach_shaders();
 	}
 
-	voxel::~voxel()
+	entity::~entity()
 	{
 		delete this->_shader;
 		glDeleteProgram(this->_shader_program);
 	}
 
-	void voxel::attach_shaders()
+	void entity::attach_shaders()
 	{
 		glAttachShader(this->_shader_program, this->_shader->_gl_vertex_shader);
 		glAttachShader(this->_shader_program, this->_shader->_gl_fragment_shader);
 		glLinkProgram(this->_shader_program);
 		this->_shader->~shader();
 	}
-
-	
 
 	texture_type get_entity_type_from_string(std::string string)
 	{

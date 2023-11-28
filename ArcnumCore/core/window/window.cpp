@@ -8,8 +8,8 @@
 
 #include "window.hpp"
 #include "../player/player.hpp"
-#include "../world/voxel.hpp"
-#include "../world/voxel_manager.hpp"
+#include "../entity/entity.hpp"
+#include "../entity/ecs.hpp"
 #include "../util/macros.hpp"
 
 
@@ -22,14 +22,11 @@ namespace arcnum_core
 	{
 		this->init_gl();
 		this->_renderer = new renderer();
-		this->_camera = new camera();
 	}
 
 	window::~window()
 	{
 		glfwTerminate();
-		delete this->_renderer;
-		delete this->_camera;
 	}
 
 	void window::init_gl()
@@ -50,11 +47,11 @@ namespace arcnum_core
 		glewInit();
 	}
 
-	void window::update(voxel_manager* entities, player* player, std::vector<world_position> voxel_positions)
+	void window::update()
 	{
-		handle_input(player->_main_camera);
+		handle_input(this->_renderer->_player->_main_camera);
 
-		entities->render(player, voxel_positions);
+		this->_renderer->render();
 
 		calculate_framerate();
 

@@ -2,7 +2,7 @@
 #define ARCNUM_HPP
 
 #include <core/window/window.hpp>
-#include <core/world/voxel.hpp>
+#include <core/entity/entity.hpp>
 #include <core/player/player.hpp>
 
 namespace arcnum_main
@@ -14,11 +14,9 @@ namespace arcnum_main
 		~arcnum();
 
 		void arcnum_main();
-		void main_loop(arcnum_core::player* player);
+		void main_loop();
 	private:
 		arcnum_core::window* _main_window;
-		arcnum_core::voxel_manager* _main_entities;
-		
 	};
 }
 

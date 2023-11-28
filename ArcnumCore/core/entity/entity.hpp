@@ -16,11 +16,11 @@
 
 namespace arcnum_core
 {
-	class voxel
+	class entity
 	{
 	public:
-		voxel(world_position world_pos, texture_type texture_type, color_type color, entity_type entity_type);
-		~voxel();
+		entity(world_position world_pos, texture_type texture_type, color_type color, entity_type entity_type);
+		~entity();
 		void attach_shaders();
 	public:
 		shader*            _shader;

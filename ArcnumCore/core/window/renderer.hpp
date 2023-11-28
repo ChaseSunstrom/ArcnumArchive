@@ -1,12 +1,8 @@
 #ifndef CORE_RENDERER_HPP
 #define CORE_RENDERER_HPP
 
-#include <vector>
-
-#include <glew.h>
-#include <glfw3.h>
-
-#include "../world/voxel.hpp"
+#include "../player/player.hpp"
+#include "../entity/ecs.hpp"
 
 namespace arcnum_core
 {
@@ -16,12 +12,14 @@ namespace arcnum_core
 		renderer();
 		~renderer();
 		void render();
-		void attach_shaders();
+		void handle_view_and_projection(entity* current_entity);
+		void handle_color_and_texture(entity* current_entity);
+		void handle_player(const int& iterator);
 	public:
-		GLuint _shader_program = 0;
-	private:
-		std::vector<voxel*> _voxels;
-		GLuint _gl_program = 0;
+		double _delta_time;
+		ecs* _ecs;
+		player* _player;
+		std::vector<world_position> _entity_positions;
 	};
 }
 

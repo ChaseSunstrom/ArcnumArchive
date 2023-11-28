@@ -18,34 +18,28 @@
     <ClInclude Include="core\window\window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\window\renderer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\world\shader.hpp">
+    <ClInclude Include="core\entity\shader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\window\camera.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\debug\macros.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\world\texture.hpp">
+    <ClInclude Include="core\entity\texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\OTHER\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\world\texture_type.hpp">
+    <ClInclude Include="core\entity\texture_type.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\world\entity_type.hpp">
+    <ClInclude Include="core\entity\entity_type.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\world\voxel.hpp">
+    <ClInclude Include="core\entity\entity.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\world\color.hpp">
+    <ClInclude Include="core\entity\color.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\util\macros.hpp">
@@ -54,7 +48,10 @@
     <ClInclude Include="core\player\player.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\world\voxel_manager.hpp">
+    <ClInclude Include="core\entity\ecs.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\window\renderer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -65,28 +62,28 @@
     <ClCompile Include="lib\GLAD\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\window\renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core\world\shader.cpp">
+    <ClCompile Include="core\entity\shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\window\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\world\texture.cpp">
+    <ClCompile Include="core\entity\texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\world\voxel.cpp">
+    <ClCompile Include="core\entity\entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\world\color.cpp">
+    <ClCompile Include="core\entity\color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\player\player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\world\voxel_manager.cpp">
+    <ClCompile Include="core\entity\ecs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\window\renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
