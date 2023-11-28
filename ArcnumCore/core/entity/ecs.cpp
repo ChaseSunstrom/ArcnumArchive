@@ -55,7 +55,7 @@ namespace arcnum_core
 		this->_current_entity++;
 	}
 
-	void ecs::add_voxel(entity* voxel)
+	void ecs::add_entity(entity* voxel)
 	{
 		this->_VAOs.emplace_back(0);
 		this->_VBOs.emplace_back(0);

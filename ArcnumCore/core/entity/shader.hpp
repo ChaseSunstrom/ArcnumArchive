@@ -16,6 +16,8 @@ namespace arcnum_core
 		std::string read_file(std::filesystem::path path);
 
 		void set_mat4(const GLuint& shader_program, const std::string& name, const glm::mat4& mat);
+		void set_vec3(const GLuint& shader_program, const std::string& name, const glm::vec3& vec);
+		void set_vec4(const GLuint& shader_program, const std::string& name, const glm::vec4& vec);
 
 		GLuint _gl_vertex_shader = 0;
 		GLuint _gl_fragment_shader = 0;

@@ -15,8 +15,6 @@
 
 namespace arcnum_core
 {
-	double delta_time = 0.0;
-	double last_frame = 0.0;
 
 	window::window()
 	{
@@ -49,11 +47,13 @@ namespace arcnum_core
 
 	void window::update()
 	{
-		handle_input(this->_renderer->_player->_main_camera);
+		this->handle_input(this->_renderer->_player->_main_camera);
 
 		this->_renderer->render();
 
-		calculate_framerate();
+		this->calculate_delta_time();
+
+		std::cout << "FPS: " << 1 / this->_renderer->_delta_time << std::endl;
 
 		glfwSwapBuffers(this->_window);
 		glfwPollEvents();
@@ -66,7 +66,7 @@ namespace arcnum_core
 
 	void window::handle_input(camera* player_camera)
 	{
-		player_camera->_camera_speed = 2.5 * delta_time;
+		player_camera->_camera_speed = 2.5 * this->_renderer->_delta_time;
 
 		if (glfwGetKey(this->_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			glfwSetWindowShouldClose(this->_window, true);
@@ -89,11 +89,10 @@ namespace arcnum_core
 		glViewport(0, 0, width, height);
 	}
 
-	void calculate_framerate()
+	void window::calculate_delta_time()
 	{
 		double current_time = glfwGetTime();
-		delta_time = current_time - last_frame;
-		last_frame = current_time;
-		std::cout << "FPS: " << (1 / delta_time) << std::endl;
+		this->_renderer->_delta_time = current_time - this->_renderer->_last_frame;
+		this->_renderer->_last_frame = current_time;
 	}
 }

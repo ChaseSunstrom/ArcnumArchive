@@ -27,18 +27,27 @@ namespace arcnum_core
 		switch (texture_type)
 		{
 		case texture_type::NONE:
-			this->_shader = new shader(std::filesystem::absolute("ArcnumCore/shaders/color_shader.vsl"), std::filesystem::absolute("ArcnumCore/shaders/color_shader.fsl"));
+			switch (entity_type)
+			{
+			case entity_type::LIGHT:
+				this->_shader = new shader(std::filesystem::absolute("ArcnumCore/shaders/color_shader.vsl"), std::filesystem::absolute("ArcnumCore/shaders/light_shader.fsl"));
+				break;
+			default:
+				this->_shader = new shader(std::filesystem::absolute("ArcnumCore/shaders/color_shader.vsl"), std::filesystem::absolute("ArcnumCore/shaders/color_shader.fsl"));
+				break;
+			}
 			break;
 		default:
 			this->_shader = new shader(std::filesystem::absolute("ArcnumCore/shaders/texture_shader.vsl"), std::filesystem::absolute("ArcnumCore/shaders/texture_shader.fsl"));
 			break;
 		}
 		this->_texture_type = texture_type;
-		this->_color = color;
+		this->_color_type = color;
 		this->_entity_type = entity_type;
 		this->_position = world_pos;
 
 		this->_vertices = {
+			//position           //color           //texture
 			-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, //bottom left
 			 0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, //bottom right
 			 0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, //top right

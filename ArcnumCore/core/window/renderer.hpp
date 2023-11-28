@@ -14,9 +14,10 @@ namespace arcnum_core
 		void render();
 		void handle_view_and_projection(entity* current_entity);
 		void handle_color_and_texture(entity* current_entity);
-		void handle_player(const int& iterator);
+		void handle_player();
 	public:
-		double _delta_time;
+		double _last_frame = 0;
+		double _delta_time = 0;
 		ecs* _ecs;
 		player* _player;
 		std::vector<world_position> _entity_positions;

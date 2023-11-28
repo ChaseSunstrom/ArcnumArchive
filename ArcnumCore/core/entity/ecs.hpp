@@ -19,7 +19,7 @@ namespace arcnum_core
 		~ecs();
 		void bind_objects();
 		void bind_all_objects();
-		void add_voxel(entity* entity);
+		void add_entity(entity* entity);
 	public:
 		texture_manager* _texture_manager;
 		std::vector<entity*> _entities;

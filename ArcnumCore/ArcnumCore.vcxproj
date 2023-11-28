@@ -255,7 +255,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include/GLAD;$(ProjectDir)include/GLEW;$(ProjectDir)include/GLFW;$(ProjectDir)include/SDL;$(ProjectDir)include/GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include/OTHER;$(ProjectDir)include/GLAD;$(ProjectDir)include/GLEW;$(ProjectDir)include/GLFW;$(ProjectDir)include/SDL;$(ProjectDir)include/GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
@@ -285,6 +285,7 @@
     <ClInclude Include="core\entity\entity.hpp" />
     <ClInclude Include="core\entity\ecs.hpp" />
     <ClInclude Include="core\window\renderer.hpp" />
+    <ClInclude Include="core\lighting\light.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\player\player.cpp" />
@@ -297,10 +298,12 @@
     <ClCompile Include="core\entity\entity.cpp" />
     <ClCompile Include="core\entity\ecs.cpp" />
     <ClCompile Include="core\window\renderer.cpp" />
+    <ClCompile Include="core\lighting\light.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\color_shader.fsl" />
     <None Include="shaders\color_shader.vsl" />
+    <None Include="shaders\light_shader.fsl" />
     <None Include="shaders\texture_shader.fsl" />
     <None Include="shaders\texture_shader.vsl" />
   </ItemGroup>

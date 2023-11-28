@@ -19,7 +19,7 @@ namespace arcnum_core
 	class entity
 	{
 	public:
-		entity(world_position world_pos, texture_type texture_type, color_type color, entity_type entity_type);
+		entity(world_position world_pos, texture_type texture_type, color_type color_type, entity_type entity_type);
 		~entity();
 		void attach_shaders();
 	public:
@@ -27,7 +27,7 @@ namespace arcnum_core
 		texture*           _texture;
 		GLuint             _shader_program;
 		texture_type       _texture_type;
-		color_type         _color;
+		color_type         _color_type;
 		entity_type        _entity_type;
 		glm::vec3          _position        = glm::vec3(0.0f, 0.0f, 0.0f);
 		glm::vec3          _rotation        = glm::vec3(0.0f, 0.0f, 0.0f);

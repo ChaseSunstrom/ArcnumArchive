@@ -9,6 +9,7 @@
 #include <core/entity/texture.hpp>
 #include <core/entity/color.hpp>
 #include <core/player/player.hpp>
+#include <core/lighting/light.hpp>
 
 #include "arcnum.hpp"
 
@@ -26,10 +27,12 @@ namespace arcnum_main
 
 	void arcnum::arcnum_main()
 	{
-		this->_main_window->_renderer->_player = new arcnum_core::player(world_position(0.0f, 0.0f, 0.0f), arcnum_core::texture_type::TEST_CONTAINER, arcnum_core::color_type::WHITE, arcnum_core::entity_type::PLAYER);
-		arcnum_core::entity* voxel = new arcnum_core::entity(world_position(0.0f, 0.0f, 0.0f), arcnum_core::texture_type::TEST_BRICK, arcnum_core::color_type::RED, arcnum_core::entity_type::BLOCK);
+		this->_main_window->_renderer->_player = new arcnum_core::player(world_position(0.0f, 0.0f, 0.0f), arcnum_core::texture_type::NONE, arcnum_core::color_type::GREEN, arcnum_core::entity_type::PLAYER);
+		arcnum_core::entity* voxel = new arcnum_core::entity(world_position(0.0f, 0.0f, 0.0f), arcnum_core::texture_type::NONE, arcnum_core::color_type::GREEN, arcnum_core::entity_type::BLOCK);
+		arcnum_core::light* light = new arcnum_core::light(world_position(-3.0f, 3.0f, -3.0f), arcnum_core::texture_type::NONE, arcnum_core::color_type::WHITE);
 		
-		this->_main_window->_renderer->_ecs->add_voxel(voxel);
+		this->_main_window->_renderer->_ecs->add_entity(voxel);
+		this->_main_window->_renderer->_ecs->add_entity(light);
 
 		this->main_loop();
 	}
@@ -37,14 +40,6 @@ namespace arcnum_main
 	void arcnum::main_loop()
 	{
 		this->_main_window->_renderer->_player->_main_camera->rotate_camera();
-
-		for (float i = 0; i < 100; i++)
-		{
-			for (int j = 0; j < 100; j++)
-			{
-				this->_main_window->_renderer->_entity_positions.push_back(world_position(-i, -0.5f, -j));
-			}
-		}
 
 		while (this->_main_window->is_running())
 		{

@@ -7,6 +7,7 @@ namespace arcnum_core
 	{
 		BLOCK,
 		PLAYER,
+		LIGHT,
 		ENEMY,
 	};
 }

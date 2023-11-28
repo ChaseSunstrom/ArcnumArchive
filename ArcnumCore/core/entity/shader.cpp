@@ -53,4 +53,16 @@ namespace arcnum_core
 		int location = glGetUniformLocation(shader_program, name.c_str());
 		glProgramUniformMatrix4fv(shader_program, location, 1, GL_FALSE, &mat[0][0]);
 	}
+
+	void shader::set_vec3(const GLuint& shader_program, const std::string& name, const glm::vec3& vec)
+	{
+		int location = glGetUniformLocation(shader_program, name.c_str());
+		glProgramUniform3fv(shader_program, location, 1, &vec[0]);
+	}
+
+	void shader::set_vec4(const GLuint& shader_program, const std::string& name, const glm::vec4& vec)
+	{
+		int location = glGetUniformLocation(shader_program, name.c_str());
+		glProgramUniform4fv(shader_program, location, 1, &vec[0]);
+	}
 }

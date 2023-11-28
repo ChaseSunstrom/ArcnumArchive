@@ -21,6 +21,7 @@ namespace arcnum_core
 		void update();
 		bool is_running();
 		void handle_input(camera* player_camera);
+		void calculate_delta_time();
 	public:
 		renderer* _renderer;
 	private:
@@ -30,7 +31,6 @@ namespace arcnum_core
 
 
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-	void calculate_framerate();
 }
 
 #endif
