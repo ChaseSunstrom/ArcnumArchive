@@ -136,7 +136,7 @@ namespace arcnum_core
 		this->_shader->~shader();
 	}
 
-	texture_type get_entity_type_from_string(std::string string)
+	texture_type get_texture_type(std::string string)
 	{
 		return (texture_type)hash(string.c_str());
 	}

@@ -37,6 +37,7 @@ namespace arcnum_core
 
 			entity->_shader->set_vec3(entity->_shader_program, "light_pos", this->_ecs->_entities[3]->_position);
 			entity->_shader->set_vec3(entity->_shader_program, "light_color", glm::vec3(1.0f, 1.0f, 1.0f));
+			entity->_shader->set_vec3(this->_player->_shader_program, "view_pos", this->_player->_main_camera->_camera_position);
 
 			model = glm::mat4(1.0f);
 			model = glm::translate(model, entity->_position);
@@ -103,6 +104,7 @@ namespace arcnum_core
 
 		this->_player->_shader->set_vec3(this->_player->_shader_program, "light_pos", this->_ecs->_entities[3]->_position);
 		this->_player->_shader->set_vec3(this->_player->_shader_program, "light_color", glm::vec3(1.0f, 1.0f, 1.0f));
+		this->_player->_shader->set_vec3(this->_player->_shader_program, "view_pos", this->_player->_main_camera->_camera_position);
 
 		glUseProgram(this->_player->_shader_program);
 		glBindVertexArray(this->_player->_VAO);

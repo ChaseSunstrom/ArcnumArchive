@@ -56,7 +56,7 @@ namespace arcnum_core
 			std::string file_string = entry.path().filename().string();
 			std::string file_without_extension = file_string.erase(file_string.find_last_of("."), std::string::npos);
 
-			texture_type type = get_entity_type_from_string(file_without_extension);
+			texture_type type = get_texture_type(file_without_extension);
 
 			this->insert(type, new texture(entry.path()));
 		}

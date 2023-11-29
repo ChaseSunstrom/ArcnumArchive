@@ -39,7 +39,7 @@ namespace arcnum_core
 		std::vector<float> _vertices;
 	};
 
-	texture_type get_entity_type_from_string(std::string string);
+	texture_type get_texture_type(std::string string);
 }
 
 #endif
