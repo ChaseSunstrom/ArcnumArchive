@@ -66,7 +66,7 @@ namespace arcnum_core
 
 	void window::handle_input(camera* player_camera)
 	{
-		player_camera->_camera_speed = 2.5 * this->_renderer->_delta_time;
+		player_camera->_camera_speed = 5 * this->_renderer->_delta_time;
 
 		if (glfwGetKey(this->_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			glfwSetWindowShouldClose(this->_window, true);

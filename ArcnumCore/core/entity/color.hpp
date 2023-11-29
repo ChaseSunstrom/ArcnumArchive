@@ -10,8 +10,29 @@ namespace arcnum_core
 		BLUE,
 		WHITE,
 		BLACK,
+		YELLOW,
+		CYAN,
+		MAGENTA,
+		ORANGE,
+		PURPLE,
+		LIME,
+		PINK,
+		TEAL,
+		BROWN,
+		GOLD,
+		SILVER,
+		GRAY,
+		SKY_BLUE,
+		INDIGO,
+		TURQUOISE,
+		CORAL,
+		SALMON,
+		OLIVE,
+		BEIGE,
+		MINT_GREEN,
 		NONE
 	};
+
 
 	struct color
 	{
