@@ -57,6 +57,18 @@
     <ClInclude Include="core\lighting\light.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="core\world\chunk.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\entity\voxel.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\entity\voxel_type.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\util\constants.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\window\window.cpp">
@@ -90,6 +102,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\lighting\light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\world\chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\entity\voxel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

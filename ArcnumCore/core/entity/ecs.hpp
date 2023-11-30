@@ -21,6 +21,7 @@ namespace arcnum_core
 		void bind_objects();
 		void bind_all_objects();
 		void add_entity(entity* entity);
+		void add_entities(std::vector<entity*> entities);
 	public:
 		texture_manager* _texture_manager;
 		std::vector<entity*> _entities;

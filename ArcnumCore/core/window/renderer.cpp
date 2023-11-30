@@ -22,14 +22,16 @@ namespace arcnum_core
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		uint64_t iterator = 0;
+		glEnable(GL_SCISSOR_TEST);
 
 		this->handle_player();
 		glm::mat4 model;
 
-		for (auto entity : this->_ecs->_entities)
+		for (int i = 0; i < this->_ecs->_entities.size() - 1; i++)
 		{
-			glBindVertexArray(this->_ecs->_VAOs[iterator]);
+			entity* entity = this->_ecs->_entities[i];
+
+			glBindVertexArray(this->_ecs->_VAOs[i]);
 			glUseProgram(entity->_shader_program);
 
 			this->handle_view_and_projection(entity);
@@ -44,8 +46,6 @@ namespace arcnum_core
 			entity->_shader->set_mat4(entity->_shader_program, "model", model);
 
 			glDrawArrays(GL_TRIANGLES, 0, 36);
-
-			iterator++;
 		}
 	}
 
@@ -58,7 +58,6 @@ namespace arcnum_core
 		projection = glm::perspective(glm::radians(FOV), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		current_voxel->_shader->set_mat4(current_voxel->_shader_program, "view", view);
 		current_voxel->_shader->set_mat4(current_voxel->_shader_program, "projection", projection);
-
 	}
 
 	void renderer::handle_color_and_texture(entity* current_voxel)

@@ -12,9 +12,9 @@ namespace arcnum_core
 	ecs::ecs()
 	{
 		this->_texture_manager = new texture_manager();
-		this->_entities = std::vector<entity*>();
-		this->_VAOs     = std::vector<GLuint>();
-		this->_VBOs     = std::vector<GLuint>();
+		this->_entities        = std::vector<entity*>();
+		this->_VAOs            = std::vector<GLuint>();
+		this->_VBOs            = std::vector<GLuint>();
 	}
 
 	ecs::~ecs()
@@ -65,5 +65,14 @@ namespace arcnum_core
 		}
 
 		this->bind_objects();
+	}
+
+	void ecs::add_entities(std::vector<entity*> entities)
+	{
+		for (auto entity : entities)
+		{
+			this->add_entity(entity);
+		}
+
 	}
 }

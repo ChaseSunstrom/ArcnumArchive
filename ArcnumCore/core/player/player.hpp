@@ -3,6 +3,8 @@
 
 #include "../entity/entity.hpp"
 #include "../window/camera.hpp"
+#include "../entity/voxel.hpp"
+#include "../util/constants.hpp"
 
 namespace arcnum_core
 {
@@ -11,7 +13,7 @@ namespace arcnum_core
 	public: 
 		player(world_position world_pos, texture_type texture_type, color_type color, entity_type entity_type)
 			:
-			entity(world_pos, texture_type, color, entity_type)
+			entity(world_pos, voxel_vertices, texture_type, color, entity_type)
 		{
 			this->bind_objects();
 		}

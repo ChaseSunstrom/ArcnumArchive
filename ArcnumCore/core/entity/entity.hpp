@@ -1,5 +1,5 @@
-#ifndef CORE_VOXEL_HPP
-#define CORE_VOXEL_HPP
+#ifndef CORE_ENTITY_HPP
+#define CORE_ENTITY_HPP
 
 #include <vector>
 
@@ -19,7 +19,7 @@ namespace arcnum_core
 	class entity
 	{
 	public:
-		entity(world_position world_pos, texture_type texture_type, color_type color_type, entity_type entity_type);
+		entity(world_position world_pos, std::vector<float> vertices, texture_type texture_type, color_type color_type, entity_type entity_type);
 		~entity();
 		void attach_shaders();
 		void bind_vertex_position();
