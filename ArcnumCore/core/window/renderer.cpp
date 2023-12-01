@@ -47,11 +47,13 @@ namespace arcnum_core
 
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
-		
+
 		std::unordered_map<voxel*, std::vector<world_position>>::iterator it;
 
-		for (auto chunk : this->_chunks)
+		for (int i = 0; i < RENDER_DISTANCE; i++)
 		{
+			chunk* chunk = this->_chunks[i];
+
 			for (it = chunk->_voxels.begin(); it != chunk->_voxels.end(); it++)
 			{
 				glBindVertexArray(it->first->_shader->_VAO);
@@ -73,7 +75,9 @@ namespace arcnum_core
 					glDrawArrays(GL_TRIANGLES, 0, 36);
 				}
 			}
+
 		}
+
 	}
 
 	void renderer::render_entity(entity entity)

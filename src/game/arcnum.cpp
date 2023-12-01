@@ -36,35 +36,67 @@ namespace arcnum_main
 
 		this->_main_window->_renderer->_ecs->add_entity(light);
 
-		
-		
-
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			arcnum_core::chunk* chunk = new arcnum_core::chunk();
 			std::vector<world_position> positions;
-			arcnum_core::voxel* voxel = nullptr;
-			if (i == 0)
-				voxel = new arcnum_core::voxel(world_position(0.0f, 0.0f, 0.0f), arcnum_core::voxel_type::GRASS);
-			if (i == 1)
-				voxel = new arcnum_core::voxel(world_position(0.0f, 0.0f, 0.0f), arcnum_core::voxel_type::SAND);
-			if (i == 2)
-				voxel = new arcnum_core::voxel(world_position(0.0f, 0.0f, 0.0f), arcnum_core::voxel_type::STONE);
-
-			for (int j = 0; j < CHUNK_SIZE; j++)
+			if (i % 2 == 0)
 			{
-				for (int n = 0; n < CHUNK_SIZE; n++)
+				arcnum_core::voxel* voxel = new arcnum_core::voxel(world_position(0.0f, 0.0f, 0.0f), arcnum_core::voxel_type::GRASS);
+
+				for (int j = 0; j < CHUNK_SIZE; j++)
 				{
-					for (int m = 0; m < CHUNK_SIZE; m++)
+					for (int n = 0; n < CHUNK_SIZE; n++)
 					{
-						positions.emplace_back(world_position((float)-j + (i * 16), (float)-m, (float)-n));
+						for (int m = 0; m < CHUNK_SIZE; m++)
+						{
+								positions.emplace_back(world_position((float)-j + (i * 16), (float)-m, (float)-n));
+						}
 					}
 				}
-			}
 
-			chunk->insert(voxel, positions);
-			this->_main_window->_renderer->_chunks.push_back(chunk);
-			positions.clear();
+				chunk->insert(voxel, positions);
+				this->_main_window->_renderer->_chunks.push_back(chunk);
+				positions.clear();
+			}
+			if (i % 2 == 1)
+			{
+				arcnum_core::voxel* voxel = new arcnum_core::voxel(world_position(0.0f, 0.0f, 0.0f), arcnum_core::voxel_type::SAND);
+
+				for (int j = 0; j < CHUNK_SIZE; j++)
+				{
+					for (int n = 0; n < CHUNK_SIZE; n++)
+					{
+						for (int m = 0; m < CHUNK_SIZE; m++)
+						{
+								positions.emplace_back(world_position((float)-j + (i * 16), (float)-m, (float)-n));
+						}
+					}
+				}
+
+				chunk->insert(voxel, positions);
+				this->_main_window->_renderer->_chunks.push_back(chunk);
+				positions.clear();
+			}
+			else
+			{
+				arcnum_core::voxel* voxel = new arcnum_core::voxel(world_position(0.0f, 0.0f, 0.0f), arcnum_core::voxel_type::STONE);
+
+				for (int j = 0; j < CHUNK_SIZE; j++)
+				{
+					for (int n = 0; n < CHUNK_SIZE; n++)
+					{
+						for (int m = 0; m < CHUNK_SIZE; m++)
+						{
+								positions.emplace_back(world_position((float)-j + (i * 16), (float)-m, (float)-n));
+						}
+					}
+				}
+
+				chunk->insert(voxel, positions);
+				this->_main_window->_renderer->_chunks.push_back(chunk);
+				positions.clear();
+			}
 		}
 
 		this->main_loop();
