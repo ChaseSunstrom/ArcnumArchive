@@ -56,7 +56,6 @@ namespace arcnum_core
 
 	entity::~entity()
 	{
-		delete this->_shader;
 		glDeleteProgram(this->_shader_program);
 	}
 

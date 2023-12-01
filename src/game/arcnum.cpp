@@ -4,6 +4,7 @@
 
 #include <core/window/window.hpp>
 #include <core/util/macros.hpp>
+#include <core/world/chunk.hpp>
 #include <core/entity/texture_type.hpp>
 #include <core/entity/entity_type.hpp>
 #include <core/entity/texture.hpp>
@@ -35,10 +36,35 @@ namespace arcnum_main
 
 		this->_main_window->_renderer->_ecs->add_entity(light);
 
-		for (float i = 0; i < 25; i++)
+		
+		
+
+		for (int i = 0; i < 3; i++)
 		{
-			arcnum_core::entity* voxel = new arcnum_core::voxel(world_position(-i, 0, -i), arcnum_core::texture_type::NONE, (arcnum_core::color_type)i, arcnum_core::voxel_type::GRASS);
-			this->_main_window->_renderer->_ecs->add_entity(voxel);
+			arcnum_core::chunk* chunk = new arcnum_core::chunk();
+			std::vector<world_position> positions;
+			arcnum_core::voxel* voxel = nullptr;
+			if (i == 0)
+				voxel = new arcnum_core::voxel(world_position(0.0f, 0.0f, 0.0f), arcnum_core::voxel_type::GRASS);
+			if (i == 1)
+				voxel = new arcnum_core::voxel(world_position(0.0f, 0.0f, 0.0f), arcnum_core::voxel_type::SAND);
+			if (i == 2)
+				voxel = new arcnum_core::voxel(world_position(0.0f, 0.0f, 0.0f), arcnum_core::voxel_type::STONE);
+
+			for (int j = 0; j < CHUNK_SIZE; j++)
+			{
+				for (int n = 0; n < CHUNK_SIZE; n++)
+				{
+					for (int m = 0; m < CHUNK_SIZE; m++)
+					{
+						positions.emplace_back(world_position((float)-j + (i * 16), (float)-m, (float)-n));
+					}
+				}
+			}
+
+			chunk->insert(voxel, positions);
+			this->_main_window->_renderer->_chunks.push_back(chunk);
+			positions.clear();
 		}
 
 		this->main_loop();

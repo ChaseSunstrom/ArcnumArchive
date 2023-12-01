@@ -13,13 +13,17 @@ namespace arcnum_core
 	class voxel : public entity
 	{
 	public:
-		voxel(world_position world_pos, texture_type texture_type, color_type _color_type, voxel_type voxel_type) 
+		voxel() = default;
+		voxel(world_position world_pos, voxel_type voxel_type) 
 			:
-		entity(world_pos, voxel_vertices, texture_type, _color_type, entity_type::BLOCK)
+		entity(world_pos, voxel_vertices, texture_type::NONE, convert_voxel_type_to_color_type(voxel_type), entity_type::BLOCK)
 		{
 			this->_voxel_type = voxel_type;
+			this->bind_objects();
 		};
-		~voxel();
+		~voxel() = default;
+		color_type convert_voxel_type_to_color_type(voxel_type voxel_type);
+		void bind_objects();
 	public:
 		voxel_type _voxel_type;
 	};

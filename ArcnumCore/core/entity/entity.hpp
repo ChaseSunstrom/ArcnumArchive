@@ -19,6 +19,7 @@ namespace arcnum_core
 	class entity
 	{
 	public:
+		entity() = default;
 		entity(world_position world_pos, std::vector<float> vertices, texture_type texture_type, color_type color_type, entity_type entity_type);
 		~entity();
 		void attach_shaders();
