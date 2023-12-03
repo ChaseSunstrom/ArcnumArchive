@@ -15,8 +15,9 @@ namespace arcnum_core
 
 	enum class texture_type
 	{
-		TEST_BRICK     = "wall"_hash,
-		TEST_CONTAINER = "container"_hash,
+		GRASS = "grass"_hash,
+		STONE = "stone"_hash,
+		SAND = "sand"_hash,
 		NONE = 0,
 
 	};

@@ -175,7 +175,6 @@ namespace arcnum_core
 		default:
 			break;
 		}
-
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, this->_ecs->_texture_manager->texture_find(current_voxel._texture_type)->_texture);
 	}

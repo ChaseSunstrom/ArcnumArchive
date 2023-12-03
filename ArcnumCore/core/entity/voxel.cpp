@@ -19,6 +19,21 @@ namespace arcnum_core
 		}
 	}
 
+	texture_type voxel::convert_voxel_type_to_texture_type(voxel_type voxel_type)
+	{
+		switch (voxel_type)
+		{
+		case voxel_type::GRASS:
+			return texture_type::GRASS;
+		case voxel_type::STONE:
+			return texture_type::STONE;
+		case voxel_type::SAND:
+			return texture_type::SAND;
+		default:
+			return texture_type::NONE;
+		}
+	}
+
 	void voxel::bind_objects()
 	{
 		glGenVertexArrays(1, &this->_shader->_VAO);

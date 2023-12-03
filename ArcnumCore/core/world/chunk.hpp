@@ -13,9 +13,7 @@ namespace arcnum_core
 	{
 	public:
 		chunk() = default;
-		~chunk() = default;
-		void load_chunk();
-		void unload_chunk();
+		~chunk();
 		void insert(voxel* key, std::vector<world_position> value);
 	public:
 		std::unordered_map<voxel*, std::vector<world_position>> _voxels = std::unordered_map<voxel*, std::vector<world_position>>();
