@@ -15,99 +15,48 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core\window\window.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\entity\shader.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\window\camera.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\entity\texture.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\OTHER\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\entity\texture_type.hpp">
+    <ClInclude Include="core\window\window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\entity\entity_type.hpp">
+    <ClInclude Include="core\renderer\renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\entity\entity.hpp">
+    <ClInclude Include="core\util\memory\alloc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\entity\color.hpp">
+    <ClInclude Include="core\util\data\vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\util\macros.hpp">
+    <ClInclude Include="core\util\util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\player\player.hpp">
+    <ClInclude Include="core\util\data\map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\entity\ecs.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\window\renderer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\lighting\light.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\world\chunk.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\entity\voxel.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\entity\voxel_type.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\util\constants.hpp">
+    <ClInclude Include="core\renderer\layer_stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="core\window\window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="lib\GLAD\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\entity\shader.cpp">
+    <ClCompile Include="core\window\window.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\window\camera.cpp">
+    <ClCompile Include="core\renderer\renderer.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\entity\texture.cpp">
+    <ClCompile Include="core\util\data\vector.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\entity\entity.cpp">
+    <ClCompile Include="core\util\data\map.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\entity\color.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core\player\player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core\entity\ecs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core\window\renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core\lighting\light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core\world\chunk.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core\entity\voxel.cpp">
+    <ClCompile Include="core\renderer\layer_stack.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

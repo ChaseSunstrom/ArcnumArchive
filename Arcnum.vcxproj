@@ -270,16 +270,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\game\arcnum.cpp" />
-    <ClCompile Include="src\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\game\arcnum.hpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="assets\sprites\grass.jpg" />
     <Image Include="assets\sprites\sand.jpeg" />
     <Image Include="assets\sprites\stone.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\game\arcnum.c" />
+    <ClCompile Include="src\main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\game\arcnum.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

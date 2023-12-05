@@ -272,39 +272,22 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="core\entity\voxel_type.hpp" />
-    <ClInclude Include="core\util\constants.hpp" />
-    <ClInclude Include="core\world\chunk.hpp" />
-    <ClInclude Include="core\player\player.hpp" />
-    <ClInclude Include="core\util\macros.hpp" />
-    <ClInclude Include="core\window\camera.hpp" />
-    <ClInclude Include="core\window\window.hpp" />
-    <ClInclude Include="core\entity\color.hpp" />
-    <ClInclude Include="core\entity\texture_type.hpp" />
-    <ClInclude Include="core\entity\shader.hpp" />
-    <ClInclude Include="core\entity\texture.hpp" />
-    <ClInclude Include="core\entity\entity_type.hpp" />
+    <ClInclude Include="core\renderer\renderer.h" />
+    <ClInclude Include="core\util\data\map.h" />
+    <ClInclude Include="core\util\data\vector.h" />
+    <ClInclude Include="core\util\memory\alloc.h" />
+    <ClInclude Include="core\util\util.h" />
+    <ClInclude Include="core\renderer\layer_stack.h" />
+    <ClInclude Include="core\window\window.h" />
     <ClInclude Include="include\OTHER\stb_image.h" />
-    <ClInclude Include="core\entity\entity.hpp" />
-    <ClInclude Include="core\entity\ecs.hpp" />
-    <ClInclude Include="core\window\renderer.hpp" />
-    <ClInclude Include="core\lighting\light.hpp" />
-    <ClInclude Include="core\entity\voxel.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="core\world\chunk.cpp" />
-    <ClCompile Include="core\player\player.cpp" />
-    <ClCompile Include="core\window\camera.cpp" />
-    <ClCompile Include="core\window\window.cpp" />
-    <ClCompile Include="core\entity\color.cpp" />
+    <ClCompile Include="core\renderer\renderer.c" />
+    <ClCompile Include="core\util\data\map.c" />
+    <ClCompile Include="core\util\data\vector.c" />
+    <ClCompile Include="core\renderer\layer_stack.c" />
+    <ClCompile Include="core\window\window.c" />
     <ClCompile Include="lib\GLAD\glad.c" />
-    <ClCompile Include="core\entity\shader.cpp" />
-    <ClCompile Include="core\entity\texture.cpp" />
-    <ClCompile Include="core\entity\entity.cpp" />
-    <ClCompile Include="core\entity\ecs.cpp" />
-    <ClCompile Include="core\window\renderer.cpp" />
-    <ClCompile Include="core\lighting\light.cpp" />
-    <ClCompile Include="core\entity\voxel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\color_shader.fsl" />
