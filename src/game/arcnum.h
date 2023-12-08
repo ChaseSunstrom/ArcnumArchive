@@ -1,24 +1,28 @@
 #ifndef ARCNUM_H
 #define ARCNUM_H
 
-#include <core/window/window.h>
+#include  "../core_include.h"
 
 // ===============================================================================
-// GAME:         | Used for storing game information
+// APPLICATION:   | Used for storing application information
 // ===============================================================================
 typedef struct
 {
-	window* window;
-} game;
+	window window;
+	layer_stack layer_stack;
+} application;
 
 
 
 // ===============================================================================
-// GAME FUNCTIONS:
+// APPLICATION FUNCTIONS:
 
-void game_main(void);
-void game_loop(game game);
-void game_cleanup(game* game);
+void application_main(void);
+void application_loop(const application app);
+void application_push_layer(const application app, layer* layer);
+void application_pop_layer(const application app);
+void application_cleanup(const application app);
+void application_on_event(const application app, generic_event* event);
 
 // ===============================================================================
 

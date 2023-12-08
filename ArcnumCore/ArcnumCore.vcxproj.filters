@@ -30,13 +30,28 @@
     <ClInclude Include="core\util\data\vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\util\util.h">
+    <ClInclude Include="core\util\std_include.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\util\data\map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\renderer\layer_stack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\util\data\iterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\util\data\collection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\events\event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\renderer\layer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\debug\log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -57,6 +72,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\renderer\layer_stack.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\util\data\iterator.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\renderer\layer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\events\event.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

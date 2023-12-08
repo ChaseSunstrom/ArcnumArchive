@@ -1,6 +1,6 @@
 #include "game/arcnum.h"
 
-int main() 
+int main(void) 
 {
-	game_main();
+	application_main();
 }

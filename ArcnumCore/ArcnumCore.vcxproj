@@ -187,6 +187,8 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)include/GLAD;$(ProjectDir)include/GLEW;$(ProjectDir)include/GLFW;$(ProjectDir)include/SDL;$(ProjectDir)include/GLM;$(ProjectDir)include/OTHER;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>acpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -272,21 +274,33 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="core\debug\log.h" />
+    <ClInclude Include="core\events\event.h" />
+    <ClInclude Include="core\renderer\layer.h" />
     <ClInclude Include="core\renderer\renderer.h" />
+    <ClInclude Include="core\util\data\collection.h" />
+    <ClInclude Include="core\util\data\iterator.h" />
     <ClInclude Include="core\util\data\map.h" />
     <ClInclude Include="core\util\data\vector.h" />
     <ClInclude Include="core\util\memory\alloc.h" />
-    <ClInclude Include="core\util\util.h" />
+    <ClInclude Include="core\util\std_include.h" />
     <ClInclude Include="core\renderer\layer_stack.h" />
     <ClInclude Include="core\window\window.h" />
     <ClInclude Include="include\OTHER\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="core\events\event.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="core\renderer\layer.c" />
     <ClCompile Include="core\renderer\renderer.c" />
+    <ClCompile Include="core\util\data\iterator.c" />
     <ClCompile Include="core\util\data\map.c" />
     <ClCompile Include="core\util\data\vector.c" />
     <ClCompile Include="core\renderer\layer_stack.c" />
-    <ClCompile Include="core\window\window.c" />
+    <ClCompile Include="core\window\window.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="lib\GLAD\glad.c" />
   </ItemGroup>
   <ItemGroup>

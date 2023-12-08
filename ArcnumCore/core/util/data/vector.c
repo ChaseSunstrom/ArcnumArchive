@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 #include "vector.h"
 
@@ -14,7 +11,7 @@ vector* vector_new(void)
 	if (v != NULL)
 	{
 		v->size = 0;
-		v->capacity = 2; // Sets an initial capacity (adjusts as needed)
+		v->capacity = 1; // Sets an initial capacity (adjusts as needed)
 		v->data = ALLOC(byte*);
 	}
 
@@ -97,8 +94,27 @@ void vector_pop(vector* v)
 	}
 }
 
+void vector_clear(vector* v)
+{
+	v->size = 0;
+	v->capacity = 1;
+	free(v->data);
+	v->data = ALLOC(byte*);
+}
+
+void vector_reverse(vector* v)
+{
+	for (size_t i = 0; i < v->size / 2; i++)
+	{
+		byte* temp = v->data[i];
+		v->data[i] = v->data[v->size - 1 - i];
+		v->data[v->size - 1 - i] = temp;
+	}
+}
+
 static inline bool vector_is_big_enough(vector* v)
 {
 	return v->capacity - v->size > 0;
 }
+
 //===============================================================================

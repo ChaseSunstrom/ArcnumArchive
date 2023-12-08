@@ -1,9 +1,6 @@
 #ifndef CORE_RENDERER_H
 #define CORE_RENDERER_H
 
-#include "layer_stack.h"
-
-
 // ==============================================================================
 // RENDERER:     | Used for rendering and storing rendering data
 // ==============================================================================
@@ -13,7 +10,6 @@ typedef struct
 	double fixed_delta_time;
 	double last_frame_time;
 	double tick_time;
-	layer_stack* layer_stack;
 } renderer;
 
 //===============================================================================

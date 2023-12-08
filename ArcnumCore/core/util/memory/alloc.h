@@ -1,7 +1,7 @@
 #ifndef CORE_ALLOC_H
 #define CORE_ALLOC_H
 
-#include <stdlib.h>
+#include "../std_include.h"
 
 typedef unsigned char byte;
 

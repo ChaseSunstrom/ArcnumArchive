@@ -1,8 +1,7 @@
 #ifndef CORE_VECTOR_H
 #define CORE_VECTOR_H
 
-#include <stdlib.h>
-#include <stdbool.h>
+#include "../std_include.h"
 
 #include "../memory/alloc.h"
 
@@ -49,6 +48,8 @@ void        vector_push(vector* v, void* data);
 void        vector_insert(vector* v, size_t index, void* data);
 void        vector_pop(vector* v);
 void        vector_remove(vector* v, size_t index);
+void        vector_clear(vector* v);
+void        vector_reverse(vector* v);
 static bool vector_is_big_enough(vector* v);
 
 //===============================================================================
