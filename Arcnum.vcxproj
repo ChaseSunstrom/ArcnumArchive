@@ -198,6 +198,8 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)ArcnumCore/include/GLAD;$(SolutionDir)ArcnumCore/include/GLEW;$(SolutionDir)ArcnumCore/include/GLM;$(SolutionDir)ArcnumCore/include/GLFW;$(SolutionDir)ArcnumCore/include/OTHER;$(SolutionDir)ArcnumCore/include/SDL;$(SolutionDir)ArcnumCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>apch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -270,21 +272,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\game\arcnum.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\game\startup\start.cpp" />
+    <Image Include="assets\sprites\grass.jpg" />
+    <Image Include="assets\sprites\sand.jpeg" />
+    <Image Include="assets\sprites\stone.jpeg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\fragment_shader.glsl" />
-    <None Include="shaders\vertex_shader.glsl" />
+    <ClCompile Include="src\game\arcnum.c" />
+    <ClCompile Include="src\main.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\game\arcnum.hpp" />
-    <ClInclude Include="src\game\startup\start.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="assets\sprites\container.jpg" />
-    <Image Include="assets\sprites\wall.jpg" />
+    <ClInclude Include="src\core_include.h" />
+    <ClInclude Include="src\game\arcnum.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
