@@ -30,6 +30,7 @@ enum event_type
 	WINDOW_MOVED,
 	KEY_PRESSED,
 	KEY_RELEASED,
+	KEY_REPEAT,
 	MOUSE_PRESSED,
 	MOUSE_RELEASED,
 	MOUSE_MOVED,
@@ -65,6 +66,7 @@ EVENT_STRUCT(window_resized_event, enum event_type type; int width; int height )
 EVENT_STRUCT(window_moved_event, enum event_type type; int x_pos; int y_pos  );
 EVENT_STRUCT(key_pressed_event, enum event_type type; int key_code );
 EVENT_STRUCT(key_released_event, enum event_type type; int key_code );
+EVENT_STRUCT(key_repeat_event, enum event_type type; int key_code);
 EVENT_STRUCT(mouse_pressed_event, enum event_type type; int button  );
 EVENT_STRUCT(mouse_released_event, enum event_type type; int button );
 EVENT_STRUCT(mouse_move_event, enum event_type type; double x_pos; double y_pos );
@@ -87,7 +89,8 @@ typedef struct
 // ===============================================================
 // EVENT RELATED METHODS:
 
-bool event_dispatcher_dispatch(event_dispatcher dispatcher, void* function_to_call, generic_event* event);
+bool        event_dispatcher_dispatch(event_dispatcher dispatcher, void* function_to_call, generic_event* event);
+const char* event_type_to_string(enum event_type event_type);
 
 // ===============================================================
 // EVENT FUNCTION_PTR: | Used as a function pointer to call any event

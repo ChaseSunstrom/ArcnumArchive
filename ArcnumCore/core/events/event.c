@@ -1,7 +1,5 @@
 #include "event.h"
 
-#include "../debug/log.h"
-
 bool event_dispatcher_dispatch(event_dispatcher dispatcher, void* function_to_call, generic_event* e)
 {
 	if (dispatcher.event->type == e->type)

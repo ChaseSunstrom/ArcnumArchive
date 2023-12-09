@@ -3,7 +3,7 @@
 
 #include "window.h"
 
-#include "../debug/log.h"
+#include "../log/log.h"
  
 
 // ==============================================================================
@@ -88,12 +88,33 @@ void window_vsync(bool vsync)
 
 void window_on_event(generic_event* event)
 {
-	ARCNUM_CORE_LOG("%d\n", event->type);
-}
-
-static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	glViewport(0, 0, width, height);
+	switch (event->type)
+	{
+	case WINDOW_RESIZED:
+		ARCNUM_CORE_LOG("[EVENT]: WINDOW RESIZED {X: %d, Y: %d}\n", ((window_resized_event*)event)->width, ((window_resized_event*)event)->height);
+		break;
+	case MOUSE_MOVED:
+		ARCNUM_CORE_LOG("[EVENT]: MOUSE POSITION {X: %f, Y: %f}\n", ((mouse_move_event*)event)->x_pos, ((mouse_move_event*)event)->y_pos);
+		break;
+	case MOUSE_SCROLLED:
+		ARCNUM_CORE_LOG("[EVENT]: MOUSE SCROLLED \n", );
+		break;
+	case KEY_PRESSED:
+		ARCNUM_CORE_LOG("[EVENT]: KEY PRESSED {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
+		break;
+	case KEY_RELEASED:
+		ARCNUM_CORE_LOG("[EVENT]: KEY RELEASED {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
+		break;
+	case KEY_REPEAT:
+		ARCNUM_CORE_LOG("[EVENT]: KEY HELD {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
+		break;
+	case MOUSE_PRESSED:
+		ARCNUM_CORE_LOG("[EVENT]: MOUSE BUTTON PRESSED {KEYCODE: %d}\n", ((mouse_pressed_event*)event)->button);
+		break;
+	case MOUSE_RELEASED:
+		ARCNUM_CORE_LOG("[EVENT]: MOUSE BUTTON RELEASED {KEYCODE: %d}\n", ((mouse_pressed_event*)event)->button);
+		break;
+	}
 }
 
 // ==============================================================================
@@ -117,7 +138,7 @@ void window_resized_event_callback(GLFWwindow* window, uint32_t width, uint32_t 
 void window_close_event_callback(GLFWwindow* window)
 {
 	window_data* _window_data = (window_data*)glfwGetWindowUserPointer(window);
-	window_closed_event event;
+	window_closed_event event = {.type = WINDOW_CLOSED};
 
 	_window_data->event_callback(&event);
 }
@@ -140,7 +161,13 @@ void window_key_event_callback(GLFWwindow* window, int key, int scancode, int ac
 			_window_data->event_callback(&event);
 			break;
 		}
-		
+		case GLFW_REPEAT:
+		{
+			key_repeat_event event = { .key_code = key, .type = KEY_REPEAT };
+			_window_data->event_callback(&event);
+			break;
+		}
+
 	}
 }
 
@@ -190,6 +217,11 @@ void window_mouse_move_event_callback(GLFWwindow* window, double xpos, double yp
 void glfw_error_callback(int error, const char* description)
 {
 	ARCNUM_CORE_LOG("GLFW ERROR: %s\n", description);
+}
+
+static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
 }
 
 // ==============================================================================

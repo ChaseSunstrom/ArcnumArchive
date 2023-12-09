@@ -276,6 +276,7 @@
   <ItemGroup>
     <ClInclude Include="core\debug\log.h" />
     <ClInclude Include="core\events\event.h" />
+    <ClInclude Include="core\log\log.h" />
     <ClInclude Include="core\renderer\layer.h" />
     <ClInclude Include="core\renderer\renderer.h" />
     <ClInclude Include="core\util\data\collection.h" />
