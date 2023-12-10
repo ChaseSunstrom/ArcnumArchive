@@ -57,6 +57,9 @@
     <ClInclude Include="core\log\log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="core\util\log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\GLAD\glad.c">

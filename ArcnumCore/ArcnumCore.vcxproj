@@ -283,6 +283,7 @@
     <ClInclude Include="core\util\data\iterator.h" />
     <ClInclude Include="core\util\data\map.h" />
     <ClInclude Include="core\util\data\vector.h" />
+    <ClInclude Include="core\util\log.h" />
     <ClInclude Include="core\util\memory\alloc.h" />
     <ClInclude Include="core\util\std_include.h" />
     <ClInclude Include="core\renderer\layer_stack.h" />

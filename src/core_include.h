@@ -10,6 +10,6 @@
 #include <core/util/data/vector.h>
 #include <core/util/data/collection.h>
 #include <core/util/data/iterator.h>
-#include <core/log/log.h>
+#include <core/util/log.h>
 
 #endif
