@@ -9,7 +9,7 @@
 #define SCREEN_WIDTH 1080
 #define SCREEN_HEIGHT 1080
 
-typedef void (*event_callback)(generic_event*);
+typedef generic_event* (*event_callback)(generic_event*);
 
 // ==============================================================================
 // WINDOW:       | Used for storing window information
@@ -39,14 +39,15 @@ typedef struct
 // ==============================================================================
 // WINDOW FUNCTIONS:
 
-GLFWwindow* window_init_gl(window_data window_data);
-window*     window_new(void);
-void        window_free(window* window);
-void        window_on_update(window window);
-void        window_vsync(bool vsync);
-void        window_on_event(window window, generic_event* event);
-bool        window_is_running(window window);
-bool        window_close_event(window window);
+GLFWwindow*    window_init_gl(window_data window_data);
+window*        window_new(void);
+generic_event* window_propagate_event(generic_event* event);
+void		   window_free(window* window);
+void           window_on_update(window window);
+void           window_vsync(bool vsync);
+void           window_on_event(window window, generic_event* event);
+bool           window_is_running(window window);
+bool           window_close_event(window window);
 
 // ==============================================================================
 

@@ -24,7 +24,7 @@ GLFWwindow* window_init_gl(window_data window_data)
 	glfwSetErrorCallback(glfw_error_callback);
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 	glfwSetWindowUserPointer(gl_window, &window_data);
-	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 
 	glewInit();
 
@@ -117,6 +117,8 @@ void window_on_event(generic_event* event)
 	}
 }
 
+generic_event* window_propagate_event(generic_event* event) { return event; }
+
 // ==============================================================================
 
 
@@ -167,7 +169,6 @@ void window_key_event_callback(GLFWwindow* window, int key, int scancode, int ac
 			_window_data->event_callback(&event);
 			break;
 		}
-
 	}
 }
 

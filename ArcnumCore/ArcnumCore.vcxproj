@@ -276,6 +276,7 @@
   <ItemGroup>
     <ClInclude Include="core\debug\log.h" />
     <ClInclude Include="core\events\event.h" />
+    <ClInclude Include="core\events\sub.h" />
     <ClInclude Include="core\log\log.h" />
     <ClInclude Include="core\renderer\layer.h" />
     <ClInclude Include="core\renderer\renderer.h" />
@@ -294,6 +295,7 @@
     <ClCompile Include="core\events\event.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="core\events\sub.c" />
     <ClCompile Include="core\renderer\layer.c" />
     <ClCompile Include="core\renderer\renderer.c" />
     <ClCompile Include="core\util\data\iterator.c" />
