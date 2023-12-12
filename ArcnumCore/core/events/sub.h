@@ -16,7 +16,7 @@ typedef struct
 	void* value;
 } publisher;
 
-typedef void (*on_publish)(publisher);
+typedef void (*on_publish)(void*);
 
 typedef struct
 {

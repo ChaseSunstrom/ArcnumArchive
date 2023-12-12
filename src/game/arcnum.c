@@ -25,10 +25,8 @@ void application_push_overlay(const application app, layer* layer)
 	layer_stack_push_overlay(app.layer_stack, layer);
 }
 
-void application_on_event(publisher _event)
+void application_on_event(generic_event* event)
 {
-	generic_event* event = _event.value;
-
 	switch (event->type)
 	{
 	case WINDOW_RESIZED:
@@ -65,7 +63,7 @@ void application_loop(const application app)
 	application_push_layer(app, _layer);
 
 
-	subscription* subscription = subscription_new(EVENT_TOPIC, &application_on_event);
+	subscription* subscription = subscription_new(EVENT_TOPIC, application_on_event);
 
 	while (window_is_running(app.window))
 	{

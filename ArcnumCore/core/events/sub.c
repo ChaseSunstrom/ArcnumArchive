@@ -33,6 +33,6 @@ void publish(topic topic, void* value)
 	for (int i = 0; i < subscription_count; i++) {
 		subscription* subscription = subscriptions[i];
 		if (subscription == NULL || subscription->topic != topic) continue;
-		subscription->on_publish_function(publisher);
+		subscription->on_publish_function(publisher.value);
 	}
 }
