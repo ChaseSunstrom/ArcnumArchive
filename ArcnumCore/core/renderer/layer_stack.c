@@ -37,8 +37,7 @@ void layer_stack_pop_layer(layer_stack layer_stack)
 void layer_stack_pop_overlay(layer_stack layer_stack)
 {
 	vector_pop(layer_stack.layers);
-
-
+	
 	iterator_update(layer_stack.layers_it, layer_stack.layers);
 }
 

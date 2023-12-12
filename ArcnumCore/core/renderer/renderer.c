@@ -8,11 +8,11 @@
 
 renderer* renderer_new()
 {
-	renderer* _renderer    = ALLOC(renderer);
-	_renderer->last_frame_time = 0;
-	_renderer->delta_time = 0;
+	renderer* _renderer         = ALLOC(renderer);
+	_renderer->last_frame_time  = 0;
+	_renderer->delta_time       = 0;
 	_renderer->fixed_delta_time = 0.01f;
-	_renderer->tick_time = 0;
+	_renderer->tick_time        = 0;
 	return _renderer;
 }
 

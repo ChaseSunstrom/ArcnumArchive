@@ -1,4 +1,3 @@
-
 #include "map.h"
 
 // ===============================================================================
@@ -40,7 +39,6 @@ void map_insert(map* m, void* key, void* value)
 	m->size++;
 }
 
-
 void* map_find(map* m, void* key)
 {
 	for (size_t i = 0; i < m->size; i++)
@@ -81,4 +79,5 @@ void map_remove(map* m, void* key)
 		}
 	}
 }
+
 //==============================================================================

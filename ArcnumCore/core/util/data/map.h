@@ -31,6 +31,7 @@ void  map_insert(map* m, void* key, void* value);
 void* map_find(map* m, void* key);
 void  map_remove(map* m, void* key);
 void  map_free(map* m);
+
 //===============================================================================
 
 
@@ -39,6 +40,7 @@ void  map_free(map* m);
 
 #define map_put(m, k, v) map_insert(m, k, v)
 #define map_get(m, k)    map_find(m, k)
+
 //===============================================================================
 
 #endif //CORE_MAP_H

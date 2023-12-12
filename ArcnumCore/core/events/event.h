@@ -8,11 +8,11 @@
 // ===============================================================
 // EVENT STRUCT: | Used to easily create an event
 // ===============================================================
-#define EVENT_STRUCT(_name, ...)	typedef  struct   \
-									{                 \
-										bool handled; \
-										__VA_ARGS__;  \
-									} _name           \
+#define EVENT_STRUCT(_name, ...)	typedef  struct           \
+									{                         \
+										bool handled;         \
+										__VA_ARGS__;          \
+									} _name                   \
 
 
 
@@ -70,7 +70,7 @@ EVENT_STRUCT(key_repeat_event, enum event_type type; int key_code);
 EVENT_STRUCT(mouse_pressed_event, enum event_type type; int button  );
 EVENT_STRUCT(mouse_released_event, enum event_type type; int button );
 EVENT_STRUCT(mouse_move_event, enum event_type type; double x_pos; double y_pos );
-EVENT_STRUCT(mouse_scroll_event, enum event_type type; double x_offset; double y_offset);
+EVENT_STRUCT(mouse_scroll_event, enum event_type type;  double x_offset; double y_offset);
 
 // ===============================================================
 

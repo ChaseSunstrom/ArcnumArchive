@@ -1,6 +1,7 @@
 #ifndef CORE_SUB_H
 #define CORE_SUB_H
 
+#include "event.h"
 #include "../util/data/vector.h"
 
 typedef enum
@@ -26,6 +27,6 @@ typedef struct
 
 subscription* subscription_new(topic topic, on_publish on_publish_function);
 bool          subscription_unsubscribe(subscription* subscription);
-int           publish(topic topic, void* value);
+void          publish(topic topic, void* value);
 
 #endif

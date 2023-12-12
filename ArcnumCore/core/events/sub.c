@@ -1,6 +1,8 @@
 #include "../util/memory/alloc.h"
 #include "sub.h"
 
+#include "event.h"
+
 subscription** subscriptions = NULL;
 unsigned int subscription_count = 0;
 
@@ -24,17 +26,13 @@ bool subscription_unsubscribe(subscription* subscription)
 	return true;
 }
 
-int publish(topic topic, void* value)
+void publish(topic topic, void* value)
 {
 	publisher publisher = { .topic = topic, .value = value };
-
-	int sent = 0;
 
 	for (int i = 0; i < subscription_count; i++) {
 		subscription* subscription = subscriptions[i];
 		if (subscription == NULL || subscription->topic != topic) continue;
 		subscription->on_publish_function(publisher);
-		sent++;
 	}
-	return sent;
 }

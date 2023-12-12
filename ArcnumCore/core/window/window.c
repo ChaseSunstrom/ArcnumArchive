@@ -1,5 +1,6 @@
 #include "../util/std_include.h"
 #include "../util/memory/alloc.h"
+#include "../events/sub.h"
 
 #include "window.h"
 
@@ -88,33 +89,7 @@ void window_vsync(bool vsync)
 
 void window_on_event(generic_event* event)
 {
-	switch (event->type)
-	{
-	case WINDOW_RESIZED:
-		ARCNUM_CORE_LOG("[EVENT]: WINDOW RESIZED {X: %d, Y: %d}\n", ((window_resized_event*)event)->width, ((window_resized_event*)event)->height);
-		break;
-	case MOUSE_MOVED:
-		ARCNUM_CORE_LOG("[EVENT]: MOUSE POSITION {X: %f, Y: %f}\n", ((mouse_move_event*)event)->x_pos, ((mouse_move_event*)event)->y_pos);
-		break;
-	case MOUSE_SCROLLED:
-		ARCNUM_CORE_LOG("[EVENT]: MOUSE SCROLLED \n", );
-		break;
-	case KEY_PRESSED:
-		ARCNUM_CORE_LOG("[EVENT]: KEY PRESSED {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
-		break;
-	case KEY_RELEASED:
-		ARCNUM_CORE_LOG("[EVENT]: KEY RELEASED {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
-		break;
-	case KEY_REPEAT:
-		ARCNUM_CORE_LOG("[EVENT]: KEY HELD {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
-		break;
-	case MOUSE_PRESSED:
-		ARCNUM_CORE_LOG("[EVENT]: MOUSE BUTTON PRESSED {KEYCODE: %d}\n", ((mouse_pressed_event*)event)->button);
-		break;
-	case MOUSE_RELEASED:
-		ARCNUM_CORE_LOG("[EVENT]: MOUSE BUTTON RELEASED {KEYCODE: %d}\n", ((mouse_pressed_event*)event)->button);
-		break;
-	}
+	publish(EVENT_TOPIC, event);
 }
 
 generic_event* window_propagate_event(generic_event* event) { return event; }
