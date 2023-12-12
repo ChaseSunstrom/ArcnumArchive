@@ -23,6 +23,7 @@ void application_push_layer(const application app, layer* layer);
 void application_pop_layer(const application app);
 void application_cleanup(const application app);
 void application_on_event(generic_event* event);
+void application_print_event(generic_event* event);
 
 // ===============================================================================
 

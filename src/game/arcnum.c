@@ -25,7 +25,7 @@ void application_push_overlay(const application app, layer* layer)
 	layer_stack_push_overlay(app.layer_stack, layer);
 }
 
-void application_on_event(generic_event* event)
+void application_print_event(generic_event* event)
 {
 	switch (event->type)
 	{
@@ -56,14 +56,20 @@ void application_on_event(generic_event* event)
 	}
 }
 
+void application_on_event(generic_event* event)
+{
+	event_dispatcher dispatcher = { .event = event };
+
+	event_dispatcher_dispatch(dispatcher, application_print_event, event);
+}
+
 void application_loop(const application app)
 {
 
 	layer* _layer = layer_new();
 	application_push_layer(app, _layer);
 
-
-	subscription* subscription = subscription_new(EVENT_TOPIC, application_on_event);
+	subscription* _subscription = subscription_new(WINDOW_EVENT_TOPIC, application_on_event);
 
 	while (window_is_running(app.window))
 	{

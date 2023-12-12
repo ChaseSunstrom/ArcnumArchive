@@ -7,7 +7,7 @@
 typedef enum
 {
 	NO_TOPIC,
-	EVENT_TOPIC
+	WINDOW_EVENT_TOPIC
 } topic;
 
 typedef struct

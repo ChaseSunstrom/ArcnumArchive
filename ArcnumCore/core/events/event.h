@@ -96,7 +96,7 @@ const char* event_type_to_string(enum event_type event_type);
 // EVENT FUNCTION_PTR: | Used as a function pointer to call any event
 //                     | function
 // ===============================================================
-#define EVENT_FUNCTION_PTR(_function, _name) bool(*_name)(generic_event*) = _function
+#define EVENT_FUNCTION_PTR(_function, _name) void(*_name)(generic_event*) = _function
 
 // ===============================================================
 

@@ -89,7 +89,7 @@ void window_vsync(bool vsync)
 
 void window_on_event(generic_event* event)
 {
-	publish(EVENT_TOPIC, event);
+	publish(WINDOW_EVENT_TOPIC, event);
 }
 
 generic_event* window_propagate_event(generic_event* event) { return event; }
