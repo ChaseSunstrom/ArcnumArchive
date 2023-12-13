@@ -290,6 +290,7 @@
     <ClInclude Include="core\util\data\map.h" />
     <ClInclude Include="core\util\data\vector.h" />
     <ClInclude Include="core\util\log.h" />
+    <ClInclude Include="core\util\math\mat.h" />
     <ClInclude Include="core\util\math\radians.h" />
     <ClInclude Include="core\util\math\vec.h" />
     <ClInclude Include="core\util\memory\alloc.h" />
@@ -310,6 +311,7 @@
     <ClCompile Include="core\util\data\map.c" />
     <ClCompile Include="core\util\data\vector.c" />
     <ClCompile Include="core\renderer\layer_stack.c" />
+    <ClCompile Include="core\util\math\mat.c" />
     <ClCompile Include="core\util\math\radians.c" />
     <ClCompile Include="core\util\math\vec.c" />
     <ClCompile Include="core\window\window.c">

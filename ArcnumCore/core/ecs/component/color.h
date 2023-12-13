@@ -9,4 +9,4 @@ typedef struct
 	double a;
 } color;
 
-#endif
+#endif // CORE_COLOR_H
