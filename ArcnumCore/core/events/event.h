@@ -6,9 +6,9 @@
 #define BIT_SHIFT(x) (1 << x)
 
 // ===============================================================
-// EVENT STRUCT: | Used to easily create an event
+// EVENT FACTORY: | Used to easily create an event
 // ===============================================================
-#define EVENT_STRUCT(_name, ...)	typedef  struct           \
+#define EVENT_FACTORY(_name, ...)	typedef  struct           \
 									{                         \
 										bool handled;         \
 										__VA_ARGS__;          \
@@ -57,20 +57,20 @@ enum event_category
 // ===============================================================
 // EVENT STRUCTS: | Used to hold event data related to their type
 
-EVENT_STRUCT(generic_event,  enum event_type type);
-EVENT_STRUCT(app_update_event, enum event_type type);
-EVENT_STRUCT(app_tick_event, enum event_type type);
-EVENT_STRUCT(app_render_event, enum event_type type);
-EVENT_STRUCT(window_closed_event, enum event_type type);
-EVENT_STRUCT(window_resized_event, enum event_type type; int width; int height );
-EVENT_STRUCT(window_moved_event, enum event_type type; int x_pos; int y_pos  );
-EVENT_STRUCT(key_pressed_event, enum event_type type; int key_code );
-EVENT_STRUCT(key_released_event, enum event_type type; int key_code );
-EVENT_STRUCT(key_repeat_event, enum event_type type; int key_code);
-EVENT_STRUCT(mouse_pressed_event, enum event_type type; int button  );
-EVENT_STRUCT(mouse_released_event, enum event_type type; int button );
-EVENT_STRUCT(mouse_move_event, enum event_type type; double x_pos; double y_pos );
-EVENT_STRUCT(mouse_scroll_event, enum event_type type;  double x_offset; double y_offset);
+EVENT_FACTORY(generic_event,  enum event_type type);
+EVENT_FACTORY(app_update_event, enum event_type type);
+EVENT_FACTORY(app_tick_event, enum event_type type);
+EVENT_FACTORY(app_render_event, enum event_type type);
+EVENT_FACTORY(window_closed_event, enum event_type type);
+EVENT_FACTORY(window_resized_event, enum event_type type; int width; int height );
+EVENT_FACTORY(window_moved_event, enum event_type type; int x_pos; int y_pos  );
+EVENT_FACTORY(key_pressed_event, enum event_type type; int key_code );
+EVENT_FACTORY(key_released_event, enum event_type type; int key_code );
+EVENT_FACTORY(key_repeat_event, enum event_type type; int key_code);
+EVENT_FACTORY(mouse_pressed_event, enum event_type type; int button  );
+EVENT_FACTORY(mouse_released_event, enum event_type type; int button );
+EVENT_FACTORY(mouse_move_event, enum event_type type; double x_pos; double y_pos );
+EVENT_FACTORY(mouse_scroll_event, enum event_type type;  double x_offset; double y_offset);
 
 // ===============================================================
 
@@ -89,14 +89,14 @@ typedef struct
 // ===============================================================
 // EVENT RELATED METHODS:
 
-bool        event_dispatcher_dispatch(event_dispatcher dispatcher, void* function_to_call, generic_event* event);
+bool        event_dispatcher_dispatch(event_dispatcher dispatcher, void* function_to_call);
 const char* event_type_to_string(enum event_type event_type);
 
 // ===============================================================
 // EVENT FUNCTION_PTR: | Used as a function pointer to call any event
 //                     | function
 // ===============================================================
-#define EVENT_FUNCTION_PTR(_function, _name) void(*_name)(generic_event*) = _function
+#define EVENT_FUNCTION_PTR( _name, _function) bool(*_name)(generic_event*) = _function
 
 // ===============================================================
 

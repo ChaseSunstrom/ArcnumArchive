@@ -63,6 +63,27 @@
     <ClInclude Include="core\events\sub.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="core\ecs\entity\entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\ecs\entity\uuid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\ecs\component\component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\util\math\vec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\ecs\system\system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\ecs\component\color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\util\math\radians.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\GLAD\glad.c">
@@ -93,6 +114,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\events\sub.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\ecs\entity\uuid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\util\math\vec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\util\math\radians.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

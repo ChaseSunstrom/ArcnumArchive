@@ -33,6 +33,7 @@ typedef vector* float64_vec;
 typedef vector* string_vec;
 typedef vector* struct_vec;
 typedef vector* enum_vec;
+typedef vector* function_ptr_vec;
 
 // ===============================================================================
 

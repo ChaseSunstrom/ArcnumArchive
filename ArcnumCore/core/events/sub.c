@@ -3,10 +3,14 @@
 
 #include "event.h"
 
-subscription** subscriptions = NULL;
-unsigned int subscription_count = 0;
+// Vector of current subscriptions
+static subscription** subscriptions = NULL;
+static unsigned int subscription_count = 0;
 
-subscription* subscription_new(topic topic, on_publish on_publish_function)
+// ===============================================================
+// SUBSCRIPTION AND PUBLISHER FUNCTIONS:
+
+subscription* subscription_new(subscription_topic topic, on_publish on_publish_function)
 {
 	subscription* _subscription = ALLOC(subscription);
 	_subscription->subscription_id = subscription_count++; 
@@ -26,7 +30,7 @@ bool subscription_unsubscribe(subscription* subscription)
 	return true;
 }
 
-void publish(topic topic, void* value)
+void publish(subscription_topic topic, void* value)
 {
 	publisher publisher = { .topic = topic, .value = value };
 
@@ -36,3 +40,5 @@ void publish(topic topic, void* value)
 		subscription->on_publish_function(publisher.value);
 	}
 }
+
+// ===============================================================

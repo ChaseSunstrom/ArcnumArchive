@@ -45,5 +45,5 @@ void layer_stack_free(layer_stack* layer_stack)
 {
 	vector_free(layer_stack->layers);
 	iterator_free(layer_stack->layers_it);
-	free(layer_stack);
+	FREE(layer_stack);
 }

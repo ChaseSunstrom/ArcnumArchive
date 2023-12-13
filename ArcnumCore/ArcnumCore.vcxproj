@@ -275,6 +275,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="core\debug\log.h" />
+    <ClInclude Include="core\ecs\component\color.h" />
+    <ClInclude Include="core\ecs\component\component.h" />
+    <ClInclude Include="core\ecs\entity\entity.h" />
+    <ClInclude Include="core\ecs\entity\uuid.h" />
+    <ClInclude Include="core\ecs\system\system.h" />
     <ClInclude Include="core\events\event.h" />
     <ClInclude Include="core\events\sub.h" />
     <ClInclude Include="core\log\log.h" />
@@ -285,6 +290,8 @@
     <ClInclude Include="core\util\data\map.h" />
     <ClInclude Include="core\util\data\vector.h" />
     <ClInclude Include="core\util\log.h" />
+    <ClInclude Include="core\util\math\radians.h" />
+    <ClInclude Include="core\util\math\vec.h" />
     <ClInclude Include="core\util\memory\alloc.h" />
     <ClInclude Include="core\util\std_include.h" />
     <ClInclude Include="core\renderer\layer_stack.h" />
@@ -292,6 +299,7 @@
     <ClInclude Include="include\OTHER\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="core\ecs\entity\uuid.c" />
     <ClCompile Include="core\events\event.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -302,6 +310,8 @@
     <ClCompile Include="core\util\data\map.c" />
     <ClCompile Include="core\util\data\vector.c" />
     <ClCompile Include="core\renderer\layer_stack.c" />
+    <ClCompile Include="core\util\math\radians.c" />
+    <ClCompile Include="core\util\math\vec.c" />
     <ClCompile Include="core\window\window.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>

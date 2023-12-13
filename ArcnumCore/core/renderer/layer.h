@@ -1,16 +1,22 @@
 #ifndef CORE_LAYER_H
 #define CORE_LAYER_H
 
+typedef enum
+{
+	WINDOW_LAYER,
+	RENDERER_LAYER,
+	ENTITY_LAYER,
+} layer_type;
+
+
 
 // ==============================================================================
 // LAYER:        | Used for the _renderer 
 // ==============================================================================
-
 typedef struct
 {
 	char* name;
 } layer;
-
 
 
 

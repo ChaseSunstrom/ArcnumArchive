@@ -12,5 +12,9 @@
 #include <core/util/data/iterator.h>
 #include <core/events/sub.h>
 #include <core/util/log.h>
+#include <core/util/math/vec.h>
+#include <core/ecs/entity/uuid.h>
+#include <core/ecs/entity/entity.h>
+#include <core/ecs/component/component.h>
 
 #endif

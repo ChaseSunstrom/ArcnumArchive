@@ -18,7 +18,7 @@ vector* vector_new(void)
 	return v;
 }
 
-byte* vector_get(vector* v, size_t index, size_t data_size)
+byte* vector_get(vector* v, size_t index)
 {
 	if (index < v->size)
 		return v->data[index];
@@ -31,15 +31,15 @@ void vector_free(vector* v)
 {
 	if (v)
 	{
-		free(v->data);
-		free(v);
+		FREE(v->data);
+		FREE(v);
 	}
 }
 void vector_push(vector* v, void* data)
 {
 	if (v->size >= v->capacity)
 	{
-		v->capacity *= 2;
+		v->capacity <<= 1;
 		v->data = REALLOC(v->data, byte*, v->capacity);
 	}
 	v->data[v->size] = data;
@@ -56,7 +56,7 @@ void vector_insert(vector* v, size_t index, void* data)
 
 	if (!vector_is_big_enough(v))
 	{
-		v->capacity *= 2;
+		v->capacity <<= 1;
 		v->data = REALLOC(v->data, byte*, v->capacity);
 	}
 
