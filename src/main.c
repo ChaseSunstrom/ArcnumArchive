@@ -10,9 +10,6 @@ int main(void)
 
 	for (i32 i = 0; i < 2; ++i)
 	{
-		for (i32 j = 0; j < 2; ++j)
-		{
-			printf("%f\n", result.matrix[i * 2 + j]);
-		}
+		printf("%f\n", result.matrix[i]);
 	}
 }

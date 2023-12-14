@@ -67,27 +67,21 @@ mat mvdot(T vec, mat m1)
 	u64 vec_size = ((vec4*)vec)->vec_size;
 	u64 rows = m1.rows;
 	u64 cols = m1.cols;
-	f64 test = 0;
-
-	mat result = { rows, cols, (f64*)malloc(sizeof(f64) * rows * vec_size) };
 
 	if (cols != vec_size)
 	{
-		result.rows = 0;
-		result.cols = 0;
-		mat_free(result);
+		mat result = { 0, 0, NULL };
 		return result;
 	}
 
-	for (i32 i = 0; i < rows; ++i)
+	mat result = { rows, 1, (f64*)malloc(sizeof(f64) * rows) };
+
+	for (u64 i = 0; i < rows; ++i)
 	{
-		for (i32 j = 0; j < vec_size; ++j)
+		result.matrix[i] = 0.0;
+		for (u64 k = 0; k < cols; ++k)
 		{
-			result.matrix[i * result.cols + j] = 0.0;
-			for (i32 k = 0; k < cols; ++k)
-			{
-				test = *(f64*)((byte*)vec + ((offsetof(vec4, vec_size) * vec_size) + sizeof(f64)));
-			}
+			result.matrix[i] += m1.matrix[i * cols + k] * ((f64*)vec)[k + 1];
 		}
 	}
 
