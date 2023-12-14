@@ -8,14 +8,14 @@
 // ===============================================================================
 typedef enum
 {
+	// Used as a placeholder
+	ITERATOR_NONE,
+
 	ITERATOR_BEGIN,
 	ITERATOR_NEXT,
 	ITERATOR_PREV,
 	ITERATOR_ITERATING,
 	ITERATOR_END,
-
-	// Used as a placeholder
-	ITERATOR_NONE,
 } iterator_state;
 
 

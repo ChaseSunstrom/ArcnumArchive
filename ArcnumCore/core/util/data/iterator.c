@@ -76,7 +76,8 @@ iterator_state iterator_end(iterator* it)
 
 	return ITERATOR_ITERATING;
 }
-void* iterator_get_prev(iterator* it)
+
+T iterator_get_prev(iterator* it)
 {
 	if (iterator_prev(it) == ITERATOR_ITERATING)
 		return it->collection_data[it->index - 2];
@@ -84,7 +85,7 @@ void* iterator_get_prev(iterator* it)
 	return NULL;
 }
 
-void* iterator_get_next(iterator* it)
+T iterator_get_next(iterator* it)
 {
 	if (iterator_next(it) == ITERATOR_ITERATING)
 		return it->collection_data[it->index];
@@ -92,7 +93,7 @@ void* iterator_get_next(iterator* it)
 	return NULL;
 }
 
-void* iterator_get_current_data(iterator* it)
+T iterator_get_current_data(iterator* it)
 {
 	if (iterator_end(it) == ITERATOR_END)
 		return NULL;

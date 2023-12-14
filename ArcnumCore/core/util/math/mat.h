@@ -19,6 +19,7 @@ typedef struct
 mat  mat_new(f64 rows, f64 cols, f64* matrix);
 mat  mdot(mat m1, mat m2);
 mat  msdot(f64 scalar, mat m1);
+mat  mvdot(T vec, mat m1);
 void mat_free(mat mat);
 
 
