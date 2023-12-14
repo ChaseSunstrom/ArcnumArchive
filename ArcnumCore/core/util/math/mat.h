@@ -5,20 +5,20 @@
 
 typedef struct
 {
-	size_t size;
-	double scalar;
+	u64 size;
+	f64 scalar;
 } scalar;
 
 typedef struct
 {
-	size_t  rows;
-	size_t  cols;
-	double* matrix;
+	u64  rows;
+	u64  cols;
+	f64* matrix;
 } mat;
 
-mat  mat_new(double rows, double cols, double* matrix);
+mat  mat_new(f64 rows, f64 cols, f64* matrix);
 mat  mdot(mat m1, mat m2);
-mat  msdot(double scalar, mat m1);
+mat  msdot(f64 scalar, mat m1);
 void mat_free(mat mat);
 
 

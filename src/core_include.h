@@ -1,6 +1,7 @@
 #ifndef ARCNUM_APCH_H
 #define ARCNUM_APCH_H
 
+#include <core/util/std_include.h>
 #include <core/events/event.h>
 #include <core/renderer/layer.h>
 #include <core/renderer/layer_stack.h>

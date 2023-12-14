@@ -3,10 +3,10 @@
 
 typedef struct
 {
-	double r;
-	double g;
-	double b;
-	double a;
+	f64 r;
+	f64 g;
+	f64 b;
+	f64 a;
 } color;
 
 #endif // CORE_COLOR_H

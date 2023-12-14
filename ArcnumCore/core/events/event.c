@@ -1,6 +1,6 @@
 #include "event.h"
 
-bool event_dispatcher_dispatch(event_dispatcher dispatcher, void* function_to_call)
+bool event_dispatcher_dispatch(event_dispatcher dispatcher, T function_to_call)
 {
 	// Checks if the type is greater than 0 which will be anything except 'NO_TYPE'
 	if (dispatcher.event->type)

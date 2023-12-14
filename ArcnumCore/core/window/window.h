@@ -17,10 +17,10 @@ typedef generic_event* (*event_callback)(generic_event*);
 
 typedef struct 
 {
-	const char* title;
-	bool        vsync;
-	uint32_t    width;
-	uint32_t    height;
+	string title;
+	bool   vsync;
+	u32    width;
+	u32    height;
 
 	// A function that gets called every event
 	event_callback event_callback;
@@ -57,20 +57,20 @@ bool           window_close_event(window window);
 // EVENT CALLBACKS:
 
 void window_event_callback(generic_event* event);
-void window_resized_event_callback(GLFWwindow* window, uint32_t width, uint32_t height);
+void window_resized_event_callback(GLFWwindow* window, u32 width, u32 height);
 void window_close_event_callback(GLFWwindow* window);
-void window_key_event_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-void window_mouse_button_event_callback(GLFWwindow* window, int button, int action, int mods);
-void window_mouse_scroll_event_callback(GLFWwindow* window, double xoffset, double yoffset);
-void window_mouse_move_event_callback(GLFWwindow* window, double x, double y);
+void window_key_event_callback(GLFWwindow* window, i32 key, i32 scancode, i32 action, i32 mods);
+void window_mouse_button_event_callback(GLFWwindow* window, i32 button, i32 action, i32 mods);
+void window_mouse_scroll_event_callback(GLFWwindow* window, f64 xoffset, f64 yoffset);
+void window_mouse_move_event_callback(GLFWwindow* window, f64 x, f64 y);
 
 // ==============================================================================
 
 // ==============================================================================
 // GLFW CALLBACKS:
 
-void        glfw_error_callback(int error, const char* description);
-static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void        glfw_error_callback(i32 error, string description);
+static void framebuffer_size_callback(GLFWwindow* window, i32 width, i32 height);
 
 // ==============================================================================
 

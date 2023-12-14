@@ -4,7 +4,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-mat mat_new(double rows, double cols, double* matrix)
+mat mat_new(f64 rows, f64 cols, f64* matrix)
 {
 	mat mat = { rows, cols, matrix };
 	return mat;
@@ -12,12 +12,12 @@ mat mat_new(double rows, double cols, double* matrix)
 
 mat mdot(mat m1, mat m2)
 {
-	size_t rows1 = m1.rows;
-	size_t rows2 = m2.rows;
-	size_t cols1 = m1.cols;
-	size_t cols2 = m2.cols;
+	u64 rows1 = m1.rows;
+	u64 rows2 = m2.rows;
+	u64 cols1 = m1.cols;
+	u64 cols2 = m2.cols;
 
-	mat result = { m1.rows, m2.cols, (double*)malloc(sizeof(double) * m1.rows * m2.cols) };
+	mat result = { m1.rows, m2.cols, (f64*)malloc(sizeof(f64) * m1.rows * m2.cols) };
 
 	if (cols1 != rows2)
 	{
@@ -27,12 +27,12 @@ mat mdot(mat m1, mat m2)
 		return result;
 	}
 
-	for (int i = 0; i < rows1; ++i)
+	for (i32 i = 0; i < rows1; ++i)
 	{
-		for (int j = 0; j < cols2; ++j)
+		for (i32 j = 0; j < cols2; ++j)
 		{
 			result.matrix[i * result.cols + j] = 0.0;
-			for (int k = 0; k < cols1; ++k)
+			for (i32 k = 0; k < cols1; ++k)
 			{
 				result.matrix[i * result.cols + j] += m1.matrix[i * cols1 + k] * m2.matrix[k * cols2 + j];
 			}
@@ -42,16 +42,16 @@ mat mdot(mat m1, mat m2)
 	return result;
 }
 
-mat msdot(double scalar, mat m1)
+mat msdot(f64 scalar, mat m1)
 {
-	size_t rows = m1.rows;
-	size_t cols = m1.cols;
+	u64 rows = m1.rows;
+	u64 cols = m1.cols;
 
-	mat result = { rows, cols, (double*)malloc(sizeof(double) * rows * cols) };
+	mat result = { rows, cols, (f64*)malloc(sizeof(f64) * rows * cols) };
 
-	for (int i = 0; i < rows; ++i)
+	for (i32 i = 0; i < rows; ++i)
 	{
-		for (int j = 0; j < cols; ++j)
+		for (i32 j = 0; j < cols; ++j)
 		{
 			result.matrix[i * cols + j] = m1.matrix[i * cols + j] * scalar;
 		}

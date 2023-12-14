@@ -23,13 +23,13 @@ typedef enum
 typedef struct
 {
 	subscription_topic topic;
-	void* value;
+	T value;
 } publisher;
 
 
 
 // Function pointer to any function the subscription will hold
-typedef void (*on_publish)(void*);
+typedef void (*on_publish)(T);
 
 
 
@@ -39,7 +39,7 @@ typedef void (*on_publish)(void*);
 // ===============================================================
 typedef struct
 {
-	unsigned int subscription_id;
+	u32 subscription_id;
 	subscription_topic topic;
 	on_publish on_publish_function;
 } subscription;
@@ -51,7 +51,7 @@ typedef struct
 
 subscription* subscription_new(subscription_topic topic, on_publish on_publish_function);
 bool          subscription_unsubscribe(subscription* subscription);
-void          publish(subscription_topic topic, void* value);
+void          publish(subscription_topic topic, T value);
 
 // ===============================================================
 

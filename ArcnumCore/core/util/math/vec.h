@@ -6,28 +6,28 @@
 
 typedef struct
 {
-	double x;
+	f64 x;
 } vec1;
 
 typedef struct
 {
 	double x;
-	double y;
+	f64 y;
 } vec2;
 
 typedef struct
 {
-	double x;
-	double y;
-	double z;
+	f64 x;
+	f64 y;
+	f64 z;
 } vec3;
 
 typedef struct
 {
-	double x;
-	double y;
-	double z;
-	double w;
+	f64 x;
+	f64 y;
+	f64 z;
+	f64 w;
 } vec4;
 
 // ===============================================================
@@ -38,13 +38,13 @@ typedef struct
 // VEC FUNCTIONS:
 
 vec1 vec1_default();
-vec1 vec1_new(double x);
+vec1 vec1_new(f64 x);
 vec2 vec2_default();
-vec2 vec2_new(double x, double y);
+vec2 vec2_new(f64 x, f64 y);
 vec3 vec3_default();
-vec3 vec3_new(double x, double y, double z);
+vec3 vec3_new(f64 x, f64 y, f64 z);
 vec4 vec4_default();
-vec4 vec4_new(double x, double y, double z, double w);
+vec4 vec4_new(f64 x, f64 y, f64 z, f64 w);
 
 // ===============================================================
 

@@ -18,7 +18,7 @@ vector* vector_new(void)
 	return v;
 }
 
-byte* vector_get(vector* v, size_t index)
+byte* vector_get(vector* v, u64 index)
 {
 	if (index < v->size)
 		return v->data[index];
@@ -35,7 +35,7 @@ void vector_free(vector* v)
 		FREE(v);
 	}
 }
-void vector_push(vector* v, void* data)
+void vector_push(vector* v, T data)
 {
 	if (v->size >= v->capacity)
 	{
@@ -46,7 +46,7 @@ void vector_push(vector* v, void* data)
 	v->size += 1;
 }
 
-void vector_insert(vector* v, size_t index, void* data)
+void vector_insert(vector* v, u64 index, T data)
 {
 	if (index > v->size)
 	{
@@ -60,7 +60,7 @@ void vector_insert(vector* v, size_t index, void* data)
 		v->data = REALLOC(v->data, byte*, v->capacity);
 	}
 
-	for (size_t i = v->size; i > index; i--)
+	for (u64 i = v->size; i > index; i--)
 	{
 		v->data[i] = v->data[i - 1];
 	}
@@ -69,7 +69,7 @@ void vector_insert(vector* v, size_t index, void* data)
 	v->size += 1;
 }
 
-void vector_remove(vector* v, size_t index)
+void vector_remove(vector* v, u64 index)
 {
 	if (index >= v->size)
 	{
@@ -104,7 +104,7 @@ void vector_clear(vector* v)
 
 void vector_reverse(vector* v)
 {
-	for (size_t i = 0; i < v->size / 2; i++)
+	for (u64 i = 0; i < v->size / 2; i++)
 	{
 		byte* temp = v->data[i];
 		v->data[i] = v->data[v->size - 1 - i];

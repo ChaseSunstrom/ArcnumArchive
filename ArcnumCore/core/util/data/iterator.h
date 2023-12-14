@@ -26,10 +26,10 @@ typedef enum
 typedef struct
 {
 	iterator_state state;
-	void** collection;
-	void** collection_data;
-	size_t index;
-	size_t collection_size;
+	T* collection;
+	T* collection_data;
+	u64 index;
+	u64 collection_size;
 } iterator;
 
 
@@ -37,18 +37,18 @@ typedef struct
 // ===============================================================================
 // ITERATOR FUNCTIONS:
 
-iterator*      iterator_new(void** collection);
+iterator*      iterator_new(T* collection);
 iterator_state iterator_next(iterator* it);
 iterator_state iterator_prev(iterator* it);
 iterator_state iterator_iterate(iterator* it);
 iterator_state iterator_b_iterate(iterator* it);
 iterator_state iterator_begin(iterator* it);
 iterator_state iterator_end(iterator* it);
-void*          iterator_get_prev(iterator* it);
-void*          iterator_get_next(iterator* it);
-void*          iterator_get_current_data(iterator* it);
+T			   iterator_get_prev(iterator* it);
+T		       iterator_get_next(iterator* it);
+T	           iterator_get_current_data(iterator* it);
 void           iterator_reset(iterator* it);
-void           iterator_update(iterator* it, void** collection);
+void           iterator_update(iterator* it, T* collection);
 void           iterator_free(iterator* it);
 
 //===============================================================================

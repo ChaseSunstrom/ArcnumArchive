@@ -7,7 +7,7 @@
 // ===============================================================================
 // ITERATOR FUNCTIONS
 
-iterator* iterator_new(void** collection)
+iterator* iterator_new(T* collection)
 {
 	iterator* it = ALLOC(iterator);
 	it->index = 0;

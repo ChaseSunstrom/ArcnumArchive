@@ -11,4 +11,6 @@
 #include <glew.h>
 #include <glfw3.h>
 
+#include "data/types.h"
+
 #endif// CORE_ACPCH_H

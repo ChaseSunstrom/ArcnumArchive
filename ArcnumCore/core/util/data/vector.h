@@ -10,8 +10,8 @@
 // ===============================================================================
 typedef struct
 {
-	size_t size;
-	size_t capacity;
+	u64 size;
+	u64 capacity;
 	byte** data;
 } vector;
 
@@ -43,12 +43,12 @@ typedef vector* function_ptr_vec;
 // VECTOR FUNCTIONS:
 
 vector*     vector_new(void);
-byte*       vector_get(vector* v, size_t index);
+byte*       vector_get(vector* v, u64 index);
 void        vector_free(vector* v);
-void        vector_push(vector* v, void* data);
-void        vector_insert(vector* v, size_t index, void* data);
+void        vector_push(vector* v, T data);
+void        vector_insert(vector* v, u64 index, T data);
 void        vector_pop(vector* v);
-void        vector_remove(vector* v, size_t index);
+void        vector_remove(vector* v, u64 index);
 void        vector_clear(vector* v);
 void        vector_reverse(vector* v);
 static bool vector_is_big_enough(vector* v);

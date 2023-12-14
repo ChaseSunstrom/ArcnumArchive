@@ -5,7 +5,7 @@
 
 // Vector of current subscriptions
 static subscription** subscriptions = NULL;
-static unsigned int subscription_count = 0;
+static u32            subscription_count = 0;
 
 // ===============================================================
 // SUBSCRIPTION AND PUBLISHER FUNCTIONS:
@@ -34,7 +34,7 @@ void publish(subscription_topic topic, void* value)
 {
 	publisher publisher = { .topic = topic, .value = value };
 
-	for (int i = 0; i < subscription_count; i++) {
+	for (i32 i = 0; i < subscription_count; i++) {
 		subscription* subscription = subscriptions[i];
 		if (subscription == NULL || subscription->topic != topic) continue;
 		subscription->on_publish_function(publisher.value);

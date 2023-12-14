@@ -1,9 +1,6 @@
 #include "uuid.h"
 
-#include <stdlib.h>
-#include <time.h>
-
-const char* uuid_generate()
+string uuid_generate()
 {
     char v[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
     

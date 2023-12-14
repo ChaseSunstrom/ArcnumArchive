@@ -15,7 +15,7 @@ typedef enum
 // ==============================================================================
 typedef struct
 {
-	char* name;
+	string name;
 } layer;
 
 

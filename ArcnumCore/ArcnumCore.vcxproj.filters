@@ -33,9 +33,6 @@
     <ClInclude Include="core\util\std_include.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\util\data\map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="core\renderer\layer_stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -87,6 +84,9 @@
     <ClInclude Include="core\util\math\mat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="core\util\data\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\GLAD\glad.c">
@@ -99,9 +99,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\util\data\vector.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core\util\data\map.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\renderer\layer_stack.c">

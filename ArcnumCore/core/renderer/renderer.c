@@ -26,7 +26,7 @@ void renderer_render(renderer* renderer)
 
 void renderer_set_delta_time(renderer* renderer)
 {
-	double current_time = glfwGetTime();
+	f64 current_time = glfwGetTime();
 	renderer->delta_time = current_time - renderer->last_frame_time;
 	renderer->last_frame_time = current_time;
 }

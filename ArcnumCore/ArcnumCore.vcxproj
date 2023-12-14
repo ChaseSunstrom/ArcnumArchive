@@ -287,7 +287,7 @@
     <ClInclude Include="core\renderer\renderer.h" />
     <ClInclude Include="core\util\data\collection.h" />
     <ClInclude Include="core\util\data\iterator.h" />
-    <ClInclude Include="core\util\data\map.h" />
+    <ClInclude Include="core\util\data\types.h" />
     <ClInclude Include="core\util\data\vector.h" />
     <ClInclude Include="core\util\log.h" />
     <ClInclude Include="core\util\math\mat.h" />
@@ -308,7 +308,6 @@
     <ClCompile Include="core\renderer\layer.c" />
     <ClCompile Include="core\renderer\renderer.c" />
     <ClCompile Include="core\util\data\iterator.c" />
-    <ClCompile Include="core\util\data\map.c" />
     <ClCompile Include="core\util\data\vector.c" />
     <ClCompile Include="core\renderer\layer_stack.c" />
     <ClCompile Include="core\util\math\mat.c" />

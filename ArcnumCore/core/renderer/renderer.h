@@ -6,10 +6,10 @@
 // ==============================================================================
 typedef struct
 {
-	double delta_time;
-	double fixed_delta_time;
-	double last_frame_time;
-	double tick_time;
+	f64 delta_time;
+	f64 fixed_delta_time;
+	f64 last_frame_time;
+	f64 tick_time;
 } renderer;
 
 //===============================================================================

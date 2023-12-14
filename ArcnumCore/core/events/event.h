@@ -1,7 +1,7 @@
 #ifndef CORE_EVENT_H
 #define CORE_EVENT_H
 
-#include <stdbool.h>
+#include "../util/std_include.h"
 
 #define BIT_SHIFT(x) (1 << x)
 
@@ -89,7 +89,7 @@ typedef struct
 // ===============================================================
 // EVENT RELATED METHODS:
 
-bool        event_dispatcher_dispatch(event_dispatcher dispatcher, void* function_to_call);
+bool        event_dispatcher_dispatch(event_dispatcher dispatcher, T function_to_call);
 const char* event_type_to_string(enum event_type event_type);
 
 // ===============================================================
