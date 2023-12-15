@@ -61,16 +61,28 @@ __AC_CORE_API__ vec1 vec1_add(vec1 v1, vec1 v2);
 __AC_CORE_API__ vec2 vec2_add(vec2 v1, vec2 v2);
 __AC_CORE_API__ vec3 vec3_add(vec3 v1, vec3 v2);
 __AC_CORE_API__ vec4 vec4_add(vec4 v1, vec4 v2);
+__AC_CORE_API__ vec1 vec1_mul(vec1 v1, vec1 v2);
+__AC_CORE_API__ vec2 vec2_mul(vec2 v1, vec2 v2);
+__AC_CORE_API__ vec3 vec3_mul(vec3 v1, vec3 v2);
+__AC_CORE_API__ vec4 vec4_mul(vec4 v1, vec4 v2);
+__AC_CORE_API__ vec1 vec1_sub(vec1 v1, vec1 v2);
+__AC_CORE_API__ vec2 vec2_sub(vec2 v1, vec2 v2);
+__AC_CORE_API__ vec3 vec3_sub(vec3 v1, vec3 v2);
+__AC_CORE_API__ vec4 vec4_sub(vec4 v1, vec4 v2);
+__AC_CORE_API__ vec1 vec1_div(vec1 v1, vec1 v2);
+__AC_CORE_API__ vec2 vec2_div(vec2 v1, vec2 v2);
+__AC_CORE_API__ vec3 vec3_div(vec3 v1, vec3 v2);
+__AC_CORE_API__ vec4 vec4_div(vec4 v1, vec4 v2);
 
 __AC_CORE_API__ __AC_CORE_INLINE__ f64 vec1_dot(vec1 v1, vec1 v2);
 __AC_CORE_API__ __AC_CORE_INLINE__ f64 vec2_dot(vec2 v1, vec2 v2);
 __AC_CORE_API__ __AC_CORE_INLINE__ f64 vec3_dot(vec3 v1, vec3 v2);
 __AC_CORE_API__ __AC_CORE_INLINE__ f64 vec4_dot(vec4 v1, vec4 v2);
 
-__AC_CORE_API__ __AC_CORE_INLINE__ f64 vec1_norm1(vec1 v);
-__AC_CORE_API__ __AC_CORE_INLINE__ f64 vec2_norm2(vec2 v);
-__AC_CORE_API__ __AC_CORE_INLINE__ f64 vec3_norm3(vec3 v);
-__AC_CORE_API__ __AC_CORE_INLINE__ f64 vec4_norm4(vec4 v);
+__AC_CORE_API__ __AC_CORE_INLINE__ f64 _vec1_norm(vec1 v);
+__AC_CORE_API__ __AC_CORE_INLINE__ f64 _vec2_norm(vec2 v);
+__AC_CORE_API__ __AC_CORE_INLINE__ f64 _vec3_norm(vec3 v);
+__AC_CORE_API__ __AC_CORE_INLINE__ f64 _vec4_norm(vec4 v);
 
 __AC_CORE_API__ __AC_CORE_INLINE__ f64 vec1_norm(vec1 v);
 __AC_CORE_API__ __AC_CORE_INLINE__ f64 vec2_norm(vec2 v);
