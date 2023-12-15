@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include <stdint.h>
+#include <corecrt_math.h>
 
 #include <glew.h>
 #include <glfw3.h>

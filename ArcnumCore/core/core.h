@@ -5,6 +5,7 @@
 
 #ifdef _MSC_VER
 	#define __AC_CORE_INLINE__ __forceinline
+	#define __AC_CORE_RESTRICT__ __restrict
 #else
 	#define __AC_CORE_INLINE__ 
 #endif // _MSC_VER
