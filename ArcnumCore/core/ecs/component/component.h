@@ -7,7 +7,7 @@
 
 #include "color.h"
 
-AC_CORE_API typedef struct
+__AC_CORE_API__ typedef struct
 {
 	GLuint VAO;
 	GLuint VBO;
@@ -15,29 +15,29 @@ AC_CORE_API typedef struct
 	GLuint fragment_shader;
 } shader_component;
 
-AC_CORE_API typedef struct
+__AC_CORE_API__ typedef struct
 {
 	bool rendering;
 	shader_component shader;
 } renderable_component;
 
-AC_CORE_API typedef struct
+__AC_CORE_API__ typedef struct
 {
 	byte* image_data;
 	GLuint texture;
 } texture_component;
 
-AC_CORE_API typedef struct
+__AC_CORE_API__ typedef struct
 {
 	color color;
 } color_component;
 
-AC_CORE_API typedef struct
+__AC_CORE_API__ typedef struct
 {
 	vec3 position;
 } position_component;
 
-AC_CORE_API typedef struct
+__AC_CORE_API__ typedef struct
 {
 	vec3 position;
 } size_component;

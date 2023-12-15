@@ -8,7 +8,7 @@
 // ENTITY:       | Used to store entity related data
 // ===============================================================
 
-AC_CORE_API typedef struct
+__AC_CORE_API__ typedef struct
 {
 	function_ptr_vec systems;
 	struct_vec components;

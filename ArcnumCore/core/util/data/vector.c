@@ -4,7 +4,7 @@
 // ==============================================================================
 // VECTOR FUNCTIONS
 
-AC_CORE_API vector* vector_new(void)
+__AC_CORE_API__ vector* vector_new(void)
 {
 	vector* v = ALLOC(vector);
 	
@@ -18,7 +18,7 @@ AC_CORE_API vector* vector_new(void)
 	return v;
 }
 
-AC_CORE_API byte* vector_get(vector* v, u64 index)
+__AC_CORE_API__ byte* vector_get(vector* v, u64 index)
 {
 	if (index < v->size)
 		return v->data[index];
@@ -27,7 +27,7 @@ AC_CORE_API byte* vector_get(vector* v, u64 index)
 	exit(EXIT_FAILURE);
 }
 
-AC_CORE_API void vector_free(vector* v)
+__AC_CORE_API__ void vector_free(vector* v)
 {
 	if (v)
 	{
@@ -36,7 +36,7 @@ AC_CORE_API void vector_free(vector* v)
 	}
 }
 
-AC_CORE_API void vector_push(vector* v, T data)
+__AC_CORE_API__ void vector_push(vector* v, T data)
 {
 	if (v->size >= v->capacity)
 	{
@@ -47,7 +47,7 @@ AC_CORE_API void vector_push(vector* v, T data)
 	v->size += 1;
 }
 
-AC_CORE_API void vector_insert(vector* v, u64 index, T data)
+__AC_CORE_API__ void vector_insert(vector* v, u64 index, T data)
 {
 	if (index > v->size)
 	{
@@ -70,7 +70,7 @@ AC_CORE_API void vector_insert(vector* v, u64 index, T data)
 	v->size += 1;
 }
 
-AC_CORE_API void vector_remove(vector* v, u64 index)
+__AC_CORE_API__ void vector_remove(vector* v, u64 index)
 {
 	if (index >= v->size)
 	{
@@ -86,7 +86,7 @@ AC_CORE_API void vector_remove(vector* v, u64 index)
 	v->size -= 1;
 }
 
-AC_CORE_API void vector_pop(vector* v)
+__AC_CORE_API__ void vector_pop(vector* v)
 {
 	if (v->size > 0)
 	{
@@ -95,7 +95,7 @@ AC_CORE_API void vector_pop(vector* v)
 	}
 }
 
-AC_CORE_API void vector_clear(vector* v)
+__AC_CORE_API__ void vector_clear(vector* v)
 {
 	v->size = 0;
 	v->capacity = 1;
@@ -103,7 +103,7 @@ AC_CORE_API void vector_clear(vector* v)
 	v->data = ALLOC(byte*);
 }
 
-AC_CORE_API void vector_reverse(vector* v)
+__AC_CORE_API__ void vector_reverse(vector* v)
 {
 	for (u64 i = 0; i < v->size / 2; i++)
 	{
@@ -113,7 +113,7 @@ AC_CORE_API void vector_reverse(vector* v)
 	}
 }
 
-AC_CORE_API static inline bool vector_is_big_enough(vector* v)
+__AC_CORE_API__ static inline bool vector_is_big_enough(vector* v)
 {
 	return v->capacity - v->size > 0;
 }

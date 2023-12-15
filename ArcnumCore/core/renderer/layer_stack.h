@@ -9,7 +9,7 @@
 // ==============================================================================
 // LAYER STACK:   | Used for different rendering layers
 // ==============================================================================
-AC_CORE_API typedef struct
+__AC_CORE_API__ typedef struct
 {
 	struct_vec layers;
 	iterator*  layers_it;
@@ -20,12 +20,12 @@ AC_CORE_API typedef struct
 // ==============================================================================
 // LAYER STACK:   | Functions
 
-AC_CORE_API layer_stack* layer_stack_new(void);
-AC_CORE_API void         layer_stack_push_layer(layer_stack layer_stack, layer* layer);
-AC_CORE_API void         layer_stack_push_overlay(layer_stack layer_stack, layer* overlay);
-AC_CORE_API void         layer_stack_pop_layer(layer_stack layer_stack, layer* layer);
-AC_CORE_API void         layer_stack_pop_overlay(layer_stack layer_stack, layer* overlay);
-AC_CORE_API void         layer_stack_free(layer_stack* layer_stack);
+__AC_CORE_API__ layer_stack* layer_stack_new(void);
+__AC_CORE_API__ void         layer_stack_push_layer(layer_stack layer_stack, layer* layer);
+__AC_CORE_API__ void         layer_stack_push_overlay(layer_stack layer_stack, layer* overlay);
+__AC_CORE_API__ void         layer_stack_pop_layer(layer_stack layer_stack, layer* layer);
+__AC_CORE_API__ void         layer_stack_pop_overlay(layer_stack layer_stack, layer* overlay);
+__AC_CORE_API__ void         layer_stack_free(layer_stack* layer_stack);
 
 // ==============================================================================
 

@@ -6,13 +6,13 @@
 
 #include "vec.h"
 
-AC_CORE_API mat mat_new(f64 rows, f64 cols, f64* matrix)
+__AC_CORE_API__ mat mat_new(f64 rows, f64 cols, f64* matrix)
 {
 	mat mat = { rows, cols, matrix };
 	return mat;
 }
 
-AC_CORE_API mat mdot(mat m1, mat m2)
+__AC_CORE_API__ mat mdot(mat m1, mat m2)
 {
 	u64 rows1 = m1.rows;
 	u64 rows2 = m2.rows;
@@ -44,7 +44,7 @@ AC_CORE_API mat mdot(mat m1, mat m2)
 	return result;
 }
 
-AC_CORE_API mat msdot(f64 scalar, mat m1)
+__AC_CORE_API__ mat msdot(f64 scalar, mat m1)
 {
 	u64 rows = m1.rows;
 	u64 cols = m1.cols;
@@ -62,7 +62,7 @@ AC_CORE_API mat msdot(f64 scalar, mat m1)
 	return result;
 }
 
-AC_CORE_API T mvdot(T vec, mat m1)
+__AC_CORE_API__ T mvdot(T vec, mat m1)
 {
 	u64 vec_size = ((vec4*)vec)->vec_size;
 	u64 rows = m1.rows;
@@ -93,7 +93,7 @@ AC_CORE_API T mvdot(T vec, mat m1)
 	return _vec;
 }
 
-AC_CORE_API void mat_free(mat mat)
+__AC_CORE_API__ __AC_CORE_INLINE__ void mat_free(mat mat)
 {
 	FREE(mat.matrix);
 }
