@@ -19,7 +19,7 @@
 // ===============================================================
 // EVENT TYPES: | Used to store the type of event
 // ===============================================================
-__AC_CORE_API__ enum event_type
+__A_CORE_API__ enum event_type
 {
 	NO_TYPE,
 	APP_UPDATE,
@@ -42,7 +42,7 @@ __AC_CORE_API__ enum event_type
 // ===============================================================
 // EVENT CATEGORIES: | Used to store the category of event
 // ===============================================================
-__AC_CORE_API__ enum event_category
+__A_CORE_API__ enum event_category
 { 
 	NO_CATEGORY  = 0,
 	INPUT        = BIT_SHIFT(1),
@@ -57,20 +57,20 @@ __AC_CORE_API__ enum event_category
 // ===============================================================
 // EVENT STRUCTS: | Used to hold event data related to their type
 
-__AC_CORE_API__ EVENT_FACTORY(generic_event,  enum event_type type);
-__AC_CORE_API__ EVENT_FACTORY(app_update_event, enum event_type type);
-__AC_CORE_API__ EVENT_FACTORY(app_tick_event, enum event_type type);
-__AC_CORE_API__ EVENT_FACTORY(app_render_event, enum event_type type);
-__AC_CORE_API__ EVENT_FACTORY(window_closed_event, enum event_type type);
-__AC_CORE_API__ EVENT_FACTORY(window_resized_event, enum event_type type; int width; int height );
-__AC_CORE_API__ EVENT_FACTORY(window_moved_event, enum event_type type; int x_pos; int y_pos  );
-__AC_CORE_API__ EVENT_FACTORY(key_pressed_event, enum event_type type; int key_code );
-__AC_CORE_API__ EVENT_FACTORY(key_released_event, enum event_type type; int key_code );
-__AC_CORE_API__ EVENT_FACTORY(key_repeat_event, enum event_type type; int key_code);
-__AC_CORE_API__ EVENT_FACTORY(mouse_pressed_event, enum event_type type; int button  );
-__AC_CORE_API__ EVENT_FACTORY(mouse_released_event, enum event_type type; int button );
-__AC_CORE_API__ EVENT_FACTORY(mouse_move_event, enum event_type type; double x_pos; double y_pos );
-__AC_CORE_API__ EVENT_FACTORY(mouse_scroll_event, enum event_type type;  double x_offset; double y_offset);
+__A_CORE_API__ EVENT_FACTORY(generic_event,  enum event_type type);
+__A_CORE_API__ EVENT_FACTORY(app_update_event, enum event_type type);
+__A_CORE_API__ EVENT_FACTORY(app_tick_event, enum event_type type);
+__A_CORE_API__ EVENT_FACTORY(app_render_event, enum event_type type);
+__A_CORE_API__ EVENT_FACTORY(window_closed_event, enum event_type type);
+__A_CORE_API__ EVENT_FACTORY(window_resized_event, enum event_type type; int width; int height );
+__A_CORE_API__ EVENT_FACTORY(window_moved_event, enum event_type type; int x_pos; int y_pos  );
+__A_CORE_API__ EVENT_FACTORY(key_pressed_event, enum event_type type; int key_code );
+__A_CORE_API__ EVENT_FACTORY(key_released_event, enum event_type type; int key_code );
+__A_CORE_API__ EVENT_FACTORY(key_repeat_event, enum event_type type; int key_code);
+__A_CORE_API__ EVENT_FACTORY(mouse_pressed_event, enum event_type type; int button  );
+__A_CORE_API__ EVENT_FACTORY(mouse_released_event, enum event_type type; int button );
+__A_CORE_API__ EVENT_FACTORY(mouse_move_event, enum event_type type; double x_pos; double y_pos );
+__A_CORE_API__ EVENT_FACTORY(mouse_scroll_event, enum event_type type;  double x_offset; double y_offset);
 
 // ===============================================================
 
@@ -79,7 +79,7 @@ __AC_CORE_API__ EVENT_FACTORY(mouse_scroll_event, enum event_type type;  double 
 // ===============================================================
 // EVENT DISPATCHER: | Used to dispatch and handle events
 // ===============================================================
-__AC_CORE_API__ typedef struct
+__A_CORE_API__ typedef struct
 {
 	generic_event* event;
 } event_dispatcher;
@@ -89,8 +89,8 @@ __AC_CORE_API__ typedef struct
 // ===============================================================
 // EVENT RELATED METHODS:
 
-__AC_CORE_API__ bool        event_dispatcher_dispatch(event_dispatcher dispatcher, T function_to_call);
-__AC_CORE_API__ const char* event_type_to_string(enum event_type event_type);
+__A_CORE_API__ bool        event_dispatcher_dispatch(event_dispatcher dispatcher, T function_to_call);
+__A_CORE_API__ const char* event_type_to_string(enum event_type event_type);
 
 // ===============================================================
 // EVENT FUNCTION_PTR: | Used as a function pointer to call any event

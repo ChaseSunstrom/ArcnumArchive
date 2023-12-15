@@ -9,13 +9,13 @@
 #define SCREEN_WIDTH 1080
 #define SCREEN_HEIGHT 1080
 
-__AC_CORE_API__ typedef generic_event* (*event_callback)(generic_event*);
+__A_CORE_API__ typedef generic_event* (*event_callback)(generic_event*);
 
 // ==============================================================================
 // WINDOW:       | Used for storing window information
 // ==============================================================================
 
-__AC_CORE_API__ typedef struct
+__A_CORE_API__ typedef struct
 {
 	string title;
 	bool   vsync;
@@ -26,7 +26,7 @@ __AC_CORE_API__ typedef struct
 	event_callback event_callback;
 } window_data;
 
-__AC_CORE_API__ typedef struct
+__A_CORE_API__ typedef struct
 {
 	GLFWwindow* window;
 	renderer*   renderer;
@@ -39,15 +39,15 @@ __AC_CORE_API__ typedef struct
 // ==============================================================================
 // WINDOW FUNCTIONS:
 
-__AC_CORE_API__ GLFWwindow*    window_init_gl(window_data window_data);
-__AC_CORE_API__ window*        window_new(void);
-__AC_CORE_API__ generic_event* window_propagate_event(generic_event* event);
-__AC_CORE_API__ void		   window_free(window* window);
-__AC_CORE_API__ void           window_on_update(window window);
-__AC_CORE_API__ void           window_vsync(bool vsync);
-__AC_CORE_API__ void           window_on_event(window window, generic_event* event);
-__AC_CORE_API__ bool           window_is_running(window window);
-__AC_CORE_API__ bool           window_close_event(window window);
+__A_CORE_API__ GLFWwindow*    window_init_gl(window_data window_data);
+__A_CORE_API__ window*        window_new(void);
+__A_CORE_API__ generic_event* window_propagate_event(generic_event* event);
+__A_CORE_API__ void		   window_free(window* window);
+__A_CORE_API__ void           window_on_update(window window);
+__A_CORE_API__ void           window_vsync(bool vsync);
+__A_CORE_API__ void           window_on_event(window window, generic_event* event);
+__A_CORE_API__ bool           window_is_running(window window);
+__A_CORE_API__ bool           window_close_event(window window);
 
 // ==============================================================================
 
@@ -56,21 +56,21 @@ __AC_CORE_API__ bool           window_close_event(window window);
 // ==============================================================================
 // EVENT CALLBACKS:
 
-__AC_CORE_API__ void window_event_callback(generic_event* event);
-__AC_CORE_API__ void window_resized_event_callback(GLFWwindow* window, u32 width, u32 height);
-__AC_CORE_API__ void window_close_event_callback(GLFWwindow* window);
-__AC_CORE_API__ void window_key_event_callback(GLFWwindow* window, i32 key, i32 scancode, i32 action, i32 mods);
-__AC_CORE_API__ void window_mouse_button_event_callback(GLFWwindow* window, i32 button, i32 action, i32 mods);
-__AC_CORE_API__ void window_mouse_scroll_event_callback(GLFWwindow* window, f64 xoffset, f64 yoffset);
-__AC_CORE_API__ void window_mouse_move_event_callback(GLFWwindow* window, f64 x, f64 y);
+__A_CORE_API__ void window_event_callback(generic_event* event);
+__A_CORE_API__ void window_resized_event_callback(GLFWwindow* window, u32 width, u32 height);
+__A_CORE_API__ void window_close_event_callback(GLFWwindow* window);
+__A_CORE_API__ void window_key_event_callback(GLFWwindow* window, i32 key, i32 scancode, i32 action, i32 mods);
+__A_CORE_API__ void window_mouse_button_event_callback(GLFWwindow* window, i32 button, i32 action, i32 mods);
+__A_CORE_API__ void window_mouse_scroll_event_callback(GLFWwindow* window, f64 xoffset, f64 yoffset);
+__A_CORE_API__ void window_mouse_move_event_callback(GLFWwindow* window, f64 x, f64 y);
 
 // ==============================================================================
 
 // ==============================================================================
 // GLFW CALLBACKS:
 
-__AC_CORE_API__ void        glfw_error_callback(i32 error, string description);
-__AC_CORE_API__ static void framebuffer_size_callback(GLFWwindow* window, i32 width, i32 height);
+__A_CORE_API__ void        glfw_error_callback(i32 error, string description);
+__A_CORE_API__ static void framebuffer_size_callback(GLFWwindow* window, i32 width, i32 height);
 
 // ==============================================================================
 

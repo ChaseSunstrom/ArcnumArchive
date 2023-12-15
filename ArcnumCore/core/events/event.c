@@ -1,6 +1,6 @@
 #include "event.h"
 
-__AC_CORE_API__ bool event_dispatcher_dispatch(event_dispatcher dispatcher, T function_to_call)
+__A_CORE_API__ bool event_dispatcher_dispatch(event_dispatcher dispatcher, T function_to_call)
 {
 	// Checks if the type is greater than 0 which will be anything except 'NO_TYPE'
 	if (dispatcher.event->type)

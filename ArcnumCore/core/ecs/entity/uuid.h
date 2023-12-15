@@ -3,6 +3,6 @@
 
 #include "../../util/std_include.h"
 
-__AC_CORE_API__ string uuid_generate();
+__A_CORE_API__ string uuid_generate();
 
 #endif // CORE_UUID_H

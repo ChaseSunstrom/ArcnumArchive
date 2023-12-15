@@ -1,13 +1,13 @@
 #ifndef CORE_CORE_H
 #define CORE_CORE_H
 
-#define __AC_CORE_API__
+#define __A_CORE_API__
 
 #ifdef _MSC_VER
-	#define __AC_CORE_INLINE__ __forceinline
-	#define __AC_CORE_RESTRICT__ __restrict
+	#define __A_CORE_INLINE__ __forceinline
+	#define __A_CORE_RESTRICT__ __restrict
 #else
-	#define __AC_CORE_INLINE__ 
+	#define __A_CORE_INLINE__ 
 #endif // _MSC_VER
 
 #define AC_STRUCT(_name, ...) struct _name { __VA_ARGS__ }

@@ -6,7 +6,7 @@
 // ===============================================================================
 // ITERATOR_STATE: | Used to store the state of an iterator
 // ===============================================================================
-__AC_CORE_API__ typedef enum
+__A_CORE_API__ typedef enum
 {
 	// Used as a placeholder
 	ITERATOR_NONE,
@@ -23,7 +23,7 @@ __AC_CORE_API__ typedef enum
 // ===============================================================================
 // ITERATOR:      | Used to iterate through a list
 // ===============================================================================
-__AC_CORE_API__ typedef struct
+__A_CORE_API__ typedef struct
 {
 	iterator_state state;
 	T* collection;
@@ -37,19 +37,19 @@ __AC_CORE_API__ typedef struct
 // ===============================================================================
 // ITERATOR FUNCTIONS:
 
-__AC_CORE_API__ iterator*      iterator_new(T* collection);
-__AC_CORE_API__ iterator_state iterator_next(iterator* it);
-__AC_CORE_API__ iterator_state iterator_prev(iterator* it);
-__AC_CORE_API__ iterator_state iterator_iterate(iterator* it);
-__AC_CORE_API__ iterator_state iterator_b_iterate(iterator* it);
-__AC_CORE_API__ iterator_state iterator_begin(iterator* it);
-__AC_CORE_API__ iterator_state iterator_end(iterator* it);
-__AC_CORE_API__ T			   iterator_get_prev(iterator* it);
-__AC_CORE_API__ T		       iterator_get_next(iterator* it);
-__AC_CORE_API__ T	           iterator_get_current_data(iterator* it);
-__AC_CORE_API__ void           iterator_reset(iterator* it);
-__AC_CORE_API__ void           iterator_update(iterator* it, T* collection);
-__AC_CORE_API__ void           iterator_free(iterator* it);
+__A_CORE_API__ iterator*      iterator_new(T* collection);
+__A_CORE_API__ iterator_state iterator_next(iterator* it);
+__A_CORE_API__ iterator_state iterator_prev(iterator* it);
+__A_CORE_API__ iterator_state iterator_iterate(iterator* it);
+__A_CORE_API__ iterator_state iterator_b_iterate(iterator* it);
+__A_CORE_API__ iterator_state iterator_begin(iterator* it);
+__A_CORE_API__ iterator_state iterator_end(iterator* it);
+__A_CORE_API__ T			   iterator_get_prev(iterator* it);
+__A_CORE_API__ T		       iterator_get_next(iterator* it);
+__A_CORE_API__ T	           iterator_get_current_data(iterator* it);
+__A_CORE_API__ void           iterator_reset(iterator* it);
+__A_CORE_API__ void           iterator_update(iterator* it, T* collection);
+__A_CORE_API__ void           iterator_free(iterator* it);
 
 //===============================================================================
 

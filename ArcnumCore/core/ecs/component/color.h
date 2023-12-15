@@ -1,7 +1,7 @@
 #ifndef CORE_COLOR_H
 #define CORE_COLOR_H
 
-__AC_CORE_API__ typedef struct
+__A_CORE_API__ typedef struct
 {
 	f64 r;
 	f64 g;
