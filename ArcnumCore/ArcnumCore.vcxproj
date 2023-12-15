@@ -274,6 +274,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="core\core.h" />
     <ClInclude Include="core\debug\log.h" />
     <ClInclude Include="core\ecs\component\color.h" />
     <ClInclude Include="core\ecs\component\component.h" />
@@ -311,7 +312,6 @@
     <ClCompile Include="core\util\data\vector.c" />
     <ClCompile Include="core\renderer\layer_stack.c" />
     <ClCompile Include="core\util\math\mat.c" />
-    <ClCompile Include="core\util\math\radians.c" />
     <ClCompile Include="core\util\math\vec.c" />
     <ClCompile Include="core\window\window.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>

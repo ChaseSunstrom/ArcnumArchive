@@ -4,13 +4,13 @@
 #include "event.h"
 
 // Vector of current subscriptions
-static subscription** subscriptions = NULL;
-static u32            subscription_count = 0;
+AC_CORE_API static subscription** subscriptions = NULL;
+AC_CORE_API static u32            subscription_count = 0;
 
 // ===============================================================
 // SUBSCRIPTION AND PUBLISHER FUNCTIONS:
 
-subscription* subscription_new(subscription_topic topic, on_publish on_publish_function)
+AC_CORE_API subscription* subscription_new(subscription_topic topic, on_publish on_publish_function)
 {
 	subscription* _subscription = ALLOC(subscription);
 	_subscription->subscription_id = subscription_count++; 
@@ -21,7 +21,7 @@ subscription* subscription_new(subscription_topic topic, on_publish on_publish_f
 	return _subscription;
 }
 
-bool subscription_unsubscribe(subscription* subscription)
+AC_CORE_API bool subscription_unsubscribe(subscription* subscription)
 {
 	if (subscription == NULL) return false;
 	if (subscription->subscription_id >= subscription_count) return false;
@@ -30,7 +30,7 @@ bool subscription_unsubscribe(subscription* subscription)
 	return true;
 }
 
-void publish(subscription_topic topic, void* value)
+AC_CORE_API void publish(subscription_topic topic, void* value)
 {
 	publisher publisher = { .topic = topic, .value = value };
 

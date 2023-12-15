@@ -1,7 +1,7 @@
 #ifndef CORE_LAYER_H
 #define CORE_LAYER_H
 
-typedef enum
+AC_CORE_API typedef enum
 {
 	WINDOW_LAYER,
 	RENDERER_LAYER,
@@ -13,7 +13,7 @@ typedef enum
 // ==============================================================================
 // LAYER:        | Used for the _renderer 
 // ==============================================================================
-typedef struct
+AC_CORE_API typedef struct
 {
 	string name;
 } layer;
@@ -23,12 +23,12 @@ typedef struct
 // ==============================================================================
 // LAYER FUNCTIONS:
 
-layer* layer_new(void);
-void   layer_on_attach(layer* layer);
-void   layer_on_detach(layer* layer);
-void   layer_on_update(layer* layer);
-void   layer_on_event(layer* layer);
-void   layer_free(layer* layer);
+AC_CORE_API layer* layer_new(void);
+AC_CORE_API void   layer_on_attach(layer* layer);
+AC_CORE_API void   layer_on_detach(layer* layer);
+AC_CORE_API void   layer_on_update(layer* layer);
+AC_CORE_API void   layer_on_event(layer* layer);
+AC_CORE_API void   layer_free(layer* layer);
 
 // ==============================================================================
 

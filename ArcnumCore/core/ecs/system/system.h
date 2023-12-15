@@ -1,12 +1,14 @@
 #ifndef CORE_SYSTEM_H
 #define CORE_SYSTEM_H
 
-// Tells the renderer how to render different entities
-typedef void (*system_function)(void);
+#include "../../util/std_include.h"
 
-void system_handle_color(void);
-void system_handle_texture(void);
-void system_handle_position(void);
+// Tells the renderer how to render different entities
+AC_CORE_API typedef void (*system_function)(void);
+
+AC_CORE_API void system_handle_color(void);
+AC_CORE_API void system_handle_texture(void);
+AC_CORE_API void system_handle_position(void);
 
 
 #endif

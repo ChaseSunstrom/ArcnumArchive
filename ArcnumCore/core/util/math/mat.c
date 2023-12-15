@@ -6,20 +6,20 @@
 
 #include "vec.h"
 
-mat mat_new(f64 rows, f64 cols, f64* matrix)
+AC_CORE_API mat mat_new(f64 rows, f64 cols, f64* matrix)
 {
 	mat mat = { rows, cols, matrix };
 	return mat;
 }
 
-mat mdot(mat m1, mat m2)
+AC_CORE_API mat mdot(mat m1, mat m2)
 {
 	u64 rows1 = m1.rows;
 	u64 rows2 = m2.rows;
 	u64 cols1 = m1.cols;
 	u64 cols2 = m2.cols;
 
-	mat result = { rows1, cols2, (f64*)malloc(sizeof(f64) * rows1 * cols2) };
+	mat result = { rows1, cols2, (f64*)calloc(rows1 * cols2, sizeof(f64)) };
 
 	if (cols1 != rows2)
 	{
@@ -44,12 +44,12 @@ mat mdot(mat m1, mat m2)
 	return result;
 }
 
-mat msdot(f64 scalar, mat m1)
+AC_CORE_API mat msdot(f64 scalar, mat m1)
 {
 	u64 rows = m1.rows;
 	u64 cols = m1.cols;
 
-	mat result = { rows, cols, (f64*)malloc(sizeof(f64) * rows * cols) };
+	mat result = { rows, cols, (f64*)calloc(rows * cols,sizeof(f64)) };
 
 	for (i32 i = 0; i < rows; ++i)
 	{
@@ -62,19 +62,16 @@ mat msdot(f64 scalar, mat m1)
 	return result;
 }
 
-mat mvdot(T vec, mat m1)
+AC_CORE_API T mvdot(T vec, mat m1)
 {
 	u64 vec_size = ((vec4*)vec)->vec_size;
 	u64 rows = m1.rows;
 	u64 cols = m1.cols;
 
 	if (cols != vec_size)
-	{
-		mat result = { 0, 0, NULL };
-		return result;
-	}
+		return NULL;
 
-	mat result = { rows, 1, (f64*)malloc(sizeof(f64) * rows) };
+	mat result = { rows, 1, (f64*)calloc(rows, sizeof(f64)) };
 
 	for (u64 i = 0; i < rows; ++i)
 	{
@@ -85,10 +82,18 @@ mat mvdot(T vec, mat m1)
 		}
 	}
 
-	return result;
+	vec4* _vec = ALLOC(vec4);
+	_vec->vec_size = vec_size;
+
+	for (u64 i = 0; i < rows; i++)
+		((f64*)_vec)[i + 1] = result.matrix[i];
+
+	mat_free(result);
+
+	return _vec;
 }
 
-void mat_free(mat mat)
+AC_CORE_API void mat_free(mat mat)
 {
 	FREE(mat.matrix);
 }

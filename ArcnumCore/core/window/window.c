@@ -10,7 +10,7 @@
 // ==============================================================================
 // WINDOW FUNCTIONS:
 
-GLFWwindow* window_init_gl(window_data window_data)
+AC_CORE_API GLFWwindow* window_init_gl(window_data window_data)
 {
 	glfwInit();
 
@@ -42,7 +42,7 @@ GLFWwindow* window_init_gl(window_data window_data)
 	return gl_window;
 }
 
-window* window_new(void)
+AC_CORE_API window* window_new(void)
 {
 	window* _window = ALLOC(window);
 	_window->renderer = renderer_new();
@@ -56,7 +56,7 @@ window* window_new(void)
 	return _window;
 }
 
-void window_on_update(window window)
+AC_CORE_API void window_on_update(window window)
 {
 	renderer_render(window.renderer);
 
@@ -64,18 +64,18 @@ void window_on_update(window window)
 	glfwPollEvents();
 }
 
-bool window_is_running(window window)
+AC_CORE_API bool window_is_running(window window)
 {
 	return !glfwWindowShouldClose(window.window);
 }
 
-bool window_close_event(window window)
+AC_CORE_API bool window_close_event(window window)
 {
 	window.running = false;
 	return true;
 }
 
-void window_vsync(bool vsync)
+AC_CORE_API void window_vsync(bool vsync)
 {
 	if (vsync)
 	{
@@ -87,12 +87,12 @@ void window_vsync(bool vsync)
 	}
 }
 
-void window_on_event(generic_event* event)
+AC_CORE_API void window_on_event(generic_event* event)
 {
 	publish(WINDOW_EVENT_TOPIC, event);
 }
 
-generic_event* window_propagate_event(generic_event* event) { return event; }
+AC_CORE_API generic_event* window_propagate_event(generic_event* event) { return event; }
 
 // ==============================================================================
 
@@ -101,7 +101,7 @@ generic_event* window_propagate_event(generic_event* event) { return event; }
 // ==============================================================================
 // EVENT CALLBACKS:
 
-void window_resized_event_callback(GLFWwindow* window, u32 width, u32 height)
+AC_CORE_API void window_resized_event_callback(GLFWwindow* window, u32 width, u32 height)
 {
 	window_data* _window_data = (window_data*)glfwGetWindowUserPointer(window);
 	window_resized_event event = { .width = width, .height = height, .type = WINDOW_RESIZED };
@@ -112,7 +112,7 @@ void window_resized_event_callback(GLFWwindow* window, u32 width, u32 height)
 	_window_data->event_callback(&event);
 }
 
-void window_close_event_callback(GLFWwindow* window)
+AC_CORE_API void window_close_event_callback(GLFWwindow* window)
 {
 	window_data* _window_data = (window_data*)glfwGetWindowUserPointer(window);
 	window_closed_event event = {.type = WINDOW_CLOSED};
@@ -120,7 +120,7 @@ void window_close_event_callback(GLFWwindow* window)
 	_window_data->event_callback(&event);
 }
 
-void window_key_event_callback(GLFWwindow* window, i32 key, i32 scancode, i32 action, i32 mods)
+AC_CORE_API void window_key_event_callback(GLFWwindow* window, i32 key, i32 scancode, i32 action, i32 mods)
 {
 	window_data* _window_data = (window_data*)glfwGetWindowUserPointer(window);
 
@@ -147,7 +147,7 @@ void window_key_event_callback(GLFWwindow* window, i32 key, i32 scancode, i32 ac
 	}
 }
 
-void window_mouse_button_event_callback(GLFWwindow* window, i32 button, i32 action, i32 mods)
+AC_CORE_API void window_mouse_button_event_callback(GLFWwindow* window, i32 button, i32 action, i32 mods)
 {
 	window_data* _window_data = (window_data*)glfwGetWindowUserPointer(window);
 
@@ -168,7 +168,7 @@ void window_mouse_button_event_callback(GLFWwindow* window, i32 button, i32 acti
 	}
 }
 
-void window_mouse_scroll_event_callback(GLFWwindow* window, f64 xoffset, f64 yoffset)
+AC_CORE_API void window_mouse_scroll_event_callback(GLFWwindow* window, f64 xoffset, f64 yoffset)
 {
 	window_data* _window_data = (window_data*)glfwGetWindowUserPointer(window);
 
@@ -176,7 +176,7 @@ void window_mouse_scroll_event_callback(GLFWwindow* window, f64 xoffset, f64 yof
 	_window_data->event_callback(&event);
 }
 
-void window_mouse_move_event_callback(GLFWwindow* window, f64 xpos, f64 ypos)
+AC_CORE_API void window_mouse_move_event_callback(GLFWwindow* window, f64 xpos, f64 ypos)
 {
 	window_data* _window_data = (window_data*)glfwGetWindowUserPointer(window);
 	mouse_move_event event = { .x_pos = xpos, .y_pos = ypos, .type = MOUSE_MOVED };
@@ -190,12 +190,12 @@ void window_mouse_move_event_callback(GLFWwindow* window, f64 xpos, f64 ypos)
 // ==============================================================================
 // GLFW CALLBACKS:
 
-void glfw_error_callback(i32 error, string description)
+AC_CORE_API void glfw_error_callback(i32 error, string description)
 {
 	ARCNUM_CORE_LOG("GLFW ERROR: %s\n", description);
 }
 
-static void framebuffer_size_callback(GLFWwindow* window, i32 width, i32 height)
+AC_CORE_API static void framebuffer_size_callback(GLFWwindow* window, i32 width, i32 height)
 {
 	glViewport(0, 0, width, height);
 }

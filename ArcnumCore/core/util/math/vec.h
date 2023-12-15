@@ -11,20 +11,20 @@
 // ===============================================================
 // VEC STRUCTS:  | Used to store position data
 
-typedef struct
+AC_CORE_API typedef struct
 {
 	byte vec_size;
 	f64  x;
 } vec1;
 
-typedef struct
+AC_CORE_API typedef struct
 {
 	byte vec_size;
 	f64  x;
 	f64  y;
 } vec2;
 
-typedef struct
+AC_CORE_API typedef struct
 {
 	byte vec_size;
 	f64  x;
@@ -32,7 +32,7 @@ typedef struct
 	f64  z;
 } vec3;
 
-typedef struct
+AC_CORE_API typedef struct
 {
 	byte vec_size;
 	f64  x;
@@ -48,19 +48,19 @@ typedef struct
 // ===============================================================
 // VEC FUNCTIONS:
 
-vec1 vec1_default();
-vec1 vec1_new(f64 x);
-vec2 vec2_default();
-vec2 vec2_new(f64 x, f64 y);
-vec3 vec3_default();
-vec3 vec3_new(f64 x, f64 y, f64 z);
-vec4 vec4_default();
-vec4 vec4_new(f64 x, f64 y, f64 z, f64 w);
+AC_CORE_API vec1 vec1_default();
+AC_CORE_API vec1 vec1_new(f64 x);
+AC_CORE_API vec2 vec2_default();
+AC_CORE_API vec2 vec2_new(f64 x, f64 y);
+AC_CORE_API vec3 vec3_default();
+AC_CORE_API vec3 vec3_new(f64 x, f64 y, f64 z);
+AC_CORE_API vec4 vec4_default();
+AC_CORE_API vec4 vec4_new(f64 x, f64 y, f64 z, f64 w);
 
-vec1 vec1_add(vec1 v1, vec1 v2);
-vec2 vec2_add(vec2 v1, vec2 v2);
-vec3 vec3_add(vec3 v1, vec3 v2);
-vec4 vec4_add(vec4 v1, vec4 v2);
+AC_CORE_API vec1 vec1_add(vec1 v1, vec1 v2);
+AC_CORE_API vec2 vec2_add(vec2 v1, vec2 v2);
+AC_CORE_API vec3 vec3_add(vec3 v1, vec3 v2);
+AC_CORE_API vec4 vec4_add(vec4 v1, vec4 v2);
 
 // ===============================================================
 

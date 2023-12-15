@@ -8,7 +8,7 @@
 // ===============================================================
 // TOPIC:      | Used to store the subscription and publisher subscription_topic
 // ===============================================================
-typedef enum
+AC_CORE_API typedef enum
 {
 	NO_TOPIC,
 	WINDOW_EVENT_TOPIC
@@ -20,7 +20,7 @@ typedef enum
 // PUBLISHER:  | Used to hold a value that will be used in the function
 //             | that subscription holds
 // ===============================================================
-typedef struct
+AC_CORE_API typedef struct
 {
 	subscription_topic topic;
 	T value;
@@ -29,7 +29,7 @@ typedef struct
 
 
 // Function pointer to any function the subscription will hold
-typedef void (*on_publish)(T);
+AC_CORE_API typedef void (*on_publish)(T);
 
 
 
@@ -37,7 +37,7 @@ typedef void (*on_publish)(T);
 // SUBSCRIPTION: | Used to hold a publisher function and to store
 //				 | data related to publishers
 // ===============================================================
-typedef struct
+AC_CORE_API typedef struct
 {
 	u32 subscription_id;
 	subscription_topic topic;
@@ -49,9 +49,9 @@ typedef struct
 // ===============================================================
 // SUBSCRIPTION AND PUBLISHER FUNCTIONS:
 
-subscription* subscription_new(subscription_topic topic, on_publish on_publish_function);
-bool          subscription_unsubscribe(subscription* subscription);
-void          publish(subscription_topic topic, T value);
+AC_CORE_API subscription* subscription_new(subscription_topic topic, on_publish on_publish_function);
+AC_CORE_API bool          subscription_unsubscribe(subscription* subscription);
+AC_CORE_API void          publish(subscription_topic topic, T value);
 
 // ===============================================================
 

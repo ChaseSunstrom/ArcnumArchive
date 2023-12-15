@@ -17,5 +17,8 @@
 #include <core/ecs/entity/uuid.h>
 #include <core/ecs/entity/entity.h>
 #include <core/ecs/component/component.h>
+#include <core/util/math/vec.h>
+#include <core/util/math/mat.h>
+#include <core/util/math/radians.h>
 
 #endif

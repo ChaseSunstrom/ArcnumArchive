@@ -87,6 +87,9 @@
     <ClInclude Include="core\util\data\types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="core\core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\GLAD\glad.c">
@@ -120,9 +123,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\util\math\vec.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core\util\math\radians.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\util\math\mat.c">

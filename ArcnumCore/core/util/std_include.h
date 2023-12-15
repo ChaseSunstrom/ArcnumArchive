@@ -13,4 +13,6 @@
 
 #include "data/types.h"
 
+#include "../core.h"
+
 #endif// CORE_ACPCH_H

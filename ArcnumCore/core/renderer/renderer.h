@@ -4,7 +4,7 @@
 // ==============================================================================
 // RENDERER:     | Used for rendering and storing rendering data
 // ==============================================================================
-typedef struct
+AC_CORE_API typedef struct
 {
 	f64 delta_time;
 	f64 fixed_delta_time;
@@ -15,17 +15,17 @@ typedef struct
 //===============================================================================
 // RENDERER FUNCTIONS:     
 
-renderer* renderer_new(void);
-void      renderer_free(renderer* renderer);
-void      renderer_render(renderer* renderer);
-void      renderer_set_tick_time(renderer* renderer);
-void      renderer_set_delta_time(renderer* renderer);
-void      renderer_set_fixed_delta_time(renderer* renderer);
-void      renderer_set_last_frame_time(renderer* renderer);
-double    calculate_tick_time(void);
-double    calculate_delta_time(void);
-double    calculate_fixed_delta_time(void);
-double    calculate_last_frame_time(void);
+AC_CORE_API renderer* renderer_new(void);
+AC_CORE_API void      renderer_free(renderer* renderer);
+AC_CORE_API void      renderer_render(renderer* renderer);
+AC_CORE_API void      renderer_set_tick_time(renderer* renderer);
+AC_CORE_API void      renderer_set_delta_time(renderer* renderer);
+AC_CORE_API void      renderer_set_fixed_delta_time(renderer* renderer);
+AC_CORE_API void      renderer_set_last_frame_time(renderer* renderer);
+AC_CORE_API double    calculate_tick_time(void);
+AC_CORE_API double    calculate_delta_time(void);
+AC_CORE_API double    calculate_fixed_delta_time(void);
+AC_CORE_API double    calculate_last_frame_time(void);
 
 //===============================================================================
 #endif //CORE_RENDERER_H

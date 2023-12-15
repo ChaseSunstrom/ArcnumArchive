@@ -4,7 +4,7 @@
 // ==============================================================================
 // VECTOR FUNCTIONS
 
-vector* vector_new(void)
+AC_CORE_API vector* vector_new(void)
 {
 	vector* v = ALLOC(vector);
 	
@@ -18,7 +18,7 @@ vector* vector_new(void)
 	return v;
 }
 
-byte* vector_get(vector* v, u64 index)
+AC_CORE_API byte* vector_get(vector* v, u64 index)
 {
 	if (index < v->size)
 		return v->data[index];
@@ -27,7 +27,7 @@ byte* vector_get(vector* v, u64 index)
 	exit(EXIT_FAILURE);
 }
 
-void vector_free(vector* v)
+AC_CORE_API void vector_free(vector* v)
 {
 	if (v)
 	{
@@ -35,7 +35,8 @@ void vector_free(vector* v)
 		FREE(v);
 	}
 }
-void vector_push(vector* v, T data)
+
+AC_CORE_API void vector_push(vector* v, T data)
 {
 	if (v->size >= v->capacity)
 	{
@@ -46,7 +47,7 @@ void vector_push(vector* v, T data)
 	v->size += 1;
 }
 
-void vector_insert(vector* v, u64 index, T data)
+AC_CORE_API void vector_insert(vector* v, u64 index, T data)
 {
 	if (index > v->size)
 	{
@@ -69,7 +70,7 @@ void vector_insert(vector* v, u64 index, T data)
 	v->size += 1;
 }
 
-void vector_remove(vector* v, u64 index)
+AC_CORE_API void vector_remove(vector* v, u64 index)
 {
 	if (index >= v->size)
 	{
@@ -85,7 +86,7 @@ void vector_remove(vector* v, u64 index)
 	v->size -= 1;
 }
 
-void vector_pop(vector* v)
+AC_CORE_API void vector_pop(vector* v)
 {
 	if (v->size > 0)
 	{
@@ -94,7 +95,7 @@ void vector_pop(vector* v)
 	}
 }
 
-void vector_clear(vector* v)
+AC_CORE_API void vector_clear(vector* v)
 {
 	v->size = 0;
 	v->capacity = 1;
@@ -102,7 +103,7 @@ void vector_clear(vector* v)
 	v->data = ALLOC(byte*);
 }
 
-void vector_reverse(vector* v)
+AC_CORE_API void vector_reverse(vector* v)
 {
 	for (u64 i = 0; i < v->size / 2; i++)
 	{
@@ -112,7 +113,7 @@ void vector_reverse(vector* v)
 	}
 }
 
-static inline bool vector_is_big_enough(vector* v)
+AC_CORE_API static inline bool vector_is_big_enough(vector* v)
 {
 	return v->capacity - v->size > 0;
 }
