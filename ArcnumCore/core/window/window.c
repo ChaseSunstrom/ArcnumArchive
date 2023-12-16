@@ -56,6 +56,20 @@ __A_CORE_API__ window* window_new(void)
 	return _window;
 }
 
+__A_CORE_API__ window* _window_new(bump_allocator* allocator)
+{
+	window* _window = bump_allocator_alloc(allocator, sizeof(window));
+	_window->renderer = renderer_new();
+	_window->running = true;
+	_window->window_data.title = "Arcnum";
+	_window->window_data.vsync = false;
+	_window->window_data.width = SCREEN_WIDTH;
+	_window->window_data.height = SCREEN_HEIGHT;
+	_window->window_data.event_callback = window_on_event;
+	_window->window = window_init_gl(_window->window_data);
+	return _window;
+}
+
 __A_CORE_API__ void window_on_update(window window)
 {
 	renderer_render(window.renderer);

@@ -6,11 +6,13 @@
 
 void application_main(void)
 {
-	const application _app =
+	application _app =
 	{
-		.window = *window_new(),
-		.layer_stack = *layer_stack_new(),
+		.allocator = bump_allocator_new(10 * MEGABYTE)
 	};
+
+	_app.window      = *_window_new(_app.allocator);
+	_app.layer_stack = *_layer_stack_new(_app.allocator);
 
 	application_loop(_app);
 }

@@ -12,6 +12,14 @@ __A_CORE_API__ layer_stack* layer_stack_new()
 	return _layer_stack;
 }
 
+__A_CORE_API__ layer_stack* _layer_stack_new(bump_allocator* allocator)
+{
+	layer_stack* _layer_stack = bump_allocator_alloc(allocator, sizeof(layer_stack));
+	_layer_stack->layers      = vector_new();
+	_layer_stack->layers_it   = iterator_new(_layer_stack->layers);
+	return _layer_stack;
+}
+
 __A_CORE_API__ void layer_stack_push_layer(layer_stack layer_stack, layer* layer)
 {
 	vector_push(layer_stack.layers, layer);

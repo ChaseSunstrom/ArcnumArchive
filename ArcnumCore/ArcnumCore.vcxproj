@@ -296,6 +296,7 @@
     <ClInclude Include="core\util\math\radians.h" />
     <ClInclude Include="core\util\math\vec.h" />
     <ClInclude Include="core\util\memory\alloc.h" />
+    <ClInclude Include="core\util\memory\bump_allocator.h" />
     <ClInclude Include="core\util\std_include.h" />
     <ClInclude Include="core\renderer\layer_stack.h" />
     <ClInclude Include="core\window\window.h" />
@@ -315,6 +316,7 @@
     <ClCompile Include="core\util\math\mat.c" />
     <ClCompile Include="core\util\math\math.c" />
     <ClCompile Include="core\util\math\vec.c" />
+    <ClCompile Include="core\util\memory\bump_allocator.c" />
     <ClCompile Include="core\window\window.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>

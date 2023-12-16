@@ -1,6 +1,8 @@
 #ifndef CORE_RENDERER_H
 #define CORE_RENDERER_H
 
+#include "../util/memory/bump_allocator.h"
+
 // ==============================================================================
 // RENDERER:     | Used for rendering and storing rendering data
 // ==============================================================================
@@ -16,6 +18,7 @@ __A_CORE_API__ typedef struct
 // RENDERER FUNCTIONS:     
 
 __A_CORE_API__ renderer* renderer_new(void);
+__A_CORE_API__ renderer* _renderer_new(bump_allocator* allocator);
 __A_CORE_API__ void      renderer_free(renderer* renderer);
 __A_CORE_API__ void      renderer_render(renderer* renderer);
 __A_CORE_API__ void      renderer_set_tick_time(renderer* renderer);

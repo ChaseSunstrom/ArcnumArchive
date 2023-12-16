@@ -10,6 +10,7 @@ typedef struct
 {
 	window window;
 	layer_stack layer_stack;
+	bump_allocator* allocator;
 } application;
 
 
