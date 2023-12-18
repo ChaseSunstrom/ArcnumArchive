@@ -105,10 +105,10 @@ __A_CORE_API__ __A_CORE_INLINE__ vec2 vec2_clamp(vec2 v, f64 min, f64 max);
 __A_CORE_API__ __A_CORE_INLINE__ vec3 vec3_clamp(vec3 v, f64 min, f64 max);
 __A_CORE_API__ __A_CORE_INLINE__ vec4 vec4_clamp(vec4 v, f64 min, f64 max);
 
-__A_CORE_API__ void vec1_normalize(vec1* v);
-__A_CORE_API__ void vec2_normalize(vec2* v);
-__A_CORE_API__ void vec3_normalize(vec3* v);
-__A_CORE_API__ void vec4_normalize(vec4* v);
+__A_CORE_API__ vec1 vec1_normalize(vec1 v);
+__A_CORE_API__ vec2 vec2_normalize(vec2 v);
+__A_CORE_API__ vec3 vec3_normalize(vec3 v);
+__A_CORE_API__ vec4 vec4_normalize(vec4 v);
 
 __A_CORE_API__ vec3 vec3_rotate(quat q, vec3* v);
 
@@ -140,6 +140,11 @@ __A_CORE_API__ __A_CORE_INLINE__ void vec1_clamp_to(vec1* v, f64 min, f64 max);
 __A_CORE_API__ __A_CORE_INLINE__ void vec2_clamp_to(vec2* v, f64 min, f64 max);
 __A_CORE_API__ __A_CORE_INLINE__ void vec3_clamp_to(vec3* v, f64 min, f64 max);
 __A_CORE_API__ __A_CORE_INLINE__ void vec4_clamp_to(vec4* v, f64 min, f64 max);
+
+__A_CORE_API__ void vec1_normalize(vec1* v);
+__A_CORE_API__ void vec2_normalize(vec2* v);
+__A_CORE_API__ void vec3_normalize(vec3* v);
+__A_CORE_API__ void vec4_normalize(vec4* v);
 
 __A_CORE_API__ void vec3_rotate_to(quat q, vec3* v);
 

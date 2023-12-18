@@ -215,33 +215,41 @@ __A_CORE_API__ __A_CORE_INLINE__ vec4 vec4_scale(vec4 v, f64 scale)
 	return (vec4) { VEC1_SIZE, v.x* scale, v.y* scale, v.z* scale, v.w* scale };
 }
 
-__A_CORE_API__ __A_CORE_INLINE__ void vec1_clamp(vec1 v, f64 min, f64 max)
+__A_CORE_API__ __A_CORE_INLINE__ vec1 vec1_clamp(vec1 v, f64 min, f64 max)
 {
-	v.x = clamp(v.x, min, max);
+	vec1 res;
+	res.x = clamp(v.x, min, max);
+	return res;
 }
 
-__A_CORE_API__ __A_CORE_INLINE__ void vec2_clamp(vec2 v, f64 min, f64 max)
+__A_CORE_API__ __A_CORE_INLINE__ vec2 vec2_clamp(vec2 v, f64 min, f64 max)
 {
-	v.x = clamp(v.x, min, max);
-	v.y = clamp(v.y, min, max);
+	vec2 res;
+	res.x = clamp(v.x, min, max);
+	res.y = clamp(v.y, min, max);
+	return res;
 }
 
-__A_CORE_API__ __A_CORE_INLINE__ void vec3_clamp(vec3 v, f64 min, f64 max)
+__A_CORE_API__ __A_CORE_INLINE__ vec3 vec3_clamp(vec3 v, f64 min, f64 max)
 {
-	v.x = clamp(v.x, min, max);
-	v.y = clamp(v.y, min, max);
-	v.z = clamp(v.z, min, max);
+	vec3 res;
+	res.x = clamp(v.x, min, max);
+	res.y = clamp(v.y, min, max);
+	res.z = clamp(v.z, min, max);
+	return res;
 }
 
-__A_CORE_API__ __A_CORE_INLINE__ void vec4_clamp(vec4 v, f64 min, f64 max)
+__A_CORE_API__ __A_CORE_INLINE__ vec4 vec4_clamp(vec4 v, f64 min, f64 max)
 {
-	v.x = clamp(v.x, min, max);
-	v.y = clamp(v.x, min, max);
-	v.z = clamp(v.z, min, max);
-	v.w = clamp(v.w, min, max);
+	vec4 res;
+	res.x = clamp(v.x, min, max);
+	res.y = clamp(v.y, min, max);
+	res.z = clamp(v.z, min, max);
+	res.w = clamp(v.w, min, max);
+	return res;
 }
 
-__A_CORE_API__ void vec1_normalize(vec1 v)
+__A_CORE_API__ vec1 vec1_normalize(vec1 v)
 {
 	f64 norm = 0.0;
 
@@ -249,14 +257,13 @@ __A_CORE_API__ void vec1_normalize(vec1 v)
 
 	if (norm == 0.0f)
 	{
-		v.x = 0.0;
-		return;
+		return (vec1) { 1, 0.0 };
 	}
 
-	vec1_scale(v, 1.0f / norm);
+	return vec1_scale(v, 1.0f / norm);
 }
 
-__A_CORE_API__ void vec2_normalize(vec2 v)
+__A_CORE_API__ vec2 vec2_normalize(vec2 v)
 {
 	f64 norm = 0.0;
 
@@ -264,15 +271,13 @@ __A_CORE_API__ void vec2_normalize(vec2 v)
 
 	if (norm == 0.0f)
 	{
-		v.x = 0.0;
-		v.y = 0.0;
-		return;
+		return (vec2) { 2, 0.0, 0.0};
 	}
 
-	vec2_scale(v, 1.0f / norm);
+	return vec2_scale(v, 1.0f / norm);
 }
 
-__A_CORE_API__ void vec3_normalize(vec3 v)
+__A_CORE_API__ vec3 vec3_normalize(vec3 v)
 {
 	f64 norm = 0.0;
 
@@ -280,16 +285,13 @@ __A_CORE_API__ void vec3_normalize(vec3 v)
 
 	if (norm == 0.0f)
 	{
-		v.x = 0.0;
-		v.y = 0.0;
-		v.z = 0.0;
-		return;
+		return (vec3){3, 0.0, 0.0, 0.0};
 	}
 
-	vec3_scale(v, 1.0f / norm);
+	return vec3_scale(v, 1.0f / norm);
 }
 
-__A_CORE_API__ void vec4_normalize(vec4 v)
+__A_CORE_API__ vec4 vec4_normalize(vec4 v)
 {
 	f64 norm = 0.0;
 
@@ -297,14 +299,10 @@ __A_CORE_API__ void vec4_normalize(vec4 v)
 
 	if (norm == 0.0f)
 	{
-		v.x = 0.0;
-		v.y = 0.0;
-		v.z = 0.0;
-		v.w = 0.0;
-		return;
+		return (vec4){ 4, 0.0, 0.0, 0.0, 0.0 };
 	}
 
-	vec4_scale(v, 1.0f / norm);
+	return vec4_scale(v, 1.0f / norm);
 }
 
 __A_CORE_API__ vec3 vec3_rotate(quat q, vec3 v)
@@ -322,7 +320,6 @@ __A_CORE_API__ vec3 vec3_rotate(quat q, vec3 v)
 			result_quaternion.z* q.w + result_quaternion.w * -q.z + result_quaternion.x * -q.y - result_quaternion.y * -q.x
 	};
 }
-
 
 __A_CORE_API__ void vec1_add_to(vec1* v1, vec1* v2)
 {
@@ -376,8 +373,6 @@ __A_CORE_API__ void vec4_mul_to(vec4* v1, vec4* v2)
 	v1->w = v1->w * v2->w;
 }
 
-
-
 __A_CORE_API__ void vec1_sub_to(vec1* v1, vec1* v2)
 {
 	v1->x = v1->x - v2->x;
@@ -430,5 +425,127 @@ __A_CORE_API__ void vec4_div_to(vec4* v1, vec4* v2)
 	v1->w = v1->w / v2->w;
 }
 
+__A_CORE_API__ __A_CORE_INLINE__ void vec3_cross_to(vec3* v1, vec3* v2)
+{
+	v1->x = v1->y * v2->z - v1->z * v2->y;
+	v1->y = v1->z * v2->x - v1->x * v2->z;
+	v1->z = v1->x * v2->y - v1->y * v2->x;
+}
+
+__A_CORE_API__ __A_CORE_INLINE__ void vec1_scale_to(vec1* v, f64 scale)
+{
+	v->x = v->x * scale;
+}
+
+__A_CORE_API__ __A_CORE_INLINE__ void vec2_scale_to(vec2* v, f64 scale)
+{
+	v->x = v->x * scale;
+	v->y = v->y * scale;
+}
+
+__A_CORE_API__ __A_CORE_INLINE__ void vec3_scale_to(vec3* v, f64 scale)
+{
+	v->x = v->x * scale;
+	v->y = v->y * scale;
+	v->z = v->z * scale;
+}
+
+__A_CORE_API__ __A_CORE_INLINE__ void vec4_scale_to(vec4* v, f64 scale)
+{
+	v->x = v->x * scale;
+	v->y = v->y * scale;
+	v->z = v->z * scale;
+	v->w = v->w * scale;
+}
+
+__A_CORE_API__ __A_CORE_INLINE__ void vec1_clamp_to(vec1* v, f64 min, f64 max)
+{
+	v->x = clamp(v->x, min, max);
+}
+
+__A_CORE_API__ __A_CORE_INLINE__ void vec2_clamp_to(vec2* v, f64 min, f64 max)
+{
+	v->x = clamp(v->x, min, max);
+	v->y = clamp(v->y, min, max);
+}
+
+__A_CORE_API__ __A_CORE_INLINE__ void vec3_clamp_to(vec3* v, f64 min, f64 max)
+{
+	v->x = clamp(v->x, min, max);
+	v->y = clamp(v->y, min, max);
+	v->z = clamp(v->z, min, max);
+}
+
+__A_CORE_API__ __A_CORE_INLINE__ void vec4_clamp_to(vec4* v, f64 min, f64 max)
+{
+	v->x = clamp(v->x, min, max);
+	v->y = clamp(v->y, min, max);
+	v->z = clamp(v->z, min, max);
+	v->w = clamp(v->w, min, max);
+}
+
+__A_CORE_API__ void vec1_normalize_to(vec1* v)
+{
+	f64 norm = 0.0;
+
+	norm = vec1_norm(*v);
+
+	if (norm == 0.0f)
+	{
+		v->x = 0.0;
+		return;
+	}
+
+	vec1_scale_to(v, 1.0f / norm);
+}
+
+__A_CORE_API__ void vec2_normalize_to(vec2* v)
+{
+	norm = vec2_norm(*v);
+
+	if (norm == 0.0f)
+	{
+		v->x = 0.0;
+		v->y = 0.0;
+		return;
+	}
+
+	vec2_scale_to(v, 1.0f / norm);
+}
+
+__A_CORE_API__ void vec3_normalize_to(vec3* v)
+{
+	f64 norm = 0.0;
+
+	norm = vec3_norm(*v);
+
+	if (norm == 0.0f)
+	{
+		v->x = 0.0;
+		v->y = 0.0;
+		v->z = 0.0;
+		return;
+	}
+
+	vec3_scale_to(v, 1.0f / norm);
+}
+
+__A_CORE_API__ void vec4_normalize_to(vec4* v)
+{
+	f64 norm = 0.0;
+
+	norm = vec4_norm(*v);
+
+	if (norm == 0.0f)
+	{
+		v->x = 0.0;
+		v->y = 0.0;
+		v->z = 0.0;
+		v->w = 0.0;
+		return;
+	}
+
+	vec4_scale_to(v, 1.0f / norm);
+}
 
 // ===============================================================
