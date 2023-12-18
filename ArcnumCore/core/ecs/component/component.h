@@ -9,6 +9,22 @@
 
 __A_CORE_API__ typedef struct
 {
+	vec3 position;
+} position_component;
+
+__A_CORE_API__ typedef struct
+{
+	vec3 position;
+} size_component;
+
+__A_CORE_API__ typedef struct
+{
+	//this is just a placeholder until quaternions are implemented
+	vec3 rotation;
+} rotation_component;
+
+__A_CORE_API__ typedef struct
+{
 	GLuint VAO;
 	GLuint VBO;
 	GLuint vertex_shader;
@@ -19,7 +35,10 @@ __A_CORE_API__ typedef struct
 {
 	bool rendering;
 	shader_component shader;
-} renderable_component;
+	position_component position;
+	size_component size;
+	rotation_component rotation;
+} render_component;
 
 __A_CORE_API__ typedef struct
 {
@@ -31,16 +50,5 @@ __A_CORE_API__ typedef struct
 {
 	color color;
 } color_component;
-
-__A_CORE_API__ typedef struct
-{
-	vec3 position;
-} position_component;
-
-__A_CORE_API__ typedef struct
-{
-	vec3 position;
-} size_component;
-
 
 #endif // CORE_COMPONENT_H 

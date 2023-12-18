@@ -4,10 +4,11 @@
 #define __A_CORE_API__
 
 #ifdef _MSC_VER
-	#define __A_CORE_INLINE__ __forceinline
-	#define __A_CORE_RESTRICT__ __restrict
+	#define __A_CORE_INLINE__   __forceinline
+	#define __A_CORE_RESTRICT__ __restrict 
 #else
-	#define __A_CORE_INLINE__ 
+	#define __A_CORE_INLINE__   inline
+	#define __A_CORE_RESTRICT   restrict
 #endif // _MSC_VER
 
 #define AC_STRUCT(_name, ...) struct _name { __VA_ARGS__ }

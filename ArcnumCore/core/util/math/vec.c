@@ -27,7 +27,7 @@ __A_CORE_API__ vec2 vec2_new(f64 x, f64 y)
 
 __A_CORE_API__ vec3 vec3_default()
 {
-	return (vec3) {VEC3_SIZE, 0, 0, 0 };
+	return (vec3) { VEC3_SIZE, 0, 0, 0 };
 }
 
 __A_CORE_API__ vec3 vec3_new(f64 x, f64 y, f64 z)
@@ -52,7 +52,7 @@ __A_CORE_API__ vec1 vec1_add(vec1 v1, vec1 v2)
 
 __A_CORE_API__ vec2 vec2_add(vec2 v1, vec2 v2)
 {
-	return (vec2) {VEC2_SIZE, (v1.x + v2.x), (v1.y + v2.y)};
+	return (vec2) { VEC2_SIZE, (v1.x + v2.x), (v1.y + v2.y) };
 }
 
 __A_CORE_API__ vec3 vec3_add(vec3 v1, vec3 v2)
@@ -125,6 +125,16 @@ __A_CORE_API__ vec4 vec4_div(vec4 v1, vec4 v2)
 	return (vec4) { VEC4_SIZE, (v1.x / v2.x), (v1.y / v2.y), (v1.z / v2.z), (v1.w / v2.w) };
 }
 
+__A_CORE_API__ __A_CORE_INLINE__ vec3 vec3_cross(vec3 v1, vec3 v2)
+{
+	return (vec3) {
+		3,
+			v1.y* v2.z - v1.z * v2.y,
+			v1.z* v2.x - v1.x * v2.z,
+			v1.x* v2.y - v1.y * v2.x
+	};
+}
+
 __A_CORE_API__ __A_CORE_INLINE__ f64 vec1_dot(vec1 v1, vec1 v2)
 {
 	return v1.x * v2.x;
@@ -192,17 +202,17 @@ __A_CORE_API__ __A_CORE_INLINE__ vec1 vec1_scale(vec1 v, f64 scale)
 
 __A_CORE_API__ __A_CORE_INLINE__ vec2 vec2_scale(vec2 v, f64 scale)
 {
-	return (vec2) { VEC1_SIZE, v.x* scale, v.y * scale };
+	return (vec2) { VEC1_SIZE, v.x* scale, v.y* scale };
 }
 
 __A_CORE_API__ __A_CORE_INLINE__ vec3 vec3_scale(vec3 v, f64 scale)
 {
-	return (vec3) { VEC1_SIZE, v.x* scale, v.y * scale, v.z * scale };
+	return (vec3) { VEC1_SIZE, v.x* scale, v.y* scale, v.z* scale };
 }
 
 __A_CORE_API__ __A_CORE_INLINE__ vec4 vec4_scale(vec4 v, f64 scale)
 {
-	return (vec4) { VEC1_SIZE, v.x* scale, v.y * scale, v.z * scale, v.w * scale };
+	return (vec4) { VEC1_SIZE, v.x* scale, v.y* scale, v.z* scale, v.w* scale };
 }
 
 __A_CORE_API__ __A_CORE_INLINE__ void vec1_clamp(vec1 v, f64 min, f64 max)
@@ -237,7 +247,7 @@ __A_CORE_API__ void vec1_normalize(vec1 v)
 
 	norm = vec1_norm(v);
 
-	if (norm == 0.0f) 
+	if (norm == 0.0f)
 	{
 		v.x = 0.0;
 		return;
@@ -296,5 +306,129 @@ __A_CORE_API__ void vec4_normalize(vec4 v)
 
 	vec4_scale(v, 1.0f / norm);
 }
+
+__A_CORE_API__ vec3 vec3_rotate(quat q, vec3 v)
+{
+	quat result_quaternion = {
+		q.w * v.x + q.y * v.z - q.z * v.y,
+		q.w * v.y + q.z * v.x - q.x * v.z,
+		q.w * v.z + q.x * v.y - q.y * v.x,
+	   -q.x * v.x - q.y * v.y - q.z * v.z
+	};
+
+	return (vec3) {
+		result_quaternion.x* q.w + result_quaternion.w * -q.x + result_quaternion.y * -q.z - result_quaternion.z * -q.y,
+			result_quaternion.y* q.w + result_quaternion.w * -q.y + result_quaternion.z * -q.x - result_quaternion.x * -q.z,
+			result_quaternion.z* q.w + result_quaternion.w * -q.z + result_quaternion.x * -q.y - result_quaternion.y * -q.x
+	};
+}
+
+
+__A_CORE_API__ void vec1_add_to(vec1* v1, vec1* v2)
+{
+	v1->x = v1->x + v2->x;
+}
+
+__A_CORE_API__ void vec2_add_to(vec2* v1, vec2* v2)
+{
+	v1->x = v1->x + v2->x;
+	v1->y = v1->y + v2->y;
+}
+
+__A_CORE_API__ void vec3_add_to(vec3* v1, vec3* v2)
+{
+	v1->x = v1->x + v2->x;
+	v1->y = v1->y + v2->y;
+	v1->z = v1->z + v2->z;
+}
+
+__A_CORE_API__ void vec4_add_to(vec4* v1, vec4* v2)
+{
+	v1->x = v1->x + v2->x;
+	v1->y = v1->y + v2->y;
+	v1->z = v1->z + v2->z;
+	v1->w = v1->w + v2->w;
+}
+
+__A_CORE_API__ void vec1_mul_to(vec1* v1, vec1* v2)
+{
+	v1->x = v1->x * v2->x;
+}
+
+__A_CORE_API__ void vec2_mul_to(vec2* v1, vec2* v2)
+{
+	v1->x = v1->x * v2->x;
+	v1->y = v1->y * v2->y;
+}
+
+__A_CORE_API__ void vec3_mul_to(vec3* v1, vec3* v2)
+{
+	v1->x = v1->x * v2->x;
+	v1->y = v1->y * v2->y;
+	v1->z = v1->z * v2->z;
+}
+
+__A_CORE_API__ void vec4_mul_to(vec4* v1, vec4* v2)
+{
+	v1->x = v1->x * v2->x;
+	v1->y = v1->y * v2->y;
+	v1->z = v1->z * v2->z;
+	v1->w = v1->w * v2->w;
+}
+
+
+
+__A_CORE_API__ void vec1_sub_to(vec1* v1, vec1* v2)
+{
+	v1->x = v1->x - v2->x;
+}
+
+__A_CORE_API__ void vec2_sub_to(vec2* v1, vec2* v2)
+{
+	v1->x = v1->x - v2->x;
+	v1->y = v1->y - v2->y;
+}
+
+__A_CORE_API__ void vec3_sub_to(vec3* v1, vec3* v2)
+{
+	v1->x = v1->x - v2->x;
+	v1->y = v1->y - v2->y;
+	v1->z = v1->z - v2->z;
+}
+
+__A_CORE_API__ void vec4_sub_to(vec4* v1, vec4* v2)
+{
+	v1->x = v1->x  v2->x;
+	v1->y = v1->y - v2->y;
+	v1->z = v1->z - v2->z;
+	v1->w = v1->w - v2->w;
+}
+
+__A_CORE_API__ void vec1_div_to(vec1* v1, vec1* v2)
+{
+	v1->x = v1->x / v2->x;
+}
+
+__A_CORE_API__ void vec2_div_to(vec2* v1, vec2* v2)
+{
+	v1->x = v1->x / v2->x;
+	v1->y = v1->y /  v2->y;
+}
+
+__A_CORE_API__ void vec3_div_to(vec3* v1, vec3* v2)
+{
+	v1->x = v1->x / v2->x;
+	v1->y = v1->y / v2->y;
+	v1->z = v1->z / v2->z;
+}
+
+__A_CORE_API__ void vec4_div_to(vec4* v1, vec4* v2)
+{
+	v1->x = v1->x / v2->x;
+	v1->y = v1->y / v2->y;
+	v1->z = v1->z / v2->z;
+	v1->w = v1->w / v2->w;
+}
+
 
 // ===============================================================

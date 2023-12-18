@@ -197,9 +197,10 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)ArcnumCore/include/GLAD;$(SolutionDir)ArcnumCore/include/GLEW;$(SolutionDir)ArcnumCore/include/GLM;$(SolutionDir)ArcnumCore/include/GLFW;$(SolutionDir)ArcnumCore/include/OTHER;$(SolutionDir)ArcnumCore/include/SDL;$(SolutionDir)ArcnumCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>apch.h</PrecompiledHeaderFile>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

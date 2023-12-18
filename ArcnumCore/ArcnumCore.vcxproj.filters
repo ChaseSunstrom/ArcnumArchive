@@ -140,6 +140,9 @@
     <ClCompile Include="core\util\memory\bump_allocator.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\ecs\system\system.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\texture_shader.fsl" />

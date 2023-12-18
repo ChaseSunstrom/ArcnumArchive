@@ -41,6 +41,8 @@ __A_CORE_API__ typedef struct
 	f64  w;
 } vec4;
 
+typedef vec4 quat;
+
 // ===============================================================
 
 
@@ -56,6 +58,8 @@ __A_CORE_API__ vec3 vec3_default();
 __A_CORE_API__ vec3 vec3_new(f64 x, f64 y, f64 z);
 __A_CORE_API__ vec4 vec4_default();
 __A_CORE_API__ vec4 vec4_new(f64 x, f64 y, f64 z, f64 w);
+#define quat_default() vec4_default()
+#define quat_new(_x, _y, _z, _w) vec4_new(_x, _y, _z, _w)
 
 __A_CORE_API__ vec1 vec1_add(vec1 v1, vec1 v2);
 __A_CORE_API__ vec2 vec2_add(vec2 v1, vec2 v2);
@@ -73,6 +77,8 @@ __A_CORE_API__ vec1 vec1_div(vec1 v1, vec1 v2);
 __A_CORE_API__ vec2 vec2_div(vec2 v1, vec2 v2);
 __A_CORE_API__ vec3 vec3_div(vec3 v1, vec3 v2);
 __A_CORE_API__ vec4 vec4_div(vec4 v1, vec4 v2);
+
+__A_CORE_API__ __A_CORE_INLINE__ vec3 vec3_cross(vec3 v1, vec3 v2);
 
 __A_CORE_API__ __A_CORE_INLINE__ f64 vec1_dot(vec1 v1, vec1 v2);
 __A_CORE_API__ __A_CORE_INLINE__ f64 vec2_dot(vec2 v1, vec2 v2);
@@ -94,16 +100,48 @@ __A_CORE_API__ __A_CORE_INLINE__ vec2 vec2_scale(vec2 v, f64 scale);
 __A_CORE_API__ __A_CORE_INLINE__ vec3 vec3_scale(vec3 v, f64 scale);
 __A_CORE_API__ __A_CORE_INLINE__ vec4 vec4_scale(vec4 v, f64 scale);
 
-__A_CORE_API__ __A_CORE_INLINE__ void vec1_clamp(vec1 v, f64 min, f64 max);
-__A_CORE_API__ __A_CORE_INLINE__ void vec2_clamp(vec2 v, f64 min, f64 max);
-__A_CORE_API__ __A_CORE_INLINE__ void vec3_clamp(vec3 v, f64 min, f64 max);
-__A_CORE_API__ __A_CORE_INLINE__ void vec4_clamp(vec4 v, f64 min, f64 max);
+__A_CORE_API__ __A_CORE_INLINE__ vec1 vec1_clamp(vec1 v, f64 min, f64 max);
+__A_CORE_API__ __A_CORE_INLINE__ vec2 vec2_clamp(vec2 v, f64 min, f64 max);
+__A_CORE_API__ __A_CORE_INLINE__ vec3 vec3_clamp(vec3 v, f64 min, f64 max);
+__A_CORE_API__ __A_CORE_INLINE__ vec4 vec4_clamp(vec4 v, f64 min, f64 max);
 
-__A_CORE_API__ void vec1_normalize(vec1 v);
-__A_CORE_API__ void vec2_normalize(vec2 v);
-__A_CORE_API__ void vec3_normalize(vec3 v);
-__A_CORE_API__ void vec4_normalize(vec4 v);
+__A_CORE_API__ void vec1_normalize(vec1* v);
+__A_CORE_API__ void vec2_normalize(vec2* v);
+__A_CORE_API__ void vec3_normalize(vec3* v);
+__A_CORE_API__ void vec4_normalize(vec4* v);
 
+__A_CORE_API__ vec3 vec3_rotate(quat q, vec3* v);
+
+__A_CORE_API__ void vec1_add_to(vec1* v1, vec1* v2);
+__A_CORE_API__ void vec2_add_to(vec2* v1, vec2* v2);
+__A_CORE_API__ void vec3_add_to(vec3* v1, vec3* v2);
+__A_CORE_API__ void vec4_add_to(vec4* v1, vec4* v2);
+__A_CORE_API__ void vec1_mul_to(vec1* v1, vec1* v2);
+__A_CORE_API__ void vec2_mul_to(vec2* v1, vec2* v2);
+__A_CORE_API__ void vec3_mul_to(vec3* v1, vec3* v2);
+__A_CORE_API__ void vec4_mul_to(vec4* v1, vec4* v2);
+__A_CORE_API__ void vec1_sub_to(vec1* v1, vec1* v2);
+__A_CORE_API__ void vec2_sub_to(vec2* v1, vec2* v2);
+__A_CORE_API__ void vec3_sub_to(vec3* v1, vec3* v2);
+__A_CORE_API__ void vec4_sub_to(vec4* v1, vec4* v2);
+__A_CORE_API__ void vec1_div_to(vec1* v1, vec1* v2);
+__A_CORE_API__ void vec2_div_to(vec2* v1, vec2* v2);
+__A_CORE_API__ void vec3_div_to(vec3* v1, vec3* v2);
+__A_CORE_API__ void vec4_div_to(vec4* v1, vec4* v2);
+
+__A_CORE_API__ __A_CORE_INLINE__ void vec3_cross_to(vec3* v1, vec3* v2);
+
+__A_CORE_API__ __A_CORE_INLINE__ void vec1_scale_to(vec1* v, f64 scale);
+__A_CORE_API__ __A_CORE_INLINE__ void vec2_scale_to(vec2* v, f64 scale);
+__A_CORE_API__ __A_CORE_INLINE__ void vec3_scale_to(vec3* v, f64 scale);
+__A_CORE_API__ __A_CORE_INLINE__ void vec4_scale_to(vec4* v, f64 scale);
+
+__A_CORE_API__ __A_CORE_INLINE__ void vec1_clamp_to(vec1* v, f64 min, f64 max);
+__A_CORE_API__ __A_CORE_INLINE__ void vec2_clamp_to(vec2* v, f64 min, f64 max);
+__A_CORE_API__ __A_CORE_INLINE__ void vec3_clamp_to(vec3* v, f64 min, f64 max);
+__A_CORE_API__ __A_CORE_INLINE__ void vec4_clamp_to(vec4* v, f64 min, f64 max);
+
+__A_CORE_API__ void vec3_rotate_to(quat q, vec3* v);
 
 // ===============================================================
 

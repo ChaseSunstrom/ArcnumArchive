@@ -38,7 +38,7 @@ bool application_print_event(generic_event* event)
 		ARCNUM_CORE_LOG("[EVENT]: MOUSE POSITION {X: %f, Y: %f}\n", ((mouse_move_event*)event)->x_pos, ((mouse_move_event*)event)->y_pos);
 		return true;
 	case MOUSE_SCROLLED:
-		ARCNUM_CORE_LOG("[EVENT]: MOUSE SCROLLED \n", );
+		printf("[EVENT]: MOUSE SCROLLED \n");
 		return true;
 	case KEY_PRESSED:
 		ARCNUM_CORE_LOG("[EVENT]: KEY PRESSED {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
