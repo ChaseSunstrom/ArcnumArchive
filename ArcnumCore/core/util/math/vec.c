@@ -177,22 +177,22 @@ __A_CORE_API__ __A_CORE_INLINE__ f64 _vec4_norm(vec4 v)
 
 __A_CORE_API__ __A_CORE_INLINE__ f64 vec1_norm(vec1 v)
 {
-	return sqrt(vec1_norm(v));
+	return sqrt(_vec1_norm(v));
 }
 
 __A_CORE_API__ __A_CORE_INLINE__ f64 vec2_norm(vec2 v)
 {
-	return sqrt(vec2_norm(v));
+	return sqrt(_vec2_norm(v));
 }
 
 __A_CORE_API__ __A_CORE_INLINE__ f64 vec3_norm(vec3 v)
 {
-	return sqrt(vec3_norm(v));
+	return sqrt(_vec3_norm(v));
 }
 
 __A_CORE_API__ __A_CORE_INLINE__ f64 vec4_norm(vec4 v)
 {
-	return sqrt(vec4_norm(v));
+	return sqrt(_vec4_norm(v));
 }
 
 __A_CORE_API__ __A_CORE_INLINE__ vec1 vec1_scale(vec1 v, f64 scale)
@@ -393,7 +393,7 @@ __A_CORE_API__ void vec3_sub_to(vec3* v1, vec3* v2)
 
 __A_CORE_API__ void vec4_sub_to(vec4* v1, vec4* v2)
 {
-	v1->x = v1->x  v2->x;
+	v1->x = v1->x - v2->x;
 	v1->y = v1->y - v2->y;
 	v1->z = v1->z - v2->z;
 	v1->w = v1->w - v2->w;
@@ -501,6 +501,7 @@ __A_CORE_API__ void vec1_normalize_to(vec1* v)
 
 __A_CORE_API__ void vec2_normalize_to(vec2* v)
 {
+	f64 norm = 0.0;
 	norm = vec2_norm(*v);
 
 	if (norm == 0.0f)

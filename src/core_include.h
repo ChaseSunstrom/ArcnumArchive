@@ -22,5 +22,6 @@
 #include <core/util/math/radians.h>
 #include <core/util/math/math.h>
 #include <core/util/memory/bump_allocator.h>
+#include <core/util/data/map.h>
 
 #endif

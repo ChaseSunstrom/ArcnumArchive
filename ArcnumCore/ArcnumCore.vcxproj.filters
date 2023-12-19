@@ -96,6 +96,12 @@
     <ClInclude Include="core\util\memory\bump_allocator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="core\ecs\ecs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\util\data\map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\GLAD\glad.c">
@@ -141,6 +147,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\ecs\system\system.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\util\data\map.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
