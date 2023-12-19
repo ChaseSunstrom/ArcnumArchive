@@ -2,5 +2,5 @@
 
 int main(void)
 {
-	
+	application_main();
 }

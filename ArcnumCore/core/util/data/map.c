@@ -1,26 +1,30 @@
 #include "map.h"
 
-bool pair_compare(pair* pair, T key)
+__A_CORE_API__ bool pair_compare(pair* pair, T key)
 {
 	return pair->key == key;
 }
 
-map* map_new()
+__A_CORE_API__ map* map_new()
 {
 	map* _map = ALLOC(map);
 	_map->pairs = vector_new();
+	_map->size = _map->pairs->size;
+	_map->capacity = _map->pairs->capacity;
 	return _map;
 }
 
-void map_insert(map* _map, void* key, void* value)
+__A_CORE_API__ void map_insert(map* _map, void* key, void* value)
 {
 	pair* _pair = ALLOC(pair);
 	_pair->key = key;
 	_pair->value = value;
 	vector_push(_map->pairs, _pair);
+	_map->size = _map->pairs->size;
+	_map->capacity = _map->pairs->capacity;
 }
 
-T map_get(map* _map, void* key)
+__A_CORE_API__ T map_get(map* _map, void* key)
 {
 	for (int i = 0; i < _map->pairs->size; i++)
 	{
@@ -33,7 +37,7 @@ T map_get(map* _map, void* key)
 	return NULL;
 }
 
-void map_remove(map* _map, void* key)
+__A_CORE_API__ void map_remove(map* _map, void* key)
 {
 	for (int i = 0; i < _map->pairs->size; i++)
 	{
@@ -45,4 +49,7 @@ void map_remove(map* _map, void* key)
 			break;
 		}
 	}
+
+	_map->size = _map->pairs->size;
+	_map->capacity = _map->pairs->capacity;
 }

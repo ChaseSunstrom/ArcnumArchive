@@ -6,9 +6,12 @@
 
 #include "color.h"
 
+typedef u64 component_id;
+typedef u64 archetype_id;
+
 __A_CORE_API__ typedef struct
 {
-	u64 component_id;
+	component_id component_id;
 	vec3 position;
 	vec3 rotation;
 	vec3 scale;
@@ -16,7 +19,7 @@ __A_CORE_API__ typedef struct
 
 __A_CORE_API__ typedef struct
 {
-	u64 component_id;
+	component_id component_id;
 	GLuint VAO;
 	GLuint VBO;
 	GLuint vertex_shader;
@@ -25,7 +28,7 @@ __A_CORE_API__ typedef struct
 
 __A_CORE_API__ typedef struct
 {
-	u64 component_id;
+	component_id component_id;
 	bool rendering;
 	shader_component shader;
 	transform_component transform;
@@ -33,26 +36,26 @@ __A_CORE_API__ typedef struct
 
 __A_CORE_API__ typedef struct
 {
-	u64 component_id;
+	component_id component_id;
 	byte* image_data;
 	GLuint texture;
 } texture_component;
 
 __A_CORE_API__ typedef struct
 {
-	u64 component_id;
+	component_id component_id;
 	color color;
 } color_component;
 
 __A_CORE_API__ typedef struct
 {
-	u64 id;
+	archetype_id id;
 	struct_vec components;
 } archetype;
 
 __A_CORE_API__ typedef struct
 {
-	u64 id;
+	archetype_id id;
 	struct_vec archetypes;
 } archetype_index;
 
