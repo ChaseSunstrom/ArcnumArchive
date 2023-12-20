@@ -22,7 +22,7 @@ __A_CORE_API__ typedef struct
 __A_CORE_API__ typedef vector* bool_vec;
 __A_CORE_API__ typedef vector* int8_vec;
 __A_CORE_API__ typedef vector* int16_vec;
-__A_CORE_API__  typedef vector* int32_vec;
+__A_CORE_API__ typedef vector* int32_vec;
 __A_CORE_API__ typedef vector* int64_vec;
 __A_CORE_API__ typedef vector* uint8_vec;
 __A_CORE_API__ typedef vector* uint16_vec;
@@ -42,7 +42,8 @@ __A_CORE_API__ typedef vector* function_ptr_vec;
 // ===============================================================================
 // VECTOR FUNCTIONS:
 
-__A_CORE_API__ vector*     vector_new(void);
+__A_CORE_API__ vector*     vector_default(void);
+__A_CORE_API__ vector*     vector_new(generic values[]);
 __A_CORE_API__ byte*       vector_get(vector* v, u64 index);
 __A_CORE_API__ void        vector_free(vector* v);
 __A_CORE_API__ void        vector_push(vector* v, generic data);
@@ -51,7 +52,7 @@ __A_CORE_API__ void        vector_pop(vector* v);
 __A_CORE_API__ void        vector_remove(vector* v, u64 index);
 __A_CORE_API__ void        vector_clear(vector* v);
 __A_CORE_API__ void        vector_reverse(vector* v);
-__A_CORE_API__ static bool vector_is_big_enough(vector* v);
+__A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector* v);
 
 //===============================================================================
 

@@ -11,7 +11,7 @@ typedef float			   f32;
 typedef double             f64;
 typedef const char*        string;
 typedef void*              generic;
-typedef unsigned char      byte;
 typedef signed char        sbyte;
+typedef unsigned char      byte;
 
 #endif

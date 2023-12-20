@@ -100,6 +100,16 @@ __A_CORE_API__ generic iterator_get_current_data(iterator* it)
 	return it->collection_data[it->index - 1];
 }
 
+__A_CORE_API__ bool iterator_has_next(iterator* it)
+{
+	return iterator_next(it) != ITERATOR_END;
+}
+
+__A_CORE_API__ bool iterator_has_prev(iterator* it)
+{
+	return iterator_prev(it) != ITERATOR_BEGIN;
+}
+
 __A_CORE_API__ void iterator_update(iterator* it, generic* collection)
 {
 	it->collection_size = COLLECTION_SIZE(collection);

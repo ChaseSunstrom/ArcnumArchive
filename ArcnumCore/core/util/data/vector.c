@@ -1,10 +1,9 @@
-
 #include "vector.h"
 
 // ==============================================================================
 // VECTOR FUNCTIONS
 
-__A_CORE_API__ vector* vector_new(void)
+__A_CORE_API__ vector* vector_default(void)
 {
 	vector* v = ALLOC(vector);
 	
@@ -18,13 +17,26 @@ __A_CORE_API__ vector* vector_new(void)
 	return v;
 }
 
+__A_CORE_API__ vector* vector_new(generic values[])
+{
+	vector* v = ALLOC(vector);
+
+	const u64 arr_size = sizeof(values) / sizeof(values[0]);
+
+	if (v != NULL)
+	{
+		v->size     = arr_size;
+		v->capacity = arr_size << 1;
+		v->data     = values;
+	}
+
+	return v;
+}
+
 __A_CORE_API__ byte* vector_get(vector* v, u64 index)
 {
 	if (index < v->size)
 		return v->data[index];
-
-	printf("VECTOR INDEX OUT OF RANGE: %u\n", index);
-	exit(EXIT_FAILURE);
 }
 
 __A_CORE_API__ void vector_free(vector* v)
@@ -51,7 +63,6 @@ __A_CORE_API__ void vector_insert(vector* v, u64 index, generic data)
 {
 	if (index > v->size)
 	{
-		printf("VECTOR INDEX OUT OF RANGE: %u\n", index);
 		return;
 	}
 
@@ -74,7 +85,6 @@ __A_CORE_API__ void vector_remove(vector* v, u64 index)
 {
 	if (index >= v->size)
 	{
-		printf("VECTOR INDEX OUT OF RANGE: %u\n", index);
 		return;
 	}
 
@@ -113,7 +123,7 @@ __A_CORE_API__ void vector_reverse(vector* v)
 	}
 }
 
-__A_CORE_API__ static inline bool vector_is_big_enough(vector* v)
+__A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector* v)
 {
 	return v->capacity - v->size > 0;
 }

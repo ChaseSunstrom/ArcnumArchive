@@ -2,6 +2,7 @@
 #define CORE_RENDERER_H
 
 #include "../util/memory/bump_allocator.h"
+#include "../util/data/vector.h"
 
 // ==============================================================================
 // RENDERER:     | Used for rendering and storing rendering data
@@ -12,6 +13,13 @@ __A_CORE_API__ typedef struct
 	f64 fixed_delta_time;
 	f64 last_frame_time;
 	f64 tick_time;
+
+	// These are for batch rendering, all entity data that can be batch rendered will be
+	// stored here
+	GLuint VAO;
+	GLuint VBO;
+
+	struct_vec entities;
 } renderer;
 
 //===============================================================================

@@ -308,6 +308,8 @@
     <ClInclude Include="include\OTHER\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="core\ecs\component\color.c" />
+    <ClCompile Include="core\ecs\component\component.c" />
     <ClCompile Include="core\ecs\entity\uuid.c" />
     <ClCompile Include="core\ecs\system\system.c" />
     <ClCompile Include="core\events\event.c">

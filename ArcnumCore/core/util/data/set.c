@@ -3,7 +3,7 @@
 __A_CORE_API__ set* set_new()
 {
 	set* _set = ALLOC(set);
-	_set->data = vector_new();
+	_set->data = vector_default();
 	_set->capacity = _set->data->capacity;
 	_set->size = _set->data->size;
 	return _set;

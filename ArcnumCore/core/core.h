@@ -8,7 +8,7 @@
 	#define __A_CORE_RESTRICT__ __restrict 
 #else
 	#define __A_CORE_INLINE__   inline
-	#define __A_CORE_RESTRICT   restrict
+	#define __A_CORE_RESTRICT__ restrict
 #endif // _MSC_VER
 
 #define AC_STRUCT(_name, ...) struct _name { __VA_ARGS__ }

@@ -161,6 +161,12 @@
     <ClCompile Include="core\util\data\set.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\ecs\component\component.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\ecs\component\color.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\texture_shader.fsl" />
