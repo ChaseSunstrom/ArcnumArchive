@@ -7,7 +7,7 @@
 // ===============================================================================
 // ITERATOR FUNCTIONS
 
-__A_CORE_API__ iterator* iterator_new(T* collection)
+__A_CORE_API__ iterator* iterator_new(generic* collection)
 {
 	iterator* it = ALLOC(iterator);
 	it->index = 0;
@@ -77,7 +77,7 @@ __A_CORE_API__ iterator_state iterator_end(iterator* it)
 	return ITERATOR_ITERATING;
 }
 
-__A_CORE_API__ T iterator_get_prev(iterator* it)
+__A_CORE_API__ generic iterator_get_prev(iterator* it)
 {
 	if (iterator_prev(it) == ITERATOR_ITERATING)
 		return it->collection_data[it->index - 2];
@@ -85,7 +85,7 @@ __A_CORE_API__ T iterator_get_prev(iterator* it)
 	return NULL;
 }
 
-__A_CORE_API__ T iterator_get_next(iterator* it)
+__A_CORE_API__ generic iterator_get_next(iterator* it)
 {
 	if (iterator_next(it) == ITERATOR_ITERATING)
 		return it->collection_data[it->index];
@@ -93,7 +93,7 @@ __A_CORE_API__ T iterator_get_next(iterator* it)
 	return NULL;
 }
 
-__A_CORE_API__ T iterator_get_current_data(iterator* it)
+__A_CORE_API__ generic iterator_get_current_data(iterator* it)
 {
 	if (iterator_end(it) == ITERATOR_END)
 		return NULL;

@@ -110,7 +110,7 @@ __A_CORE_API__ vec2 vec2_normalize(vec2 v);
 __A_CORE_API__ vec3 vec3_normalize(vec3 v);
 __A_CORE_API__ vec4 vec4_normalize(vec4 v);
 
-__A_CORE_API__ vec3 vec3_rotate(quat q, vec3* v);
+__A_CORE_API__ vec3 vec3_rotate(vec3 v, vec3 axis, f64 angle);
 
 __A_CORE_API__ void vec1_add_to(vec1* v1, vec1* v2);
 __A_CORE_API__ void vec2_add_to(vec2* v1, vec2* v2);
@@ -146,7 +146,7 @@ __A_CORE_API__ void vec2_normalize_to(vec2* v);
 __A_CORE_API__ void vec3_normalize_to(vec3* v);
 __A_CORE_API__ void vec4_normalize_to(vec4* v);
 
-__A_CORE_API__ void vec3_rotate_to(quat q, vec3* v);
+__A_CORE_API__ void vec3_rotate_to(vec3* v, vec3 axis, f64 angle);
 
 // ===============================================================
 

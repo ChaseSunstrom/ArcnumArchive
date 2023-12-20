@@ -9,7 +9,7 @@ __A_CORE_API__ set* set_new()
 	return _set;
 }
 
-__A_CORE_API__ void set_insert(set* _set, u64 index, T data)
+__A_CORE_API__ void set_insert(set* _set, u64 index, generic data)
 {
 	for (u64 i = 0; i < _set->data->size; i++)
 	{
@@ -22,7 +22,7 @@ __A_CORE_API__ void set_insert(set* _set, u64 index, T data)
 	vector_insert(_set->data, index, data);
 }
 
-__A_CORE_API__ void set_push(set* _set, T data)
+__A_CORE_API__ void set_push(set* _set, generic data)
 {
 	for (u64 i = 0; i < _set->data->size; i++)
 	{
@@ -35,7 +35,7 @@ __A_CORE_API__ void set_push(set* _set, T data)
 	vector_push(_set->data, data);
 }
 
-__A_CORE_API__ T set_get(set* _set, u64 index)
+__A_CORE_API__ generic set_get(set* _set, u64 index)
 {
 	return vector_get(_set->data, index);
 }

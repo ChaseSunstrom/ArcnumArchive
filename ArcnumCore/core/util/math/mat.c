@@ -62,7 +62,7 @@ __A_CORE_API__ mat msdot(f64 scalar, mat m1)
 	return result;
 }
 
-__A_CORE_API__ T mvdot(T vec, mat m1)
+__A_CORE_API__ generic mvdot(generic vec, mat m1)
 {
 	u64 vec_size = ((vec4*)vec)->vec_size;
 	u64 rows = m1.rows;

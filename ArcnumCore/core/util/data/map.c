@@ -1,6 +1,6 @@
 #include "map.h"
 
-__A_CORE_API__ bool pair_compare(pair* pair, T key)
+__A_CORE_API__ __A_CORE_INLINE__ bool pair_compare(pair* pair, generic key)
 {
 	return pair->key == key;
 }
@@ -24,7 +24,7 @@ __A_CORE_API__ void map_insert(map* _map, void* key, void* value)
 	_map->capacity = _map->pairs->capacity;
 }
 
-__A_CORE_API__ T map_get(map* _map, void* key)
+__A_CORE_API__ generic map_get(map* _map, void* key)
 {
 	for (int i = 0; i < _map->pairs->size; i++)
 	{

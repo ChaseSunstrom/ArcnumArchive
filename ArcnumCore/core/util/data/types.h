@@ -10,7 +10,8 @@ typedef unsigned long long u64;
 typedef float			   f32;
 typedef double             f64;
 typedef const char*        string;
-typedef void*              T;
+typedef void*              generic;
 typedef unsigned char      byte;
+typedef signed char        sbyte;
 
 #endif

@@ -89,7 +89,7 @@ __A_CORE_API__ typedef struct
 // ===============================================================
 // EVENT RELATED METHODS:
 
-__A_CORE_API__ bool        event_dispatcher_dispatch(event_dispatcher dispatcher, T function_to_call);
+__A_CORE_API__ bool        event_dispatcher_dispatch(event_dispatcher dispatcher, generic function_to_call);
 __A_CORE_API__ const char* event_type_to_string(enum event_type event_type);
 
 // ===============================================================

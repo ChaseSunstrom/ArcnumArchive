@@ -288,6 +288,7 @@
     <ClInclude Include="core\log\log.h" />
     <ClInclude Include="core\renderer\layer.h" />
     <ClInclude Include="core\renderer\renderer.h" />
+    <ClInclude Include="core\util\renderer.h" />
     <ClInclude Include="core\util\data\collection.h" />
     <ClInclude Include="core\util\data\iterator.h" />
     <ClInclude Include="core\util\data\map.h" />

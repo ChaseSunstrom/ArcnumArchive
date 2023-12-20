@@ -21,7 +21,7 @@
     <ClInclude Include="core\window\window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\renderer\renderer.h">
+    <ClInclude Include="core\util\renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\util\memory\alloc.h">
@@ -103,6 +103,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\util\data\set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\renderer\renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

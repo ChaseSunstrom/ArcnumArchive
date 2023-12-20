@@ -1,4 +1,3 @@
-
 #include "layer_stack.h"
 
 // ==============================================================================
@@ -37,7 +36,6 @@ __A_CORE_API__ void layer_stack_push_overlay(layer_stack layer_stack, layer* lay
 __A_CORE_API__ void layer_stack_pop_layer(layer_stack layer_stack)
 {
 	vector_pop(layer_stack.layers);
-
 
 	iterator_update(layer_stack.layers_it, layer_stack.layers);
 }

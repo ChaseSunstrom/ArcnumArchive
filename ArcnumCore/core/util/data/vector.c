@@ -36,7 +36,7 @@ __A_CORE_API__ void vector_free(vector* v)
 	}
 }
 
-__A_CORE_API__ void vector_push(vector* v, T data)
+__A_CORE_API__ void vector_push(vector* v, generic data)
 {
 	if (v->size >= v->capacity)
 	{
@@ -47,7 +47,7 @@ __A_CORE_API__ void vector_push(vector* v, T data)
 	v->size += 1;
 }
 
-__A_CORE_API__ void vector_insert(vector* v, u64 index, T data)
+__A_CORE_API__ void vector_insert(vector* v, u64 index, generic data)
 {
 	if (index > v->size)
 	{

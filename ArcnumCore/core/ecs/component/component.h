@@ -47,16 +47,4 @@ __A_CORE_API__ typedef struct
 	color color;
 } color_component;
 
-__A_CORE_API__ typedef struct
-{
-	archetype_id id;
-	struct_vec components;
-} archetype;
-
-__A_CORE_API__ typedef struct
-{
-	archetype_id id;
-	struct_vec archetypes;
-} archetype_index;
-
 #endif // CORE_COMPONENT_H 

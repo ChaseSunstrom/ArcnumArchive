@@ -305,20 +305,24 @@ __A_CORE_API__ vec4 vec4_normalize(vec4 v)
 	return vec4_scale(v, 1.0f / norm);
 }
 
-__A_CORE_API__ vec3 vec3_rotate(quat q, vec3 v)
+__A_CORE_API__ vec3 vec3_rotate(vec3 v, vec3 axis, f64 angle)
 {
-	quat result_quaternion = {
-		q.w * v.x + q.y * v.z - q.z * v.y,
-		q.w * v.y + q.z * v.x - q.x * v.z,
-		q.w * v.z + q.x * v.y - q.y * v.x,
-	   -q.x * v.x - q.y * v.y - q.z * v.z
-	};
+	f64 c = cos(angle);
+	f64 s = sin(angle);
 
-	return (vec3) {
-		result_quaternion.x* q.w + result_quaternion.w * -q.x + result_quaternion.y * -q.z - result_quaternion.z * -q.y,
-			result_quaternion.y* q.w + result_quaternion.w * -q.y + result_quaternion.z * -q.x - result_quaternion.x * -q.z,
-			result_quaternion.z* q.w + result_quaternion.w * -q.z + result_quaternion.x * -q.y - result_quaternion.y * -q.x
-	};
+	vec3 k = vec3_normalize(axis);
+
+	vec3 v1 = vec3_scale(v, c);
+
+	vec3 v2 = vec3_cross(k, v);
+	vec3_scale_to(&v2, s);
+
+	vec3_add_to(&v1, &v2);
+
+	v2 = vec3_scale(k, vec3_dot(k, v) * (1.0f - c));
+	v = vec3_add(v1, v2);
+
+	return v;
 }
 
 __A_CORE_API__ void vec1_add_to(vec1* v1, vec1* v2)
@@ -547,6 +551,24 @@ __A_CORE_API__ void vec4_normalize_to(vec4* v)
 	}
 
 	vec4_scale_to(v, 1.0f / norm);
+}
+
+__A_CORE_API__ void vec3_rotate_to(vec3* v, vec3 axis, f64 angle)
+{
+	f64 c = cos(angle);
+	f64 s = sin(angle);
+
+	vec3 k = vec3_normalize(axis);
+
+	vec3 v1 = vec3_scale(*v, c);
+
+	vec3 v2 = vec3_cross(k, *v);
+	vec3_scale_to(&v2, s);
+
+	vec3_add_to(&v1, &v2);
+
+	v2 = vec3_scale(k, vec3_dot(k, *v) * (1.0f - c));
+	*v = vec3_add(v1, v2);
 }
 
 // ===============================================================

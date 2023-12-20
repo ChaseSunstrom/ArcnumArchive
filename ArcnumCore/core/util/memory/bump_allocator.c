@@ -26,13 +26,13 @@ __A_CORE_API__ bump_allocator* bump_allocator_new(u64 size)
 	return allocator;
 }
 
-__A_CORE_API__ T bump_allocator_alloc(bump_allocator* allocator, u64 size)
+__A_CORE_API__ generic bump_allocator_alloc(bump_allocator* allocator, u64 size)
 {
 	if (allocator->current + size > allocator->end)
 		// Out of memory
 		return NULL;
 
-	T allocation = allocator->current;
+	generic allocation = allocator->current;
 	allocator->current += size;
 	return allocation;
 }
