@@ -12,7 +12,6 @@ __A_CORE_API__ iterator* iterator_new(generic* collection)
 	iterator* it = ALLOC(iterator);
 	it->index = 0;
 	it->state = ITERATOR_NONE;
-	it->collection = collection;
 	it->collection_size = COLLECTION_SIZE(collection);
 	it->collection_data = COLLECTION_DATA(collection);
 	return it;
@@ -101,9 +100,8 @@ __A_CORE_API__ generic iterator_get_current_data(iterator* it)
 	return it->collection_data[it->index - 1];
 }
 
-__A_CORE_API__ void iterator_update(iterator* it, void** collection)
+__A_CORE_API__ void iterator_update(iterator* it, generic* collection)
 {
-	it->collection = collection;
 	it->collection_size = COLLECTION_SIZE(collection);
 	it->collection_data = COLLECTION_DATA(collection);
 }

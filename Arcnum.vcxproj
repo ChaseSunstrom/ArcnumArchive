@@ -196,7 +196,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)ArcnumCore/include/GLAD;$(SolutionDir)ArcnumCore/include/GLEW;$(SolutionDir)ArcnumCore/include/GLM;$(SolutionDir)ArcnumCore/include/GLFW;$(SolutionDir)ArcnumCore/include/OTHER;$(SolutionDir)ArcnumCore/include/SDL;$(SolutionDir)ArcnumCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ArcnumCore/include/GLAD;$(SolutionDir)ArcnumCore/include/GLEW;$(SolutionDir)ArcnumCore/include/GLFW;$(SolutionDir)ArcnumCore/include/OTHER;$(SolutionDir)ArcnumCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>apch.h</PrecompiledHeaderFile>
@@ -205,7 +205,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)ArcnumCore\$(Platform)\$(Configuration)\*.obj;SDL2.lib;SDL2main.lib;glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)ArcnumCore\$(Platform)\$(Configuration)\*.obj;glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ArcnumCore/lib/GLFW;$(SolutionDir)ArcnumCore/lib/GLEW;$(SolutionDir)ArcnumCore/lib/SDL;$(SolutionDir)ArcnumCore/lib/GLAD;$(SolutionDir)ArcnumCore;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

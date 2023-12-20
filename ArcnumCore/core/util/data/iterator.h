@@ -26,7 +26,6 @@ __A_CORE_API__ typedef enum
 __A_CORE_API__ typedef struct
 {
 	iterator_state state;
-	generic* collection;
 	generic* collection_data;
 	u64 index;
 	u64 collection_size;
