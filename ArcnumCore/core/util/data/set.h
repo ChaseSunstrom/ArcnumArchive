@@ -10,12 +10,12 @@ __A_CORE_API__ typedef struct
 	vector* data;
 } set;
 
-__A_CORE_API__ set* set_new();
-__A_CORE_API__ void set_insert(set* set, u64 index, generic data);
-__A_CORE_API__ void set_push(set* set, generic data);
-__A_CORE_API__ void set_remove(set* set, u64 index);
-__A_CORE_API__ generic    set_get(set* set, u64 index);
-__A_CORE_API__ void set_free(set* set);
+__A_CORE_API__ set*    set_new();
+__A_CORE_API__ void    set_insert(set* set, u64 index, generic data);
+__A_CORE_API__ void    set_push(set* set, generic data);
+__A_CORE_API__ void	   set_remove(set* set, u64 index);
+__A_CORE_API__ generic set_get(set* set, u64 index);
+__A_CORE_API__ void    set_free(set* set);
 
 
 #endif // CORE_SET_H

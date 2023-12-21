@@ -17,18 +17,25 @@ __A_CORE_API__ vector* vector_default(void)
 	return v;
 }
 
-__A_CORE_API__ vector* vector_new(generic values[])
+__A_CORE_API__ vector* vector_new(byte values[])
 {
 	vector* v = ALLOC(vector);
 
-	const u64 arr_size = sizeof(values) / sizeof(values[0]);
+	const u64 arr_size = sizeof(values) / sizeof(values[0]) / 2;
 
 	if (v != NULL)
 	{
 		v->size     = arr_size;
 		v->capacity = arr_size << 1;
 		v->data     = values;
+
+		for (u64 i = 0; i < arr_size; ++i)
+		{
+			vector_push(v, values[i]);
+		}
 	}
+
+	
 
 	return v;
 }
@@ -121,6 +128,22 @@ __A_CORE_API__ void vector_reverse(vector* v)
 		v->data[i] = v->data[v->size - 1 - i];
 		v->data[v->size - 1 - i] = temp;
 	}
+}
+
+__A_CORE_API__ void vector_add_capacity(vector* v, u64 size)
+{
+	while (v->capacity < v->size + size)
+	{
+		v->capacity <<= 1;
+		v->data = REALLOC(v->data, byte*, v->capacity);
+	}
+}
+
+__A_CORE_API__ void vector_add_vector(vector* v, vector* other)
+{
+	vector_add_capacity(v, other->size);
+
+	memcpy(v->data[v->size], other->data, other->size * sizeof(byte*));
 }
 
 __A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector* v)

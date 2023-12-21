@@ -43,7 +43,7 @@ __A_CORE_API__ typedef vector* function_ptr_vec;
 // VECTOR FUNCTIONS:
 
 __A_CORE_API__ vector*     vector_default(void);
-__A_CORE_API__ vector*     vector_new(generic values[]);
+__A_CORE_API__ vector*     vector_new(byte values[]);
 __A_CORE_API__ byte*       vector_get(vector* v, u64 index);
 __A_CORE_API__ void        vector_free(vector* v);
 __A_CORE_API__ void        vector_push(vector* v, generic data);
@@ -52,6 +52,8 @@ __A_CORE_API__ void        vector_pop(vector* v);
 __A_CORE_API__ void        vector_remove(vector* v, u64 index);
 __A_CORE_API__ void        vector_clear(vector* v);
 __A_CORE_API__ void        vector_reverse(vector* v);
+__A_CORE_API__ void        vector_add_capacity(vector* v, u64 size);
+__A_CORE_API__ void        vector_add_vector(vector* v, vector* other);
 __A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector* v);
 
 //===============================================================================

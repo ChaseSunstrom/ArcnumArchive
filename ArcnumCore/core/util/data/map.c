@@ -1,5 +1,10 @@
 #include "map.h"
 
+
+
+// ==============================================================================
+// MAP FUNCTIONS:
+
 __A_CORE_API__ __A_CORE_INLINE__ bool pair_compare(pair* pair, generic key)
 {
 	return pair->key == key;
@@ -53,3 +58,5 @@ __A_CORE_API__ void map_remove(map* _map, void* key)
 	_map->size = _map->pairs->size;
 	_map->capacity = _map->pairs->capacity;
 }
+
+// ==============================================================================

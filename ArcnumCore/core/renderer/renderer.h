@@ -3,10 +3,15 @@
 
 #include "../util/memory/bump_allocator.h"
 #include "../util/data/vector.h"
+#include "../ecs/ecs.h"
+#include "batcher.h"
+
+
 
 // ==============================================================================
 // RENDERER:     | Used for rendering and storing rendering data
 // ==============================================================================
+
 __A_CORE_API__ typedef struct
 {
 	f64 delta_time;
@@ -14,13 +19,12 @@ __A_CORE_API__ typedef struct
 	f64 last_frame_time;
 	f64 tick_time;
 
-	// These are for batch rendering, all entity data that can be batch rendered will be
-	// stored here
-	GLuint VAO;
-	GLuint VBO;
+	batcher* batcher;
 
-	struct_vec entities;
+	ecs* ecs;
 } renderer;
+
+
 
 //===============================================================================
 // RENDERER FUNCTIONS:     
@@ -39,4 +43,5 @@ __A_CORE_API__ double    calculate_fixed_delta_time(void);
 __A_CORE_API__ double    calculate_last_frame_time(void);
 
 //===============================================================================
+
 #endif //CORE_RENDERER_H

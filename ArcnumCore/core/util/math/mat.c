@@ -6,6 +6,10 @@
 
 #include "vec.h"
 
+
+// ==============================================================================
+// MAT FUNCTIONS:
+
 __A_CORE_API__ mat mat_new(f64 rows, f64 cols, f64* matrix)
 {
 	mat mat = { rows, cols, matrix };
@@ -97,3 +101,5 @@ __A_CORE_API__ __A_CORE_INLINE__ void mat_free(mat mat)
 {
 	FREE(mat.matrix);
 }
+
+// ==============================================================================

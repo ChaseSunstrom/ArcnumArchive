@@ -1,5 +1,9 @@
 #include "system.h"
 
+
+// ==============================================================================
+// SYSTEM FUNCTIONS:
+
 __A_CORE_API__ void system_handle_color(void)
 {
 	
@@ -34,3 +38,5 @@ __A_CORE_API__ void system_handle_shader(void)
 {
 	
 }
+
+// ==============================================================================
