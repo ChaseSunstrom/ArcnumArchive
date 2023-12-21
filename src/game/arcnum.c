@@ -8,7 +8,7 @@ void application_main(void)
 {
 	application _app =
 	{
-		.allocator = bump_allocator_new(10 * MEGABYTE)
+		.allocator = bump_allocator_new(KILOBYTE)
 	};
 
 	_app.window      = *_window_new(_app.allocator);

@@ -12,8 +12,11 @@
 
 typedef struct
 {
+	u64 entity_id;
 	render_component render_component;
 } generic_entity;
 
+generic_entity generic_entity_default(void);
+generic_entity generic_entity_new(render_component render_component);
 
 #endif //CORE_ENTITY_H

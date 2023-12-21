@@ -21,6 +21,9 @@ __A_CORE_API__ typedef struct
 	u64 entity_count;
 
 	float64_vec vertices;
+
+	// This is used as a way to store the positions of the entities in the batcher
+	uint64_vec entities_in_vertices;
 } batcher;
 
 

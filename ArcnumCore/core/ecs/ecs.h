@@ -10,4 +10,6 @@ typedef struct
 	struct_vec entities;
 } ecs;
 
+ecs* ecs_default();
+
 #endif // CORE_ECS_H

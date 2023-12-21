@@ -143,7 +143,24 @@ __A_CORE_API__ void vector_add_vector(vector* v, vector* other)
 {
 	vector_add_capacity(v, other->size);
 
-	memcpy(v->data[v->size], other->data, other->size * sizeof(byte*));
+	memcpy(v->data + v->size, other->data, other->size * sizeof(byte*));
+
+	v->size += other->size;
+}
+
+__A_CORE_API__ void vector_remove_slice(vector* v, u64 index, u64 amount)
+{
+	if (index + amount > v->size)
+	{
+		return;
+	}
+
+	for (u64 i = index; i < v->size - amount; i++)
+	{
+		v->data[i] = v->data[i + amount];
+	}
+
+	v->size -= amount;
 }
 
 __A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector* v)

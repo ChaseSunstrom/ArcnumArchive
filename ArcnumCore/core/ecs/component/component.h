@@ -54,7 +54,7 @@ __A_CORE_API__ COMPONENT_FACTORY(color_component, color color; );
 __A_CORE_API__ __A_CORE_INLINE__ mesh_component      mesh_component_default(void);
 __A_CORE_API__ __A_CORE_INLINE__ transform_component transform_component_default(void);
 __A_CORE_API__ __A_CORE_INLINE__ shader_component	 shader_component_default(void);
-__A_CORE_API__ __A_CORE_INLINE__ render_component	 render_component_default(void);
+__A_CORE_API__  render_component	 render_component_default(void);
 __A_CORE_API__ __A_CORE_INLINE__ texture_component   texture_component_default(void);
 __A_CORE_API__ __A_CORE_INLINE__ color_component	 color_component_default(void);
 
