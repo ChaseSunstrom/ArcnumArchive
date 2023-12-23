@@ -1,5 +1,6 @@
 
 #include "arcnum.h"
+#include "voxel/voxel.h"
 
 // ===============================================================================
 // GAME FUNCTIONS:
@@ -72,6 +73,10 @@ void application_loop(const application app)
 	application_push_layer(app, _layer);
 
 	subscription_new(WINDOW_EVENT_TOPIC, application_on_event);
+
+	voxel vox = voxel_default();
+
+	batcher_add_entity(app.window.renderer->batcher, &vox);
 
 	while (window_is_running(app.window))
 	{

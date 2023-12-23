@@ -1,7 +1,9 @@
 #ifndef VOXEL_H
 #define VOXEL_H
 
-const float voxel_vertices[] = {
+#include "../../core_include.h"
+
+static const float voxel_vertices[] = {
 	//position           //color           //texture          //normal
 	-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f,  0.0f, -1.0f, //bottom left
 	 0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f,  0.0f, -1.0f,//bottom right
@@ -45,5 +47,15 @@ const float voxel_vertices[] = {
 	-0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,  1.0f, 0.0f,
 	-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  1.0f, 0.0f,
 };
+
+typedef struct
+{
+	u64 entity_id;
+	render_component render_component;
+	color_component color_component;
+} voxel;
+
+voxel voxel_default();
+voxel voxel_new(vec3 position, vec3 scale, vec3 rotation, color color);
 
 #endif

@@ -17,7 +17,7 @@ __A_CORE_API__ vector* vector_default(void)
 	return v;
 }
 
-__A_CORE_API__ vector* _vector_new(u64 size, void* values[])
+__A_CORE_API__ vector* _vector_new(u64 size, generic values[])
 {
 	vector* v = ALLOC(vector);
 
@@ -25,11 +25,11 @@ __A_CORE_API__ vector* _vector_new(u64 size, void* values[])
 	{
 		v->size     = size;
 		v->capacity = size << 1;
-		v->data     = values;
+		v->data     = ALLOC(byte*);
 
 		vector_add_capacity(v, size);
 
-		memcpy(v->data, values, size * sizeof(void*));
+		memcpy(v->data, values, size * sizeof(generic));
 	}
 
 	return v;
@@ -130,8 +130,8 @@ __A_CORE_API__ void vector_add_capacity(vector* v, u64 size)
 	while (v->capacity < v->size + size)
 	{
 		v->capacity <<= 1;
-		v->data = REALLOC(v->data, byte*, v->capacity);
 	}
+	v->data = REALLOC(v->data, byte*, v->capacity);
 }
 
 __A_CORE_API__ void vector_add_vector(vector* v, vector* other)
@@ -143,11 +143,13 @@ __A_CORE_API__ void vector_add_vector(vector* v, vector* other)
 	v->size += other->size;
 }
 
-__A_CORE_API__ void _vector_add_array(vector* v, u64 size, void* array[])
+__A_CORE_API__ void _vector_add_array(vector* v, u64 size, generic array[])
 {
 	vector_add_capacity(v, size);
 
-	memcpy(v->data + v->size, array, size * sizeof(void*));
+	memcpy(v->data + v->size, array, size * sizeof(generic));
+
+	v->size += size;
 }
 
 __A_CORE_API__ void vector_remove_slice(vector* v, u64 index, u64 amount)

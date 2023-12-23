@@ -279,12 +279,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\game\arcnum.c" />
+    <ClCompile Include="src\game\voxel\voxel.c" />
     <ClCompile Include="src\main.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core_include.h" />
     <ClInclude Include="src\game\arcnum.h" />
     <ClInclude Include="src\game\voxel\voxel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
