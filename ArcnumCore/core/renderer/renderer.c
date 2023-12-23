@@ -33,6 +33,8 @@ __A_CORE_API__ void renderer_render(renderer* renderer)
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	batcher_render(renderer->batcher);
+
 	renderer_set_delta_time(renderer);
 }
 

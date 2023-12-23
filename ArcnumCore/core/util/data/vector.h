@@ -20,20 +20,20 @@ __A_CORE_API__ typedef struct
 //				 | it is up to the user to cast the data to the correct type
 
 __A_CORE_API__ typedef vector* bool_vec;
-__A_CORE_API__ typedef vector* int8_vec;
-__A_CORE_API__ typedef vector* int16_vec;
-__A_CORE_API__ typedef vector* int32_vec;
-__A_CORE_API__ typedef vector* int64_vec;
-__A_CORE_API__ typedef vector* uint8_vec;
-__A_CORE_API__ typedef vector* uint16_vec;
-__A_CORE_API__ typedef vector* uint32_vec;
-__A_CORE_API__ typedef vector* uint64_vec;
-__A_CORE_API__ typedef vector* float32_vec;
-__A_CORE_API__ typedef vector* float64_vec;
+__A_CORE_API__ typedef vector* i8_vec;
+__A_CORE_API__ typedef vector* i16_vec;
+__A_CORE_API__ typedef vector* i32_vec;
+__A_CORE_API__ typedef vector* i64_vec;
+__A_CORE_API__ typedef vector* u8_vec;
+__A_CORE_API__ typedef vector* u16_vec;
+__A_CORE_API__ typedef vector* u32_vec;
+__A_CORE_API__ typedef vector* u64_vec;
+__A_CORE_API__ typedef vector* f32_vec;
+__A_CORE_API__ typedef vector* f64_vec;
 __A_CORE_API__ typedef vector* string_vec;
 __A_CORE_API__ typedef vector* struct_vec;
 __A_CORE_API__ typedef vector* enum_vec;
-__A_CORE_API__ typedef vector* function_ptr_vec;
+__A_CORE_API__ typedef vector* fn_ptr_vec;
 
 // ===============================================================================
 

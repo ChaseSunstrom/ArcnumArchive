@@ -14,6 +14,9 @@ typedef struct
 {
 	u64 entity_id;
 	render_component render_component;
+
+	// This is used internally to tell OpenGL the size of the stride needed to render the entity
+	stride_type stride;
 } generic_entity;
 
 generic_entity generic_entity_default(void);

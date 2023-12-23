@@ -108,6 +108,9 @@
     <ClInclude Include="core\renderer\batcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="core\util\data\file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\GLAD\glad.c">
@@ -174,6 +177,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\ecs\ecs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\util\data\file.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

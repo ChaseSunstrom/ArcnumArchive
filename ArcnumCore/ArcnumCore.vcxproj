@@ -290,6 +290,7 @@
     <ClInclude Include="core\renderer\layer.h" />
     <ClInclude Include="core\renderer\renderer.h" />
     <ClInclude Include="core\util\data\collection.h" />
+    <ClInclude Include="core\util\data\file.h" />
     <ClInclude Include="core\util\data\iterator.h" />
     <ClInclude Include="core\util\data\map.h" />
     <ClInclude Include="core\util\data\set.h" />
@@ -321,6 +322,7 @@
     <ClCompile Include="core\renderer\batcher.c" />
     <ClCompile Include="core\renderer\layer.c" />
     <ClCompile Include="core\renderer\renderer.c" />
+    <ClCompile Include="core\util\data\file.c" />
     <ClCompile Include="core\util\data\iterator.c" />
     <ClCompile Include="core\util\data\map.c" />
     <ClCompile Include="core\util\data\set.c" />
