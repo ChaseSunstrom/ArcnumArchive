@@ -14,6 +14,7 @@ __A_CORE_API__ renderer* renderer_new()
 	_renderer->fixed_delta_time = 0.01f;
 	_renderer->tick_time        = 0;
 	_renderer->ecs              = ecs_default();
+	_renderer->batcher          = batcher_default();
 	return _renderer;
 }
 
@@ -25,6 +26,7 @@ __A_CORE_API__ renderer* _renderer_new(bump_allocator* allocator)
 	_renderer->fixed_delta_time = 0.01f;
 	_renderer->tick_time        = 0;
 	_renderer->ecs              = ecs_default();
+	_renderer->batcher          = batcher_default();
 	return _renderer;
 }
 

@@ -37,10 +37,10 @@ __A_CORE_API__ void      renderer_set_tick_time(renderer* renderer);
 __A_CORE_API__ void      renderer_set_delta_time(renderer* renderer);
 __A_CORE_API__ void      renderer_set_fixed_delta_time(renderer* renderer);
 __A_CORE_API__ void      renderer_set_last_frame_time(renderer* renderer);
-__A_CORE_API__ double    calculate_tick_time(void);
-__A_CORE_API__ double    calculate_delta_time(void);
-__A_CORE_API__ double    calculate_fixed_delta_time(void);
-__A_CORE_API__ double    calculate_last_frame_time(void);
+__A_CORE_API__ f64       calculate_tick_time(void);
+__A_CORE_API__ f64       calculate_delta_time(void);
+__A_CORE_API__ f64       calculate_fixed_delta_time(void);
+__A_CORE_API__ f64       calculate_last_frame_time(void);
 
 //===============================================================================
 

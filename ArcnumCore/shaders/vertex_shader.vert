@@ -20,4 +20,5 @@ void main()
     color = aColor;
     Normal = mat3(transpose(inverse(model))) * aNormal; 
     TexCoord = aTexCoord;
+  
 }

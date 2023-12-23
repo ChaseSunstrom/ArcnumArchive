@@ -284,6 +284,7 @@
   <ItemGroup>
     <ClInclude Include="src\core_include.h" />
     <ClInclude Include="src\game\arcnum.h" />
+    <ClInclude Include="src\game\voxel\voxel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

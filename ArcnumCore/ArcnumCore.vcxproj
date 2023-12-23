@@ -276,7 +276,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="core\core.h" />
-    <ClInclude Include="core\debug\log.h" />
     <ClInclude Include="core\ecs\component\color.h" />
     <ClInclude Include="core\ecs\component\component.h" />
     <ClInclude Include="core\ecs\ecs.h" />
@@ -285,7 +284,6 @@
     <ClInclude Include="core\ecs\system\system.h" />
     <ClInclude Include="core\events\event.h" />
     <ClInclude Include="core\events\sub.h" />
-    <ClInclude Include="core\log\log.h" />
     <ClInclude Include="core\renderer\batcher.h" />
     <ClInclude Include="core\renderer\layer.h" />
     <ClInclude Include="core\renderer\renderer.h" />
@@ -338,10 +336,10 @@
     <ClCompile Include="lib\GLAD\glad.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\color_shader.fsl" />
-    <None Include="shaders\light_shader.fsl" />
-    <None Include="shaders\texture_shader.fsl" />
-    <None Include="shaders\vertex_shader.vsl" />
+    <None Include="shaders\color_shader.frag" />
+    <None Include="shaders\light_shader.vert" />
+    <None Include="shaders\texture_shader.frag" />
+    <None Include="shaders\vertex_shader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

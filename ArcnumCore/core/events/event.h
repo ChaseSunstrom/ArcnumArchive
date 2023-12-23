@@ -46,15 +46,15 @@ __A_CORE_API__ EVENT_FACTORY(app_update_event);
 __A_CORE_API__ EVENT_FACTORY(app_tick_event);
 __A_CORE_API__ EVENT_FACTORY(app_render_event);
 __A_CORE_API__ EVENT_FACTORY(window_closed_event);
-__A_CORE_API__ EVENT_FACTORY(window_resized_event, int width; int height;);
-__A_CORE_API__ EVENT_FACTORY(window_moved_event, int x_pos; int y_pos;);
-__A_CORE_API__ EVENT_FACTORY(key_pressed_event, int key_code; );
-__A_CORE_API__ EVENT_FACTORY(key_released_event, int key_code; );
-__A_CORE_API__ EVENT_FACTORY(key_repeat_event, int key_code;);
-__A_CORE_API__ EVENT_FACTORY(mouse_pressed_event, int button;);
-__A_CORE_API__ EVENT_FACTORY(mouse_released_event, int button;);
-__A_CORE_API__ EVENT_FACTORY(mouse_move_event, double x_pos; double y_pos;);
-__A_CORE_API__ EVENT_FACTORY(mouse_scroll_event, double x_offset; double y_offset;);
+__A_CORE_API__ EVENT_FACTORY(window_resized_event, i32 width; i32 height;);
+__A_CORE_API__ EVENT_FACTORY(window_moved_event, i32 x_pos; i32 y_pos;);
+__A_CORE_API__ EVENT_FACTORY(key_pressed_event, i32 key_code; );
+__A_CORE_API__ EVENT_FACTORY(key_released_event, i32 key_code; );
+__A_CORE_API__ EVENT_FACTORY(key_repeat_event, i32 key_code;);
+__A_CORE_API__ EVENT_FACTORY(mouse_pressed_event, i32 button;);
+__A_CORE_API__ EVENT_FACTORY(mouse_released_event, i32 button;);
+__A_CORE_API__ EVENT_FACTORY(mouse_move_event, f64 x_pos; f64 y_pos;);
+__A_CORE_API__ EVENT_FACTORY(mouse_scroll_event, f64 x_offset; f64 y_offset;);
 
 // ===============================================================
 
@@ -74,7 +74,7 @@ __A_CORE_API__ typedef struct
 // EVENT RELATED METHODS:
 
 __A_CORE_API__ bool        event_dispatcher_dispatch(event_dispatcher dispatcher, generic function_to_call);
-__A_CORE_API__ const char* event_type_to_string(enum event_type event_type);
+__A_CORE_API__ string event_type_to_string(enum event_type event_type);
 
 // ===============================================================
 // EVENT FUNCTION_PTR: | Used as a function pointer to call any event

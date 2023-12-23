@@ -24,7 +24,6 @@ void main()
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = diff * light_color;
 
-    
     // specular
     float specularStrength = 0.5;
     vec3 viewDir = normalize(view_pos - FragPos);

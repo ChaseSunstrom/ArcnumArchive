@@ -45,12 +45,6 @@
     <ClInclude Include="core\renderer\layer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\debug\log.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\log\log.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="core\util\log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -184,9 +178,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\texture_shader.fsl" />
-    <None Include="shaders\vertex_shader.vsl" />
-    <None Include="shaders\color_shader.fsl" />
-    <None Include="shaders\light_shader.fsl" />
+    <None Include="shaders\texture_shader.frag" />
+    <None Include="shaders\vertex_shader.vert" />
+    <None Include="shaders\color_shader.frag" />
+    <None Include="shaders\light_shader.vert" />
   </ItemGroup>
 </Project>

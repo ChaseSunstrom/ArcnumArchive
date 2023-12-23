@@ -25,7 +25,7 @@ __A_CORE_API__ typedef struct
 	// This is just in case access to entities data is needed;
 	struct_vec entities;
 
-	// This is used as a way to store the positions of the entities in the batcher
+	// This is used as a way to store the entity ids of the entities in the batcher
 	u64_vec entity_ids;
 } batcher;
 

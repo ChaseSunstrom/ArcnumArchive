@@ -12,10 +12,10 @@ __A_CORE_API__ batcher* batcher_default()
 	_batcher->VAO = 0;
 	_batcher->VBO = 0;
 	_batcher->entity_count = 0;
-	_batcher->shader_program = glCreateProgram();
 	_batcher->vertices = vector_default();
 	_batcher->entity_ids = vector_default();
 	_batcher->entities = vector_default();
+	_batcher->shader_program = glCreateProgram();
 	batcher_bind(_batcher);
 	return _batcher;
 }
@@ -26,6 +26,9 @@ __A_CORE_API__ batcher* batcher_new(struct_vec entities, u64 entity_count)
 	_batcher->VAO = 0;
 	_batcher->VBO = 0;
 	_batcher->entity_count = entity_count;
+	_batcher->vertices = vector_default();
+	_batcher->entity_ids = vector_default();
+	_batcher->entities = vector_default();
 	_batcher->shader_program = glCreateProgram();
 	batcher_add_entities(_batcher, entities);
 	batcher_bind(_batcher);
@@ -84,6 +87,9 @@ __A_CORE_API__ void batcher_remove(batcher* batcher, generic_entity* entity)
 
 __A_CORE_API__ void batcher_render(batcher* batcher)
 {
-	
+	glBindVertexArray(batcher->VAO);
+	glUseProgram(batcher->shader_program);
+
+	glDrawArrays(GL_TRIANGLES, 0, batcher->vertices->size / 11);
 }
 // ==============================================================================

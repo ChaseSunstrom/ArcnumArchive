@@ -17,25 +17,20 @@ __A_CORE_API__ vector* vector_default(void)
 	return v;
 }
 
-__A_CORE_API__ vector* vector_new(byte values[])
+__A_CORE_API__ vector* _vector_new(u64 size, void* values[])
 {
 	vector* v = ALLOC(vector);
 
-	const u64 arr_size = sizeof(values) / sizeof(values[0]) / 2;
-
 	if (v != NULL)
 	{
-		v->size     = arr_size;
-		v->capacity = arr_size << 1;
+		v->size     = size;
+		v->capacity = size << 1;
 		v->data     = values;
 
-		for (u64 i = 0; i < arr_size; ++i)
-		{
-			vector_push(v, values[i]);
-		}
-	}
+		vector_add_capacity(v, size);
 
-	
+		memcpy(v->data, values, size * sizeof(void*));
+	}
 
 	return v;
 }
@@ -146,6 +141,13 @@ __A_CORE_API__ void vector_add_vector(vector* v, vector* other)
 	memcpy(v->data + v->size, other->data, other->size * sizeof(byte*));
 
 	v->size += other->size;
+}
+
+__A_CORE_API__ void _vector_add_array(vector* v, u64 size, void* array[])
+{
+	vector_add_capacity(v, size);
+
+	memcpy(v->data + v->size, array, size * sizeof(void*));
 }
 
 __A_CORE_API__ void vector_remove_slice(vector* v, u64 index, u64 amount)
