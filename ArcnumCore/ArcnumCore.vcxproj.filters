@@ -182,5 +182,6 @@
     <None Include="shaders\vertex_shader.vert" />
     <None Include="shaders\color_shader.frag" />
     <None Include="shaders\light_shader.vert" />
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

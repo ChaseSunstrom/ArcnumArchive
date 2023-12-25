@@ -3,7 +3,7 @@
 
 #include "../../util/std_include.h"
 
-__A_CORE_API__ typedef struct
+typedef struct
 {
 	f64 r;
 	f64 g;

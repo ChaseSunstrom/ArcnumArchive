@@ -64,6 +64,9 @@ __A_CORE_API__  shader_component shader_component_new(string vertex_path, string
 
 	glLinkProgram(shader.shader_program);
 
+	glDeleteShader(shader.vertex_shader);
+	glDeleteShader(shader.fragment_shader);
+
 	return shader;
 }
 

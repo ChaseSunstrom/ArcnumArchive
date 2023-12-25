@@ -16,10 +16,10 @@ __A_CORE_API__ string read_file(string file_path)
      long file_size = ftell(file);
     rewind(file);
 
-    char buffer[10000];
+    char buffer[3000];
 
 	for (u64 i = 0; i < file_size; i++) {
-		*(buffer+i) = fgetc(file);
+		buffer[i] = fgetc(file);
 	}
 
 	*(buffer + file_size) = '\0';

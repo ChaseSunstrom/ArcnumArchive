@@ -11,7 +11,7 @@
 // BATCHER:        | Used to store related entities to batch render
 // ==============================================================================
 
-__A_CORE_API__ typedef struct
+typedef struct
 {
 	GLuint shader_program;
 	GLuint VAO;
@@ -37,7 +37,7 @@ __A_CORE_API__ typedef struct
 __A_CORE_API__ batcher* batcher_default();
 __A_CORE_API__ batcher* batcher_new(f64_vec vertices, u64 entity_count);
 __A_CORE_API__ void     batcher_bind(batcher* batcher);
-__A_CORE_API__ void     batcher_add_entity(batcher* batcher, generic_entity* entity);
+__A_CORE_API__ void     batcher_add_entity(batcher* batcher, entity* entity);
 __A_CORE_API__ void     batcher_add_entities(batcher* batcher, struct_vec entities);
 __A_CORE_API__ void     batcher_render(batcher* batch);
 

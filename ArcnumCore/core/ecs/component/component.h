@@ -56,6 +56,7 @@ __A_CORE_API__ typedef enum
 // ==============================================================================
 // COMPONENTS:
 
+__A_CORE_API__ CORE_COMPONENT_FACTORY(component);
 __A_CORE_API__ CORE_COMPONENT_FACTORY(mesh_component, f64_vec values; );
 __A_CORE_API__ CORE_COMPONENT_FACTORY(transform_component, vec3 position; vec3 rotation; vec3 scale;);
 __A_CORE_API__ CORE_COMPONENT_FACTORY(shader_component, GLuint VAO; GLuint VBO; GLuint vertex_shader; GLuint fragment_shader; GLuint shader_program; );
