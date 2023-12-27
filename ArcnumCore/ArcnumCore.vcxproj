@@ -336,7 +336,6 @@
     <ClCompile Include="lib\GLAD\glad.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
     <None Include="shaders\color_shader.frag" />
     <None Include="shaders\light_shader.vert" />
     <None Include="shaders\texture_shader.frag" />

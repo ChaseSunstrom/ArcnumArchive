@@ -43,7 +43,7 @@ __A_CORE_API__  transform_component transform_component_new(vec3 position, vec3 
 	return (transform_component) { COMPONENT_TYPE_TRANSFORM, position, rotation, scale };
 }
 
-__A_CORE_API__  shader_component shader_component_new(string vertex_path, string fragment_path)
+__A_CORE_API__ shader_component shader_component_new(f64_vec vertices, string vertex_path, string fragment_path)
 {
 	string vertex_source = read_file(vertex_path);
 	string fragment_source = read_file(fragment_path);
@@ -58,6 +58,54 @@ __A_CORE_API__  shader_component shader_component_new(string vertex_path, string
 	glCompileShader(shader.fragment_shader);
 
 	shader.shader_program = glCreateProgram();
+
+	glUseProgram(shader.shader_program);
+
+	glGenVertexArrays(1, &shader.VAO);
+	glBindVertexArray(shader.VAO);
+
+	glGenBuffers(1, &shader.VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, shader.VBO);
+	glBufferData(GL_ARRAY_BUFFER, vertices->size, vertices->data, GL_DYNAMIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glAttachShader(shader.shader_program, shader.vertex_shader);
+	glAttachShader(shader.shader_program, shader.fragment_shader);
+
+	glLinkProgram(shader.shader_program);
+
+	glDeleteShader(shader.vertex_shader);
+	glDeleteShader(shader.fragment_shader);
+
+	return shader;
+}
+
+__A_CORE_API__ shader_component _shader_component_new(string vertex_path, string fragment_path)
+{
+	string vertex_source = read_file(vertex_path);
+	string fragment_source = read_file(fragment_path);
+
+	shader_component shader = { COMPONENT_TYPE_SHADER, 0, 0 };
+
+	shader.vertex_shader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(shader.vertex_shader, 1, &vertex_source, NULL);
+	glCompileShader(shader.vertex_shader);
+	shader.fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(shader.fragment_shader, 1, &fragment_source, NULL);
+	glCompileShader(shader.fragment_shader);
+
+	shader.shader_program = glCreateProgram();
+
+	glUseProgram(shader.shader_program);
+
+	glGenVertexArrays(1, &shader.VAO);
+	glBindVertexArray(shader.VAO);
+
+	glGenBuffers(1, &shader.VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, shader.VBO);
+	glBufferData(GL_ARRAY_BUFFER, 0, NULL, GL_DYNAMIC_DRAW);
 
 	glAttachShader(shader.shader_program, shader.vertex_shader);
 	glAttachShader(shader.shader_program, shader.fragment_shader);
@@ -123,4 +171,39 @@ __A_CORE_API__ void normal_on_attach(stride_type stride_size)
 {
 	glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, stride_size * sizeof(f64), 3 * sizeof(f64));
 	glEnableVertexAttribArray(1);
+}
+
+__A_CORE_API__ void shader_component_change_shader(shader_component* sc, string shader_path, GLint shader_type)
+{
+
+	if (shader_type == GL_FRAGMENT_SHADER)
+	{
+		string fragment_source = read_file(shader_path);
+
+		sc->fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
+		glShaderSource(sc->fragment_shader, 1, &fragment_source, NULL);
+		glCompileShader(sc->fragment_shader);
+
+		glAttachShader(sc->shader_program, sc->fragment_shader);
+		glDeleteShader(sc->fragment_shader);
+	}
+
+	else if (shader_type == GL_VERTEX_SHADER)
+	{
+
+		string vertex_source = read_file(shader_path);
+
+		sc->vertex_shader = glCreateShader(GL_VERTEX_SHADER);
+		glShaderSource(sc->vertex_shader, 1, &vertex_source, NULL);
+		glCompileShader(sc->vertex_shader);
+
+		glAttachShader(sc->shader_program, sc->vertex_shader);
+		glDeleteShader(sc->vertex_shader);
+	}
+}
+
+
+__A_CORE_API__ void mesh_component_change_vertices(mesh_component* mc, f64_vec vertices)
+{
+	vector_move_data(mc->values, vertices);
 }

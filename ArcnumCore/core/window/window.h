@@ -40,16 +40,16 @@ __A_CORE_API__ typedef struct
 // ==============================================================================
 // WINDOW FUNCTIONS:
 
-__A_CORE_API__ GLFWwindow*    window_init_gl(window_data window_data);
+__A_CORE_API__ GLFWwindow*    window_init_gl(window_data* window_data);
 __A_CORE_API__ window*        window_new(void);
 __A_CORE_API__ window*		  _window_new(bump_allocator* allocator);
 __A_CORE_API__ generic_event* window_propagate_event(generic_event* event);
 __A_CORE_API__ void		      window_free(window* window);
-__A_CORE_API__ void           window_on_update(window window);
+__A_CORE_API__ void           window_on_update(window* window);
 __A_CORE_API__ void           window_vsync(bool vsync);
-__A_CORE_API__ void           window_on_event(window window, generic_event* event);
-__A_CORE_API__ bool           window_is_running(window window);
-__A_CORE_API__ bool           window_close_event(window window);
+__A_CORE_API__ void           window_on_event(window* window, generic_event* event);
+__A_CORE_API__ bool           window_is_running(window* window);
+__A_CORE_API__ bool           window_close_event(window* window);
 
 // ==============================================================================
 

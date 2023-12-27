@@ -62,7 +62,6 @@ __A_CORE_API__ void batcher_add_entity(batcher* batcher, entity* entity)
 
 		glBindBuffer(GL_ARRAY_BUFFER, batcher->VBO);
 		glBufferSubData(GL_ARRAY_BUFFER, batcher->vertices->size, render_component->mesh.values->size * sizeof(f64), render_component->mesh.values);
-
 	}
 }
 __A_CORE_API__ void batcher_add_entities(batcher* batcher, struct_vec entities)

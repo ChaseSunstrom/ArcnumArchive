@@ -167,6 +167,27 @@ __A_CORE_API__ void vector_remove_slice(vector* v, u64 index, u64 amount)
 	v->size -= amount;
 }
 
+__A_CORE_API__ void vector_move_data(vector* v, vector* other)
+{
+	vector_add_capacity(v, other->size);
+
+	memmove(v->data + v->size, other->data, other->size * sizeof(byte*));
+
+	v->size += other->size;
+
+	vector_free(other);
+}
+
+__A_CORE_API__ void vector_change_data(vector* v, vector* other)
+{
+	if (v->size < other->size)
+		vector_add_capacity(v, other->size);
+
+	memmove(v->data + v->size, other->data, other->size * sizeof(byte*));
+
+	vector_free(other);
+}
+
 __A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector* v)
 {
 	return v->capacity - v->size > 0;

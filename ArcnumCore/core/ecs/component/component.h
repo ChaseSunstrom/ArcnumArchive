@@ -11,7 +11,7 @@
 // COMPONENT FACTORY | Used to easily create components
 // ==============================================================================
 
-#define CORE_COMPONENT_FACTORY(_name, ...) typedef struct           \
+#define CORE_COMPONENT_FACTORY(_name, ...) typedef struct      \
 									  {                        \
 										  component_type type; \
 									 	  __VA_ARGS__		   \
@@ -82,7 +82,8 @@ __A_CORE_API__ normal_component	   normal_component_default(void);
 
 __A_CORE_API__ mesh_component	   mesh_component_new(f64_vec values);
 __A_CORE_API__ transform_component transform_component_new(vec3 position, vec3 rotation, vec3 scale);
-__A_CORE_API__ shader_component	   shader_component_new(string vertex_path, string fragment_path);
+__A_CORE_API__ shader_component    shader_component_new(f64_vec vertices, string vertex_path, string fragment_path);
+__A_CORE_API__ shader_component	   _shader_component_new(string vertex_path, string fragment_path);
 __A_CORE_API__ render_component	   render_component_new(mesh_component mesh, shader_component shader, transform_component transform);
 __A_CORE_API__ texture_component   texture_component_new(byte* image_data, GLuint texture);
 __A_CORE_API__ color_component	   color_component_new(color color);
@@ -91,6 +92,10 @@ __A_CORE_API__ normal_component	   normal_component_new(void);
 __A_CORE_API__ void                color_on_attach(stride_type stride_size);
 __A_CORE_API__ void                texture_on_attach(stride_type stride_size);
 __A_CORE_API__ void                normal_on_attach(stride_type stride_size);
+
+__A_CORE_API__ void                shader_component_change_shader(shader_component* sc, string shader_path, GLint shader_type);
+
+__A_CORE_API__ void                mesh_component_change_vertices(mesh_component* mc, f64_vec vertices);
 
 // ==============================================================================
 

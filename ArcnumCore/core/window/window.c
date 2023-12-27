@@ -10,7 +10,7 @@
 // ==============================================================================
 // WINDOW FUNCTIONS:
 
-__A_CORE_API__ GLFWwindow* window_init_gl(window_data window_data)
+__A_CORE_API__ GLFWwindow* window_init_gl(window_data* window_data)
 {
 	glfwInit();
 
@@ -18,7 +18,7 @@ __A_CORE_API__ GLFWwindow* window_init_gl(window_data window_data)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* gl_window = glfwCreateWindow(window_data.width, window_data.height, window_data.title, NULL, NULL);
+	GLFWwindow* gl_window = glfwCreateWindow(window_data->width, window_data->height, window_data->title, NULL, NULL);
 
 	glfwMakeContextCurrent(gl_window);
 	glfwSetFramebufferSizeCallback(gl_window, framebuffer_size_callback);
@@ -29,7 +29,7 @@ __A_CORE_API__ GLFWwindow* window_init_gl(window_data window_data)
 
 	glewInit();
 
-	window_vsync(window_data.vsync);
+	window_vsync(window_data->vsync);
 
 	//glfw callbacks
 	glfwSetWindowSizeCallback(gl_window, window_resized_event_callback);
@@ -50,7 +50,7 @@ __A_CORE_API__ window* window_new(void)
 	_window->window_data.width = SCREEN_WIDTH;
 	_window->window_data.height = SCREEN_HEIGHT;
 	_window->window_data.event_callback = window_on_event;
-	_window->window = window_init_gl(_window->window_data);
+	_window->window = window_init_gl(&_window->window_data);
 	_window->renderer = renderer_new();
 	_window->running = true;
 	return _window;
@@ -64,28 +64,28 @@ __A_CORE_API__ window* _window_new(bump_allocator* allocator)
 	_window->window_data.width = SCREEN_WIDTH;
 	_window->window_data.height = SCREEN_HEIGHT;
 	_window->window_data.event_callback = window_on_event;
-	_window->window = window_init_gl(_window->window_data);
+	_window->window = window_init_gl(&_window->window_data);
 	_window->renderer = renderer_new();
 	_window->running = true;
 	return _window;
 }
 
-__A_CORE_API__ void window_on_update(window window)
+__A_CORE_API__ void window_on_update(window* window)
 {
-	renderer_render(window.renderer);
+	renderer_render(window->renderer);
 
-	glfwSwapBuffers(window.window);
+	glfwSwapBuffers(window->window);
 	glfwPollEvents();
 }
 
-__A_CORE_API__ bool window_is_running(window window)
+__A_CORE_API__ bool window_is_running(window* window)
 {
-	return !glfwWindowShouldClose(window.window);
+	return !glfwWindowShouldClose(window->window);
 }
 
-__A_CORE_API__ bool window_close_event(window window)
+__A_CORE_API__ bool window_close_event(window* window)
 {
-	window.running = false;
+	window->running = false;
 	return true;
 }
 

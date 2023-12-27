@@ -31,7 +31,7 @@ typedef struct
     entity entity;
 } voxel;
 
-voxel voxel_default();
+voxel* voxel_default();
 voxel voxel_new(vec3 position, vec3 scale, vec3 rotation, color color);
 
 #endif

@@ -56,6 +56,8 @@ __A_CORE_API__ void        vector_add_capacity(vector* v, u64 size);
 __A_CORE_API__ void        vector_add_vector(vector* v, vector* other);
 __A_CORE_API__ void        _vector_add_array(vector* v, u64 size, generic array[]);
 __A_CORE_API__ void        vector_remove_slice(vector* v, u64 index, u64 amount);
+__A_CORE_API__ void        vector_move_data(vector* v, vector* other);
+__A_CORE_API__ void        vector_change_data(vector* v, vector* other);
 __A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector* v);
 
 

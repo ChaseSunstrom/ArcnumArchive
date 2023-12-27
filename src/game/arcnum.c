@@ -74,11 +74,11 @@ void application_loop(const application app)
 
 	subscription_new(WINDOW_EVENT_TOPIC, application_on_event);
 
-	voxel vox = voxel_default();
+	voxel* vox = voxel_default();
 
-	batcher_add_entity(app.window.renderer->batcher, &vox);
+	ecs_add_entity(app.window.renderer->ecs, vox);
 
-	while (window_is_running(app.window))
+	while (window_is_running(&app.window))
 	{
 		while (iterator_b_iterate(app.layer_stack.layers_it) != ITERATOR_BEGIN)
 		{
@@ -88,7 +88,7 @@ void application_loop(const application app)
 
 		iterator_reset(app.layer_stack.layers_it);
 
-		window_on_update(app.window);
+		window_on_update(&app.window);
 	}
 }
 

@@ -23,6 +23,8 @@ __A_CORE_API__ typedef struct
 
 __A_CORE_API__ entity entity_default(void);
 __A_CORE_API__ entity entity_new(component components[]);
+__A_CORE_API__ void   entity_render(entity* entity);
+__A_CORE_API__ void   entity_change_vertices(entity* entity, f64_vec vertices);
 
 __A_CORE_API__ void   entity_add_component(entity* entity, component* component);
 __A_CORE_API__ component* entity_get_component(entity* entity, component_type type);
