@@ -16,8 +16,7 @@ __A_CORE_API__ entity entity_new(component components[])
 	entity entity;
 	entity.entity_id = ++globabl_entity_id;
 	entity.component_mask = 0;
-	entity.components = vector_default();
-	vector_add_array(entity.components, components);
+	entity.components = vector_new(components);
 
 	for (u64 i = 0; i < entity.components->size; ++i)
 		entity.component_mask |= ((component*)vector_get(entity.components, i))->type;
@@ -27,6 +26,9 @@ __A_CORE_API__ entity entity_new(component components[])
 
 __A_CORE_API__ void entity_render(entity* entity)
 {
+	// rc becomes NULL after the second call to this function
+	// definitely correlation not causation
+	// however, still need to find root cause
 	render_component* rc = entity_get_component(entity, COMPONENT_TYPE_RENDER);
 
 	glUseProgram(rc->shader.shader_program);

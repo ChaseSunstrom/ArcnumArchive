@@ -24,7 +24,7 @@ __A_CORE_API__ GLFWwindow* window_init_gl(window_data* window_data)
 	glfwSetFramebufferSizeCallback(gl_window, framebuffer_size_callback);
 	glfwSetErrorCallback(glfw_error_callback);
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-	glfwSetWindowUserPointer(gl_window, &window_data);
+	glfwSetWindowUserPointer(gl_window, window_data);
 	glEnable(GL_DEPTH_TEST);
 
 	glewInit();

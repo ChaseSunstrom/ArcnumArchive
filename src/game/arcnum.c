@@ -7,25 +7,24 @@
 
 void application_main(void)
 {
-	application _app =
-	{
-		.allocator = bump_allocator_new(KILOBYTE)
-	};
+	application* _app = ALLOC(application);
 
-	_app.window      = *_window_new(_app.allocator);
-	_app.layer_stack = *_layer_stack_new(_app.allocator);
+	_app->allocator = bump_allocator_new(KILOBYTE);
+
+	_app->window      = _window_new(_app->allocator);
+	_app->layer_stack = *_layer_stack_new(_app->allocator);
 
 	application_loop(_app);
 }
 
-void application_push_layer(const application app, layer* layer)
+void application_push_layer(const application* app, layer* layer)
 {
-	layer_stack_push_layer(app.layer_stack, layer);
+	layer_stack_push_layer(app->layer_stack, layer);
 }
 
-void application_push_overlay(const application app, layer* layer)
+void application_push_overlay(const application* app, layer* layer)
 {
-	layer_stack_push_overlay(app.layer_stack, layer);
+	layer_stack_push_overlay(app->layer_stack, layer);
 }
 
 bool application_print_event(generic_event* event)
@@ -67,7 +66,7 @@ void application_on_event(generic_event* event)
 	event_dispatcher_dispatch(dispatcher, application_print_event, event);
 }
 
-void application_loop(const application app)
+void application_loop(const application* app)
 {
 	layer* _layer = layer_new();
 	application_push_layer(app, _layer);
@@ -76,19 +75,19 @@ void application_loop(const application app)
 
 	voxel* vox = voxel_default();
 
-	ecs_add_entity(app.window.renderer->ecs, vox);
+	ecs_add_entity(app->window->renderer->ecs, vox);
 
-	while (window_is_running(&app.window))
+	while (window_is_running(app->window))
 	{
-		while (iterator_b_iterate(app.layer_stack.layers_it) != ITERATOR_BEGIN)
+		while (iterator_b_iterate(app->layer_stack.layers_it) != ITERATOR_BEGIN)
 		{
-			layer* current_layer = iterator_get_current_data(app.layer_stack.layers_it);
+			layer* current_layer = iterator_get_current_data(app->layer_stack.layers_it);
 			layer_on_update(current_layer);
 		}
 
-		iterator_reset(app.layer_stack.layers_it);
+		iterator_reset(app->layer_stack.layers_it);
 
-		window_on_update(&app.window);
+		window_on_update(app->window);
 	}
 }
 

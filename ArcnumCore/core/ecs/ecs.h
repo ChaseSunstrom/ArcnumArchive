@@ -13,6 +13,5 @@ typedef struct
 
 ecs* ecs_default();
 void ecs_add_entity(ecs* ecs, entity* entity);
-void ecs_render(ecs* ecs);
 
 #endif // CORE_ECS_H

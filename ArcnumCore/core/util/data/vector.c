@@ -39,6 +39,8 @@ __A_CORE_API__ byte* vector_get(vector* v, u64 index)
 {
 	if (index < v->size)
 		return v->data[index];
+
+	return NULL;
 }
 
 __A_CORE_API__ void vector_free(vector* v)
