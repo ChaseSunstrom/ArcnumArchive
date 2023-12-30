@@ -1,10 +1,7 @@
 #include "file.h"
 
-#ifdef _MSC_VER
-	#pragma warning(disable : 4996)
-#endif // _MSC_VER
 
-__A_CORE_API__ string read_file(string file_path)
+__A_CORE_API__ c_str read_file(c_str file_path)
 {
     FILE* file = fopen(file_path, "r");
     if (file == NULL) {

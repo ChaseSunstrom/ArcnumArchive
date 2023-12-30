@@ -43,10 +43,10 @@ __A_CORE_API__  transform_component transform_component_new(vec3 position, vec3 
 	return (transform_component) { COMPONENT_TYPE_TRANSFORM, position, rotation, scale };
 }
 
-__A_CORE_API__ shader_component shader_component_new(f64_vec vertices, string vertex_path, string fragment_path)
+__A_CORE_API__ shader_component shader_component_new(f64_vec vertices, c_str vertex_path, c_str fragment_path)
 {
-	string vertex_source = read_file(vertex_path);
-	string fragment_source = read_file(fragment_path);
+	c_str vertex_source = read_file(vertex_path);
+	c_str fragment_source = read_file(fragment_path);
 
 	shader_component shader = { COMPONENT_TYPE_SHADER, 0, 0 };
 
@@ -82,10 +82,10 @@ __A_CORE_API__ shader_component shader_component_new(f64_vec vertices, string ve
 	return shader;
 }
 
-__A_CORE_API__ shader_component _shader_component_new(string vertex_path, string fragment_path)
+__A_CORE_API__ shader_component _shader_component_new(c_str vertex_path, c_str fragment_path)
 {
-	string vertex_source = read_file(vertex_path);
-	string fragment_source = read_file(fragment_path);
+	c_str vertex_source = read_file(vertex_path);
+	c_str fragment_source = read_file(fragment_path);
 
 	shader_component shader = { COMPONENT_TYPE_SHADER, 0, 0 };
 
@@ -173,12 +173,12 @@ __A_CORE_API__ void normal_on_attach(stride_type stride_size)
 	glEnableVertexAttribArray(1);
 }
 
-__A_CORE_API__ void shader_component_change_shader(shader_component* sc, string shader_path, GLint shader_type)
+__A_CORE_API__ void shader_component_change_shader(shader_component* sc, c_str shader_path, GLint shader_type)
 {
 
 	if (shader_type == GL_FRAGMENT_SHADER)
 	{
-		string fragment_source = read_file(shader_path);
+		c_str fragment_source = read_file(shader_path);
 
 		sc->fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(sc->fragment_shader, 1, &fragment_source, NULL);
@@ -191,7 +191,7 @@ __A_CORE_API__ void shader_component_change_shader(shader_component* sc, string 
 	else if (shader_type == GL_VERTEX_SHADER)
 	{
 
-		string vertex_source = read_file(shader_path);
+		c_str vertex_source = read_file(shader_path);
 
 		sc->vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(sc->vertex_shader, 1, &vertex_source, NULL);

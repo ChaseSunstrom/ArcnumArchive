@@ -292,6 +292,7 @@
     <ClInclude Include="core\util\data\iterator.h" />
     <ClInclude Include="core\util\data\map.h" />
     <ClInclude Include="core\util\data\set.h" />
+    <ClInclude Include="core\util\data\str.h" />
     <ClInclude Include="core\util\data\types.h" />
     <ClInclude Include="core\util\data\vector.h" />
     <ClInclude Include="core\util\log.h" />
@@ -324,6 +325,7 @@
     <ClCompile Include="core\util\data\iterator.c" />
     <ClCompile Include="core\util\data\map.c" />
     <ClCompile Include="core\util\data\set.c" />
+    <ClCompile Include="core\util\data\str.c" />
     <ClCompile Include="core\util\data\vector.c" />
     <ClCompile Include="core\renderer\layer_stack.c" />
     <ClCompile Include="core\util\math\mat.c" />

@@ -3,6 +3,6 @@
 
 #include "../std_include.h"
 
-__A_CORE_API__ string read_file(string file_path);
+__A_CORE_API__ c_str read_file(c_str file_path);
 
 #endif

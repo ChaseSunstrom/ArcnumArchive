@@ -2,5 +2,5 @@
 
 int main()
 {
-	application_main();
+    application_main();
 }

@@ -18,7 +18,7 @@ __A_CORE_API__ typedef generic_event* (*event_callback)(generic_event*);
 
 __A_CORE_API__ typedef struct
 {
-	string title;
+	c_str title;
 	bool   vsync;
 	u32    width;
 	u32    height;
@@ -71,7 +71,7 @@ __A_CORE_API__ void window_mouse_move_event_callback(GLFWwindow* window, f64 x, 
 // ==============================================================================
 // GLFW CALLBACKS:
 
-__A_CORE_API__ void        glfw_error_callback(i32 error, string description);
+__A_CORE_API__ void        glfw_error_callback(i32 error, c_str description);
 __A_CORE_API__ static void framebuffer_size_callback(GLFWwindow* window, i32 width, i32 height);
 
 // ==============================================================================

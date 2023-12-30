@@ -74,7 +74,7 @@ __A_CORE_API__ typedef struct
 // EVENT RELATED METHODS:
 
 __A_CORE_API__ bool        event_dispatcher_dispatch(event_dispatcher dispatcher, generic function_to_call);
-__A_CORE_API__ string event_type_to_string(enum event_type event_type);
+__A_CORE_API__ c_str event_type_to_string(enum event_type event_type);
 
 // ===============================================================
 // EVENT FUNCTION_PTR: | Used as a function pointer to call any event

@@ -9,7 +9,7 @@ typedef unsigned int       u32;
 typedef unsigned long long u64;
 typedef float			   f32;
 typedef double             f64;
-typedef const char*        string;
+typedef char*              c_str;
 typedef void*              generic;
 typedef signed char        sbyte;
 typedef unsigned char      byte;

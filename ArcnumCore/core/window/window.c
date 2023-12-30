@@ -204,7 +204,7 @@ __A_CORE_API__ void window_mouse_move_event_callback(GLFWwindow* window, f64 xpo
 // ==============================================================================
 // GLFW CALLBACKS:
 
-__A_CORE_API__ void glfw_error_callback(i32 error, string description)
+__A_CORE_API__ void glfw_error_callback(i32 error, c_str description)
 {
 	ARCNUM_CORE_LOG("GLFW ERROR: %s\n", description);
 }

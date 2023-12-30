@@ -15,7 +15,7 @@ __A_CORE_API__ typedef enum
 // ==============================================================================
 __A_CORE_API__ typedef struct
 {
-	string name;
+	c_str name;
 } layer;
 
 
