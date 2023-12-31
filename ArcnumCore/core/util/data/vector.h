@@ -8,43 +8,34 @@
 // ===============================================================================
 // VECTOR:       | Can store any type in the same vector as another type 
 // ===============================================================================
-__A_CORE_API__ typedef struct
-{
-	u64 size;
-	u64 capacity;
-	byte** data;
-} vector;
 
-// ===============================================================================
-// VECTOR TYPES: | Used to hint at the data inside the vector.
-//				 | it is up to the user to cast the data to the correct type
+// Define a macro to declare a vector type
+#define DECLARE_VECTOR(_type) \
+    typedef struct { \
+        uint64_t size; \
+        uint64_t capacity; \
+        byte** data; \
+    } _type##_vector
 
-__A_CORE_API__ typedef vector* bool_vec;
-__A_CORE_API__ typedef vector* i8_vec;
-__A_CORE_API__ typedef vector* i16_vec;
-__A_CORE_API__ typedef vector* i32_vec;
-__A_CORE_API__ typedef vector* i64_vec;
-__A_CORE_API__ typedef vector* u8_vec;
-__A_CORE_API__ typedef vector* u16_vec;
-__A_CORE_API__ typedef vector* u32_vec;
-__A_CORE_API__ typedef vector* u64_vec;
-__A_CORE_API__ typedef vector* f32_vec;
-__A_CORE_API__ typedef vector* f64_vec;
-__A_CORE_API__ typedef vector* string_vec;
-__A_CORE_API__ typedef vector* struct_vec;
-__A_CORE_API__ typedef vector* enum_vec;
-__A_CORE_API__ typedef vector* fn_ptr_vec;
+// Define a macro to declare the vector type if not already declared
+#define DECLARE_VECTOR_IF_NOT_DECLARED(_type) 
+        #ifdef _type
+_type##_vector
+        #else 
+DECLARE_VECTOR(_type);
+#endif
 
-// ===============================================================================
-
-
+// Define a macro to create an alias for the vector type
+#ifndef vector
+#define vector(_type) DECLARE_VECTOR_IF_NOT_DECLARED(_type)
+#endif
 
 // ===============================================================================
 // VECTOR FUNCTIONS:
 
-__A_CORE_API__ vector*     vector_default(void);
-__A_CORE_API__ vector*     _vector_new(u64 size, generic values[]);
-__A_CORE_API__ byte*       vector_get(vector* v, u64 index);
+__A_CORE_API__ vector(generic) vector_default(void);
+__A_CORE_API__ vector(generic) _vector_new(u64 size, generic values[]);
+__A_CORE_API__ byte*       vector_get(vector(generic) v, u64 index);
 __A_CORE_API__ void        vector_free(vector* v);
 __A_CORE_API__ void        vector_push(vector* v, generic data);
 __A_CORE_API__ void        vector_insert(vector* v, u64 index, generic data);
