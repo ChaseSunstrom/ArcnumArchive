@@ -13,7 +13,7 @@
 __A_CORE_API__ typedef struct
 {
 	u64 entity_id;
-	struct_vec components;
+	vector(component) components;
 
 	// This is used internally to tell OpenGL the size of the stride needed to render the entity
 	stride_type stride;
@@ -24,9 +24,10 @@ __A_CORE_API__ typedef struct
 __A_CORE_API__ entity entity_default(void);
 __A_CORE_API__ entity entity_new(component components[]);
 __A_CORE_API__ void   entity_render(entity* entity);
-__A_CORE_API__ void   entity_change_vertices(entity* entity, f64_vec vertices);
+__A_CORE_API__ void   entity_change_vertices(entity* entity, vector(f64) vertices);
 
 __A_CORE_API__ void   entity_add_component(entity* entity, component* component);
+__A_CORE_API__ void   entity_remove_component(entity* entity, component_type type);
 __A_CORE_API__ component* entity_get_component(entity* entity, component_type type);
 __A_CORE_API__ __A_CORE_INLINE__ bool entity_has_component(entity* entity, component_type type);
 

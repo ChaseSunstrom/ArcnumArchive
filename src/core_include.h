@@ -26,5 +26,6 @@
 #include <core/util/data/file.h>
 #include <core/renderer/batcher.h>
 #include <core/util/data/str.h>
+#include <core/tests/test.h>
 
 #endif

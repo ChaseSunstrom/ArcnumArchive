@@ -14,11 +14,11 @@ voxel* voxel_default()
 
 	vox->entity.components = vector_default();
 
-	render_component render_component = render_component_new(mesh_component_new(vector_new(voxel_vertices)),
+	render_component* render_component = render_component_new(mesh_component_new(vector_new(voxel_vertices)),
 		shader_component_new(vector_new(voxel_vertices), fullpath_buffer1, fullpath_buffer2),
 		transform_component_new(vec3_default(), vec3_default(), vec3_default()));
 	
-	entity_add_component(&vox->entity, &render_component);
+	entity_add_component(&vox->entity, render_component);
 
 	return vox;
 }
@@ -35,14 +35,14 @@ voxel voxel_new(vec3 position, vec3 scale, vec3 rotation, color color)
 
 	vox.entity.components = vector_default();
 
-	render_component render_component = render_component_new(mesh_component_new(vector_new(voxel_vertices)),
+	render_component* render_component = render_component_new(mesh_component_new(vector_new(voxel_vertices)),
 		_shader_component_new(fullpath_buffer1, fullpath_buffer2),
 		transform_component_new(position, rotation, scale));
 
-	color_component color_component = color_component_new(color);
+	color_component* color_component = color_component_new(color);
 
-	entity_add_component(&vox.entity, &render_component);
-	entity_add_component(&vox.entity, &color_component);
+	entity_add_component(&vox.entity, render_component);
+	entity_add_component(&vox.entity, color_component);
 
 	return vox;
 }

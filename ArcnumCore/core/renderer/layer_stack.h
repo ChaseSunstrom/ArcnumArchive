@@ -12,7 +12,7 @@
 // ==============================================================================
 __A_CORE_API__ typedef struct
 {
-	struct_vec layers;
+	vector(layer) layers;
 	iterator*  layers_it;
 } layer_stack;
 

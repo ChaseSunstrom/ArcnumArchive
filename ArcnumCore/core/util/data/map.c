@@ -10,16 +10,16 @@ __A_CORE_API__ __A_CORE_INLINE__ bool pair_compare(pair* pair, generic key)
 	return pair->key == key;
 }
 
-__A_CORE_API__ map* map_new()
+__A_CORE_API__ map(generic, generic) map_new()
 {
-	map* _map = ALLOC(map);
-	_map->pairs = vector_default();
-	_map->size = _map->pairs->size;
-	_map->capacity = _map->pairs->capacity;
-	return _map;
+	map(generic, generic) map = ALLOC(_map);
+	map->pairs = vector_default();
+	map->size = map->pairs->size;
+	map->capacity = map->pairs->capacity;
+	return map;
 }
 
-__A_CORE_API__ void map_insert(map* _map, void* key, void* value)
+__A_CORE_API__ void map_insert(map(generic, generic) _map, generic key, generic value)
 {
 	pair* _pair = ALLOC(pair);
 	_pair->key = key;
@@ -29,7 +29,7 @@ __A_CORE_API__ void map_insert(map* _map, void* key, void* value)
 	_map->capacity = _map->pairs->capacity;
 }
 
-__A_CORE_API__ generic map_get(map* _map, void* key)
+__A_CORE_API__ generic map_get(map(generic, generic) _map, generic key)
 {
 	for (int i = 0; i < _map->pairs->size; i++)
 	{
@@ -42,7 +42,7 @@ __A_CORE_API__ generic map_get(map* _map, void* key)
 	return NULL;
 }
 
-__A_CORE_API__ void map_remove(map* _map, void* key)
+__A_CORE_API__ void map_remove(map(generic, generic) _map, generic key)
 {
 	for (int i = 0; i < _map->pairs->size; i++)
 	{

@@ -20,13 +20,13 @@ typedef struct
 	// This is used to store the amount of entities in the batcher
 	u64 entity_count;
 
-	f64_vec vertices;
+	vector(f64) vertices;
 
 	// This is just in case access to entities data is needed;
-	struct_vec entities;
+	vector(entity) entities;
 
 	// This is used as a way to store the entity ids of the entities in the batcher
-	u64_vec entity_ids;
+	vector(u64) entity_ids;
 } batcher;
 
 
@@ -35,10 +35,10 @@ typedef struct
 // BATCHER FUNCTIONS:
 
 __A_CORE_API__ batcher* batcher_default();
-__A_CORE_API__ batcher* batcher_new(f64_vec vertices, u64 entity_count);
+__A_CORE_API__ batcher* batcher_new(vector(f64) vertices, u64 entity_count);
 __A_CORE_API__ void     batcher_bind(batcher* batcher);
 __A_CORE_API__ void     batcher_add_entity(batcher* batcher, entity* entity);
-__A_CORE_API__ void     batcher_add_entities(batcher* batcher, struct_vec entities);
+__A_CORE_API__ void     batcher_add_entities(batcher* batcher, vector(entity) entities);
 __A_CORE_API__ void     batcher_render(batcher* batch);
 
 // ==============================================================================

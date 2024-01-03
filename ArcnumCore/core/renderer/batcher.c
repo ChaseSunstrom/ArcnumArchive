@@ -20,7 +20,7 @@ __A_CORE_API__ batcher* batcher_default()
 	return _batcher;
 }
 
-__A_CORE_API__ batcher* batcher_new(struct_vec entities, u64 entity_count)
+__A_CORE_API__ batcher* batcher_new(vector(entity) entities, u64 entity_count)
 {
 	batcher* _batcher = ALLOC(batcher);
 	_batcher->VAO = 0;
@@ -58,13 +58,13 @@ __A_CORE_API__ void batcher_add_entity(batcher* batcher, entity* entity)
 
 	if (render_component)
 	{
-		vector_add_vector(batcher->vertices, render_component->mesh.values);
+		vector_add_vector(batcher->vertices, render_component->mesh->values);
 
 		glBindBuffer(GL_ARRAY_BUFFER, batcher->VBO);
-		glBufferSubData(GL_ARRAY_BUFFER, batcher->vertices->size, render_component->mesh.values->size * sizeof(f64), render_component->mesh.values);
+		glBufferSubData(GL_ARRAY_BUFFER, batcher->vertices->size, render_component->mesh->values->size * sizeof(f64), render_component->mesh->values);
 	}
 }
-__A_CORE_API__ void batcher_add_entities(batcher* batcher, struct_vec entities)
+__A_CORE_API__ void batcher_add_entities(batcher* batcher, vector(entity) entities)
 {
 	iterator* it = iterator_new(entities);
 
@@ -90,7 +90,7 @@ __A_CORE_API__ void batcher_remove(batcher* batcher, entity* entity)
 	{
 		if ((u64)vector_get(batcher->entity_ids, i) == entity->entity_id)
 		{
-			vector_remove_slice(batcher->vertices, i, render_component->mesh.values->size);
+			vector_remove_slice(batcher->vertices, i, render_component->mesh->values->size);
 			vector_remove(batcher->entity_ids, i);
 			return;
 		}

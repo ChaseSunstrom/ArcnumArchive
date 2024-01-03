@@ -24,19 +24,20 @@ __A_CORE_API__ typedef struct
 {
 	u64 size;
 	u64 capacity;
-	struct_vec pairs;
-} map;
+	vector(pair) pairs;
+} _map;
 
+#define map(_type1, _type2) _map*
 
 // ==============================================================================
 // MAP FUNCITONS:
 
 __A_CORE_API__ __A_CORE_INLINE__ bool pair_compare(pair* a, generic key);
 
-__A_CORE_API__ map*    map_new();
-__A_CORE_API__ void    map_insert(map* map, generic key, generic value);
-__A_CORE_API__ void    map_remove(map* map, generic key);
-__A_CORE_API__ generic map_get(map* map, generic key);
+__A_CORE_API__ map(generic, generic)    map_new();
+__A_CORE_API__ void    map_insert(map(generic, generic) map, generic key, generic value);
+__A_CORE_API__ void    map_remove(map(generic, generic) map, generic key);
+__A_CORE_API__ generic map_get(map(generic, generic) map, generic key);
 
 // ==============================================================================
 

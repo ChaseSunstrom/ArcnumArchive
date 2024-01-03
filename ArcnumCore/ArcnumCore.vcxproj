@@ -306,6 +306,7 @@
     <ClInclude Include="core\renderer\layer_stack.h" />
     <ClInclude Include="core\window\window.h" />
     <ClInclude Include="include\OTHER\stb_image.h" />
+    <ClInclude Include="core\tests\test.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ecs\component\color.c" />

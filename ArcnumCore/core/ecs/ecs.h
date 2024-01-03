@@ -8,10 +8,11 @@
 
 typedef struct
 {
-	struct_vec entities;
+	vector(entity) entities;
 } ecs;
 
 ecs* ecs_default();
 void ecs_add_entity(ecs* ecs, entity* entity);
+void ecs_remove_entity(ecs* ecs, entity* entity);
 
 #endif // CORE_ECS_H

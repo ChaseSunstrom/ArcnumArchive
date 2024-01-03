@@ -27,25 +27,23 @@ __A_CORE_API__ entity entity_new(component components[])
 __A_CORE_API__ void entity_render(entity* entity)
 {
 	// rc becomes NULL after the second call to this function
-	// definitely correlation not causation
-	// however, still need to find root cause
 	render_component* rc = entity_get_component(entity, COMPONENT_TYPE_RENDER);
 
-	glUseProgram(rc->shader.shader_program);
-	glBindVertexArray(rc->shader.VAO);
+	glUseProgram(rc->shader->shader_program);
+	glBindVertexArray(rc->shader->VAO);
 
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
-__A_CORE_API__ void entity_change_vertices(entity* entity, f64_vec vertices)
+__A_CORE_API__ void entity_change_vertices(entity* entity, vector(f64) vertices)
 {
 	if (!entity_has_component(entity, COMPONENT_TYPE_RENDER))
 		return;
 
 	render_component* rc = entity_get_component(entity, COMPONENT_TYPE_RENDER);
 
-	glBindBuffer(GL_ARRAY_BUFFER, rc->shader.VBO);
-	glBufferSubData(GL_ARRAY_BUFFER, rc->mesh.values ->size, vertices->size * sizeof(f64), vertices);
+	glBindBuffer(GL_ARRAY_BUFFER, rc->shader->VBO);
+	glBufferSubData(GL_ARRAY_BUFFER, rc->mesh->values->size, vertices->size * sizeof(f64), vertices);
 
 	vector_change_data(entity, vertices);
 }
@@ -66,6 +64,14 @@ __A_CORE_API__ void entity_add_component(entity* entity, component* component)
 {
 	vector_push(entity->components, component);
 	entity->component_mask |= component->type;
+}
+
+__A_CORE_API__ void entity_remove_component(entity* entity, component_type component_type)
+{
+	for (u64 i = 0; i < entity->components->size; i++)
+		if (((component*)vector_get(entity->components, i))->type == component_type)
+			vector_remove(entity->components, i);
+	entity->component_mask &= ~component_type;
 }
 
 __A_CORE_API__ __A_CORE_INLINE__ bool entity_has_component(entity* entity, component_type component_type)

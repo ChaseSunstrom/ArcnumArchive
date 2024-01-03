@@ -3,134 +3,181 @@
 #include "../../util/data/vector.h"
 #include "../../util/data/file.h"
 
-__A_CORE_API__  mesh_component      mesh_component_default(void)
+__A_CORE_API__  mesh_component* mesh_component_default(void)
 {
-	return (mesh_component) { COMPONENT_TYPE_MESH, vector_default() };
+	mesh_component* mc = ALLOC(mesh_component);
+	mc->type = COMPONENT_TYPE_MESH;
+	mc->values = vector_default();
+	return mc;
 }
 
-__A_CORE_API__  transform_component transform_component_default(void)
+__A_CORE_API__  transform_component* transform_component_default(void)
 {
-	return (transform_component) { COMPONENT_TYPE_TRANSFORM, vec3_default(), vec3_default(), vec3_default() };
+	transform_component* tc = ALLOC(transform_component);
+	tc->type = COMPONENT_TYPE_TRANSFORM;
+	tc->position = vec3_default();
+	tc->rotation = vec3_default();
+	tc->scale = vec3_default();
+	return tc;
 }
 
-__A_CORE_API__  shader_component	   shader_component_default(void)
+__A_CORE_API__  shader_component* shader_component_default(void)
 {
-	return (shader_component) { COMPONENT_TYPE_SHADER, 0, 0, 0, 0, glCreateProgram() };
+	shader_component* sc = ALLOC(shader_component);
+	sc->type = COMPONENT_TYPE_SHADER;
+	sc->vertex_shader = 0;
+	sc->fragment_shader = 0;
+	sc->shader_program = glCreateProgram();
+	sc->VAO = 0;
+	sc->VBO = 0;
+	return sc;
 }
 
-__A_CORE_API__ render_component	   render_component_default(void)
+__A_CORE_API__ render_component* render_component_default(void)
 {
-	return (render_component) { COMPONENT_TYPE_RENDER, mesh_component_default(), shader_component_default(), transform_component_default() };
+	render_component* rc = ALLOC(render_component);
+	rc->type = COMPONENT_TYPE_RENDER;
+	rc->mesh = mesh_component_default();
+	rc->shader = shader_component_default();
+	rc->transform = transform_component_default();
+	return rc;
 }
 
-__A_CORE_API__  texture_component   texture_component_default(void)
+__A_CORE_API__  texture_component* texture_component_default(void)
 {
-	return (texture_component) { COMPONENT_TYPE_TEXTURE, NULL, 0 };
+	texture_component* tc = ALLOC(texture_component);
+	tc->type = COMPONENT_TYPE_TEXTURE;
+	tc->image_data = NULL;
+	tc->texture = 0;
+	return tc;
 }
 
-__A_CORE_API__  color_component	   color_component_default(void)
+__A_CORE_API__  color_component* color_component_default(void)
 {
-	return (color_component) { COMPONENT_TYPE_COLOR, color_default() };
+	color_component* cc = ALLOC(color_component);
+	cc->type = COMPONENT_TYPE_COLOR;
+	cc->color = color_default();
+	return cc;
 }
 
-__A_CORE_API__  mesh_component mesh_component_new(f64_vec values)
+__A_CORE_API__  mesh_component* mesh_component_new(vector(f64) values)
 {
-	return (mesh_component) { COMPONENT_TYPE_MESH, values };
+	mesh_component* mc = ALLOC(mesh_component);
+	mc->type = COMPONENT_TYPE_MESH;
+	mc->values = values;
+	return mc;
 }
 
-__A_CORE_API__  transform_component transform_component_new(vec3 position, vec3 rotation, vec3 scale)
+__A_CORE_API__  transform_component* transform_component_new(vec3 position, vec3 rotation, vec3 scale)
 {
-	return (transform_component) { COMPONENT_TYPE_TRANSFORM, position, rotation, scale };
+	transform_component* tc = ALLOC(transform_component);
+	tc->type = COMPONENT_TYPE_TRANSFORM;
+	tc->position = position;
+	tc->rotation = rotation;
+	tc->scale = scale;
+	return tc;
 }
 
-__A_CORE_API__ shader_component shader_component_new(f64_vec vertices, c_str vertex_path, c_str fragment_path)
+__A_CORE_API__ shader_component* shader_component_new(vector(f64) vertices, c_str vertex_path, c_str fragment_path)
 {
 	c_str vertex_source = read_file(vertex_path);
 	c_str fragment_source = read_file(fragment_path);
 
-	shader_component shader = { COMPONENT_TYPE_SHADER, 0, 0 };
+	shader_component* shader = ALLOC(shader_component);
 
-	shader.vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(shader.vertex_shader, 1, &vertex_source, NULL);
-	glCompileShader(shader.vertex_shader);
-	shader.fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(shader.fragment_shader, 1, &fragment_source, NULL);
-	glCompileShader(shader.fragment_shader);
+	shader->vertex_shader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(shader->vertex_shader, 1, &vertex_source, NULL);
+	glCompileShader(shader->vertex_shader);
+	shader->fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(shader->fragment_shader, 1, &fragment_source, NULL);
+	glCompileShader(shader->fragment_shader);
 
-	shader.shader_program = glCreateProgram();
+	shader->shader_program = glCreateProgram();
 
-	glUseProgram(shader.shader_program);
+	glUseProgram(shader->shader_program);
 
-	glGenVertexArrays(1, &shader.VAO);
-	glBindVertexArray(shader.VAO);
+	glGenVertexArrays(1, &shader->VAO);
+	glBindVertexArray(shader->VAO);
 
-	glGenBuffers(1, &shader.VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, shader.VBO);
+	glGenBuffers(1, &shader->VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, shader->VBO);
 	glBufferData(GL_ARRAY_BUFFER, vertices->size, vertices->data, GL_DYNAMIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	glAttachShader(shader.shader_program, shader.vertex_shader);
-	glAttachShader(shader.shader_program, shader.fragment_shader);
+	glAttachShader(shader->shader_program, shader->vertex_shader);
+	glAttachShader(shader->shader_program, shader->fragment_shader);
 
-	glLinkProgram(shader.shader_program);
+	glLinkProgram(shader->shader_program);
 
-	glDeleteShader(shader.vertex_shader);
-	glDeleteShader(shader.fragment_shader);
+	glDeleteShader(shader->vertex_shader);
+	glDeleteShader(shader->fragment_shader);
 
 	return shader;
 }
 
-__A_CORE_API__ shader_component _shader_component_new(c_str vertex_path, c_str fragment_path)
+__A_CORE_API__ shader_component* _shader_component_new(c_str vertex_path, c_str fragment_path)
 {
 	c_str vertex_source = read_file(vertex_path);
 	c_str fragment_source = read_file(fragment_path);
 
-	shader_component shader = { COMPONENT_TYPE_SHADER, 0, 0 };
+	shader_component* shader = ALLOC(shader_component);
 
-	shader.vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(shader.vertex_shader, 1, &vertex_source, NULL);
-	glCompileShader(shader.vertex_shader);
-	shader.fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(shader.fragment_shader, 1, &fragment_source, NULL);
-	glCompileShader(shader.fragment_shader);
+	shader->vertex_shader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(shader->vertex_shader, 1, &vertex_source, NULL);
+	glCompileShader(shader->vertex_shader);
+	shader->fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(shader->fragment_shader, 1, &fragment_source, NULL);
+	glCompileShader(shader->fragment_shader);
 
-	shader.shader_program = glCreateProgram();
+	shader->shader_program = glCreateProgram();
 
-	glUseProgram(shader.shader_program);
+	glUseProgram(shader->shader_program);
 
-	glGenVertexArrays(1, &shader.VAO);
-	glBindVertexArray(shader.VAO);
+	glGenVertexArrays(1, &shader->VAO);
+	glBindVertexArray(shader->VAO);
 
-	glGenBuffers(1, &shader.VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, shader.VBO);
+	glGenBuffers(1, &shader->VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, shader->VBO);
 	glBufferData(GL_ARRAY_BUFFER, 0, NULL, GL_DYNAMIC_DRAW);
 
-	glAttachShader(shader.shader_program, shader.vertex_shader);
-	glAttachShader(shader.shader_program, shader.fragment_shader);
+	glAttachShader(shader->shader_program, shader->vertex_shader);
+	glAttachShader(shader->shader_program, shader->fragment_shader);
 
-	glLinkProgram(shader.shader_program);
+	glLinkProgram(shader->shader_program);
 
-	glDeleteShader(shader.vertex_shader);
-	glDeleteShader(shader.fragment_shader);
+	glDeleteShader(shader->vertex_shader);
+	glDeleteShader(shader->fragment_shader);
 
 	return shader;
 }
 
-__A_CORE_API__  render_component render_component_new(mesh_component mesh, shader_component shader, transform_component transform)
+__A_CORE_API__  render_component* render_component_new(mesh_component* mesh, shader_component* shader, transform_component* transform)
 {
-	return (render_component) { COMPONENT_TYPE_RENDER, mesh, shader, transform };
+	render_component* rc = ALLOC(render_component);
+	rc->type = COMPONENT_TYPE_RENDER;
+	rc->mesh = mesh;
+	rc->shader = shader;
+	rc->transform = transform;
+	return rc;
 }
 
-__A_CORE_API__  texture_component texture_component_new(byte* image_data, GLuint texture)
+__A_CORE_API__  texture_component* texture_component_new(byte* image_data, GLuint texture)
 {
-	return (texture_component) { COMPONENT_TYPE_TEXTURE, image_data, texture };
+	texture_component* tc = ALLOC(texture_component);
+	tc->type = COMPONENT_TYPE_TEXTURE;
+	tc->image_data = image_data;
+	tc->texture = texture;
+	return tc;
 }
 
-__A_CORE_API__  color_component	color_component_new(color color)
+__A_CORE_API__  color_component*	color_component_new(color color)
 {
-	return (color_component) { COMPONENT_TYPE_COLOR, color };
+	color_component* cc = ALLOC(color_component);
+	cc->type = COMPONENT_TYPE_COLOR;
+	cc->color = color;
+	return cc;
 }
 
 __A_CORE_API__ void color_on_attach(stride_type stride_size)
@@ -175,7 +222,6 @@ __A_CORE_API__ void normal_on_attach(stride_type stride_size)
 
 __A_CORE_API__ void shader_component_change_shader(shader_component* sc, c_str shader_path, GLint shader_type)
 {
-
 	if (shader_type == GL_FRAGMENT_SHADER)
 	{
 		c_str fragment_source = read_file(shader_path);
@@ -203,7 +249,7 @@ __A_CORE_API__ void shader_component_change_shader(shader_component* sc, c_str s
 }
 
 
-__A_CORE_API__ void mesh_component_change_vertices(mesh_component* mc, f64_vec vertices)
+__A_CORE_API__ void mesh_component_change_vertices(mesh_component* mc, vector(f64) vertices)
 {
 	vector_move_data(mc->values, vertices);
 }

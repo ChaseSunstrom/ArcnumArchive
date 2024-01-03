@@ -3,9 +3,9 @@
 // ==============================================================================
 // VECTOR FUNCTIONS
 
-__A_CORE_API__ vector* vector_default(void)
+__A_CORE_API__ vector(generic) vector_default(void)
 {
-	vector* v = ALLOC(vector);
+	vector(generic) v = ALLOC(_vector);
 	
 	if (v != NULL)
 	{
@@ -17,9 +17,9 @@ __A_CORE_API__ vector* vector_default(void)
 	return v;
 }
 
-__A_CORE_API__ vector* _vector_new(u64 size, generic values[])
+__A_CORE_API__ vector(generic) _vector_new(u64 size, generic values[])
 {
-	vector* v = ALLOC(vector);
+	vector(generic) v = ALLOC(_vector);
 
 	if (v != NULL)
 	{
@@ -35,7 +35,7 @@ __A_CORE_API__ vector* _vector_new(u64 size, generic values[])
 	return v;
 }
 
-__A_CORE_API__ byte* vector_get(vector* v, u64 index)
+__A_CORE_API__ byte* vector_get(vector(generic) v, u64 index)
 {
 	if (index < v->size)
 		return v->data[index];
@@ -43,7 +43,7 @@ __A_CORE_API__ byte* vector_get(vector* v, u64 index)
 	return NULL;
 }
 
-__A_CORE_API__ void vector_free(vector* v)
+__A_CORE_API__ void vector_free(vector(generic) v)
 {
 	if (v)
 	{
@@ -52,7 +52,7 @@ __A_CORE_API__ void vector_free(vector* v)
 	}
 }
 
-__A_CORE_API__ void vector_push(vector* v, generic data)
+__A_CORE_API__ void vector_push(vector(generic) v, generic data)
 {
 	if (v->size >= v->capacity)
 	{
@@ -63,7 +63,7 @@ __A_CORE_API__ void vector_push(vector* v, generic data)
 	v->size += 1;
 }
 
-__A_CORE_API__ void vector_insert(vector* v, u64 index, generic data)
+__A_CORE_API__ void vector_insert(vector(generic) v, u64 index, generic data)
 {
 	if (index > v->size)
 	{
@@ -85,7 +85,7 @@ __A_CORE_API__ void vector_insert(vector* v, u64 index, generic data)
 	v->size += 1;
 }
 
-__A_CORE_API__ void vector_remove(vector* v, u64 index)
+__A_CORE_API__ void vector_remove(vector(generic) v, u64 index)
 {
 	if (index >= v->size)
 	{
@@ -100,7 +100,7 @@ __A_CORE_API__ void vector_remove(vector* v, u64 index)
 	v->size -= 1;
 }
 
-__A_CORE_API__ void vector_pop(vector* v)
+__A_CORE_API__ void vector_pop(vector(generic) v)
 {
 	if (v->size > 0)
 	{
@@ -109,7 +109,7 @@ __A_CORE_API__ void vector_pop(vector* v)
 	}
 }
 
-__A_CORE_API__ void vector_clear(vector* v)
+__A_CORE_API__ void vector_clear(vector(generic) v)
 {
 	v->size = 0;
 	v->capacity = 1;
@@ -117,7 +117,7 @@ __A_CORE_API__ void vector_clear(vector* v)
 	v->data = ALLOC(byte*);
 }
 
-__A_CORE_API__ void vector_reverse(vector* v)
+__A_CORE_API__ void vector_reverse(vector(generic) v)
 {
 	for (u64 i = 0; i < v->size / 2; i++)
 	{
@@ -127,7 +127,7 @@ __A_CORE_API__ void vector_reverse(vector* v)
 	}
 }
 
-__A_CORE_API__ void vector_add_capacity(vector* v, u64 size)
+__A_CORE_API__ void vector_add_capacity(vector(generic) v, u64 size)
 {
 	while (v->capacity < v->size + size)
 	{
@@ -136,7 +136,7 @@ __A_CORE_API__ void vector_add_capacity(vector* v, u64 size)
 	v->data = REALLOC(v->data, byte*, v->capacity);
 }
 
-__A_CORE_API__ void vector_add_vector(vector* v, vector* other)
+__A_CORE_API__ void vector_add_vector(vector(generic) v, vector(generic) other)
 {
 	vector_add_capacity(v, other->size);
 
@@ -145,7 +145,7 @@ __A_CORE_API__ void vector_add_vector(vector* v, vector* other)
 	v->size += other->size;
 }
 
-__A_CORE_API__ void _vector_add_array(vector* v, u64 size, generic array[])
+__A_CORE_API__ void _vector_add_array(vector(generic) v, u64 size, generic array[])
 {
 	vector_add_capacity(v, size);
 
@@ -154,7 +154,7 @@ __A_CORE_API__ void _vector_add_array(vector* v, u64 size, generic array[])
 	v->size += size;
 }
 
-__A_CORE_API__ void vector_remove_slice(vector* v, u64 index, u64 amount)
+__A_CORE_API__ void vector_remove_slice(vector(generic) v, u64 index, u64 amount)
 {
 	if (index + amount > v->size)
 	{
@@ -169,7 +169,7 @@ __A_CORE_API__ void vector_remove_slice(vector* v, u64 index, u64 amount)
 	v->size -= amount;
 }
 
-__A_CORE_API__ void vector_move_data(vector* v, vector* other)
+__A_CORE_API__ void vector_move_data(vector(generic) v, vector(generic) other)
 {
 	vector_add_capacity(v, other->size);
 
@@ -180,7 +180,7 @@ __A_CORE_API__ void vector_move_data(vector* v, vector* other)
 	vector_free(other);
 }
 
-__A_CORE_API__ void vector_change_data(vector* v, vector* other)
+__A_CORE_API__ void vector_change_data(vector(generic) v, vector(generic) other)
 {
 	if (v->size < other->size)
 		vector_add_capacity(v, other->size);
@@ -190,7 +190,7 @@ __A_CORE_API__ void vector_change_data(vector* v, vector* other)
 	vector_free(other);
 }
 
-__A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector* v)
+__A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector(generic) v)
 {
 	return v->capacity - v->size > 0;
 }

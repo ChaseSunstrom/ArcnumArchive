@@ -2,6 +2,7 @@
 #define CORE_CORE_H
 
 #define __A_CORE_API__
+#define __A_CORE_TEST__
 
 #ifdef _MSC_VER
 	#define __A_CORE_INLINE__   __forceinline
