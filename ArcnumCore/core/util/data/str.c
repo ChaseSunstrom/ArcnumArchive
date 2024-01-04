@@ -37,12 +37,8 @@ void str_cconcat(str* str, c_str c_str)
 u64 str_find_char(str* str, char c)
 {
 	for (u64 i = 0; i < str->length; i++)
-	{
 		if (str->data[i] == c)
-		{
 			return i;
-		}
-	}
 }
 
 u64* str_find_chars(str* str, char c)
@@ -85,9 +81,7 @@ void str_remove_chars(str* str, char c)
 		u64 index = indices[i];
 
 		for (u64 j = index; j < str->length - 1; j++)
-		{
 			str->data[j] = str->data[j + 1];
-		}
 
 		str->length -= 1;
 	}
@@ -102,9 +96,7 @@ void _str_remove_char(str* str, u64 index)
 		return;
 
 	for (u64 i = index; i < str->length - 1; i++)
-	{
 		str->data[i] = str->data[i + 1];
-	}
 
 	str->length -= 1;
 	REALLOC(str->data, char, str->length);
@@ -116,9 +108,7 @@ void _str_remove_chars(str* str, u64 index, u64 amount)
 		return;
 
 	for (u64 i = index; i < str->length - amount; i++)
-	{
 		str->data[i] = str->data[i + amount];
-	}
 
 	str->length -= amount;
 	REALLOC(str->data, char, str->length);

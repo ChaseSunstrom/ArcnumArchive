@@ -12,7 +12,7 @@ __A_CORE_API__ typedef struct
 
 #define set(_type) _set*
 
-__A_CORE_API__ set(_type)    set_new();
+__A_CORE_API__ set(_type)    set_default();
 __A_CORE_API__ void    set_insert(set(generic) set, u64 index, generic data);
 __A_CORE_API__ void    set_push(set(generic) set, generic data);
 __A_CORE_API__ void	   set_remove(set(generic) set, u64 index);

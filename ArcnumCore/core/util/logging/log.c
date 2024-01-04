@@ -3,7 +3,7 @@
 
 // Magic windows color codes
 #define TEXT_COLOR_GREEN  2
-#define TEXT_COLOR_RED    1
+#define TEXT_COLOR_RED    4
 #define TEXT_COLOR_CYAN   11
 #define TEXT_COLOR_YELLOW 14
 

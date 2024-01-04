@@ -4,6 +4,7 @@
 #include "../memory/alloc.h"
 
 #include "types.h"
+#include "vector.h"
 
 typedef struct entry
 {
@@ -15,8 +16,7 @@ typedef struct entry
 typedef struct
 {
 	u64 size;
-	u64 capacity;
-	entry** buckets;
+	vector(entry) buckets;
 } _hashmap;
 
 #define hashmap(_key, _value) _hashmap*
@@ -47,6 +47,6 @@ bool                      _hashmap_compare_keys(byte* key1, byte* key2, u64 key_
 
 #define hashmap_insert_entries(_hmap, _entries) _hashmap_insert_entries(_hmap, _entries, sizeof(_entries) / sizeof(_entries[0]))
 #define hashmap_new(_entries) _hashmap_new(_entries, sizeof(_entries) / sizeof(_entries[0]))
-#define hashmap_compare_keys(_key1, _key2) _hashmap_compare_keys(_key1, _key2, sizeof(_key1) / sizeof(_key1[0]))
+#define hashmap_compare_keys(_key1, _key2) _hashmap_compare_keys(_key1, _key2, strlen(_key1))
 
 #endif // CORE_HASH_H

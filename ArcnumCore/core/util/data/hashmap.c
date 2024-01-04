@@ -62,16 +62,17 @@ u64 _hash64(byte* _data, u64 len)
         k1 = ROTL64(k1, 33);
         k1 *= c1;
         h ^= k1;
-        break;
+        //break;
 
-    case  8: k1 ^= ((u64)tail[7]) << 56;
-    case  7: k1 ^= ((u64)tail[6]) << 48;
-    case  6: k1 ^= ((u64)tail[5]) << 40;
-    case  5: k1 ^= ((u64)tail[4]) << 32;
-    case  4: k1 ^= ((u64)tail[3]) << 24;
-    case  3: k1 ^= ((u64)tail[2]) << 16;
-    case  2: k1 ^= ((u64)tail[1]) << 8;
-    case  1: k1 ^= ((u64)tail[0]) << 0;
+        // Buffer overflow here, no idea why
+    //case  8: k1 ^= ((u64)tail[7]) << 56;
+    //case  7: k1 ^= ((u64)tail[6]) << 48;
+    //case  6: k1 ^= ((u64)tail[5]) << 40;
+    //case  5: k1 ^= ((u64)tail[4]) << 32;
+    //case  4: k1 ^= ((u64)tail[3]) << 24;
+    //case  3: k1 ^= ((u64)tail[2]) << 16;
+    //case  2: k1 ^= ((u64)tail[1]) << 8;
+    //case  1: k1 ^= ((u64)tail[0]) << 0;
 
         k1 *= c1;
         k1 = ROTL64(k1, 31);
@@ -173,7 +174,7 @@ entry* entry_new(generic key, generic value)
 	return _entry;
 }
 
- bool _hashmap_compare_keys(generic key1, generic key2, u64 key_size)
+ bool _hashmap_compare_keys(byte* key1, byte* key2, u64 key_size)
 {
     byte* k1_b = key1;
 	byte* k2_b = key2;
@@ -188,8 +189,7 @@ hashmap(generic, generic) hashmap_default()
 {
     hashmap(generic, generic) hmap = ALLOC(_hashmap);
     hmap->size = 0;
-    hmap->capacity = 1;
-    hmap->buckets = ALLOC(entry*);
+    hmap->buckets = vector_default();
     return hmap;
 }
 
@@ -200,24 +200,26 @@ hashmap(generic, generic) _hashmap_new(entry* entries, u64 num_entries)
 	return hmap;
 }
 
-void hashmap_insert(hashmap(generic, generic) hmap, generic key, generic value)
+void hashmap_insert(hashmap(generic, generic) hmap, byte* key, byte* value)
 {
-    u64 hash = hash64(key);
-    u64 index = hash % hmap->capacity;
-
-    if (hmap->size >= hmap->capacity)
-    {
-        hmap->capacity <<= 1;
-	    hmap->buckets = REALLOC(hmap->buckets, entry*, hmap->capacity);
-    }
-
-    entry* entry = entry_new(key, value);
-
-    // Insert at the beginning of the linked list (chaining)
-    entry->next = hmap->buckets[index];
-    hmap->buckets[index] = entry;
-
     hmap->size++;
+    u64 hash = hash64(key);
+    u64 index = hash % hmap->size;
+
+    entry* new_entry = entry_new(key, value);
+
+    entry* current = vector_get(hmap->buckets, index);
+
+    if (current == NULL) 
+        vector_insert(hmap->buckets, index, new_entry);
+    
+    else 
+    {
+        while (current->next != NULL)
+            current = current->next;
+        
+        current->next = new_entry;
+    }
 }
 
 void _hashmap_insert_entries(hashmap(generic, generic) hmap, entry* entries, u64 num_entries)
@@ -228,10 +230,10 @@ void _hashmap_insert_entries(hashmap(generic, generic) hmap, entry* entries, u64
 
 void hashmap_remove(hashmap(generic, generic) hmap, generic key)
 {
-    u64 index = hash64(key) % hmap->capacity;
+    u64 index = hash64(key) % hmap->size;
 
     // Locate the bucket
-    entry* current = hmap->buckets[index];
+    entry* current = vector_get(hmap->buckets, index);
     entry* prev = NULL;
 
     // Search for the entry in the linked list
@@ -243,11 +245,13 @@ void hashmap_remove(hashmap(generic, generic) hmap, generic key)
             if (prev != NULL)
                 prev->next = current->next;
             else
-                hmap->buckets[index] = current->next;
+                vector_assign_data(hmap->buckets, current->next, index);
 
             // Free the memory occupied by the entry
             free(current);
             hmap->size--;
+
+            vector_remove(hmap->buckets, index);
 
             return;  // Entry removed, exit the function
         }
@@ -258,12 +262,12 @@ void hashmap_remove(hashmap(generic, generic) hmap, generic key)
     }
 }
 
-generic hashmap_get(hashmap(generic, generic) hmap, generic key)
+generic hashmap_get(hashmap(generic, generic) hmap, byte* key)
 {
-    u64 index = hash64(key) % hmap->capacity;
+    u64 index = hash64(key) % hmap->size;
 
     // Search for the entry in the bucket
-    entry* current = hmap->buckets[index];
+    entry* current = vector_get(hmap->buckets, index);
 
     while (current != NULL) 
     {

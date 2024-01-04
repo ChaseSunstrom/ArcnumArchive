@@ -1,5 +1,7 @@
 #include "vector.h"
 
+#include "../logging/log.h"
+
 // ==============================================================================
 // VECTOR FUNCTIONS
 
@@ -52,6 +54,19 @@ __A_CORE_API__ void vector_free(vector(generic) v)
 	}
 }
 
+__A_CORE_API__ void vector_free_all(vector(generic) v)
+{
+	if (v)
+	{
+		for (u64 i = 0; i < v->size; i++)
+			if (vector_get(v->data, i))
+				free(v->data[i]);
+
+		free(v->data);
+		free(v);
+	}
+}
+
 __A_CORE_API__ void vector_push(vector(generic) v, generic data)
 {
 	if (v->size >= v->capacity)
@@ -65,16 +80,10 @@ __A_CORE_API__ void vector_push(vector(generic) v, generic data)
 
 __A_CORE_API__ void vector_insert(vector(generic) v, u64 index, generic data)
 {
-	if (index > v->size)
-	{
-		return;
-	}
-
-	if (!vector_is_big_enough(v))
-	{
+	while (!vector_is_big_enough(v) || v->capacity < index + 1)
 		v->capacity <<= 1;
-		v->data = REALLOC(v->data, byte*, v->capacity);
-	}
+
+	v->data = REALLOC(v->data, byte*, v->capacity);
 
 	for (u64 i = v->size; i > index; i--)
 	{
@@ -88,14 +97,10 @@ __A_CORE_API__ void vector_insert(vector(generic) v, u64 index, generic data)
 __A_CORE_API__ void vector_remove(vector(generic) v, u64 index)
 {
 	if (index >= v->size)
-	{
 		return;
-	}
 
 	for (size_t i = index; i < v->size - 1; i++)
-	{
 		v->data[i] = v->data[i + 1];
-	}
 
 	v->size -= 1;
 }
@@ -189,5 +194,17 @@ __A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector(generic
 {
 	return v->capacity - v->size > 0;
 }
+
+__A_CORE_API__ void vector_assign_data(vector(generic) v, generic data, u64 index)
+{
+	if (index >= v->capacity)
+		vector_add_capacity(v, index - v->capacity * 2 + 1);
+
+	v->data[index] = data;
+	if (index > v->size)
+	v->size += index;
+}
+
+
 
 //===============================================================================
