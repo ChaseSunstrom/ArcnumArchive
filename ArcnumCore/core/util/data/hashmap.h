@@ -1,5 +1,5 @@
-#ifndef CORE_HASH_H
-#define CORE_HASH_H
+#ifndef CORE_HASHMAP_H
+#define CORE_HASHMAP_H
 
 #include "../memory/alloc.h"
 
@@ -24,9 +24,9 @@ typedef struct
 // =================================================================
 // HASH FUNCTIONS:
 
-u64  _hash64(byte* data, u64 size);
+u64  _hash64(byte* _data, u64 size);
 u64* _hash128(byte* _data, u64 size);
-u64  getblock64(const u64* p, int i);
+u64  getblock64(const u64* p, u64 i);
 u64  fmix64(u64 k);
 
 #define hash64(_data)  _hash64(_data, sizeof(_data))
@@ -43,7 +43,7 @@ void                      hashmap_insert(hashmap(generic, generic) hmap, byte* k
 void                      _hashmap_insert_entries(hashmap(generic, generic) hmap, entry* entries, u64 num_entries);
 void                      hashmap_remove(hashmap(generic, generic) hmap, byte* key);
 generic                   hashmap_get(hashmap(generic, generic) hmap, byte* key);
-static bool               _hashmap_compare_keys(byte* key1, byte* key2, u64 key_size);
+bool                      _hashmap_compare_keys(byte* key1, byte* key2, u64 key_size);
 
 #define hashmap_insert_entries(_hmap, _entries) _hashmap_insert_entries(_hmap, _entries, sizeof(_entries) / sizeof(_entries[0]))
 #define hashmap_new(_entries) _hashmap_new(_entries, sizeof(_entries) / sizeof(_entries[0]))

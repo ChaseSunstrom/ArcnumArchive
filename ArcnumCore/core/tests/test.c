@@ -1,21 +1,8 @@
 #include "test.h"
 
+#include "../util/logging/log.h"
+
 #include "../util/data/hashmap.h"
-
-#ifdef _MSC_VER
-
-#include <windows.h>
-
-void set_console_color(int color)
-{
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-}
-
-#else
-
-void set_console_color(int color) { }
-
-#endif // _MSC_VER
 
 void add_test(test test)
 {
@@ -25,36 +12,60 @@ void add_test(test test)
 
 TEST(test_hashmap_insert)
 {
+	hashmap(c_str, c_str) hmap = hashmap_default();
 
-	return true;
+	hashmap_insert(hmap, "key1", "value1");
+	hashmap_insert(hmap, "key2", "value2");
+	hashmap_insert(hmap, "key3", "value3");
+	hashmap_insert(hmap, "key4", "value4");
+
+	if (hmap->size = 4)
+		return true;
+
+	test_fail_reason = "HASHMAP SIZE INCORRECT";
+	return false;
 }
 
 TEST(test_hashmap_insert_entries)
 {
-	test_fail_reason = "FUCK YOU";
+	hashmap(c_str, c_str) hmap = hashmap_default();
+	entry entries[] = { { "key1", "value1" }, { "key2", "value2" }, { "key3", "value3" }, { "key4", "value4" } };
+	hashmap_insert_entries(hmap, entries);
+
+	if (hmap->size = 4)
+		return true;
+
+	test_fail_reason = "HASHMAP SIZE INCORRECT";
 	return false;
 }
 
 TEST(test_hashmap_remove)
 {
-	return true;
+	hashmap(c_str, c_str) hmap = hashmap_default();
+	entry entries[] = { { "key1", "value1" }, { "key2", "value2" }, { "key3", "value3" }, { "key4", "value4" } };
+	hashmap_insert_entries(hmap, entries);
+
+	hashmap_remove(hmap, "key1");
+	hashmap_remove(hmap, "key3");
+
+	if (hmap->size == 2)
+		return true;
+
+	test_fail_reason = "HASHMAP SIZE INCORRECT";
+	return false;
 }
 
 TEST(test_hashmap_compare_keys)
 {
-	test_fail_reason = "CUZ YOU SUCK";
+	if (hashmap_compare_keys("key1", "key1"))
+		return true;
+
+	test_fail_reason = "HASHMAP COMPARE KEYS RETURNED FALSE";
 	return false;
 } 
 
 TEST(test_hashmap_get)
 {
-	hashmap(c_str, u64) hashmap = hashmap_default();
-
-	hashmap_insert(hashmap, "a", 5);
-	hashmap_insert(hashmap, "e", 6);
-	hashmap_insert(hashmap, "l", 7);
-
-	
 
 }
 
@@ -74,15 +85,9 @@ bool core_test_main(void)
 		bool result = current_test.fn();
 
 		if (result)
-		{
-			set_console_color(FOREGROUND_GREEN);
-			printf("[TEST PASSED]: %s\n", current_test.name);
-		}
+			A_CORE_INFO_F("[TEST PASSED]: %s     SUCCESS\n", current_test.name);
 
 		else
-		{
-			set_console_color(FOREGROUND_RED);
-			printf("[TEST FAILED]: %s       REASON - %s\n", current_test.name, test_fail_reason);
-		}
+			A_CORE_ERROR_F("[TEST FAILED]: %s     REASON - %s     FAILURE\n", current_test.name, test_fail_reason);
 	}
 }

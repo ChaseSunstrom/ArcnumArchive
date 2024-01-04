@@ -4,6 +4,11 @@
 #define __A_CORE_API__
 #define __A_CORE_TEST__
 
+#define __A_CORE_TRACE__
+#define __A_CORE_INFO__
+#define __A_CORE_WARN__
+#define __A_CORE_ERROR__
+
 #ifdef _MSC_VER
 	#define __A_CORE_INLINE__   __forceinline
 	#define __A_CORE_RESTRICT__ __restrict 

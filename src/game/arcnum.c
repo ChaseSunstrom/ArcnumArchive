@@ -32,28 +32,28 @@ bool application_print_event(generic_event* event)
 	switch (event->type)
 	{
 	case WINDOW_RESIZED:
-		ARCNUM_CORE_LOG("[EVENT]: WINDOW RESIZED {X: %d, Y: %d}\n", ((window_resized_event*)event)->width, ((window_resized_event*)event)->height);
+		A_CORE_TRACE_F("[EVENT]: WINDOW RESIZED {X: %d, Y: %d}\n", ((window_resized_event*)event)->width, ((window_resized_event*)event)->height);
 		return true;
 	case MOUSE_MOVED:
-		ARCNUM_CORE_LOG("[EVENT]: MOUSE POSITION {X: %f, Y: %f}\n", ((mouse_move_event*)event)->x_pos, ((mouse_move_event*)event)->y_pos);
+		A_CORE_TRACE_F("[EVENT]: MOUSE POSITION {X: %f, Y: %f}\n", ((mouse_move_event*)event)->x_pos, ((mouse_move_event*)event)->y_pos);
 		return true;
 	case MOUSE_SCROLLED:
-		printf("[EVENT]: MOUSE SCROLLED \n");
+		A_CORE_TRACE_UF("[EVENT]: MOUSE SCROLLED \n");
 		return true;
 	case KEY_PRESSED:
-		ARCNUM_CORE_LOG("[EVENT]: KEY PRESSED {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
+		A_CORE_TRACE_F("[EVENT]: KEY PRESSED {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
 		return true;
 	case KEY_RELEASED:
-		ARCNUM_CORE_LOG("[EVENT]: KEY RELEASED {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
+		A_CORE_TRACE_F("[EVENT]: KEY RELEASED {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
 		return true;
 	case KEY_REPEAT:
-		ARCNUM_CORE_LOG("[EVENT]: KEY HELD {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
+		A_CORE_TRACE_F("[EVENT]: KEY HELD {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
 		return true;
 	case MOUSE_PRESSED:
-		ARCNUM_CORE_LOG("[EVENT]: MOUSE BUTTON PRESSED {KEYCODE: %d}\n", ((mouse_pressed_event*)event)->button);
+		A_CORE_TRACE_F("[EVENT]: MOUSE BUTTON PRESSED {KEYCODE: %d}\n", ((mouse_pressed_event*)event)->button);
 		return true;
 	case MOUSE_RELEASED:
-		ARCNUM_CORE_LOG("[EVENT]: MOUSE BUTTON RELEASED {KEYCODE: %d}\n", ((mouse_pressed_event*)event)->button);
+		A_CORE_TRACE_F("[EVENT]: MOUSE BUTTON RELEASED {KEYCODE: %d}\n", ((mouse_pressed_event*)event)->button);
 		return true;
 	}
 	return false;

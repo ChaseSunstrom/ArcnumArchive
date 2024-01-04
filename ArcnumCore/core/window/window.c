@@ -4,7 +4,7 @@
 
 #include "window.h"
 
-#include "../util/log.h"
+#include "../util/logging/log.h"
  
 
 // ==============================================================================
@@ -206,7 +206,7 @@ __A_CORE_API__ void window_mouse_move_event_callback(GLFWwindow* window, f64 xpo
 
 __A_CORE_API__ void glfw_error_callback(i32 error, c_str description)
 {
-	ARCNUM_CORE_LOG("GLFW ERROR: %s\n", description);
+	A_CORE_ERROR_F("GLFW ERROR: %s\n", description);
 }
 
 __A_CORE_API__ static void framebuffer_size_callback(GLFWwindow* window, i32 width, i32 height)

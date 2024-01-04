@@ -296,7 +296,7 @@
     <ClInclude Include="core\util\data\str.h" />
     <ClInclude Include="core\util\data\types.h" />
     <ClInclude Include="core\util\data\vector.h" />
-    <ClInclude Include="core\util\log.h" />
+    <ClInclude Include="core\util\logging\log.h" />
     <ClInclude Include="core\util\math\mat.h" />
     <ClInclude Include="core\util\math\math.h" />
     <ClInclude Include="core\util\math\radians.h" />
@@ -332,6 +332,7 @@
     <ClCompile Include="core\util\data\str.c" />
     <ClCompile Include="core\util\data\vector.c" />
     <ClCompile Include="core\renderer\layer_stack.c" />
+    <ClCompile Include="core\util\logging\log.c" />
     <ClCompile Include="core\util\math\mat.c" />
     <ClCompile Include="core\util\math\math.c" />
     <ClCompile Include="core\util\math\vec.c" />

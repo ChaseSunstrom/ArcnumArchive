@@ -5,11 +5,13 @@
 
 #define ROTL64(x, r) ((x << r) | (x >> (64 - r)))
 
-static inline u64 getblock64(const u64* p, int i) {
+static inline u64 getblock64(const u64* p, u64 i) 
+{
     return p[i];
 }
 
-static inline u64 fmix64(u64 k) {
+static inline u64 fmix64(u64 k) 
+{
     k ^= (k >> 33);
     k *= 0xff51afd7ed558ccd;
     k ^= (k >> 33);
@@ -19,8 +21,8 @@ static inline u64 fmix64(u64 k) {
     return k;
 }
 
-u64 _hash64(byte* _data, u64 len) {
-
+u64 _hash64(byte* _data, u64 len) 
+{
     const byte* data = _data;
     const u64 nblocks = len / 16;
 
@@ -91,7 +93,8 @@ u64 _hash64(byte* _data, u64 len) {
 
 }
 
-u64* _hash128(byte* _data, u64 len) {
+u64* _hash128(byte* _data, u64 len) 
+{
     const byte* data = _data;
     const u64 nblocks = len / 16;
 
@@ -170,7 +173,7 @@ entry* entry_new(generic key, generic value)
 	return _entry;
 }
 
-static bool _hashmap_compare_keys(generic key1, generic key2, u64 key_size)
+ bool _hashmap_compare_keys(generic key1, generic key2, u64 key_size)
 {
     byte* k1_b = key1;
 	byte* k2_b = key2;
@@ -232,16 +235,14 @@ void hashmap_remove(hashmap(generic, generic) hmap, generic key)
     entry* prev = NULL;
 
     // Search for the entry in the linked list
-    while (current != NULL) 
+    while (current != NULL)
     {
-        if (_hashmap_compare_keys(current->key, key, sizeof(current->key) / sizeof(current->key[0]))) 
+        if (hashmap_compare_keys(current->key, key))
         {
             // Entry found, remove it from the linked list
-            if (prev != NULL) 
+            if (prev != NULL)
                 prev->next = current->next;
-
-            // Entry is at the beginning of the linked list
-            else 
+            else
                 hmap->buckets[index] = current->next;
 
             // Free the memory occupied by the entry

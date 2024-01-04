@@ -45,7 +45,7 @@
     <ClInclude Include="core\renderer\layer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\util\log.h">
+    <ClInclude Include="core\util\logging\log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\events\sub.h">
@@ -192,6 +192,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\tests\test.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\util\logging\log.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
