@@ -130,9 +130,8 @@ __A_CORE_API__ void vector_reverse(vector(generic) v)
 __A_CORE_API__ void vector_add_capacity(vector(generic) v, u64 size)
 {
 	while (v->capacity < v->size + size)
-	{
 		v->capacity <<= 1;
-	}
+
 	v->data = REALLOC(v->data, byte*, v->capacity);
 }
 
@@ -157,14 +156,10 @@ __A_CORE_API__ void _vector_add_array(vector(generic) v, u64 size, generic array
 __A_CORE_API__ void vector_remove_slice(vector(generic) v, u64 index, u64 amount)
 {
 	if (index + amount > v->size)
-	{
 		return;
-	}
 
 	for (u64 i = index; i < v->size - amount; i++)
-	{
 		v->data[i] = v->data[i + amount];
-	}
 
 	v->size -= amount;
 }
