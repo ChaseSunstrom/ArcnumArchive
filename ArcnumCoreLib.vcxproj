@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EB327AB5-57F3-F5EB-202E-3F698CAD3AC8}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ArcnumCoreLib</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>bin\Debug\</OutDir>
+    <IntDir>obj\Debug\ArcnumCoreLib\</IntDir>
+    <TargetName>ArcnumCoreLib</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>bin\Release\</OutDir>
+    <IntDir>obj\Release\ArcnumCoreLib\</IntDir>
+    <TargetName>ArcnumCoreLib</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>ArcnumCore\include\GLEW;ArcnumCore\include\GLFW;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>glfw3.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>ArcnumCore\lib\GLEW;ArcnumCore\lib\GLFW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>ArcnumCore\include\GLEW;ArcnumCore\include\GLFW;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>glfw3.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>ArcnumCore\lib\GLEW;ArcnumCore\lib\GLFW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="ArcnumCore\core\core.h" />
+    <ClInclude Include="ArcnumCore\core\ecs\component\color.h" />
+    <ClInclude Include="ArcnumCore\core\ecs\component\component.h" />
+    <ClInclude Include="ArcnumCore\core\ecs\ecs.h" />
+    <ClInclude Include="ArcnumCore\core\ecs\entity\entity.h" />
+    <ClInclude Include="ArcnumCore\core\ecs\entity\uuid.h" />
+    <ClInclude Include="ArcnumCore\core\ecs\system\system.h" />
+    <ClInclude Include="ArcnumCore\core\events\event.h" />
+    <ClInclude Include="ArcnumCore\core\events\sub.h" />
+    <ClInclude Include="ArcnumCore\core\renderer\batcher.h" />
+    <ClInclude Include="ArcnumCore\core\renderer\layer.h" />
+    <ClInclude Include="ArcnumCore\core\renderer\layer_stack.h" />
+    <ClInclude Include="ArcnumCore\core\renderer\renderer.h" />
+    <ClInclude Include="ArcnumCore\core\tests\test.h" />
+    <ClInclude Include="ArcnumCore\core\util\data\collection.h" />
+    <ClInclude Include="ArcnumCore\core\util\data\file.h" />
+    <ClInclude Include="ArcnumCore\core\util\data\hashmap.h" />
+    <ClInclude Include="ArcnumCore\core\util\data\iterator.h" />
+    <ClInclude Include="ArcnumCore\core\util\data\map.h" />
+    <ClInclude Include="ArcnumCore\core\util\data\set.h" />
+    <ClInclude Include="ArcnumCore\core\util\data\str.h" />
+    <ClInclude Include="ArcnumCore\core\util\data\types.h" />
+    <ClInclude Include="ArcnumCore\core\util\data\vector.h" />
+    <ClInclude Include="ArcnumCore\core\util\logging\log.h" />
+    <ClInclude Include="ArcnumCore\core\util\math\mat.h" />
+    <ClInclude Include="ArcnumCore\core\util\math\math.h" />
+    <ClInclude Include="ArcnumCore\core\util\math\radians.h" />
+    <ClInclude Include="ArcnumCore\core\util\math\vec.h" />
+    <ClInclude Include="ArcnumCore\core\util\memory\alloc.h" />
+    <ClInclude Include="ArcnumCore\core\util\memory\bump_allocator.h" />
+    <ClInclude Include="ArcnumCore\core\util\std_include.h" />
+    <ClInclude Include="ArcnumCore\core\window\window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ArcnumCore\core\ecs\component\color.c" />
+    <ClCompile Include="ArcnumCore\core\ecs\component\component.c" />
+    <ClCompile Include="ArcnumCore\core\ecs\ecs.c" />
+    <ClCompile Include="ArcnumCore\core\ecs\entity\entity.c" />
+    <ClCompile Include="ArcnumCore\core\ecs\entity\uuid.c" />
+    <ClCompile Include="ArcnumCore\core\ecs\system\system.c" />
+    <ClCompile Include="ArcnumCore\core\events\event.c" />
+    <ClCompile Include="ArcnumCore\core\events\sub.c" />
+    <ClCompile Include="ArcnumCore\core\renderer\batcher.c" />
+    <ClCompile Include="ArcnumCore\core\renderer\layer.c" />
+    <ClCompile Include="ArcnumCore\core\renderer\layer_stack.c" />
+    <ClCompile Include="ArcnumCore\core\renderer\renderer.c" />
+    <ClCompile Include="ArcnumCore\core\tests\test.c" />
+    <ClCompile Include="ArcnumCore\core\util\data\file.c" />
+    <ClCompile Include="ArcnumCore\core\util\data\hashmap.c" />
+    <ClCompile Include="ArcnumCore\core\util\data\iterator.c" />
+    <ClCompile Include="ArcnumCore\core\util\data\map.c" />
+    <ClCompile Include="ArcnumCore\core\util\data\set.c" />
+    <ClCompile Include="ArcnumCore\core\util\data\str.c" />
+    <ClCompile Include="ArcnumCore\core\util\data\vector.c" />
+    <ClCompile Include="ArcnumCore\core\util\logging\log.c" />
+    <ClCompile Include="ArcnumCore\core\util\math\mat.c" />
+    <ClCompile Include="ArcnumCore\core\util\math\math.c" />
+    <ClCompile Include="ArcnumCore\core\util\math\vec.c" />
+    <ClCompile Include="ArcnumCore\core\util\memory\bump_allocator.c" />
+    <ClCompile Include="ArcnumCore\core\window\window.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

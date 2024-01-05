@@ -38,7 +38,7 @@ __A_CORE_API__ void renderer_render(renderer* renderer)
 	for (u64 i = 0; i < renderer->ecs->entities->size; i++)
 	{
 		entity* e = vector_get(renderer->ecs->entities, i);
-		if (entity_has_component(e, COMPONENT_TYPE_RENDER))
+		if (entity_has_component(e, "render_component"))
 		{
 			entity_render(e);
 		}

@@ -19,7 +19,7 @@ __A_CORE_API__ entity entity_new(component components[])
 	entity.components = hashmap_new(components);
 
 	for (u64 i = 0; i < entity.components->size; ++i)
-		entity.component_mask |= ((component*)vector_get(entity.components, i))->type;
+		//entity.component_mask |= ((component*)vector_get(entity.components, i))->component_name;
 
 	return entity;
 }
@@ -27,7 +27,7 @@ __A_CORE_API__ entity entity_new(component components[])
 __A_CORE_API__ void entity_render(entity* entity)
 {
 	// rc becomes NULL after the second call to this function
-	render_component* rc = entity_get_component(entity, COMPONENT_TYPE_RENDER);
+	render_component* rc = entity_get_component(entity, "render_component");
 
 	glUseProgram(rc->shader->shader_program);
 	glBindVertexArray(rc->shader->VAO);
@@ -37,10 +37,10 @@ __A_CORE_API__ void entity_render(entity* entity)
 
 __A_CORE_API__ void entity_change_vertices(entity* entity, vector(f64) vertices)
 {
-	if (!entity_has_component(entity, COMPONENT_TYPE_RENDER))
+	if (!entity_has_component(entity, "render_component"))
 		return;
 
-	render_component* rc = entity_get_component(entity, COMPONENT_TYPE_RENDER);
+	render_component* rc = entity_get_component(entity, "render_component");
 
 	glBindBuffer(GL_ARRAY_BUFFER, rc->shader->VBO);
 	glBufferSubData(GL_ARRAY_BUFFER, rc->mesh->values->size, vertices->size * sizeof(f64), vertices);
@@ -48,7 +48,7 @@ __A_CORE_API__ void entity_change_vertices(entity* entity, vector(f64) vertices)
 	vector_change_data(entity, vertices);
 }
 
-__A_CORE_API__ component* entity_get_component(entity* entity, component_type type)
+__A_CORE_API__ component* entity_get_component(entity* entity, c_str type)
 {
 	// Checks if the entity has the component, if not returns NULL
 	// would be a waste of performace to loop through the components
@@ -56,25 +56,25 @@ __A_CORE_API__ component* entity_get_component(entity* entity, component_type ty
 		return NULL;
 
 	for (u64 i = 0; i < entity->components->size; i++)
-		if (((component*)vector_get(entity->components, i))->type == type)
+		if (strcmp(((component*)vector_get(entity->components, i))->component_name, type) == 0)
 			return (component*)vector_get(entity->components, i);
 }
 
 __A_CORE_API__ void entity_add_component(entity* entity, component* component)
 {
 	vector_push(entity->components, component);
-	entity->component_mask |= component->type;
+	//entity->component_mask |= component->component_name;
 }
 
-__A_CORE_API__ void entity_remove_component(entity* entity, component_type component_type)
+__A_CORE_API__ void entity_remove_component(entity* entity, c_str component_type)
 {
 	for (u64 i = 0; i < entity->components->size; i++)
-		if (((component*)vector_get(entity->components, i))->type == component_type)
+		if (((component*)vector_get(entity->components, i))->component_name == component_type)
 			vector_remove(entity->components, i);
-	entity->component_mask &= ~component_type;
+	//entity->component_mask &= ~component_type;
 }
 
-__A_CORE_API__ __A_CORE_INLINE__ bool entity_has_component(entity* entity, component_type component_type)
+__A_CORE_API__ __A_CORE_INLINE__ bool entity_has_component(entity* entity, c_str component_type)
 {
-	return entity->component_mask & component_type;
+	//return entity->component_mask & component_type;
 }

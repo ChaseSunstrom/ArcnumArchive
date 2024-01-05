@@ -54,7 +54,7 @@ __A_CORE_API__ void batcher_add_entity(batcher* batcher, entity* entity)
 	vector_push(batcher->entity_ids, entity->entity_id);
 	vector_push(batcher->entities, entity);
 
-	render_component* render_component = entity_get_component(entity, COMPONENT_TYPE_RENDER);
+	render_component* render_component = entity_get_component(entity, "render_component");
 
 	if (render_component)
 	{
@@ -79,7 +79,7 @@ __A_CORE_API__ void batcher_add_entities(batcher* batcher, vector(entity) entiti
 
 __A_CORE_API__ void batcher_remove(batcher* batcher, entity* entity)
 {
-	render_component* render_component = entity_get_component(entity, COMPONENT_TYPE_RENDER);
+	render_component* render_component = entity_get_component(entity, "render_component");
 
 	if (!render_component)
 	{

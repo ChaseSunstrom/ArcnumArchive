@@ -6,7 +6,7 @@
 __A_CORE_API__  mesh_component* mesh_component_default(void)
 {
 	mesh_component* mc = ALLOC(mesh_component);
-	mc->type = "mesh_component";
+	mc->component_name = "mesh_component";
 	mc->values = vector_default();
 	return mc;
 }
@@ -14,7 +14,7 @@ __A_CORE_API__  mesh_component* mesh_component_default(void)
 __A_CORE_API__  transform_component* transform_component_default(void)
 {
 	transform_component* tc = ALLOC(transform_component);
-	tc->type = "transform_component";
+	tc->component_name = "transform_component";
 	tc->position = vec3_default();
 	tc->rotation = vec3_default();
 	tc->scale = vec3_default();
@@ -24,7 +24,7 @@ __A_CORE_API__  transform_component* transform_component_default(void)
 __A_CORE_API__  shader_component* shader_component_default(void)
 {
 	shader_component* sc = ALLOC(shader_component);
-	sc->type = "shader_component";
+	sc->component_name = "shader_component";
 	sc->vertex_shader = 0;
 	sc->fragment_shader = 0;
 	sc->shader_program = glCreateProgram();
@@ -36,7 +36,7 @@ __A_CORE_API__  shader_component* shader_component_default(void)
 __A_CORE_API__ render_component* render_component_default(void)
 {
 	render_component* rc = ALLOC(render_component);
-	rc->type = "render_component";
+	rc->component_name = "render_component";
 	rc->mesh = mesh_component_default();
 	rc->shader = shader_component_default();
 	rc->transform = transform_component_default();
@@ -46,7 +46,7 @@ __A_CORE_API__ render_component* render_component_default(void)
 __A_CORE_API__  texture_component* texture_component_default(void)
 {
 	texture_component* tc = ALLOC(texture_component);
-	tc->type = "texture_component";
+	tc->component_name = "texture_component";
 	tc->image_data = NULL;
 	tc->texture = 0;
 	return tc;
@@ -55,7 +55,7 @@ __A_CORE_API__  texture_component* texture_component_default(void)
 __A_CORE_API__  color_component* color_component_default(void)
 {
 	color_component* cc = ALLOC(color_component);
-	cc->type = "color_component";
+	cc->component_name = "color_component";
 	cc->color = color_default();
 	return cc;
 }
@@ -63,7 +63,7 @@ __A_CORE_API__  color_component* color_component_default(void)
 __A_CORE_API__  mesh_component* mesh_component_new(vector(f64) values)
 {
 	mesh_component* mc = ALLOC(mesh_component);
-	mc->type = "mesh_component";
+	mc->component_name = "mesh_component";
 	mc->values = values;
 	return mc;
 }
@@ -71,7 +71,7 @@ __A_CORE_API__  mesh_component* mesh_component_new(vector(f64) values)
 __A_CORE_API__  transform_component* transform_component_new(vec3 position, vec3 rotation, vec3 scale)
 {
 	transform_component* tc = ALLOC(transform_component);
-	tc->type = "transform_component";
+	tc->component_name = "transform_component";
 	tc->position = position;
 	tc->rotation = rotation;
 	tc->scale = scale;
@@ -126,7 +126,7 @@ __A_CORE_API__ shader_component* _shader_component_new(c_str vertex_path, c_str 
 
 	shader_component* shader = ALLOC(shader_component);
 
-	shader->component = "shader_component";
+	shader->component_name = "shader_component";
 
 	shader->vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(shader->vertex_shader, 1, &vertex_source, NULL);
@@ -160,7 +160,7 @@ __A_CORE_API__ shader_component* _shader_component_new(c_str vertex_path, c_str 
 __A_CORE_API__  render_component* render_component_new(mesh_component* mesh, shader_component* shader, transform_component* transform)
 {
 	render_component* rc = ALLOC(render_component);
-	rc->type = "render_component";
+	rc->component_name = "render_component";
 	rc->mesh = mesh;
 	rc->shader = shader;
 	rc->transform = transform;
@@ -170,7 +170,7 @@ __A_CORE_API__  render_component* render_component_new(mesh_component* mesh, sha
 __A_CORE_API__  texture_component* texture_component_new(byte* image_data, GLuint texture)
 {
 	texture_component* tc = ALLOC(texture_component);
-	tc->type = "texture_component";
+	tc->component_name = "texture_component";
 	tc->image_data = image_data;
 	tc->texture = texture;
 	return tc;
@@ -179,7 +179,7 @@ __A_CORE_API__  texture_component* texture_component_new(byte* image_data, GLuin
 __A_CORE_API__  color_component*	color_component_new(color color)
 {
 	color_component* cc = ALLOC(color_component);
-	cc->type = "color_component";
+	cc->component_name = "color_component";
 	cc->color = color;
 	return cc;
 }

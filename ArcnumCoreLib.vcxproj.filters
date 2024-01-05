@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ecs">
+      <UniqueIdentifier>{C06D880B-2C77-887C-B5F2-9E7C21FB937C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ecs\component">
+      <UniqueIdentifier>{4296BCA2-AE56-38D9-7791-8156E3107DB5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ecs\entity">
+      <UniqueIdentifier>{2C961D11-184E-5F5E-8155-38BA6D2CFA4E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ecs\system">
+      <UniqueIdentifier>{F47C8C32-E034-CE7F-493C-A7DB35136970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="events">
+      <UniqueIdentifier>{5A9D08FC-463F-33D2-2FFA-46261B3BBA22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="renderer">
+      <UniqueIdentifier>{9C6AA017-8837-FB22-B150-E9CA9D7C30B1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tests">
+      <UniqueIdentifier>{78756B10-E489-93C1-AD0B-372119DF8FF2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{43339F7C-2F6A-A00D-D856-8610C46C1C0F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\data">
+      <UniqueIdentifier>{ACB6EBCE-1821-A045-615F-51EBCD087E9A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\logging">
+      <UniqueIdentifier>{F93ECAD6-E5A1-597B-8E27-92317A6925FE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\math">
+      <UniqueIdentifier>{1CA6F0CE-8810-A545-D14E-56EB3DF8829A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\memory">
+      <UniqueIdentifier>{6B55F74D-D70A-7043-60FF-691ACCB36647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="window">
+      <UniqueIdentifier>{5DFE1E25-49A0-49FB-325B-5D4F1E9CD04B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ArcnumCore\core\core.h" />
+    <ClInclude Include="ArcnumCore\core\ecs\component\color.h">
+      <Filter>ecs\component</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\ecs\component\component.h">
+      <Filter>ecs\component</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\ecs\ecs.h">
+      <Filter>ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\ecs\entity\entity.h">
+      <Filter>ecs\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\ecs\entity\uuid.h">
+      <Filter>ecs\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\ecs\system\system.h">
+      <Filter>ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\events\event.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\events\sub.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\renderer\batcher.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\renderer\layer.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\renderer\layer_stack.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\renderer\renderer.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\tests\test.h">
+      <Filter>tests</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\data\collection.h">
+      <Filter>util\data</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\data\file.h">
+      <Filter>util\data</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\data\hashmap.h">
+      <Filter>util\data</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\data\iterator.h">
+      <Filter>util\data</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\data\map.h">
+      <Filter>util\data</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\data\set.h">
+      <Filter>util\data</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\data\str.h">
+      <Filter>util\data</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\data\types.h">
+      <Filter>util\data</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\data\vector.h">
+      <Filter>util\data</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\logging\log.h">
+      <Filter>util\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\math\mat.h">
+      <Filter>util\math</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\math\math.h">
+      <Filter>util\math</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\math\radians.h">
+      <Filter>util\math</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\math\vec.h">
+      <Filter>util\math</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\memory\alloc.h">
+      <Filter>util\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\memory\bump_allocator.h">
+      <Filter>util\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\std_include.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\window\window.h">
+      <Filter>window</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ArcnumCore\core\ecs\component\color.c">
+      <Filter>ecs\component</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\ecs\component\component.c">
+      <Filter>ecs\component</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\ecs\ecs.c">
+      <Filter>ecs</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\ecs\entity\entity.c">
+      <Filter>ecs\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\ecs\entity\uuid.c">
+      <Filter>ecs\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\ecs\system\system.c">
+      <Filter>ecs\system</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\events\event.c">
+      <Filter>events</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\events\sub.c">
+      <Filter>events</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\renderer\batcher.c">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\renderer\layer.c">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\renderer\layer_stack.c">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\renderer\renderer.c">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\tests\test.c">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\data\file.c">
+      <Filter>util\data</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\data\hashmap.c">
+      <Filter>util\data</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\data\iterator.c">
+      <Filter>util\data</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\data\map.c">
+      <Filter>util\data</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\data\set.c">
+      <Filter>util\data</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\data\str.c">
+      <Filter>util\data</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\data\vector.c">
+      <Filter>util\data</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\logging\log.c">
+      <Filter>util\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\math\mat.c">
+      <Filter>util\math</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\math\math.c">
+      <Filter>util\math</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\math\vec.c">
+      <Filter>util\math</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\memory\bump_allocator.c">
+      <Filter>util\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\window\window.c">
+      <Filter>window</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
