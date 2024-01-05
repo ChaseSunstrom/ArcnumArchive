@@ -7,7 +7,7 @@ __A_CORE_API__ entity entity_default(void)
 	entity entity;
 	entity.entity_id = ++globabl_entity_id;
 	entity.component_mask = 0;
-	entity.components = vector_default();
+	entity.components = hashmap_default();
 	return entity;
 }
 
@@ -16,7 +16,7 @@ __A_CORE_API__ entity entity_new(component components[])
 	entity entity;
 	entity.entity_id = ++globabl_entity_id;
 	entity.component_mask = 0;
-	entity.components = vector_new(components);
+	entity.components = hashmap_new(components);
 
 	for (u64 i = 0; i < entity.components->size; ++i)
 		entity.component_mask |= ((component*)vector_get(entity.components, i))->type;

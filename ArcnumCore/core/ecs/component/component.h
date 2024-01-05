@@ -11,28 +11,11 @@
 // COMPONENT FACTORY | Used to easily create components
 // ==============================================================================
 
-#define CORE_COMPONENT_FACTORY(_name, ...) typedef struct      \
-									  {                        \
-										  component_type type; \
-									 	  __VA_ARGS__		   \
+#define CORE_COMPONENT_FACTORY(_name, ...) typedef struct       \
+									  {                         \
+										  c_str component_name; \
+									 	  __VA_ARGS__		    \
 									  } _name
-
-
-
-// ==============================================================================
-// COMPONENT TYPE  | Used to store different component types
-// ==============================================================================
-__A_CORE_API__ typedef enum
-{
-	COMPONENT_TYPE_NONE = 0,
-	COMPONENT_TYPE_MESH,
-	COMPONENT_TYPE_TRANSFORM,
-	COMPONENT_TYPE_SHADER,
-	COMPONENT_TYPE_RENDER,
-	COMPONENT_TYPE_TEXTURE,
-	COMPONENT_TYPE_COLOR,
-	COMPONENT_TYPE_NORMAL,
-} component_type;
 
 
 
