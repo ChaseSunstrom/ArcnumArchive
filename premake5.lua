@@ -1,4 +1,5 @@
 workspace "Arcnum"
+    architecture "x64"
    configurations { "Debug", "Release" }
 
 project "Arcnum"
@@ -10,9 +11,9 @@ project "Arcnum"
 
    files { "src/**.c", "src/**.h" }
 
-   includedirs { "ArcnumCore/", "ArcnumCore/include/" } -- Adjusted include directory
-   libdirs { "ArcnumCore/lib/" }
-   links { "ArcnumCoreLib" }
+   includedirs { "ArcnumCore", "ArcnumCore/include/**" } -- Adjusted include directory
+   libdirs { "ArcnumCore/lib/**" }
+   links { "ArcnumCoreLib", "glfw3", "glew32", "opengl32.lib" }
 
    filter "configurations:Debug"
       defines { "DEBUG" }
@@ -29,6 +30,6 @@ project "ArcnumCoreLib"
 
    files { "ArcnumCore/core/**.c", "ArcnumCore/core/**.h" }
 
-   includedirs { "ArcnumCore/include/GLEW", "ArcnumCore/include/GLFW" } -- Adjusted include directory
-   libdirs { "ArcnumCore/lib/GLEW", "ArcnumCore/lib/GLFW" }
-   links { "glfw3.lib", "glew32.lib"}
+   includedirs { "ArcnumCore/include/**" } -- Adjusted include directory
+   libdirs { "ArcnumCore/lib/**" }
+   links { "glfw3", "glew32", "opengl32.lib"}

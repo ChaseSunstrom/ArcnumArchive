@@ -9,8 +9,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "C:/Users/Chase/Desktop/Arcnum/Arcnum/ArcnumCore/include/GLEW/glew.h"
-#include "C:/Users/Chase/Desktop/Arcnum/Arcnum/ArcnumCore/include/GLFW/glfw3.h"
+#include "glew.h"
+#include "glfw3.h"
 
 #include "../core.h"
 #include "data/types.h"
