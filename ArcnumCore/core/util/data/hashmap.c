@@ -158,13 +158,29 @@ entry* entry_new(void* key, void* value, uint64_t key_size)
 	return _entry;
 }
 
- bool hashmap_compare_keys(byte* key1, byte* key2, uint64_t key_size)
+void _entry_free(entry* current_entry, void (*key_free)(void*), void (*value_free)(void*))
+{   
+    while (current_entry)
+    {
+        key_free(current_entry->key);
+		value_free(current_entry->value);
+
+        // to be able to free the entry aswell
+		entry* next = current_entry->next;
+
+        free(current_entry);
+
+        current_entry = next;
+    }
+}
+
+bool hashmap_compare_keys(byte* key1, byte* key2, uint64_t key_size)
 {
     byte* k1_b = key1;
 	byte* k2_b = key2;
 
     for (uint64_t i = 0; i < key_size; i++)
-        if (k1_b[i] != k2_b[i])
+        if ((key1[i] & key2[i]) != key1[i])
             return false;
 
     return true;
@@ -190,7 +206,7 @@ void hashmap_insert(hashmap(void*, void*) hmap, byte* key, byte* value, uint64_t
     uint64_t index;
     uint64_t hash = hash64(key);
     if (hmap->size == 0)
-        index = 0;  // or any other default index when size is zero
+        index = hash % 1;  // or any other default index when size is zero
     else
         index = hash % hmap->size;
 
@@ -217,10 +233,22 @@ void _hashmap_insert_entries(hashmap(void*, void*) hmap, entry* entries, uint64_
         hashmap_insert(hmap, entries[i].key, entries[i].value, key_sizes[i]);
 }
 
+void __hashmap_insert_entries(hashmap(void*, void*) hmap, entry* entries, uint64_t num_entries, uint64_t key_sizes)
+{
+    for (uint64_t i = 0; i < num_entries; ++i)
+        hashmap_insert(hmap, entries[i].key, entries[i].value, key_sizes);
+}
+
 void _hashmap_inserts(hashmap(void*, void*) hmap, void* keys[], void* values[], uint64_t num_entries, uint64_t key_sizes[])
 {
     for (uint64_t i = 0; i < num_entries; i++)
 		hashmap_insert(hmap, keys[i], values[i], key_sizes[i]);
+}
+
+void __hashmap_inserts(hashmap(void*, void*) hmap, void* keys[], void* values[], uint64_t num_entries, uint64_t key_sizes)
+{
+    for (uint64_t i = 0; i < num_entries; i++)
+        hashmap_insert(hmap, keys[i], values[i], key_sizes);
 }
 
 void hashmap_remove(hashmap(void*, void*) hmap, void* key, uint64_t key_size)
@@ -259,20 +287,19 @@ void hashmap_remove(hashmap(void*, void*) hmap, void* key, uint64_t key_size)
 
 void* hashmap_get(hashmap(void*, void*) hmap, byte* key, uint64_t key_size)
 {
-    uint64_t index;
-	uint64_t hash = hash64(key);
+    uint64_t hash = hash64(key);
 
     if (hmap->size == 0)
-        index = 0;  // or any other default index when size is zero
-    else
-        index = hash % hmap->size;
+        return NULL;  // The hash map is empty, so the key cannot be present
+
+    uint64_t index = hash % hmap->size;
 
     // Search for the entry in the bucket
     entry* current = vector_get(hmap->buckets, index);
 
-    while (current != NULL) 
+    while (current != NULL)
     {
-        if (hashmap_compare_keys(current->key, key, key_size)) 
+        if (hashmap_compare_keys(current->key, key, key_size))
             return current->value;
 
         current = current->next;
@@ -280,4 +307,14 @@ void* hashmap_get(hashmap(void*, void*) hmap, byte* key, uint64_t key_size)
 
     // Key not found
     return NULL;
+}
+
+void _hashmap_free(hashmap(void*, void*) hmap, void (*key_free)(void*), void (*value_free)(void*))
+{
+    for (uint64_t index = 0; index < hmap->size; index++)
+    {
+		entry* current = vector_get(hmap->buckets, index);
+
+        _entry_free(current, key_free, value_free);
+    }
 }

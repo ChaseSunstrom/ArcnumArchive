@@ -214,14 +214,14 @@ __A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector(void*) 
 __A_CORE_API__ void vector_assign_data(vector(void*) v, void* data, uint64_t index)
 {
 	if (index >= v->capacity)
-		vector_add_capacity(v, index - v->capacity * 2 + 1);
+		vector_add_capacity(v, v->capacity * 2 + 1);
 
 	if (!v->data)
 		return;
 
 	v->data[index] = data;
 	if (index > v->size)
-		v->size += index;
+		v->size += 1;
 }
 
 

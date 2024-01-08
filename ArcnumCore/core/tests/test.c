@@ -86,12 +86,28 @@ TEST(test_hashmap_insert)
 	return false;
 }
 
+TEST(test_hashmap_insertss)
+{
+	hashmap(c_str, c_str) hmap = hashmap_default();
+
+	c_str keys[] = { "key1", "key2", "key3", "key4" };
+	c_str values[] = { "value1", "value2", "value3", "value4" };
+	uint64_t size = 4;
+
+	hashmap_insertss(hmap, keys, values, size);
+
+	if (hmap->size = 4)
+		return true;
+
+	test_fail_reason = "HASHMAP SIZE INCORRECT";
+	return false;
+}
+
 TEST(test_hashmap_insert_entries)
 {
 	hashmap(c_str, c_str) hmap = hashmap_default();
 	entry entries[] = { { "key1", "value1" }, { "key2", "value2" }, { "key3", "value3" }, { "key4", "value4" } };
-	uint64_t key_sizes[4] = { 4, 4, 4, 4 };
-	hashmap_insert_entries(hmap, entries, key_sizes);
+	hashmap_insert_entriess(hmap, entries, 4);
 
 	if (hmap->size = 4)
 		return true;
@@ -128,7 +144,7 @@ TEST(test_hashmap_compare_keys)
 
 TEST(test_hashmap_get)
 {
-	hashmap(int32_t, c_str) hmap = hashmap_default();
+	hashmap(c_str, c_str) hmap = hashmap_default();
 
 	entry entries[] = {
 		{ "key1", "value1" },
@@ -136,17 +152,20 @@ TEST(test_hashmap_get)
 		{ "key3", "value3" },
 		{ "key4", "value4" } };
 
-	uint64_t key_sizes[4] = { 4, 4, 4, 4 };
-
-	hashmap_insert_entries(hmap, entries, key_sizes);
+	hashmap_insert_entriess(hmap, entries, 4);
 
 	c_str key1 = hashmap_get(hmap, "key1", 4);
 	c_str key2 = hashmap_get(hmap, "key2", 4);
 	c_str key3 = hashmap_get(hmap, "key3", 4);
 	c_str key4 = hashmap_get(hmap, "key4", 4);
 
-	if (strcmp(key1, "value1") == 0 && strcmp(key2, "value2") == 0 && strcmp(key3, "value3") == 0 && strcmp(key4, "value4") == 0)
+	if (!key1 || !key2 || !key3 || !key4)
+		goto FAIL;
+
+	if ((strcmp(key1, "value1") == 0 && strcmp(key2, "value2") == 0 && strcmp(key3, "value3") == 0 && strcmp(key4, "value4") == 0))
 		return true;
+
+FAIL:
 
 	test_fail_reason = "HASHMAP GET RETURNED BAD VALUES";
 	return false;
@@ -162,6 +181,7 @@ bool core_test_main(void)
 
 	ADD_TEST(test_hashmap_compare_keys);
 	ADD_TEST(test_hashmap_insert);
+	ADD_TEST(test_hashmap_insertss);
 	ADD_TEST(test_hashmap_remove);
 	ADD_TEST(test_hashmap_insert_entries);
 	ADD_TEST(test_hashmap_get);
