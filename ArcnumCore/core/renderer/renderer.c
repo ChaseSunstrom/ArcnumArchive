@@ -35,7 +35,7 @@ __A_CORE_API__ void renderer_render(renderer* renderer)
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	for (u64 i = 0; i < renderer->ecs->entities->size; i++)
+	for (uint64_t i = 0; i < renderer->ecs->entities->size; i++)
 	{
 		entity* e = vector_get(renderer->ecs->entities, i);
 		if (entity_has_component(e, "render_component"))
@@ -51,7 +51,7 @@ __A_CORE_API__ void renderer_render(renderer* renderer)
 
 __A_CORE_API__ void renderer_set_delta_time(renderer* renderer)
 {
-	f64 current_time = glfwGetTime();
+	float64_t current_time = glfwGetTime();
 	renderer->delta_time = current_time - renderer->last_frame_time;
 	renderer->last_frame_time = current_time;
 }

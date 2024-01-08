@@ -115,7 +115,7 @@ __A_CORE_API__ generic_event* window_propagate_event(generic_event* event) { ret
 // ==============================================================================
 // EVENT CALLBACKS:
 
-__A_CORE_API__ void window_resized_event_callback(GLFWwindow* window, u32 width, u32 height)
+__A_CORE_API__ void window_resized_event_callback(GLFWwindow* window, uint32_t width, uint32_t height)
 {
 	window_data* _window_data = (window_data*)glfwGetWindowUserPointer(window);
 	window_resized_event event = { .width = width, .height = height, .type = WINDOW_RESIZED };
@@ -134,7 +134,7 @@ __A_CORE_API__ void window_close_event_callback(GLFWwindow* window)
 	_window_data->event_callback(&event);
 }
 
-__A_CORE_API__ void window_key_event_callback(GLFWwindow* window, i32 key, i32 scancode, i32 action, i32 mods)
+__A_CORE_API__ void window_key_event_callback(GLFWwindow* window, int32_t key, int32_t scancode, int32_t action, int32_t mods)
 {
 	window_data* _window_data = (window_data*)glfwGetWindowUserPointer(window);
 
@@ -161,7 +161,7 @@ __A_CORE_API__ void window_key_event_callback(GLFWwindow* window, i32 key, i32 s
 	}
 }
 
-__A_CORE_API__ void window_mouse_button_event_callback(GLFWwindow* window, i32 button, i32 action, i32 mods)
+__A_CORE_API__ void window_mouse_button_event_callback(GLFWwindow* window, int32_t button, int32_t action, int32_t mods)
 {
 	window_data* _window_data = (window_data*)glfwGetWindowUserPointer(window);
 
@@ -182,7 +182,7 @@ __A_CORE_API__ void window_mouse_button_event_callback(GLFWwindow* window, i32 b
 	}
 }
 
-__A_CORE_API__ void window_mouse_scroll_event_callback(GLFWwindow* window, f64 xoffset, f64 yoffset)
+__A_CORE_API__ void window_mouse_scroll_event_callback(GLFWwindow* window, float64_t xoffset, float64_t yoffset)
 {
 	window_data* _window_data = (window_data*)glfwGetWindowUserPointer(window);
 
@@ -190,7 +190,7 @@ __A_CORE_API__ void window_mouse_scroll_event_callback(GLFWwindow* window, f64 x
 	_window_data->event_callback(&event);
 }
 
-__A_CORE_API__ void window_mouse_move_event_callback(GLFWwindow* window, f64 xpos, f64 ypos)
+__A_CORE_API__ void window_mouse_move_event_callback(GLFWwindow* window, float64_t xpos, float64_t ypos)
 {
 	window_data* _window_data = (window_data*)glfwGetWindowUserPointer(window);
 	mouse_move_event event = { .x_pos = xpos, .y_pos = ypos, .type = MOUSE_MOVED };
@@ -204,12 +204,12 @@ __A_CORE_API__ void window_mouse_move_event_callback(GLFWwindow* window, f64 xpo
 // ==============================================================================
 // GLFW CALLBACKS:
 
-__A_CORE_API__ void glfw_error_callback(i32 error, c_str description)
+__A_CORE_API__ void glfw_error_callback(int32_t error, c_str description)
 {
 	A_CORE_ERROR_F("GLFW ERROR: %s\n", description);
 }
 
-__A_CORE_API__ static void framebuffer_size_callback(GLFWwindow* window, i32 width, i32 height)
+__A_CORE_API__ static void framebuffer_size_callback(GLFWwindow* window, int32_t width, int32_t height)
 {
 	glViewport(0, 0, width, height);
 }

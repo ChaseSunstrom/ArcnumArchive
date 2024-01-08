@@ -14,10 +14,10 @@
 
 __A_CORE_API__ typedef struct
 {
-	f64 delta_time;
-	f64 fixed_delta_time;
-	f64 last_frame_time;
-	f64 tick_time;
+	float64_t delta_time;
+	float64_t fixed_delta_time;
+	float64_t last_frame_time;
+	float64_t tick_time;
 
 	batcher* batcher;
 
@@ -37,10 +37,10 @@ __A_CORE_API__ void      renderer_set_tick_time(renderer* renderer);
 __A_CORE_API__ void      renderer_set_delta_time(renderer* renderer);
 __A_CORE_API__ void      renderer_set_fixed_delta_time(renderer* renderer);
 __A_CORE_API__ void      renderer_set_last_frame_time(renderer* renderer);
-__A_CORE_API__ f64       calculate_tick_time(void);
-__A_CORE_API__ f64       calculate_delta_time(void);
-__A_CORE_API__ f64       calculate_fixed_delta_time(void);
-__A_CORE_API__ f64       calculate_last_frame_time(void);
+__A_CORE_API__ float64_t       calculate_tick_time(void);
+__A_CORE_API__ float64_t       calculate_delta_time(void);
+__A_CORE_API__ float64_t       calculate_fixed_delta_time(void);
+__A_CORE_API__ float64_t       calculate_last_frame_time(void);
 
 //===============================================================================
 

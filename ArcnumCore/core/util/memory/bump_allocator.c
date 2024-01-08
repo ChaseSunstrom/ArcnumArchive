@@ -15,7 +15,7 @@ __A_CORE_API__ bump_allocator* bump_allocator_default(void)
 	return allocator;
 }
 
-__A_CORE_API__ bump_allocator* bump_allocator_new(u64 size)
+__A_CORE_API__ bump_allocator* bump_allocator_new(uint64_t size)
 {
 	bump_allocator* allocator = ALLOC(bump_allocator);
 	allocator->size = size;
@@ -26,13 +26,13 @@ __A_CORE_API__ bump_allocator* bump_allocator_new(u64 size)
 	return allocator;
 }
 
-__A_CORE_API__ generic bump_allocator_alloc(bump_allocator* allocator, u64 size)
+__A_CORE_API__ void* bump_allocator_alloc(bump_allocator* allocator, uint64_t size)
 {
 	if (allocator->current + size > allocator->end)
 		// Out of memory
 		return NULL;
 
-	generic allocation = allocator->current;
+	void* allocation = allocator->current;
 	allocator->current += size;
 	return allocation;
 }

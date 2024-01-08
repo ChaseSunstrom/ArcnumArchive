@@ -15,7 +15,7 @@ __A_CORE_API__ c_str read_file(c_str file_path)
 
     char buffer[3000];
 
-	for (u64 i = 0; i < file_size; i++) {
+	for (uint64_t i = 0; i < file_size; i++) {
 		buffer[i] = fgetc(file);
 	}
 

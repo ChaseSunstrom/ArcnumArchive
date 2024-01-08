@@ -17,7 +17,7 @@
 __A_CORE_API__ typedef struct
 {
 	// size in bytes
-	u64   size;
+	uint64_t   size;
 
 	byte* start;
 	byte* end;
@@ -30,8 +30,8 @@ __A_CORE_API__ typedef struct
 // BUMP ALLOCATOR FUNCTIONS:
 
 __A_CORE_API__ bump_allocator* bump_allocator_default(void);
-__A_CORE_API__ bump_allocator* bump_allocator_new(u64 size);
-__A_CORE_API__ generic         bump_allocator_alloc(bump_allocator* allocator, u64 size);
+__A_CORE_API__ bump_allocator* bump_allocator_new(uint64_t size);
+__A_CORE_API__ void*         bump_allocator_alloc(bump_allocator* allocator, uint64_t size);
 __A_CORE_API__ void            bump_allocator_free(bump_allocator* allocator);
 __A_CORE_API__ void            bump_allocator_reset(bump_allocator* allocator);
 

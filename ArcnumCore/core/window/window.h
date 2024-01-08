@@ -20,8 +20,8 @@ __A_CORE_API__ typedef struct
 {
 	c_str title;
 	bool   vsync;
-	u32    width;
-	u32    height;
+	uint32_t    width;
+	uint32_t    height;
 
 	// A function that gets called every event
 	event_callback event_callback;
@@ -59,20 +59,20 @@ __A_CORE_API__ bool           window_close_event(window* window);
 // EVENT CALLBACKS:
 
 __A_CORE_API__ void window_event_callback(generic_event* event);
-__A_CORE_API__ void window_resized_event_callback(GLFWwindow* window, u32 width, u32 height);
+__A_CORE_API__ void window_resized_event_callback(GLFWwindow* window, uint32_t width, uint32_t height);
 __A_CORE_API__ void window_close_event_callback(GLFWwindow* window);
-__A_CORE_API__ void window_key_event_callback(GLFWwindow* window, i32 key, i32 scancode, i32 action, i32 mods);
-__A_CORE_API__ void window_mouse_button_event_callback(GLFWwindow* window, i32 button, i32 action, i32 mods);
-__A_CORE_API__ void window_mouse_scroll_event_callback(GLFWwindow* window, f64 xoffset, f64 yoffset);
-__A_CORE_API__ void window_mouse_move_event_callback(GLFWwindow* window, f64 x, f64 y);
+__A_CORE_API__ void window_key_event_callback(GLFWwindow* window, int32_t key, int32_t scancode, int32_t action, int32_t mods);
+__A_CORE_API__ void window_mouse_button_event_callback(GLFWwindow* window, int32_t button, int32_t action, int32_t mods);
+__A_CORE_API__ void window_mouse_scroll_event_callback(GLFWwindow* window, float64_t xoffset, float64_t yoffset);
+__A_CORE_API__ void window_mouse_move_event_callback(GLFWwindow* window, float64_t x, float64_t y);
 
 // ==============================================================================
 
 // ==============================================================================
 // GLFW CALLBACKS:
 
-__A_CORE_API__ void        glfw_error_callback(i32 error, c_str description);
-__A_CORE_API__ static void framebuffer_size_callback(GLFWwindow* window, i32 width, i32 height);
+__A_CORE_API__ void        glfw_error_callback(int32_t error, c_str description);
+__A_CORE_API__ static void framebuffer_size_callback(GLFWwindow* window, int32_t width, int32_t height);
 
 // ==============================================================================
 

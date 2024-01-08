@@ -17,11 +17,11 @@ void add_test(test test)
 
 TEST(test_vector_insert)
 {
-	vector(u64) v = vector_new(((u64[]) { 1, 2, 3, 4, 5 }));
+	vector(uint64_t) v = vector_new(((uint64_t[]) { 1, 2, 3, 4, 5 }));
 
 	vector_insert(v, 2, 8);
 
-	if ((u64)vector_get(v, 2) == 8)
+	if ((uint64_t)vector_get(v, 2) == 8)
 		return true;
 
 	test_fail_reason = "VECTOR INSERTED INCORRECTLY";
@@ -30,11 +30,11 @@ TEST(test_vector_insert)
 
 TEST(test_vector_assign_data)
 {
-	vector(u64) v = vector_new(((u64[]) { 1, 2, 3, 4, 5 }));
+	vector(uint64_t) v = vector_new(((uint64_t[]) { 1, 2, 3, 4, 5 }));
 
 	vector_assign_data(v, 2, 0);
 
-	if ((u64)vector_get(v, 0) == 2)
+	if ((uint64_t)vector_get(v, 0) == 2)
 		return true;
 
 	test_fail_reason = "VECTOR ASSIGNED INCORRECTLY";
@@ -43,12 +43,12 @@ TEST(test_vector_assign_data)
 
 TEST(test_vector_size)
 {
-	vector(u64) v = vector_default();
+	vector(uint64_t) v = vector_default();
 
-	for (u64 i = 0; i < HUNDRED_MIL; i++)
+	for (uint64_t i = 0; i < HUNDRED_MIL; i++)
 		vector_push(v, i);
 
-	if ((u64)v->size == HUNDRED_MIL)
+	if ((uint64_t)v->size == HUNDRED_MIL)
 		return true;
 
 	test_fail_reason = "VECTOR SIZE WAS INCORRECT";
@@ -57,9 +57,9 @@ TEST(test_vector_size)
 
 TEST(test_set)
 {
-	set(u64) s = set_default();
+	set(uint64_t) s = set_default();
 
-	for (u64 i = 0; i < HUNDRED_MIL; i++)
+	for (uint64_t i = 0; i < HUNDRED_MIL; i++)
 		set_push(s, 1);
 
 	if (s->size == 1)
@@ -74,10 +74,10 @@ TEST(test_hashmap_insert)
 {
 	hashmap(c_str, c_str) hmap = hashmap_default();
 
-	hashmap_insert(hmap, "key1", "value1");
-	hashmap_insert(hmap, "key2", "value2");
-	hashmap_insert(hmap, "key3", "value3");
-	hashmap_insert(hmap, "key4", "value4");
+	hashmap_insert(hmap, "key1", "value1", strlen("key1"));
+	hashmap_insert(hmap, "key2", "value2", strlen("key2"));
+	hashmap_insert(hmap, "key3", "value3", strlen("key3"));
+	hashmap_insert(hmap, "key4", "value4", strlen("key4"));
 
 	if (hmap->size = 4)
 		return true;
@@ -90,7 +90,8 @@ TEST(test_hashmap_insert_entries)
 {
 	hashmap(c_str, c_str) hmap = hashmap_default();
 	entry entries[] = { { "key1", "value1" }, { "key2", "value2" }, { "key3", "value3" }, { "key4", "value4" } };
-	hashmap_insert_entries(hmap, entries);
+	uint64_t key_sizes[4] = { 4, 4, 4, 4 };
+	hashmap_insert_entries(hmap, entries, key_sizes);
 
 	if (hmap->size = 4)
 		return true;
@@ -103,22 +104,22 @@ TEST(test_hashmap_remove)
 {
 	hashmap(c_str, c_str) hmap = hashmap_default();
 	entry entries[] = { { "key1", "value1" }, { "key2", "value2" }, { "key3", "value3" }, { "key4", "value4" } };
-	hashmap_insert_entries(hmap, entries);
+	uint64_t key_sizes[4] = { 4, 4, 4, 4 };
+	hashmap_insert_entries(hmap, entries, key_sizes);
 
-	hashmap_remove(hmap, "key1");
-	hashmap_remove(hmap, "key3");
+	hashmap_remove(hmap, "key1", strlen("key1"));
+	hashmap_remove(hmap, "key3", strlen("key3"));
 
 	if (hmap->size == 2)
 		return true;
 
 	test_fail_reason = "HASHMAP SIZE INCORRECT";
-	A_CORE_TRACE_F("SIZE WAS: %d\n", hmap->size);
 	return false;
 }
 
 TEST(test_hashmap_compare_keys)
 {
-	if (hashmap_compare_keys("key1", "key1"))
+	if (hashmap_compare_keys("key1", "key1", strlen("key1")))
 		return true;
 
 	test_fail_reason = "HASHMAP COMPARE KEYS RETURNED FALSE";
@@ -127,19 +128,22 @@ TEST(test_hashmap_compare_keys)
 
 TEST(test_hashmap_get)
 {
-	hashmap(c_str, c_str) hmap = hashmap_default();
+	hashmap(int32_t, c_str) hmap = hashmap_default();
 
 	entry entries[] = {
 		{ "key1", "value1" },
 		{ "key2", "value2" },
 		{ "key3", "value3" },
 		{ "key4", "value4" } };
-	hashmap_insert_entries(hmap, entries);
 
-	c_str key1 = hashmap_get(hmap, "key1");
-	c_str key2 = hashmap_get(hmap, "key2");
-	c_str key3 = hashmap_get(hmap, "key3");
-	c_str key4 = hashmap_get(hmap, "key4");
+	uint64_t key_sizes[4] = { 4, 4, 4, 4 };
+
+	hashmap_insert_entries(hmap, entries, key_sizes);
+
+	c_str key1 = hashmap_get(hmap, "key1", 4);
+	c_str key2 = hashmap_get(hmap, "key2", 4);
+	c_str key3 = hashmap_get(hmap, "key3", 4);
+	c_str key4 = hashmap_get(hmap, "key4", 4);
 
 	if (strcmp(key1, "value1") == 0 && strcmp(key2, "value2") == 0 && strcmp(key3, "value3") == 0 && strcmp(key4, "value4") == 0)
 		return true;
@@ -162,7 +166,7 @@ bool core_test_main(void)
 	ADD_TEST(test_hashmap_insert_entries);
 	ADD_TEST(test_hashmap_get);
 
-	for (u64 i = 0; i < current_test_id; i++)
+	for (uint64_t i = 0; i < current_test_id; i++)
 	{
 		test current_test = tests[i];
 

@@ -5,7 +5,7 @@
 
 // Vector of current subscriptions
 __A_CORE_API__ static subscription** subscriptions = NULL;
-__A_CORE_API__ static u32            subscription_count = 0;
+__A_CORE_API__ static uint32_t            subscription_count = 0;
 
 // ===============================================================
 // SUBSCRIPTION AND PUBLISHER FUNCTIONS:
@@ -34,7 +34,7 @@ __A_CORE_API__ void publish(subscription_topic topic, void* value)
 {
 	publisher publisher = { .topic = topic, .value = value };
 
-	for (i32 i = 0; i < subscription_count; i++) {
+	for (int32_t i = 0; i < subscription_count; i++) {
 		subscription* subscription = subscriptions[i];
 		if (subscription == NULL || subscription->topic != topic) continue;
 		subscription->on_publish_function(publisher.value);

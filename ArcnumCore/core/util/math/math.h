@@ -12,6 +12,6 @@
 #define PI_2      1.57079632679489661923132169163975144   
 #define SQRT_2    1.41421356237309504880168872420969808
 
-__A_CORE_API__ __A_CORE_INLINE__ f64 clamp(f64 val, f64 minval, f64 maxval);
+__A_CORE_API__ __A_CORE_INLINE__ float64_t clamp(float64_t val, float64_t minval, float64_t maxval);
 
 #endif

@@ -14,7 +14,7 @@ void ecs_add_entity(ecs* ecs, entity* entity)
 
 void ecs_remove_entity(ecs* ecs, entity* _entity)
 {
-	for (u64 i = 0; i < ecs->entities->size; i++)
+	for (uint64_t i = 0; i < ecs->entities->size; i++)
 		if (((entity*)vector_get(ecs->entities, i))->entity_id == _entity->entity_id)
 			vector_remove(ecs->entities, i);
 }

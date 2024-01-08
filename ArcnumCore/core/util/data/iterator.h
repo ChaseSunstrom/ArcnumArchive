@@ -26,9 +26,9 @@ __A_CORE_API__ typedef enum
 __A_CORE_API__ typedef struct
 {
 	iterator_state state;
-	generic* collection_data;
-	u64 index;
-	u64 collection_size;
+	void** collection_data;
+	uint64_t index;
+	uint64_t collection_size;
 } iterator;
 
 
@@ -36,20 +36,20 @@ __A_CORE_API__ typedef struct
 // ===============================================================================
 // ITERATOR FUNCTIONS:
 
-__A_CORE_API__ iterator*      iterator_new(generic* collection);
+__A_CORE_API__ iterator*      iterator_new(void** collection);
 __A_CORE_API__ iterator_state iterator_next(iterator* it);
 __A_CORE_API__ iterator_state iterator_prev(iterator* it);
 __A_CORE_API__ iterator_state iterator_iterate(iterator* it);
 __A_CORE_API__ iterator_state iterator_b_iterate(iterator* it);
 __A_CORE_API__ iterator_state iterator_begin(iterator* it);
 __A_CORE_API__ iterator_state iterator_end(iterator* it);
-__A_CORE_API__ generic	      iterator_get_prev(iterator* it);
-__A_CORE_API__ generic		  iterator_get_next(iterator* it);
-__A_CORE_API__ generic	      iterator_get_current_data(iterator* it);
+__A_CORE_API__ void*	      iterator_get_prev(iterator* it);
+__A_CORE_API__ void*		  iterator_get_next(iterator* it);
+__A_CORE_API__ void*	      iterator_get_current_data(iterator* it);
 __A_CORE_API__ bool           iterator_has_next(iterator* it);
 __A_CORE_API__ bool           iterator_has_prev(iterator* it);
 __A_CORE_API__ void           iterator_reset(iterator* it);
-__A_CORE_API__ void           iterator_update(iterator* it, generic* collection);
+__A_CORE_API__ void           iterator_update(iterator* it, void** collection);
 __A_CORE_API__ void           iterator_free(iterator* it);
 
 //===============================================================================

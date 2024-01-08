@@ -11,8 +11,8 @@
 
 typedef struct 
 { 
-	u64 size; 
-	u64 capacity; 
+	uint64_t size; 
+	uint64_t capacity; 
 	byte** data; 
 } _vector;
 
@@ -21,26 +21,27 @@ typedef struct
 // ===============================================================================
 // VECTOR FUNCTIONS:
 
-__A_CORE_API__ vector(generic) vector_default(void);
-__A_CORE_API__ vector(generic) _vector_new(u64 size, generic values[]);
-__A_CORE_API__ byte*		   vector_get(vector(generic) v, u64 index);
-__A_CORE_API__ void			   vector_free(vector(generic) v);
-//                             Will free all the data inside the vector as well
-__A_CORE_API__ void            vector_free_all(vector(generic) v);
-__A_CORE_API__ void            vector_push(vector(generic) v, generic data);
-__A_CORE_API__ void            vector_insert(vector(generic) v, u64 index, generic data);
-__A_CORE_API__ void			   vector_pop(vector(generic) v);
-__A_CORE_API__ void            vector_remove(vector(generic) v, u64 index);
-__A_CORE_API__ void            vector_clear(vector(generic) v);
-__A_CORE_API__ void            vector_reverse(vector(generic) v);
-__A_CORE_API__ void            vector_add_capacity(vector(generic) v, u64 size);
-__A_CORE_API__ void            vector_add_vector(vector(generic) v, vector(generic) other);
-__A_CORE_API__ void            _vector_add_array(vector(generic) v, u64 size, generic array[]);
-__A_CORE_API__ void            vector_remove_slice(vector(generic) v, u64 index, u64 amount);
-__A_CORE_API__ void            vector_move_data(vector(generic) v, vector(generic) other);
-__A_CORE_API__ void            vector_change_data(vector(generic) v, vector(generic) other);
-__A_CORE_API__ void			   vector_assign_data(vector(generic) v, generic data, u64 index);
-__A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector(generic) v);
+__A_CORE_API__ vector(void*) vector_default(void);
+__A_CORE_API__ vector(void*) _vector_new(uint64_t size, void* values[]);
+__A_CORE_API__ byte*		   vector_get(vector(void*) v, uint64_t index);
+//                             Just frees the vector, not the data inside
+__A_CORE_API__ void			   vector_free(vector(void*) v);
+//                             Will free all the data inside the vector as well, requires a function pointer to be called to free the data
+__A_CORE_API__ void            vector_free_all(vector(void*) v, void (*fn)(void*));
+__A_CORE_API__ void            vector_push(vector(void*) v, void* data);
+__A_CORE_API__ void            vector_insert(vector(void*) v, uint64_t index, void* data);
+__A_CORE_API__ void			   vector_pop(vector(void*) v);
+__A_CORE_API__ void            vector_remove(vector(void*) v, uint64_t index);
+__A_CORE_API__ void            vector_clear(vector(void*) v);
+__A_CORE_API__ void            vector_reverse(vector(void*) v);
+__A_CORE_API__ void            vector_add_capacity(vector(void*) v, uint64_t size);
+__A_CORE_API__ void            vector_add_vector(vector(void*) v, vector(void*) other);
+__A_CORE_API__ void            _vector_add_array(vector(void*) v, uint64_t size, void* array[]);
+__A_CORE_API__ void            vector_remove_slice(vector(void*) v, uint64_t index, uint64_t amount);
+__A_CORE_API__ void            vector_move_data(vector(void*) v, vector(void*) other);
+__A_CORE_API__ void            vector_change_data(vector(void*) v, vector(void*) other);
+__A_CORE_API__ void			   vector_assign_data(vector(void*) v, void* data, uint64_t index);
+__A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector(void*) v);
 
 
 // helper macros to make calling vector functions easier

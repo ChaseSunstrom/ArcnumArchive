@@ -60,7 +60,7 @@ __A_CORE_API__  color_component* color_component_default(void)
 	return cc;
 }
 
-__A_CORE_API__  mesh_component* mesh_component_new(vector(f64) values)
+__A_CORE_API__  mesh_component* mesh_component_new(vector(float64_t) values)
 {
 	mesh_component* mc = ALLOC(mesh_component);
 	mc->component_name = "mesh_component";
@@ -78,7 +78,7 @@ __A_CORE_API__  transform_component* transform_component_new(vec3 position, vec3
 	return tc;
 }
 
-__A_CORE_API__ shader_component* shader_component_new(vector(f64) vertices, c_str vertex_path, c_str fragment_path)
+__A_CORE_API__ shader_component* shader_component_new(vector(float64_t) vertices, c_str vertex_path, c_str fragment_path)
 {
 	c_str vertex_source = read_file(vertex_path);
 	c_str fragment_source = read_file(fragment_path);
@@ -188,13 +188,13 @@ __A_CORE_API__ void color_on_attach(stride_type stride_size)
 {
 	if (stride_size == 6 || stride_size == 8)
 	{
-		glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, stride_size * sizeof(f64), 3 * sizeof(f64));
+		glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, stride_size * sizeof(float64_t), 3 * sizeof(float64_t));
 		glEnableVertexAttribArray(1);
 	}
 
 	else if (stride_size == 9 || stride_size == 11)
 	{
-		glVertexAttribPointer(2, 3, GL_DOUBLE, GL_FALSE, stride_size * sizeof(f64), 6 * sizeof(f64));
+		glVertexAttribPointer(2, 3, GL_DOUBLE, GL_FALSE, stride_size * sizeof(float64_t), 6 * sizeof(float64_t));
 		glEnableVertexAttribArray(2);
 	}
 }
@@ -203,24 +203,24 @@ __A_CORE_API__ void texture_on_attach(stride_type stride_size)
 {
 	if (stride_size == 5)
 	{
-		glVertexAttribPointer(1, 2, GL_DOUBLE, GL_FALSE, stride_size * sizeof(f64), stride_size - 2 * sizeof(f64));
+		glVertexAttribPointer(1, 2, GL_DOUBLE, GL_FALSE, stride_size * sizeof(float64_t), stride_size - 2 * sizeof(float64_t));
 		glEnableVertexAttribArray(1);
 	}
 	else if (stride_size == 11)
 	{
-		glVertexAttribPointer(3, 2, GL_DOUBLE, GL_FALSE, stride_size * sizeof(f64), stride_size - 2 * sizeof(f64));
+		glVertexAttribPointer(3, 2, GL_DOUBLE, GL_FALSE, stride_size * sizeof(float64_t), stride_size - 2 * sizeof(float64_t));
 		glEnableVertexAttribArray(3);
 	}
 	else
 	{
-		glVertexAttribPointer(2, 2, GL_DOUBLE, GL_FALSE, stride_size * sizeof(f64), stride_size - 2 * sizeof(f64));
+		glVertexAttribPointer(2, 2, GL_DOUBLE, GL_FALSE, stride_size * sizeof(float64_t), stride_size - 2 * sizeof(float64_t));
 		glEnableVertexAttribArray(2);
 	}
 }
 
 __A_CORE_API__ void normal_on_attach(stride_type stride_size)
 {
-	glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, stride_size * sizeof(f64), 3 * sizeof(f64));
+	glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, stride_size * sizeof(float64_t), 3 * sizeof(float64_t));
 	glEnableVertexAttribArray(1);
 }
 
@@ -253,7 +253,7 @@ __A_CORE_API__ void shader_component_change_shader(shader_component* sc, c_str s
 }
 
 
-__A_CORE_API__ void mesh_component_change_vertices(mesh_component* mc, vector(f64) vertices)
+__A_CORE_API__ void mesh_component_change_vertices(mesh_component* mc, vector(float64_t) vertices)
 {
 	vector_move_data(mc->values, vertices);
 }

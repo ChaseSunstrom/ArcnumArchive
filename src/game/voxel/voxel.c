@@ -1,6 +1,6 @@
 #include "voxel.h"
 #include <stdlib.h>
-static u64 voxel_id = 0;
+static uint64_t voxel_id = 0;
 
 voxel* voxel_default()
 {

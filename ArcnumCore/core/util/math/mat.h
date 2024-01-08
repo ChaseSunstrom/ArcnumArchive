@@ -10,9 +10,9 @@
 // ==============================================================================
 __A_CORE_API__ typedef struct
 {
-	u64  rows;
-	u64  cols;
-	f64* matrix;
+	uint64_t  rows;
+	uint64_t  cols;
+	float64_t* matrix;
 } mat;
 
 
@@ -20,11 +20,11 @@ __A_CORE_API__ typedef struct
 // ==============================================================================
 // MAT FUNCTIONS:
 
-__A_CORE_API__ mat     mat_new(f64 rows, f64 cols, f64* matrix);
+__A_CORE_API__ mat     mat_new(float64_t rows, float64_t cols, float64_t* matrix);
 __A_CORE_API__ mat     mdot(mat m1, mat m2);
-__A_CORE_API__ mat     msdot(f64 scalar, mat m1);
-//generic because this can return any sized vector
-__A_CORE_API__ generic mvdot(generic vec, mat m1);
+__A_CORE_API__ mat     msdot(float64_t scalar, mat m1);
+//void* because this can return any sized vector
+__A_CORE_API__ void* mvdot(void* vec, mat m1);
 __A_CORE_API__ __A_CORE_INLINE__ void mat_free(mat mat);
 
 // ==============================================================================

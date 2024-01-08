@@ -8,7 +8,7 @@
 
 #define TEST_AMOUNT 1000
 
-static u64  current_test_id = 0;
+static uint64_t  current_test_id = 0;
 static char* test_fail_reason = "";
 
 __A_CORE_API__ bool core_test_main(void);

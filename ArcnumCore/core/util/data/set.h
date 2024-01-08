@@ -5,19 +5,19 @@
 
 __A_CORE_API__ typedef struct
 {
-	u64 size;
-	u64 capacity;
-	vector(generic) data;
+	uint64_t size;
+	uint64_t capacity;
+	vector(void*) data;
 } _set;
 
 #define set(_type) _set*
 
 __A_CORE_API__ set(_type)    set_default();
-__A_CORE_API__ void    set_insert(set(generic) set, u64 index, generic data);
-__A_CORE_API__ void    set_push(set(generic) set, generic data);
-__A_CORE_API__ void	   set_remove(set(generic) set, u64 index);
-__A_CORE_API__ generic set_get(set(generic) set, u64 index);
-__A_CORE_API__ void    set_free(set(generic) set);
+__A_CORE_API__ void    set_insert(set(void*) set, uint64_t index, void* data);
+__A_CORE_API__ void    set_push(set(void*) set, void* data);
+__A_CORE_API__ void	   set_remove(set(void*) set, uint64_t index);
+__A_CORE_API__ void* set_get(set(void*) set, uint64_t index);
+__A_CORE_API__ void    set_free(set(void*) set);
 
 
 #endif // CORE_SET_H

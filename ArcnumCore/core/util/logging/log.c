@@ -10,7 +10,7 @@
 #ifdef _MSC_VER
 #include <windows.h>
 
-__A_CORE_API__ static void set_console_color(u32 color)
+__A_CORE_API__ static void set_console_color(uint32_t color)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }

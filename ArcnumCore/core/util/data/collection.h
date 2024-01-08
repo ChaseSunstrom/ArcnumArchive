@@ -4,9 +4,9 @@
 // ===============================================================================
 // COLLECTION HELPER METHODS:
 
-// Casts to a generic vector because every collection WILL have a size variable
-#define COLLECTION_SIZE(_x) (((vector(generic))_x)->size)
-#define COLLECTION_DATA(_x) (((vector(generic))_x)->data)
+// Casts to a void* vector because every collection WILL have a size variable
+#define COLLECTION_SIZE(_x) (((vector(void*))_x)->size)
+#define COLLECTION_DATA(_x) (((vector(void*))_x)->data)
 
 // ===============================================================================
 

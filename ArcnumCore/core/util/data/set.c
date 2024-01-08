@@ -1,17 +1,17 @@
 #include "set.h"
 
-__A_CORE_API__ set(generic) set_default()
+__A_CORE_API__ set(void*) set_default()
 {
-	set(generic) set = ALLOC(_set);
+	set(void*) set = ALLOC(_set);
 	set->data = vector_default();
 	set->capacity = set->data->capacity;
 	set->size = set->data->size;
 	return set;
 }
-
-__A_CORE_API__ void set_insert(set(generic) _set, u64 index, generic data)
+ 
+__A_CORE_API__ void set_insert(set(void*) _set, uint64_t index, void* data)
 {
-	for (u64 i = 0; i < _set->data->size; i++)
+	for (uint64_t i = 0; i < _set->data->size; i++)
 		if (vector_get(_set->data, i) == data)
 			return;
 
@@ -20,9 +20,9 @@ __A_CORE_API__ void set_insert(set(generic) _set, u64 index, generic data)
 	_set->capacity = _set->data->capacity;
 }
 
-__A_CORE_API__ void set_push(set(generic) _set, generic data)
+__A_CORE_API__ void set_push(set(void*) _set, void* data)
 {
-	for (u64 i = 0; i < _set->data->size; i++)
+	for (uint64_t i = 0; i < _set->data->size; i++)
 		if (vector_get(_set->data, i) == data)
 			return;
 
@@ -31,17 +31,17 @@ __A_CORE_API__ void set_push(set(generic) _set, generic data)
 	_set->capacity = _set->data->capacity;
 }
 
-__A_CORE_API__ generic set_get(set(generic) _set, u64 index)
+__A_CORE_API__ void* set_get(set(void*) _set, uint64_t index)
 {
 	return vector_get(_set->data, index);
 }
 
-__A_CORE_API__ void set_remove(set(generic) _set, u64 index)
+__A_CORE_API__ void set_remove(set(void*) _set, uint64_t index)
 {
 	vector_remove(_set->data, index);
 }
 
-__A_CORE_API__ void set_free(set(generic) _set)
+__A_CORE_API__ void set_free(set(void*) _set)
 {
 	vector_free(_set->data);
 	FREE(_set);

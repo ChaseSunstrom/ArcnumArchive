@@ -18,15 +18,15 @@ typedef struct
 	GLuint VBO;
 
 	// This is used to store the amount of entities in the batcher
-	u64 entity_count;
+	uint64_t entity_count;
 
-	vector(f64) vertices;
+	vector(float64_t) vertices;
 
 	// This is just in case access to entities data is needed;
 	vector(entity) entities;
 
 	// This is used as a way to store the entity ids of the entities in the batcher
-	vector(u64) entity_ids;
+	vector(uint64_t) entity_ids;
 } batcher;
 
 
@@ -35,7 +35,7 @@ typedef struct
 // BATCHER FUNCTIONS:
 
 __A_CORE_API__ batcher* batcher_default();
-__A_CORE_API__ batcher* batcher_new(vector(f64) vertices, u64 entity_count);
+__A_CORE_API__ batcher* batcher_new(vector(float64_t) vertices, uint64_t entity_count);
 __A_CORE_API__ void     batcher_bind(batcher* batcher);
 __A_CORE_API__ void     batcher_add_entity(batcher* batcher, entity* entity);
 __A_CORE_API__ void     batcher_add_entities(batcher* batcher, vector(entity) entities);

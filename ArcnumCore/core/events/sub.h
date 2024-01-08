@@ -23,13 +23,13 @@ __A_CORE_API__ typedef enum
 __A_CORE_API__ typedef struct
 {
 	subscription_topic topic;
-	generic value;
+	void* value;
 } publisher;
 
 
 
 // Function pointer to any function the subscription will hold
-__A_CORE_API__ typedef void (*on_publish)(generic);
+__A_CORE_API__ typedef void (*on_publish)(void*);
 
 
 
@@ -39,7 +39,7 @@ __A_CORE_API__ typedef void (*on_publish)(generic);
 // ===============================================================
 __A_CORE_API__ typedef struct
 {
-	u32 subscription_id;
+	uint32_t subscription_id;
 	subscription_topic topic;
 	on_publish on_publish_function;
 } subscription;
@@ -51,7 +51,7 @@ __A_CORE_API__ typedef struct
 
 __A_CORE_API__ subscription* subscription_new(subscription_topic topic, on_publish on_publish_function);
 __A_CORE_API__ bool          subscription_unsubscribe(subscription* subscription);
-__A_CORE_API__ void          publish(subscription_topic topic, generic value);
+__A_CORE_API__ void          publish(subscription_topic topic, void* value);
 
 // ===============================================================
 
