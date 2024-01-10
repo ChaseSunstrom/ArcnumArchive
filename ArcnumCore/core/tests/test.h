@@ -31,4 +31,9 @@ __A_CORE_API__ void add_test(test test);
 #define ADD_TEST(_name) test _name##_var = (test){.name = #_name, .fn = _name}; \
 						add_test(_name##_var) 
 
+// =================================================================
+// TEST UTILTY FUNCTIONS: | For helping with testing
+
+int64_t tests_add_callback(int64_t x, int64_t y);
+
 #endif // CORE_TEST_H

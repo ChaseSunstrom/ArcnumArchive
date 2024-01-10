@@ -1,13 +1,15 @@
 #include "test.h"
 
+#include "../util/data/ptr.h"
 #include "../util/logging/log.h"
 #include "../util/data/set.h"
 #include "../util/data/hashmap.h"
 
 #define HUNDRED_MIL 100000000
-
-// Tests leak memory due to not freeing the data inside them.
-// This is fine because nothing happens after all tests are done anyways.
+int64_t tests_add_callback(int64_t x)
+{
+	return x;
+}
 
 void add_test(test test)
 {
@@ -22,7 +24,12 @@ TEST(test_vector_insert)
 	vector_insert(v, 2, 8);
 
 	if ((uint64_t)vector_get(v, 2) == 8)
+	{
+		vector_free(v);
 		return true;
+	}
+
+	vector_free(v);
 
 	test_fail_reason = "VECTOR INSERTED INCORRECTLY";
 	return false;
@@ -35,8 +42,12 @@ TEST(test_vector_assign_data)
 	vector_assign_data(v, 2, 0);
 
 	if ((uint64_t)vector_get(v, 0) == 2)
+	{
 		return true;
+		vector_free(v);
+	}
 
+	vector_free(v);
 	test_fail_reason = "VECTOR ASSIGNED INCORRECTLY";
 	return false;
 }
@@ -49,9 +60,62 @@ TEST(test_vector_size)
 		vector_push(v, i);
 
 	if ((uint64_t)v->size == HUNDRED_MIL)
+	{
+		vector_free(v);
 		return true;
+	}
+
+	vector_free(v);
 
 	test_fail_reason = "VECTOR SIZE WAS INCORRECT";
+	return false;
+}
+
+TEST(test_vector_get)
+{
+	vector(uint64_t) v = vector_default();
+
+	for (uint64_t i = 0; i < HUNDRED_MIL + 1; i++)
+		vector_push(v, i);
+
+	if (vector_get(v, HUNDRED_MIL) == HUNDRED_MIL)
+		return true;
+
+	test_fail_reason = "VECTOR GET RETURNED INCORRECT VALUE";
+	return false;
+}
+
+TEST(test_vector_new)
+{
+	vector(uint64_t) v = vector_new(((uint64_t[]) { 1, 2, 3, 4 }));
+
+	if (v->size == 4)
+	{
+		vector_free(v);
+		return true;
+	}
+
+	vector_free(v);
+
+	test_fail_reason = "VECTOR NEW HAD INCORRECT SIZE";
+	return false;
+}
+
+TEST(test_vector_add_array)
+{
+	vector(uint64_t) v = vector_default();
+
+	vector_add_array(v, ((uint64_t[]) { 1, 2, 3, 4}));
+
+	if (v->size == 4)
+	{
+		vector_free(v);
+		return true;
+	}
+
+	vector_free(v);
+
+	test_fail_reason = "VECTOR ADD ARRAY HAD INCORRECT SIZE";
 	return false;
 }
 
@@ -63,10 +127,14 @@ TEST(test_set)
 		set_push(s, 1);
 
 	if (s->size == 1)
+	{
+		set_free(s);
 		return true;
+	}
+
+	set_free(s);
 
 	test_fail_reason = "SET SIZE WAS INCORRECT";
-	A_CORE_TRACE_F("SIZE WAS: %d\n", s->size);
 	return false;
 }
 
@@ -80,7 +148,12 @@ TEST(test_hashmap_insert)
 	hashmap_insert(hmap, "key4", "value4", strlen("key4"));
 
 	if (hmap->size = 4)
+	{
+		hashmap_free_d(hmap);
 		return true;
+	}
+
+	hashmap_free_d(hmap);
 
 	test_fail_reason = "HASHMAP SIZE INCORRECT";
 	return false;
@@ -97,7 +170,12 @@ TEST(test_hashmap_insertss)
 	hashmap_insertss(hmap, keys, values, size);
 
 	if (hmap->size = 4)
+	{
+		hashmap_free_d(hmap);
 		return true;
+	}
+
+	hashmap_free_d(hmap);
 
 	test_fail_reason = "HASHMAP SIZE INCORRECT";
 	return false;
@@ -110,7 +188,12 @@ TEST(test_hashmap_insert_entries)
 	hashmap_insert_entriess(hmap, entries, 4);
 
 	if (hmap->size = 4)
+	{
+		hashmap_free_d(hmap);
 		return true;
+	}
+
+	hashmap_free_d(hmap);
 
 	test_fail_reason = "HASHMAP SIZE INCORRECT";
 	return false;
@@ -127,7 +210,12 @@ TEST(test_hashmap_remove)
 	hashmap_remove(hmap, "key3", strlen("key3"));
 
 	if (hmap->size == 2)
+	{
+		hashmap_free_d(hmap);
 		return true;
+	}
+
+	hashmap_free_d(hmap);
 
 	test_fail_reason = "HASHMAP SIZE INCORRECT";
 	return false;
@@ -163,11 +251,99 @@ TEST(test_hashmap_get)
 		goto FAIL;
 
 	if ((strcmp(key1, "value1") == 0 && strcmp(key2, "value2") == 0 && strcmp(key3, "value3") == 0 && strcmp(key4, "value4") == 0))
+	{
+		hashmap_free_d(hmap);
 		return true;
+	}
 
 FAIL:
 
+	hashmap_free_d(hmap);
+
 	test_fail_reason = "HASHMAP GET RETURNED BAD VALUES";
+	return false;
+}
+
+TEST(test_hashmap_size)
+{
+	hashmap(c_str, c_str) hmap = hashmap_default();
+#define var 10
+	char buf[var];
+
+	for (int32_t i = 0; i < var; i++)
+	{
+		sprintf(buf, "%d", i);
+		hashmap_insert(hmap, buf, i, 1);
+	}
+
+	if (hmap->size == var)
+		return true;
+
+	test_fail_reason = "HASHMAP SIZE WAS INCORRECT";
+	return false;
+}
+
+TEST(test_handled_ptr)
+{
+	handled_ptr(int64_t) handled = handled_ptr_default();
+	int64_t value = 5;
+	handled_ptr_set_ptr(&handled, &value);
+
+	if (*(int64_t*)handled.ptr == 5)
+		return true;
+
+	test_fail_reason = "HANDLED_PTR PTR WAS WRONG";
+	return false;
+}
+
+TEST(test_optional_ptr_none)
+{
+	optional_ptr(int64_t) optional = optional_ptr_default();
+
+	if (optional.state == NONE)
+		return true;
+
+	test_fail_reason = "OPTIONAL_PTR WAS NOT NONE";
+	return false;
+}
+
+TEST(test_optional_ptr_some)
+{
+	optional_ptr(int64_t) optional = optional_ptr_default();
+	uint64_t value = 5;
+	optional_ptr_set_ptr(&optional, &value);
+	
+	if (optional.state == SOME && *(int64_t*)optional.ptr == 5)
+		return true;
+
+	test_fail_reason = "OPTIONAL_PTR WAS NOT SOME";
+	return false;
+}
+
+TEST(test_optional_ptr_deref)
+{
+	optional_ptr(int64_t) optional = optional_ptr_default();
+
+	// This should be NONE
+	void* value = optional_ptr_deref(&optional);
+
+	if (value == NONE)
+		return true;
+
+	test_fail_reason = "VALUE RETURNED BY DEREF WAS NOT NONE";
+	return false;
+}
+
+TEST(test_optional_ptr_deref_or)
+{
+	optional_ptr(int64_t) optional = optional_ptr_default();
+	optional_ptr_set_ptr(&optional, NULL);
+	int64_t* res = optional_ptr_deref_or(&optional, tests_add_callback, 5);
+
+	if (*res == 5)
+		return true;
+
+	test_fail_reason = "OPTIONAL_PTR DEREF OR CALLBACK FUNCTION FAILED";
 	return false;
 }
 
@@ -176,6 +352,9 @@ bool core_test_main(void)
 	ADD_TEST(test_vector_insert);
 	ADD_TEST(test_vector_assign_data);
 	ADD_TEST(test_vector_size);
+	ADD_TEST(test_vector_get);
+	ADD_TEST(test_vector_new);
+	ADD_TEST(test_vector_add_array);
 
 	ADD_TEST(test_set);
 
@@ -185,6 +364,14 @@ bool core_test_main(void)
 	ADD_TEST(test_hashmap_remove);
 	ADD_TEST(test_hashmap_insert_entries);
 	ADD_TEST(test_hashmap_get);
+	ADD_TEST(test_hashmap_size);
+
+	ADD_TEST(test_handled_ptr);
+
+	ADD_TEST(test_optional_ptr_none);
+	ADD_TEST(test_optional_ptr_some);
+	ADD_TEST(test_optional_ptr_deref);
+	ADD_TEST(test_optional_ptr_deref_or);
 
 	for (uint64_t i = 0; i < current_test_id; i++)
 	{

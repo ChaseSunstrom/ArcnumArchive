@@ -46,3 +46,9 @@ __A_CORE_API__ void set_free(set(void*) _set)
 	vector_free(_set->data);
 	FREE(_set);
 }
+
+__A_CORE_API__ void set_free_all(set(void*) set, void (*free_fn)(void*))
+{
+	vector_free_all(set->data, free_fn);
+	free(set);
+}

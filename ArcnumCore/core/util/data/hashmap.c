@@ -21,9 +21,9 @@ static inline uint64_t fmix64(uint64_t k)
     return k;
 }
 
-uint64_t _hash64(byte* _data, uint64_t len) 
+uint64_t _hash64(ubyte* _data, uint64_t len) 
 {
-    const byte* data = _data;
+    const ubyte* data = _data;
     const uint64_t nblocks = len / 16;
 
     uint64_t h = 0xDEADBEEFDEADBEEFULL;
@@ -46,7 +46,7 @@ uint64_t _hash64(byte* _data, uint64_t len)
 
         h = ROTL64(h, 31); h += h; h = h * 5 + 0x38495ab5;
     }
-    const byte* tail = (const byte*)(data + nblocks * 16);
+    const ubyte* tail = (const ubyte*)(data + nblocks * 16);
 
     uint64_t k1 = 0;
 
@@ -77,9 +77,9 @@ uint64_t _hash64(byte* _data, uint64_t len)
     return h;
 }
 
-uint64_t* _hash128(byte* _data, uint64_t len) 
+uint64_t* _hash128(ubyte* _data, uint64_t len) 
 {
-    const byte* data = _data;
+    const ubyte* data = _data;
     const uint64_t nblocks = len / 16;
 
     uint64_t* out = malloc(sizeof(uint64_t) * 2);
@@ -105,7 +105,7 @@ uint64_t* _hash128(byte* _data, uint64_t len)
         h2 = ROTL64(h2, 31); h2 += h1; h2 = h2 * 5 + 0x38495ab5;
     }
 
-    const byte* tail = (const byte*)(data + nblocks * 16);
+    const ubyte* tail = (const ubyte*)(data + nblocks * 16);
 
     uint64_t k1 = 0;
     uint64_t k2 = 0;
@@ -159,14 +159,63 @@ entry* entry_new(void* key, void* value, uint64_t key_size)
 }
 
 void _entry_free(entry* current_entry, void (*key_free)(void*), void (*value_free)(void*))
-{   
+{  
+    if (key_free && value_free)
+        goto FREE_BOTH;
+
+    else if (key_free)
+        goto FREE_KEY;
+
+    else if (value_free)
+        goto FREE_VALUE;
+
+    else
+        goto FREE;
+
+FREE_BOTH:
     while (current_entry)
     {
         key_free(current_entry->key);
-		value_free(current_entry->value);
+	    value_free(current_entry->value);
 
-        // to be able to free the entry aswell
-		entry* next = current_entry->next;
+        entry* next = current_entry->next;
+
+        free(current_entry);
+
+        current_entry = next;
+    }
+    return;
+
+FREE_KEY:
+    while (current_entry)
+    {
+        key_free(current_entry->key);
+        
+        entry* next = current_entry->next;
+
+        free(current_entry);
+
+        current_entry = next;
+    }
+    return;
+
+FREE_VALUE:
+    while (current_entry)
+    {
+        value_free(current_entry->value);
+
+        entry* next = current_entry->next;
+
+        free(current_entry);
+
+        current_entry = next;
+    }
+    return;
+
+FREE:
+    while (current_entry)
+    {
+        entry* next = current_entry->next;
 
         free(current_entry);
 
@@ -174,10 +223,10 @@ void _entry_free(entry* current_entry, void (*key_free)(void*), void (*value_fre
     }
 }
 
-bool hashmap_compare_keys(byte* key1, byte* key2, uint64_t key_size)
+bool hashmap_compare_keys(ubyte* key1, ubyte* key2, uint64_t key_size)
 {
-    byte* k1_b = key1;
-	byte* k2_b = key2;
+    ubyte* k1_b = key1;
+	ubyte* k2_b = key2;
 
     for (uint64_t i = 0; i < key_size; i++)
         if ((key1[i] & key2[i]) != key1[i])
@@ -201,7 +250,7 @@ hashmap(void*, void*) _hashmap_new(entry* entries, uint64_t num_entries, uint64_
 	return hmap;
 }
 
-void hashmap_insert(hashmap(void*, void*) hmap, byte* key, byte* value, uint64_t key_size)
+void hashmap_insert(hashmap(void*, void*) hmap, ubyte* key, ubyte* value, uint64_t key_size)
 {
     uint64_t index;
     uint64_t hash = hash64(key);
@@ -245,7 +294,7 @@ void _hashmap_inserts(hashmap(void*, void*) hmap, void* keys[], void* values[], 
 		hashmap_insert(hmap, keys[i], values[i], key_sizes[i]);
 }
 
-void __hashmap_inserts(hashmap(void*, void*) hmap, void* keys[], void* values[], uint64_t num_entries, uint64_t key_sizes)
+void _hashmap_insertss(hashmap(void*, void*) hmap, void* keys[], void* values[], uint64_t num_entries, uint64_t key_sizes)
 {
     for (uint64_t i = 0; i < num_entries; i++)
         hashmap_insert(hmap, keys[i], values[i], key_sizes);
@@ -260,7 +309,7 @@ void hashmap_remove(hashmap(void*, void*) hmap, void* key, uint64_t key_size)
     entry* prev = NULL;
 
     // Search for the entry in the linked list
-    while (current != NULL)
+    while (current)
     {
         if (hashmap_compare_keys(current->key, key, key_size))
         {
@@ -285,7 +334,7 @@ void hashmap_remove(hashmap(void*, void*) hmap, void* key, uint64_t key_size)
     }
 }
 
-void* hashmap_get(hashmap(void*, void*) hmap, byte* key, uint64_t key_size)
+void* hashmap_get(hashmap(void*, void*) hmap, ubyte* key, uint64_t key_size)
 {
     uint64_t hash = hash64(key);
 
@@ -297,7 +346,7 @@ void* hashmap_get(hashmap(void*, void*) hmap, byte* key, uint64_t key_size)
     // Search for the entry in the bucket
     entry* current = vector_get(hmap->buckets, index);
 
-    while (current != NULL)
+    while (current)
     {
         if (hashmap_compare_keys(current->key, key, key_size))
             return current->value;
@@ -316,5 +365,15 @@ void _hashmap_free(hashmap(void*, void*) hmap, void (*key_free)(void*), void (*v
 		entry* current = vector_get(hmap->buckets, index);
 
         _entry_free(current, key_free, value_free);
+    }
+}
+
+void hashmap_free_d(hashmap(void*, void*) hmap)
+{
+    for (uint64_t index = 0; index < hmap->size; index++)
+    {
+        entry* current = vector_get(hmap->buckets, index);
+
+        entry_free_d(current);
     }
 }

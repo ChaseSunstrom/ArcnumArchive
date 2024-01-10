@@ -11,7 +11,6 @@ typedef float			   float32_t;
 typedef double             float64_t;
 typedef char*              c_str;
 typedef signed char        sbyte;
-typedef unsigned char      byte;
-
+typedef unsigned char      ubyte;
 
 #endif

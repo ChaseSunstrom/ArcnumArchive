@@ -7,7 +7,7 @@
 #define TEXT_COLOR_CYAN   11
 #define TEXT_COLOR_YELLOW 14
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include <windows.h>
 
 __A_CORE_API__ static void set_console_color(uint32_t color)

@@ -13,7 +13,7 @@ typedef struct
 { 
 	uint64_t size; 
 	uint64_t capacity; 
-	byte** data; 
+	ubyte** data; 
 } _vector;
 
 #define vector(_type) _vector*
@@ -23,7 +23,7 @@ typedef struct
 
 __A_CORE_API__ vector(void*) vector_default(void);
 __A_CORE_API__ vector(void*) _vector_new(uint64_t size, void* values[]);
-__A_CORE_API__ byte*		   vector_get(vector(void*) v, uint64_t index);
+__A_CORE_API__ ubyte*		   vector_get(vector(void*) v, uint64_t index);
 //                             Just frees the vector, not the data inside
 __A_CORE_API__ void			   vector_free(vector(void*) v);
 //                             Will free all the data inside the vector as well, requires a function pointer to be called to free the data

@@ -19,9 +19,9 @@ __A_CORE_API__ typedef struct
 	// size in bytes
 	uint64_t   size;
 
-	byte* start;
-	byte* end;
-	byte* current;
+	ubyte* start;
+	ubyte* end;
+	ubyte* current;
 } bump_allocator;
 
 

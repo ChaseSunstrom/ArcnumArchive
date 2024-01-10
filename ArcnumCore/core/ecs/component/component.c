@@ -167,7 +167,7 @@ __A_CORE_API__  render_component* render_component_new(mesh_component* mesh, sha
 	return rc;
 }
 
-__A_CORE_API__  texture_component* texture_component_new(byte* image_data, GLuint texture)
+__A_CORE_API__  texture_component* texture_component_new(ubyte* image_data, GLuint texture)
 {
 	texture_component* tc = ALLOC(texture_component);
 	tc->component_name = "texture_component";

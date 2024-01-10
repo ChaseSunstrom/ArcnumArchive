@@ -5,7 +5,7 @@
 
 // Vector of current subscriptions
 __A_CORE_API__ static subscription** subscriptions = NULL;
-__A_CORE_API__ static uint32_t            subscription_count = 0;
+__A_CORE_API__ static uint64_t       subscription_count = 0;
 
 // ===============================================================
 // SUBSCRIPTION AND PUBLISHER FUNCTIONS:

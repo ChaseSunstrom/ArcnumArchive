@@ -104,6 +104,7 @@
     <ClInclude Include="ArcnumCore\core\util\data\hashmap.h" />
     <ClInclude Include="ArcnumCore\core\util\data\iterator.h" />
     <ClInclude Include="ArcnumCore\core\util\data\map.h" />
+    <ClInclude Include="ArcnumCore\core\util\data\ptr.h" />
     <ClInclude Include="ArcnumCore\core\util\data\set.h" />
     <ClInclude Include="ArcnumCore\core\util\data\str.h" />
     <ClInclude Include="ArcnumCore\core\util\data\types.h" />
@@ -136,6 +137,7 @@
     <ClCompile Include="ArcnumCore\core\util\data\hashmap.c" />
     <ClCompile Include="ArcnumCore\core\util\data\iterator.c" />
     <ClCompile Include="ArcnumCore\core\util\data\map.c" />
+    <ClCompile Include="ArcnumCore\core\util\data\ptr.c" />
     <ClCompile Include="ArcnumCore\core\util\data\set.c" />
     <ClCompile Include="ArcnumCore\core\util\data\str.c" />
     <ClCompile Include="ArcnumCore\core\util\data\vector.c" />

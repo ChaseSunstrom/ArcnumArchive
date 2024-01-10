@@ -8,9 +8,8 @@ __A_CORE_API__ c_str uuid_generate(void)
 
     int _rand = rand();
 
-    for (int i = 0; i < 36; ++i) {
+    for (int i = 0; i < 36; ++i)
     	buf[i] = v[rand() % 16];
-    }
 
     buf[8] = '-';
     buf[13] = '-';

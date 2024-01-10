@@ -136,6 +136,7 @@
     <ClInclude Include="ArcnumCore\core\window\window.h">
       <Filter>window</Filter>
     </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\data\ptr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArcnumCore\core\ecs\component\color.c">
@@ -216,5 +217,6 @@
     <ClCompile Include="ArcnumCore\core\window\window.c">
       <Filter>window</Filter>
     </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\data\ptr.c" />
   </ItemGroup>
 </Project>

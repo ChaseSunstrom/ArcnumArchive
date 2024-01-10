@@ -34,10 +34,10 @@ __A_CORE_API__ typedef struct
 
 __A_CORE_API__ __A_CORE_INLINE__ bool pair_compare(pair* a, void* key);
 
-__A_CORE_API__ map(void*, void*)    map_new();
-__A_CORE_API__ void    map_insert(map(void*, void*) map, void* key, void* value);
-__A_CORE_API__ void    map_remove(map(void*, void*) map, void* key);
-__A_CORE_API__ void* map_get(map(void*, void*) map, void* key);
+__A_CORE_API__ map(void*, void*) map_new();
+__A_CORE_API__ void				 map_insert(map(void*, void*) map, void* key, void* value);
+__A_CORE_API__ void			     map_remove(map(void*, void*) map, void* key);
+__A_CORE_API__ void*			 map_get(map(void*, void*) map, void* key);
 
 // ==============================================================================
 

@@ -13,7 +13,7 @@ __A_CORE_API__ vector(void*) vector_default(void)
 	{
 		v->size = 0;
 		v->capacity = 1; // Sets an initial capacity (adjusts as needed)
-		v->data = ALLOC(byte*);
+		v->data = ALLOC(ubyte*);
 	}
 
 	return v;
@@ -27,7 +27,7 @@ __A_CORE_API__ vector(void*) _vector_new(uint64_t size, void* values[])
 	{
 		v->size     = size;
 		v->capacity = size << 1;
-		v->data     = ALLOC(byte*);
+		v->data     = ALLOC(ubyte*);
 
 		vector_add_capacity(v, size);
 
@@ -37,7 +37,7 @@ __A_CORE_API__ vector(void*) _vector_new(uint64_t size, void* values[])
 	return v;
 }
 
-__A_CORE_API__ byte* vector_get(vector(void*) v, uint64_t index)
+__A_CORE_API__ ubyte* vector_get(vector(void*) v, uint64_t index)
 {
 	if (index < v->size)
 		return v->data[index];
@@ -72,7 +72,7 @@ __A_CORE_API__ void vector_push(vector(void*) v, void* data)
 	if (v->size >= v->capacity)
 	{
 		v->capacity <<= 1;
-		v->data = REALLOC(v->data, byte*, v->capacity);
+		v->data = REALLOC(v->data, ubyte*, v->capacity);
 	}
 	v->data[v->size] = data;
 	v->size += 1;
@@ -83,7 +83,7 @@ __A_CORE_API__ void vector_insert(vector(void*) v, uint64_t index, void* data)
 	while (!vector_is_big_enough(v) || v->capacity < index + 1)
 		v->capacity <<= 1;
 
-	v->data = REALLOC(v->data, byte*, v->capacity);
+	v->data = REALLOC(v->data, ubyte*, v->capacity);
 
 	if (!v->data)
 		return;
@@ -123,14 +123,14 @@ __A_CORE_API__ void vector_clear(vector(void*) v)
 	v->size = 0;
 	v->capacity = 1;
 	free(v->data);
-	v->data = ALLOC(byte*);
+	v->data = ALLOC(ubyte*);
 }
 
 __A_CORE_API__ void vector_reverse(vector(void*) v)
 {
 	for (uint64_t i = 0; i < v->size / 2; i++)
 	{
-		byte* temp = v->data[i];
+		ubyte* temp = v->data[i];
 		v->data[i] = v->data[v->size - 1 - i];
 		v->data[v->size - 1 - i] = temp;
 	}
@@ -141,7 +141,7 @@ __A_CORE_API__ void vector_add_capacity(vector(void*) v, uint64_t size)
 	while (v->capacity < v->size + size)
 		v->capacity <<= 1;
 
-	v->data = REALLOC(v->data, byte*, v->capacity);
+	v->data = REALLOC(v->data, ubyte*, v->capacity);
 }
 
 __A_CORE_API__ void vector_add_vector(vector(void*) v, vector(void*) other)
@@ -151,7 +151,7 @@ __A_CORE_API__ void vector_add_vector(vector(void*) v, vector(void*) other)
 	if (!v->data || !other->data)
 		return;
 
-	memcpy(v->data + v->size, other->data, other->size * sizeof(byte*));
+	memcpy(v->data + v->size, other->data, other->size * sizeof(ubyte*));
 
 	v->size += other->size;
 }
@@ -186,7 +186,7 @@ __A_CORE_API__ void vector_move_data(vector(void*) v, vector(void*) other)
 	if (!v->data || !other->data)
 		return;
 
-	memmove(v->data + v->size, other->data, other->size * sizeof(byte*));
+	memmove(v->data + v->size, other->data, other->size * sizeof(ubyte*));
 
 	v->size += other->size;
 
@@ -201,7 +201,7 @@ __A_CORE_API__ void vector_change_data(vector(void*) v, vector(void*) other)
 	if (!v->data || !other->data)
 		return;
 
-	memmove(v->data + v->size, other->data, other->size * sizeof(byte*));
+	memmove(v->data + v->size, other->data, other->size * sizeof(ubyte*));
 
 	vector_free(other);
 }

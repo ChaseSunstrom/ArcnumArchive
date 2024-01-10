@@ -13,20 +13,20 @@
 
 __A_CORE_API__ typedef struct
 {
-	byte vec_size;
+	ubyte vec_size;
 	float64_t  x;
 } vec1;
 
 __A_CORE_API__ typedef struct
 {
-	byte vec_size;
+	ubyte vec_size;
 	float64_t  x;
 	float64_t  y;
 } vec2;
 
 __A_CORE_API__ typedef struct
 {
-	byte vec_size;
+	ubyte vec_size;
 	float64_t  x;
 	float64_t  y;
 	float64_t  z;
@@ -34,7 +34,7 @@ __A_CORE_API__ typedef struct
 
 __A_CORE_API__ typedef struct
 {
-	byte vec_size;
+	ubyte vec_size;
 	float64_t  x;
 	float64_t  y;
 	float64_t  z;
