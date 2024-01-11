@@ -39,8 +39,8 @@ __A_CORE_API__ void* bump_allocator_alloc(bump_allocator* allocator, uint64_t si
 
 __A_CORE_API__ void bump_allocator_free(bump_allocator* allocator)
 {
-	FREE(allocator->start);
-	FREE(allocator);
+	free(allocator->start);
+	free(allocator);
 }
 
 __A_CORE_API__ void bump_allocator_reset(bump_allocator* allocator)

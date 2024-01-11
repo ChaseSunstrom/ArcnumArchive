@@ -6,7 +6,7 @@
 
 #define ROTL64(x, r) ((x << r) | (x >> (64 - r)))
 
-#define DEFAULT_BUCKET_SIZE 2
+#define DEFAULT_BUCKET_SIZE 32
 
 static inline uint64_t getblock64(const uint64_t* p, uint64_t i) 
 {
@@ -247,9 +247,6 @@ hashmap(void*, void*) hashmap_default()
 	hmap->entry_count = 0;
    
     hmap->buckets = vector_news(DEFAULT_BUCKET_SIZE);
-
-    for (uint64_t i = 0; i < DEFAULT_BUCKET_SIZE; i++)
-        vector_assign_data(hmap->buckets, NULL, i);
     
     hmap->bucket_size = DEFAULT_BUCKET_SIZE;
 
@@ -370,33 +367,29 @@ void* hashmap_get(hashmap(void*, void*) hmap, ubyte* key, uint64_t key_size)
     return NULL;
 }
 
-__A_CORE_INLINE__ void hashmap_resize(hashmap(void*, void*) hmap)
-{
-    // Doubles the bucket size
-    vector_set_capacity(hmap->buckets, hmap->bucket_size * 2);
-    hmap->bucket_size = hmap->buckets->capacity;
-}
-
 void hashmap_rehash(hashmap(void*, void*) hmap)
 {
-    hashmap_resize(hmap);
+    uint64_t new_bucket_size = hmap->bucket_size << 1;
+    vector(entry*) new_buckets = vector_news(new_bucket_size);
 
-    vector(entry*) buckets_temp = hmap->buckets;
-
-    for (uint64_t i = 0; i < hmap->bucket_size; i++)
+    for (uint64_t i = 0; i < hmap->bucket_size; ++i) 
     {
-        entry* head = vector_get(hmap->buckets, i);
-
-        while (head)
+        entry* current = vector_get(hmap->buckets, i);
+        while (current) 
         {
-			void* key = head->key;
-			void* value = head->value;
-            uint64_t key_size = head->key_size;
+            uint64_t new_index = hash64(current->key, current->key_size) % new_bucket_size;
+            entry* next = current->next;
+            
+            current->next = vector_get(new_buckets, new_index);
+            vector_assign_data(new_buckets, current, new_index);
 
-            hashmap_insert(hmap->buckets, key, value, key_size);
-			head = head->next;
+            current = next;  // Move to the next entry in the old bucket
         }
     }
+    
+    vector_free_d(hmap->buckets);
+    hmap->buckets = new_buckets;
+    hmap->bucket_size = new_bucket_size;
 }
 
 void _hashmap_free(hashmap(void*, void*) hmap, void (*key_free)(void*), void (*value_free)(void*))

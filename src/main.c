@@ -1,7 +1,7 @@
 #include "game/arcnum.h"
 #include <core/tests/test.h>
 
-#define UNIT_TESTS
+//#define UNIT_TESTS
 
 int main()
 {

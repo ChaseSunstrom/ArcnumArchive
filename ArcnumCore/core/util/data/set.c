@@ -41,14 +41,14 @@ __A_CORE_API__ void set_remove(set(void*) _set, uint64_t index)
 	vector_remove(_set->data, index);
 }
 
-__A_CORE_API__ void set_free(set(void*) _set)
+__A_CORE_API__ void set_free_d(set(void*) _set)
 {
-	vector_free(_set->data);
-	FREE(_set);
+	vector_free_d(_set->data);
+	free(_set);
 }
 
-__A_CORE_API__ void set_free_all(set(void*) set, void (*free_fn)(void*))
+__A_CORE_API__ void set_free(set(void*) set, void (*free_fn)(void*))
 {
-	vector_free_all(set->data, free_fn);
+	vector_free(set->data, free_fn);
 	free(set);
 }

@@ -30,11 +30,11 @@ TEST(test_vector_insert)
 
 	if ((uint64_t)vector_get(v, 2) == 8)
 	{
-		vector_free(v);
+		vector_free_d(v);
 		return true;
 	}
 
-	vector_free(v);
+	vector_free_d(v);
 
 	test_fail_reason = "VECTOR INSERTED INCORRECTLY";
 	return false;
@@ -48,11 +48,11 @@ TEST(test_vector_assign_data)
 
 	if ((uint64_t)vector_get(v, 0) == 2)
 	{
+		vector_free_d(v);
 		return true;
-		vector_free(v);
 	}
 
-	vector_free(v);
+	vector_free_d(v);
 	test_fail_reason = "VECTOR ASSIGNED INCORRECTLY";
 	return false;
 }
@@ -66,11 +66,11 @@ TEST(test_vector_size)
 
 	if ((uint64_t)v->size == HUNDRED_MILLION)
 	{
-		vector_free(v);
+		vector_free_d(v);
 		return true;
 	}
 
-	vector_free(v);
+	vector_free_d(v);
 
 	test_fail_reason = "VECTOR SIZE WAS INCORRECT";
 	return false;
@@ -96,11 +96,11 @@ TEST(test_vector_new)
 
 	if (v->size == 4)
 	{
-		vector_free(v);
+		vector_free_d(v);
 		return true;
 	}
 
-	vector_free(v);
+	vector_free_d(v);
 
 	test_fail_reason = "VECTOR NEW HAD INCORRECT SIZE";
 	return false;
@@ -114,11 +114,11 @@ TEST(test_vector_add_array)
 
 	if (v->size == 4)
 	{
-		vector_free(v);
+		vector_free_d(v);
 		return true;
 	}
 
-	vector_free(v);
+	vector_free_d(v);
 
 	test_fail_reason = "VECTOR ADD ARRAY HAD INCORRECT SIZE";
 	return false;
@@ -151,11 +151,11 @@ TEST(test_set)
 
 	if (s->size == 1)
 	{
-		set_free(s);
+		set_free_d(s);
 		return true;
 	}
 
-	set_free(s);
+	set_free_d(s);
 
 	test_fail_reason = "SET SIZE WAS INCORRECT";
 	return false;
@@ -253,14 +253,23 @@ TEST(test_hashmap_entry_count)
 {
 	hashmap(c_str, c_str) hmap = hashmap_default();
 
-	hashmap_insert(hmap, "key1", "value1", 4);
-	hashmap_insert(hmap, "key2", "value2", 4);
-	hashmap_insert(hmap, "key3", "value3", 4);
-	hashmap_insert(hmap, "key4", "value4", 4);
+	uint64_t k1 = 1;
+	uint64_t k2 = 2;
+	uint64_t k3 = 3;
+	uint64_t k4 = 4;
+
+	hashmap_insert(hmap, &k1, "value1", 8);
+	hashmap_insert(hmap, &k2, "value2", 8);
+	hashmap_insert(hmap, &k3, "value3", 8);
+	hashmap_insert(hmap, &k4, "value4", 8);
 
 	if (hmap->entry_count == 4)
+	{
+		hashmap_free_d(hmap);
 		return true;
+	}
 
+	hashmap_free_d(hmap);
 	test_fail_reason = "HASHMAP ENTRY COUNT WAS INCORRECT";
 	return false;
 }

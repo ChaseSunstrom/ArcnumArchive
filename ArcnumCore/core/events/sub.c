@@ -26,7 +26,7 @@ __A_CORE_API__ bool subscription_unsubscribe(subscription* subscription)
 	if (subscription == NULL) return false;
 	if (subscription->subscription_id >= subscription_count) return false;
 
-	FREE(subscription);
+	free(subscription);
 	return true;
 }
 

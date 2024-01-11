@@ -57,7 +57,6 @@ __A_CORE_API__ void                   _hashmap_free(hashmap(void*, void*) hmap, 
 
 __A_CORE_API__ void                   hashmap_free_d(hashmap(void*, void*) hmap);
 __A_CORE_API__ void                   hashmap_rehash(hashmap(void*, void*) hmap);
-__A_CORE_API__ __A_CORE_INLINE__ void hashmap_resize(hashmap(void*, void*) hmap);
 __A_CORE_API__ void*                  hashmap_get(hashmap(void*, void*) hmap, ubyte* key, uint64_t key_size);
 __A_CORE_API__ bool                   hashmap_compare_keys(ubyte* key1, ubyte* key2, uint64_t key_size);
 

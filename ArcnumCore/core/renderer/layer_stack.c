@@ -49,7 +49,7 @@ __A_CORE_API__ void layer_stack_pop_overlay(layer_stack layer_stack)
 
 __A_CORE_API__ void layer_stack_free(layer_stack* layer_stack)
 {
-	vector_free(layer_stack->layers);
+	vector_free_d(layer_stack->layers);
 	iterator_free(layer_stack->layers_it);
-	FREE(layer_stack);
+	free(layer_stack);
 }

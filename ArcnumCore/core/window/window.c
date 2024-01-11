@@ -92,13 +92,10 @@ __A_CORE_API__ bool window_close_event(window* window)
 __A_CORE_API__ void window_vsync(bool vsync)
 {
 	if (vsync)
-	{
 		glfwSwapInterval(1);
-	}
+	
 	else
-	{
 		glfwSwapInterval(0);
-	}
 }
 
 __A_CORE_API__ void window_on_event(generic_event* event)

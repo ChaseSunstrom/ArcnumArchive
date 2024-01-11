@@ -50,7 +50,7 @@ __A_CORE_API__ void map_remove(map(void*, void*) _map, void* key)
 		if (pair_compare(_pair, key))
 		{
 			vector_remove(_map->pairs, i);
-			FREE(_pair);
+			free(_pair);
 			break;
 		}
 	}

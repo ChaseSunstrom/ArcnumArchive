@@ -30,7 +30,7 @@ __A_CORE_API__ vector(void*) _vector_new(uint64_t size, void* values[]);
 __A_CORE_API__ ubyte*		 vector_get(vector(void*) v, uint64_t index);
 
 //                           Just frees the vector, not the data inside
-__A_CORE_API__ void			 vector_free(vector(void*) v);
+__A_CORE_API__ void			 vector_free_d(vector(void*) v);
 
 //                           Will free all the data inside the vector as well, requires a function pointer to be called to free the data
 __A_CORE_API__ void          vector_free_all(vector(void*) v, void (*fn)(void*));
@@ -53,8 +53,8 @@ __A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector(void*) 
 
 
 // helper macros to make calling vector functions easier
-#define vector_new(_arr)   _vector_new((sizeof(_arr) / sizeof(_arr[0])), (_arr))
-#define vector_add_array(_v, _arr) _vector_add_array(_v, sizeof(_arr) / sizeof(_arr[0]), _arr)
+#define vector_new(_arr)   _vector_new(sizeof(_arr), (_arr))
+#define vector_add_array(_v, _arr) _vector_add_array(_v, sizeof(_arr), _arr)
 
 //===============================================================================
 

@@ -26,7 +26,7 @@ __A_CORE_API__ void		  set_insert(set(void*) set, uint64_t index, void* data);
 __A_CORE_API__ void		  set_push(set(void*) set, void* data);
 __A_CORE_API__ void	      set_remove(set(void*) set, uint64_t index);
 __A_CORE_API__ void*      set_get(set(void*) set, uint64_t index);
-__A_CORE_API__ void       set_free(set(void*) set);
+__A_CORE_API__ void       set_free_d(set(void*) set);
 
 // =================================================================
 

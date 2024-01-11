@@ -123,7 +123,7 @@ __A_CORE_API__ void iterator_reset(iterator* it)
 
 __A_CORE_API__ void iterator_free(iterator* it)
 {
-	FREE(it);
+	free(it);
 }
 
 // ===============================================================================

@@ -41,11 +41,9 @@ __A_CORE_API__ vector(void*) _vector_new(uint64_t size, void* values[])
 	{
 		v->size     = size;
 		v->capacity = size << 1;
-		v->data     = ALLOC(ubyte*);
+		v->data     = malloc(sizeof(ubyte*) * size << 1);
 
-		vector_add_capacity(v, size);
-
-		memcpy(v->data, values, size * sizeof(void*));
+		memcpy(v->data, values, size);
 	}
 
 	return v;
@@ -59,16 +57,16 @@ __A_CORE_API__ ubyte* vector_get(vector(void*) v, uint64_t index)
 	return NULL;
 }
 
-__A_CORE_API__ void vector_free(vector(void*) v)
+__A_CORE_API__ void vector_free_d(vector(void*) v)
 {
 	if (v)
 	{
-		FREE(v->data);
-		FREE(v);
+		free(v->data);
+		free(v);
 	}
 }
 
-__A_CORE_API__ void vector_free_all(vector(void*) v, void (*fn)(void*))
+__A_CORE_API__ void vector_free(vector(void*) v, void (*fn)(void*))
 {
 	if (v)
 	{
@@ -175,7 +173,7 @@ __A_CORE_API__ void vector_add_vector(vector(void*) v, vector(void*) other)
 	if (!v->data || !other->data)
 		return;
 
-	memcpy(v->data + v->size, other->data, other->size * sizeof(ubyte*));
+	memcpy(v->data + v->size, other->data, other->size);
 
 	v->size += other->size;
 }
@@ -214,7 +212,7 @@ __A_CORE_API__ void vector_move_data(vector(void*) v, vector(void*) other)
 
 	v->size += other->size;
 
-	vector_free(other);
+	vector_free_d(other);
 }
 
 __A_CORE_API__ void vector_change_data(vector(void*) v, vector(void*) other)
@@ -227,7 +225,7 @@ __A_CORE_API__ void vector_change_data(vector(void*) v, vector(void*) other)
 
 	memmove(v->data + v->size, other->data, other->size * sizeof(ubyte*));
 
-	vector_free(other);
+	vector_free_d(other);
 }
 
 __A_CORE_API__ __A_CORE_INLINE__ static bool vector_is_big_enough(vector(void*) v)
