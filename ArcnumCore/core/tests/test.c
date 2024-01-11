@@ -5,7 +5,12 @@
 #include "../util/data/set.h"
 #include "../util/data/hashmap.h"
 
-#define HUNDRED_MIL 100000000
+#define TEN              10
+#define HUNDRED          100
+#define HUNDRED_THOUSAND 100000
+#define HUNDRED_MILLION  100000000
+
+
 int64_t tests_add_callback(int64_t x)
 {
 	return x;
@@ -56,10 +61,10 @@ TEST(test_vector_size)
 {
 	vector(uint64_t) v = vector_default();
 
-	for (uint64_t i = 0; i < HUNDRED_MIL; i++)
+	for (uint64_t i = 0; i < HUNDRED_MILLION; i++)
 		vector_push(v, i);
 
-	if ((uint64_t)v->size == HUNDRED_MIL)
+	if ((uint64_t)v->size == HUNDRED_MILLION)
 	{
 		vector_free(v);
 		return true;
@@ -75,10 +80,10 @@ TEST(test_vector_get)
 {
 	vector(uint64_t) v = vector_default();
 
-	for (uint64_t i = 0; i < HUNDRED_MIL + 1; i++)
+	for (uint64_t i = 0; i < HUNDRED_MILLION + 1; i++)
 		vector_push(v, i);
 
-	if (vector_get(v, HUNDRED_MIL) == HUNDRED_MIL)
+	if (vector_get(v, HUNDRED_MILLION) == HUNDRED_MILLION)
 		return true;
 
 	test_fail_reason = "VECTOR GET RETURNED INCORRECT VALUE";
@@ -119,11 +124,29 @@ TEST(test_vector_add_array)
 	return false;
 }
 
+TEST(test_vector_add_capacity)
+{
+	vector(uint64_t) v = vector_default();
+
+	for (uint64_t i = 0; i < HUNDRED_THOUSAND; i++)
+		vector_push(v, i);
+
+	uint64_t prev_capacity = v->capacity;
+
+	vector_add_capacity(v, v->capacity);
+
+	if (v->capacity == prev_capacity * 2)
+		return true;
+
+	test_fail_reason = "VECTOR CAPACITY HAD INCORRECT SIZE";
+	return false;
+}
+
 TEST(test_set)
 {
 	set(uint64_t) s = set_default();
 
-	for (uint64_t i = 0; i < HUNDRED_MIL; i++)
+	for (uint64_t i = 0; i < HUNDRED_MILLION; i++)
 		set_push(s, 1);
 
 	if (s->size == 1)
@@ -161,7 +184,7 @@ TEST(test_hashmap_insertss)
 
 	hashmap_free_d(hmap);
 
-	test_fail_reason = "HASHMAP SIZE INCORRECT";
+	test_fail_reason = "HASHMAP VALUES INCORRECT";
 	return false;
 }
 
@@ -188,7 +211,7 @@ TEST(test_hashmap_remove)
 
 TEST(test_hashmap_compare_keys)
 {
-	if (hashmap_compare_keys("key1", "key1", strlen("key1")))
+	if (hashmap_compare_keys("key1", "key1", 4))
 		return true;
 
 	test_fail_reason = "HASHMAP COMPARE KEYS RETURNED FALSE";
@@ -223,6 +246,22 @@ FAIL:
 	hashmap_free_d(hmap);
 
 	test_fail_reason = "HASHMAP GET RETURNED BAD VALUES";
+	return false;
+}
+
+TEST(test_hashmap_entry_count)
+{
+	hashmap(c_str, c_str) hmap = hashmap_default();
+
+	hashmap_insert(hmap, "key1", "value1", 4);
+	hashmap_insert(hmap, "key2", "value2", 4);
+	hashmap_insert(hmap, "key3", "value3", 4);
+	hashmap_insert(hmap, "key4", "value4", 4);
+
+	if (hmap->entry_count == 4)
+		return true;
+
+	test_fail_reason = "HASHMAP ENTRY COUNT WAS INCORRECT";
 	return false;
 }
 
@@ -298,6 +337,7 @@ bool core_test_main(void)
 	ADD_TEST(test_vector_get);
 	ADD_TEST(test_vector_new);
 	ADD_TEST(test_vector_add_array);
+	ADD_TEST(test_vector_add_capacity);
 
 	ADD_TEST(test_set);
 
@@ -305,6 +345,7 @@ bool core_test_main(void)
 	ADD_TEST(test_hashmap_insertss);
 	ADD_TEST(test_hashmap_remove);
 	ADD_TEST(test_hashmap_get);
+	ADD_TEST(test_hashmap_entry_count);
 
 	ADD_TEST(test_handled_ptr);
 

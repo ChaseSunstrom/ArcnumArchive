@@ -6,6 +6,8 @@
 
 #define ROTL64(x, r) ((x << r) | (x >> (64 - r)))
 
+#define DEFAULT_BUCKET_SIZE 2
+
 static inline uint64_t getblock64(const uint64_t* p, uint64_t i) 
 {
     return p[i];
@@ -241,8 +243,16 @@ bool hashmap_compare_keys(ubyte* key1, ubyte* key2, uint64_t key_size)
 hashmap(void*, void*) hashmap_default()
 {
     hashmap(void*, void*) hmap = ALLOC(_hashmap);
-    hmap->size = 0;
-    hmap->buckets = vector_default();
+    hmap->bucket_size = 0;
+	hmap->entry_count = 0;
+   
+    hmap->buckets = vector_news(DEFAULT_BUCKET_SIZE);
+
+    for (uint64_t i = 0; i < DEFAULT_BUCKET_SIZE; i++)
+        vector_assign_data(hmap->buckets, NULL, i);
+    
+    hmap->bucket_size = DEFAULT_BUCKET_SIZE;
+
     return hmap;
 }
 
@@ -255,21 +265,13 @@ hashmap(void*, void*) _hashmap_new(entry* entries, uint64_t num_entries, uint64_
 
 void hashmap_insert(hashmap(void*, void*) hmap, ubyte* key, ubyte* value, uint64_t key_size)
 {
-    const uint64_t default_buckets_count = 16;
+    float64_t load_factor =  ((float64_t) hmap->entry_count + 1) / (float64_t)hmap->bucket_size;
 
-    if (hmap->size == 0) 
-    {
-        // Initialize the hash map with a default number of buckets
-        hmap->buckets = vector_news(default_buckets_count);
-
-		for (uint64_t i = 0; i < default_buckets_count; i++)
-			vector_assign_data(hmap->buckets, NULL, i);
-
-        hmap->size = default_buckets_count;
-    }
+    if (load_factor >= 0.75)
+        hashmap_rehash(hmap);
 
     uint64_t hash = hash64(key, key_size);
-    uint64_t index = hash % hmap->size;
+    uint64_t index = hash % hmap->bucket_size;
 
     entry* new_entry = entry_new(key, value, key_size);
 
@@ -289,6 +291,8 @@ void hashmap_insert(hashmap(void*, void*) hmap, ubyte* key, ubyte* value, uint64
        
         current->next = new_entry;
     }
+
+    ++hmap->entry_count;
 }
 
 void _hashmap_insert_entries(hashmap(void*, void*) hmap, entry entries[], uint64_t num_entries, uint64_t key_sizes[])
@@ -315,27 +319,31 @@ void _hashmap_insertss(hashmap(void*, void*) hmap, void* keys[], void* values[],
         hashmap_insert(hmap, keys[i], values[i], key_sizes);
 }
 
-void hashmap_remove(hashmap(void*, void*) hmap, void* key, uint64_t key_size) {
-    if (hmap->size == 0) {
+void hashmap_remove(hashmap(void*, void*) hmap, void* key, uint64_t key_size) 
+{
+    if (hmap->bucket_size == 0)
         // Handle the case when the hash map is empty
         return;
-    }
 
-    uint64_t index = hash64(key, key_size) % hmap->size;
+    uint64_t index = hash64(key, key_size) % hmap->bucket_size;
     entry* current = vector_get(hmap->buckets, index);
     entry* prev = NULL;
 
-    while (current) {
-        if (hashmap_compare_keys(current->key, key, key_size)) {
-            if (prev != NULL) {
+    while (current) 
+    {
+        if (hashmap_compare_keys(current->key, key, key_size)) 
+        {
+            if (prev)
                 prev->next = current->next;
-            }
-            else {
+            
+            else
                 vector_assign_data(hmap->buckets, current->next, index);
-            }
+
             free(current);
+            --hmap->entry_count;
             return;  // Entry removed
         }
+
         prev = current;
         current = current->next;
     }
@@ -343,32 +351,57 @@ void hashmap_remove(hashmap(void*, void*) hmap, void* key, uint64_t key_size) {
 
 void* hashmap_get(hashmap(void*, void*) hmap, ubyte* key, uint64_t key_size)
 {
-    if (hmap->size == 0)
+    if (hmap->bucket_size == 0)
         return NULL;  // The hash map is empty, so the key cannot be present
 
     uint64_t hash = hash64(key, key_size);
-    uint64_t index = hash % hmap->size;
+    uint64_t index = hash % hmap->bucket_size;
 
-    // Search for the entry in the bucket
     entry* current = vector_get(hmap->buckets, index);
 
-    uint64_t i = 0; // Counter to track position in the bucket
     while (current)
     {
         if (hashmap_compare_keys(current->key, key, key_size))
             return current->value;
 
         current = current->next;
-        ++i;
     }
 
     return NULL;
 }
 
+__A_CORE_INLINE__ void hashmap_resize(hashmap(void*, void*) hmap)
+{
+    // Doubles the bucket size
+    vector_set_capacity(hmap->buckets, hmap->bucket_size * 2);
+    hmap->bucket_size = hmap->buckets->capacity;
+}
+
+void hashmap_rehash(hashmap(void*, void*) hmap)
+{
+    hashmap_resize(hmap);
+
+    vector(entry*) buckets_temp = hmap->buckets;
+
+    for (uint64_t i = 0; i < hmap->bucket_size; i++)
+    {
+        entry* head = vector_get(hmap->buckets, i);
+
+        while (head)
+        {
+			void* key = head->key;
+			void* value = head->value;
+            uint64_t key_size = head->key_size;
+
+            hashmap_insert(hmap->buckets, key, value, key_size);
+			head = head->next;
+        }
+    }
+}
 
 void _hashmap_free(hashmap(void*, void*) hmap, void (*key_free)(void*), void (*value_free)(void*))
 {
-    for (uint64_t index = 0; index < hmap->size; index++)
+    for (uint64_t index = 0; index < hmap->bucket_size; index++)
     {
 		entry* current = vector_get(hmap->buckets, index);
 
@@ -378,7 +411,7 @@ void _hashmap_free(hashmap(void*, void*) hmap, void (*key_free)(void*), void (*v
 
 void hashmap_free_d(hashmap(void*, void*) hmap)
 {
-    for (uint64_t index = 0; index < hmap->size; index++)
+    for (uint64_t index = 0; index < hmap->bucket_size; index++)
     {
         entry* current = vector_get(hmap->buckets, index);
 

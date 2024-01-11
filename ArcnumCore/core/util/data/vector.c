@@ -158,6 +158,16 @@ __A_CORE_API__ void vector_add_capacity(vector(void*) v, uint64_t size)
 	v->data = REALLOC(v->data, ubyte*, v->capacity);
 }
 
+__A_CORE_API__ void vector_set_capacity(vector(void*) v, uint64_t size)
+{
+	if (v->capacity > size)
+		return;
+
+	v->capacity = size;
+
+	v->data = REALLOC(v->data, ubyte*, v->capacity);
+}
+
 __A_CORE_API__ void vector_add_vector(vector(void*) v, vector(void*) other)
 {
 	vector_add_capacity(v, other->size);

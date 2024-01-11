@@ -17,10 +17,6 @@ __A_CORE_API__ entity entity_new(component components[])
 	entity.entity_id = ++globabl_entity_id;
 	entity.component_mask = 0;
 	entity.components = hashmap_new(components);
-
-	for (uint64_t i = 0; i < entity.components->size; ++i)
-		//entity.component_mask |= ((component*)vector_get(entity.components, i))->component_name;
-
 	return entity;
 }
 
@@ -55,7 +51,7 @@ __A_CORE_API__ component* entity_get_component(entity* entity, c_str type)
 	if (!entity_has_component(entity, type))
 		return NULL;
 
-	for (uint64_t i = 0; i < entity->components->size; i++)
+	for (uint64_t i = 0; i < entity->components->bucket_size; i++)
 		if (strcmp(((component*)vector_get(entity->components, i))->component_name, type) == 0)
 			return (component*)vector_get(entity->components, i);
 }
@@ -68,7 +64,7 @@ __A_CORE_API__ void entity_add_component(entity* entity, component* component)
 
 __A_CORE_API__ void entity_remove_component(entity* entity, c_str component_type)
 {
-	for (uint64_t i = 0; i < entity->components->size; i++)
+	for (uint64_t i = 0; i < entity->components->bucket_size; i++)
 		if (((component*)vector_get(entity->components, i))->component_name == component_type)
 			vector_remove(entity->components, i);
 	//entity->component_mask &= ~component_type;
