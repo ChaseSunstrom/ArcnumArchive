@@ -19,6 +19,20 @@ __A_CORE_API__ vector(void*) vector_default(void)
 	return v;
 }
 
+__A_CORE_API__ vector(void*) vector_news(uint64_t size)
+{
+	vector(void*) v = ALLOC(_vector);
+
+	if (v)
+	{
+		v->size = size;
+		v->capacity = size << 1;
+		v->data = calloc(size, sizeof(ubyte*));
+	}
+
+	return v;
+}
+
 __A_CORE_API__ vector(void*) _vector_new(uint64_t size, void* values[])
 {
 	vector(void*) v = ALLOC(_vector);
@@ -219,11 +233,10 @@ __A_CORE_API__ void vector_assign_data(vector(void*) v, void* data, uint64_t ind
 	if (!v->data)
 		return;
 
-	v->data[index] = data;
 	if (index > v->size)
 		v->size += 1;
+
+	v->data[index] = data;
 }
-
-
 
 //===============================================================================

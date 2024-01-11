@@ -1,4 +1,5 @@
 #include "hashmap.h"
+#include "../logging/log.h"
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -21,7 +22,7 @@ static inline uint64_t fmix64(uint64_t k)
     return k;
 }
 
-uint64_t _hash64(ubyte* _data, uint64_t len) 
+uint64_t hash64(ubyte* _data, uint64_t len) 
 {
     const ubyte* data = _data;
     const uint64_t nblocks = len / 16;
@@ -49,35 +50,37 @@ uint64_t _hash64(ubyte* _data, uint64_t len)
     const ubyte* tail = (const ubyte*)(data + nblocks * 16);
 
     uint64_t k1 = 0;
-
-    switch (len & 15) 
+    switch (len & 15)
     {
-    case 15: k1 ^= ((uint64_t)tail[14]) << 48;
-    case 14: k1 ^= ((uint64_t)tail[13]) << 40;
-    case 13: k1 ^= ((uint64_t)tail[12]) << 32;
-    case 12: k1 ^= ((uint64_t)tail[11]) << 24;
-    case 11: k1 ^= ((uint64_t)tail[10]) << 16;
-    case 10: k1 ^= ((uint64_t)tail[9]) << 8;
+    case 15: k1 ^= ((uint64_t)tail[14]) << 48; // fall through
+    case 14: k1 ^= ((uint64_t)tail[13]) << 40; // fall through
+    case 13: k1 ^= ((uint64_t)tail[12]) << 32; // fall through
+    case 12: k1 ^= ((uint64_t)tail[11]) << 24; // fall through
+    case 11: k1 ^= ((uint64_t)tail[10]) << 16; // fall through
+    case 10: k1 ^= ((uint64_t)tail[9]) << 8; // fall through
     case  9: k1 ^= ((uint64_t)tail[8]) << 0;
+        k1 *= c2; k1 = ROTL64(k1, 33); k1 *= c1; h ^= k1;
+        break;
+    case  8: k1 ^= ((uint64_t)tail[7]) << 56; // fall through
+    case  7: k1 ^= ((uint64_t)tail[6]) << 48; // fall through
+    case  6: k1 ^= ((uint64_t)tail[5]) << 40; // fall through
+    case  5: k1 ^= ((uint64_t)tail[4]) << 32; // fall through
+    case  4: k1 ^= ((uint64_t)tail[3]) << 24; // fall through
+    case  3: k1 ^= ((uint64_t)tail[2]) << 16; // fall through
+    case  2: k1 ^= ((uint64_t)tail[1]) << 8; // fall through
+    case  1: k1 ^= ((uint64_t)tail[0]) << 0;
+        k1 *= c1; k1 = ROTL64(k1, 31); k1 *= c2; h ^= k1;
+        break;
+    }
 
-        k1 *= c2;
-        k1 = ROTL64(k1, 33);
-        k1 *= c1;
-        h ^= k1;
-    };
-
+    // Finalization
     h ^= len;
-
-    h += h;
-    h = fmix64(h);
-
-    h += h;
     h = fmix64(h);
 
     return h;
 }
 
-uint64_t* _hash128(ubyte* _data, uint64_t len) 
+uint64_t* hash128(ubyte* _data, uint64_t len) 
 {
     const ubyte* data = _data;
     const uint64_t nblocks = len / 16;
@@ -229,7 +232,7 @@ bool hashmap_compare_keys(ubyte* key1, ubyte* key2, uint64_t key_size)
 	ubyte* k2_b = key2;
 
     for (uint64_t i = 0; i < key_size; i++)
-        if ((key1[i] & key2[i]) != key1[i])
+        if (key1[i] != key2[i])
             return false;
 
     return true;
@@ -252,37 +255,49 @@ hashmap(void*, void*) _hashmap_new(entry* entries, uint64_t num_entries, uint64_
 
 void hashmap_insert(hashmap(void*, void*) hmap, ubyte* key, ubyte* value, uint64_t key_size)
 {
-    uint64_t index;
-    uint64_t hash = hash64(key);
-    if (hmap->size == 0)
-        index = hash % 1;  // or any other default index when size is zero
-    else
-        index = hash % hmap->size;
+    const uint64_t default_buckets_count = 16;
+
+    if (hmap->size == 0) 
+    {
+        // Initialize the hash map with a default number of buckets
+        hmap->buckets = vector_news(default_buckets_count);
+
+		for (uint64_t i = 0; i < default_buckets_count; i++)
+			vector_assign_data(hmap->buckets, NULL, i);
+
+        hmap->size = default_buckets_count;
+    }
+
+    uint64_t hash = hash64(key, key_size);
+    uint64_t index = hash % hmap->size;
 
     entry* new_entry = entry_new(key, value, key_size);
 
-    entry* current = vector_get(hmap->buckets, index);
+    entry* head = vector_get(hmap->buckets, index);
 
-    if (!current) 
+    if (!head) 
+        // If the bucket is empty, place the new entry there
         vector_assign_data(hmap->buckets, new_entry, index);
-    
+   
     else 
     {
+        // If the bucket is not empty, append the new entry to the end of the list
+        entry* current = head;
+
         while (current->next)
             current = current->next;
-        
+       
         current->next = new_entry;
     }
-    hmap->size++;
 }
 
-void _hashmap_insert_entries(hashmap(void*, void*) hmap, entry* entries, uint64_t num_entries, uint64_t key_sizes[])
+void _hashmap_insert_entries(hashmap(void*, void*) hmap, entry entries[], uint64_t num_entries, uint64_t key_sizes[])
 {
     for (uint64_t i = 0; i < num_entries; ++i)
         hashmap_insert(hmap, entries[i].key, entries[i].value, key_sizes[i]);
 }
 
-void __hashmap_insert_entries(hashmap(void*, void*) hmap, entry* entries, uint64_t num_entries, uint64_t key_sizes)
+void _hashmap_insert_entriess(hashmap(void*, void*) hmap, entry entries[], uint64_t num_entries, uint64_t key_sizes)
 {
     for (uint64_t i = 0; i < num_entries; ++i)
         hashmap_insert(hmap, entries[i].key, entries[i].value, key_sizes);
@@ -300,35 +315,27 @@ void _hashmap_insertss(hashmap(void*, void*) hmap, void* keys[], void* values[],
         hashmap_insert(hmap, keys[i], values[i], key_sizes);
 }
 
-void hashmap_remove(hashmap(void*, void*) hmap, void* key, uint64_t key_size)
-{
-    uint64_t index = hash64(key) % hmap->size;
+void hashmap_remove(hashmap(void*, void*) hmap, void* key, uint64_t key_size) {
+    if (hmap->size == 0) {
+        // Handle the case when the hash map is empty
+        return;
+    }
 
-    // Locate the bucket
+    uint64_t index = hash64(key, key_size) % hmap->size;
     entry* current = vector_get(hmap->buckets, index);
     entry* prev = NULL;
 
-    // Search for the entry in the linked list
-    while (current)
-    {
-        if (hashmap_compare_keys(current->key, key, key_size))
-        {
-            // Entry found, remove it from the linked list
-            if (prev != NULL)
+    while (current) {
+        if (hashmap_compare_keys(current->key, key, key_size)) {
+            if (prev != NULL) {
                 prev->next = current->next;
-            else
+            }
+            else {
                 vector_assign_data(hmap->buckets, current->next, index);
-
-            // Free the memory occupied by the entry
+            }
             free(current);
-            hmap->size--;
-
-            vector_remove(hmap->buckets, index);
-
-            return;  // Entry removed, exit the function
+            return;  // Entry removed
         }
-
-        // Move to the next entry in the linked list
         prev = current;
         current = current->next;
     }
@@ -336,27 +343,28 @@ void hashmap_remove(hashmap(void*, void*) hmap, void* key, uint64_t key_size)
 
 void* hashmap_get(hashmap(void*, void*) hmap, ubyte* key, uint64_t key_size)
 {
-    uint64_t hash = hash64(key);
-
     if (hmap->size == 0)
         return NULL;  // The hash map is empty, so the key cannot be present
 
+    uint64_t hash = hash64(key, key_size);
     uint64_t index = hash % hmap->size;
 
     // Search for the entry in the bucket
     entry* current = vector_get(hmap->buckets, index);
 
+    uint64_t i = 0; // Counter to track position in the bucket
     while (current)
     {
         if (hashmap_compare_keys(current->key, key, key_size))
             return current->value;
 
         current = current->next;
+        ++i;
     }
 
-    // Key not found
     return NULL;
 }
+
 
 void _hashmap_free(hashmap(void*, void*) hmap, void (*key_free)(void*), void (*value_free)(void*))
 {

@@ -138,27 +138,6 @@ TEST(test_set)
 	return false;
 }
 
-TEST(test_hashmap_insert)
-{
-	hashmap(c_str, c_str) hmap = hashmap_default();
-
-	hashmap_insert(hmap, "key1", "value1", strlen("key1"));
-	hashmap_insert(hmap, "key2", "value2", strlen("key2"));
-	hashmap_insert(hmap, "key3", "value3", strlen("key3"));
-	hashmap_insert(hmap, "key4", "value4", strlen("key4"));
-
-	if (hmap->size = 4)
-	{
-		hashmap_free_d(hmap);
-		return true;
-	}
-
-	hashmap_free_d(hmap);
-
-	test_fail_reason = "HASHMAP SIZE INCORRECT";
-	return false;
-}
-
 TEST(test_hashmap_insertss)
 {
 	hashmap(c_str, c_str) hmap = hashmap_default();
@@ -169,25 +148,12 @@ TEST(test_hashmap_insertss)
 
 	hashmap_insertss(hmap, keys, values, size);
 
-	if (hmap->size = 4)
-	{
-		hashmap_free_d(hmap);
-		return true;
-	}
+	c_str key1 = hashmap_get(hmap, "key1", 4);
+	c_str key2 = hashmap_get(hmap, "key2", 4);
+	c_str key3 = hashmap_get(hmap, "key3", 4);
+	c_str key4 = hashmap_get(hmap, "key4", 4);
 
-	hashmap_free_d(hmap);
-
-	test_fail_reason = "HASHMAP SIZE INCORRECT";
-	return false;
-}
-
-TEST(test_hashmap_insert_entries)
-{
-	hashmap(c_str, c_str) hmap = hashmap_default();
-	entry entries[] = { { "key1", "value1" }, { "key2", "value2" }, { "key3", "value3" }, { "key4", "value4" } };
-	hashmap_insert_entriess(hmap, entries, 4);
-
-	if (hmap->size = 4)
+	if ((strcmp(key1, "value1") == 0 && strcmp(key2, "value2") == 0 && strcmp(key3, "value3") == 0 && strcmp(key4, "value4") == 0))
 	{
 		hashmap_free_d(hmap);
 		return true;
@@ -203,14 +169,13 @@ TEST(test_hashmap_remove)
 {
 	hashmap(c_str, c_str) hmap = hashmap_default();
 	entry entries[] = { { "key1", "value1" }, { "key2", "value2" }, { "key3", "value3" }, { "key4", "value4" } };
-	uint64_t key_sizes[4] = { 4, 4, 4, 4 };
-	hashmap_insert_entries(hmap, entries, key_sizes);
+	hashmap_insert_entriess(hmap, entries, 4);
 
 	hashmap_remove(hmap, "key1", strlen("key1"));
 	hashmap_remove(hmap, "key3", strlen("key3"));
 
-	if (hmap->size == 2)
-	{
+	if (hashmap_get(hmap, "key1", strlen("key1")) == NULL &&
+		hashmap_get(hmap, "key3", strlen("key3")) == NULL) {
 		hashmap_free_d(hmap);
 		return true;
 	}
@@ -234,13 +199,10 @@ TEST(test_hashmap_get)
 {
 	hashmap(c_str, c_str) hmap = hashmap_default();
 
-	entry entries[] = {
-		{ "key1", "value1" },
-		{ "key2", "value2" },
-		{ "key3", "value3" },
-		{ "key4", "value4" } };
-
-	hashmap_insert_entriess(hmap, entries, 4);
+	hashmap_insert(hmap, "key1", "value1", 4);
+	hashmap_insert(hmap, "key2", "value2", 4);
+	hashmap_insert(hmap, "key3", "value3", 4);
+	hashmap_insert(hmap, "key4", "value4", 4);
 
 	c_str key1 = hashmap_get(hmap, "key1", 4);
 	c_str key2 = hashmap_get(hmap, "key2", 4);
@@ -261,25 +223,6 @@ FAIL:
 	hashmap_free_d(hmap);
 
 	test_fail_reason = "HASHMAP GET RETURNED BAD VALUES";
-	return false;
-}
-
-TEST(test_hashmap_size)
-{
-	hashmap(c_str, c_str) hmap = hashmap_default();
-#define var 10
-	char buf[var];
-
-	for (int32_t i = 0; i < var; i++)
-	{
-		sprintf(buf, "%d", i);
-		hashmap_insert(hmap, buf, i, 1);
-	}
-
-	if (hmap->size == var)
-		return true;
-
-	test_fail_reason = "HASHMAP SIZE WAS INCORRECT";
 	return false;
 }
 
@@ -359,12 +302,9 @@ bool core_test_main(void)
 	ADD_TEST(test_set);
 
 	ADD_TEST(test_hashmap_compare_keys);
-	ADD_TEST(test_hashmap_insert);
 	ADD_TEST(test_hashmap_insertss);
 	ADD_TEST(test_hashmap_remove);
-	ADD_TEST(test_hashmap_insert_entries);
 	ADD_TEST(test_hashmap_get);
-	ADD_TEST(test_hashmap_size);
 
 	ADD_TEST(test_handled_ptr);
 
