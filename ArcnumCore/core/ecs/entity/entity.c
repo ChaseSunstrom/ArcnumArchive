@@ -28,7 +28,7 @@ __A_CORE_API__ void entity_render(entity* entity)
 	glUseProgram(rc->shader->shader_program);
 	glBindVertexArray(rc->shader->VAO);
 
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, 0);
 }
 
 __A_CORE_API__ void entity_change_vertices(entity* entity, vector(float64_t) vertices)

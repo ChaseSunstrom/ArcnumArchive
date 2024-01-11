@@ -35,16 +35,16 @@ __A_CORE_API__ void renderer_render(renderer* renderer)
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//for (uint64_t i = 0; i < renderer->ecs->entities->size; i++)
-	//{
-		//entity* e = vector_get(renderer->ecs->entities, i);
-		//if (entity_has_component(e, "render_component"))
-		//{
-			//entity_render(e);
-		//}
-	//}
+	for (uint64_t i = 0; i < renderer->ecs->entities->size; i++)
+	{
+		entity* e = vector_get(renderer->ecs->entities, i);
+		if (entity_has_component(e, "render_component"))
+		{
+			entity_render(e);
+		}
+	}
 
-	//batcher_render(renderer->batcher);
+	batcher_render(renderer->batcher);
 
 	renderer_set_delta_time(renderer);
 }
