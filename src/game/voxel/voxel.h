@@ -28,10 +28,14 @@ static const float voxel_vertices[] = {
 // ==============================================================================
 typedef struct
 {
-    entity entity;
+	uint64_t entity_id;
+    vector(system) systems;
+
+    render_component rc;
+    color_component cc;
 } voxel;
 
-voxel* voxel_default();
+voxel voxel_default();
 voxel voxel_new(vec3 position, vec3 scale, vec3 rotation, color color);
 
 #endif

@@ -4,13 +4,13 @@
 #include "../../util/std_include.h"
 
 // alias for all system functions
-__A_CORE_API__ typedef void (*system_function)(void);
+__A_CORE_API__ typedef void (*system_fn)(void);
 
 
 // ==============================================================================
 // SYSTEM FUNCTIONS:
 
-__A_CORE_API__ void system_handle_color(void);
+__A_CORE_API__ void system_handle_color();
 __A_CORE_API__ void system_handle_texture(void);
 __A_CORE_API__ void system_handle_position(void);
 __A_CORE_API__ void system_handle_size(void);

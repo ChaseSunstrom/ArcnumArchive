@@ -6,13 +6,23 @@
 #include "entity/entity.h"
 
 
-typedef struct
+// ==============================================================================
+// ECS: | List of entities and their systems
+// ==============================================================================
+
+__A_CORE_API__ typedef struct
 {
-	vector(entity) entities;
+	vector(generic_entity) entities;
 } ecs;
 
-ecs* ecs_default();
-void ecs_add_entity(ecs* ecs, entity* entity);
-void ecs_remove_entity(ecs* ecs, entity* entity);
+// ==============================================================================
+// ECS FUNCTIONS:
+
+__A_CORE_API__ ecs* ecs_default();
+__A_CORE_API__ void ecs_add_entity(ecs* ecs, generic_entity* entity);
+__A_CORE_API__ void ecs_remove_entity(ecs* ecs, generic_entity* entity);
+__A_CORE_API__ void ecs_free(ecs* ecs);
+
+// ==============================================================================
 
 #endif // CORE_ECS_H

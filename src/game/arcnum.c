@@ -9,10 +9,14 @@ void application_main(void)
 {
 	application* _app = ALLOC(application);
 
-	_app->allocator = bump_allocator_new(KILOBYTE);
+	_app->allocator   = bump_allocator_new(KILOBYTE);
+	_app->layer_stack = _layer_stack_new(_app->allocator);
 
-	_app->window      = _window_new(_app->allocator);
-	_app->layer_stack = *_layer_stack_new(_app->allocator);
+	// Default layers for the applciation
+	application_push_layer(_app, input_layer_default());
+	application_push_layer(_app, window_layer_new("Arcnum", false, 1280, 1080));
+	application_push_layer(_app, ecs_layer_default());
+	application_push_layer(_app, renderer_layer_default());
 
 	application_loop(_app);
 }
@@ -68,26 +72,15 @@ void application_on_event(generic_event* event)
 
 void application_loop(const application* app)
 {
-	layer* _layer = layer_new();
-	application_push_layer(app, _layer);
-
 	subscription_new(WINDOW_EVENT_TOPIC, application_on_event);
 
-	voxel* vox = voxel_default();
-
-	ecs_add_entity(app->window->renderer->ecs, vox);
-
-	while (window_is_running(app->window))
+	while (true)
 	{
-		while (iterator_b_iterate(app->layer_stack.layers_it) != ITERATOR_BEGIN)
+		for (uint64_t i = 0; i > app->layer_stack->layers->size; i--)
 		{
-			layer* current_layer = iterator_get_current_data(app->layer_stack.layers_it);
-			layer_on_update(current_layer);
+			layer* current_layer = vector_get(app->layer_stack->layers, i);
+			current_layer->layer_on_update_fn(current_layer);
 		}
-
-		iterator_reset(app->layer_stack.layers_it);
-
-		window_on_update(app->window);
 	}
 }
 

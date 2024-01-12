@@ -6,7 +6,7 @@
 
 #define ROTL64(x, r) ((x << r) | (x >> (64 - r)))
 
-#define DEFAULT_BUCKET_SIZE 32
+#define DEFAULT_BUCKET_SIZE 16
 
 static inline uint64_t getblock64(const uint64_t* p, uint64_t i) 
 {

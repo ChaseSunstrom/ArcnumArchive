@@ -33,7 +33,7 @@ __A_CORE_API__ ubyte*		 vector_get(vector(void*) v, uint64_t index);
 __A_CORE_API__ void			 vector_free_d(vector(void*) v);
 
 //                           Will free all the data inside the vector as well, requires a function pointer to be called to free the data
-__A_CORE_API__ void          vector_free_all(vector(void*) v, void (*fn)(void*));
+__A_CORE_API__ void          vector_free(vector(void*) v, void (*fn)(void*));
 
 __A_CORE_API__ void          vector_push(vector(void*) v, void* data);
 __A_CORE_API__ void          vector_insert(vector(void*) v, uint64_t index, void* data);

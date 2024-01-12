@@ -10,10 +10,10 @@
 // ==============================================================================
 // LAYER STACK:   | Used for different rendering layers
 // ==============================================================================
+
 __A_CORE_API__ typedef struct
 {
 	vector(layer) layers;
-	iterator*  layers_it;
 } layer_stack;
 
 
@@ -23,10 +23,10 @@ __A_CORE_API__ typedef struct
 
 __A_CORE_API__ layer_stack* layer_stack_new(void);
 __A_CORE_API__ layer_stack* _layer_stack_new(bump_allocator* allocator);
-__A_CORE_API__ void         layer_stack_push_layer(layer_stack layer_stack, layer* layer);
-__A_CORE_API__ void         layer_stack_push_overlay(layer_stack layer_stack, layer* overlay);
-__A_CORE_API__ void         layer_stack_pop_layer(layer_stack layer_stack, layer* layer);
-__A_CORE_API__ void         layer_stack_pop_overlay(layer_stack layer_stack, layer* overlay);
+__A_CORE_API__ void         layer_stack_push_layer(layer_stack* layer_stack, layer* layer);
+__A_CORE_API__ void         layer_stack_push_overlay(layer_stack* layer_stack, layer* overlay);
+__A_CORE_API__ void         layer_stack_pop_layer(layer_stack* layer_stack, layer* layer);
+__A_CORE_API__ void         layer_stack_pop_overlay(layer_stack* layer_stack, layer* overlay);
 __A_CORE_API__ void         layer_stack_free(layer_stack* layer_stack);
 
 // ==============================================================================

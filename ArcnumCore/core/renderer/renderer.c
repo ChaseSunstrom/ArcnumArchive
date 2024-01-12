@@ -13,7 +13,6 @@ __A_CORE_API__ renderer* renderer_new()
 	_renderer->delta_time       = 0;
 	_renderer->fixed_delta_time = 0.01f;
 	_renderer->tick_time        = 0;
-	_renderer->ecs              = ecs_default();
 	_renderer->batcher          = batcher_default();
 	return _renderer;
 }
@@ -25,7 +24,6 @@ __A_CORE_API__ renderer* _renderer_new(bump_allocator* allocator)
 	_renderer->delta_time       = 0;
 	_renderer->fixed_delta_time = 0.01f;
 	_renderer->tick_time        = 0;
-	_renderer->ecs              = ecs_default();
 	_renderer->batcher          = batcher_default();
 	return _renderer;
 }
@@ -34,15 +32,6 @@ __A_CORE_API__ void renderer_render(renderer* renderer)
 {
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	for (uint64_t i = 0; i < renderer->ecs->entities->size; i++)
-	{
-		entity* e = vector_get(renderer->ecs->entities, i);
-		if (entity_has_component(e, "render_component"))
-		{
-			entity_render(e);
-		}
-	}
 
 	batcher_render(renderer->batcher);
 
@@ -54,6 +43,12 @@ __A_CORE_API__ void renderer_set_delta_time(renderer* renderer)
 	float64_t current_time = glfwGetTime();
 	renderer->delta_time = current_time - renderer->last_frame_time;
 	renderer->last_frame_time = current_time;
+}
+
+__A_CORE_API__ void renderer_free(renderer* renderer)
+{
+	batcher_free(renderer->batcher);
+	free(renderer);
 }
 
 // ==============================================================================

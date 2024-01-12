@@ -90,7 +90,6 @@
     <ClInclude Include="ArcnumCore\core\ecs\component\component.h" />
     <ClInclude Include="ArcnumCore\core\ecs\ecs.h" />
     <ClInclude Include="ArcnumCore\core\ecs\entity\entity.h" />
-    <ClInclude Include="ArcnumCore\core\ecs\entity\uuid.h" />
     <ClInclude Include="ArcnumCore\core\ecs\system\system.h" />
     <ClInclude Include="ArcnumCore\core\events\event.h" />
     <ClInclude Include="ArcnumCore\core\events\sub.h" />
@@ -124,7 +123,6 @@
     <ClCompile Include="ArcnumCore\core\ecs\component\component.c" />
     <ClCompile Include="ArcnumCore\core\ecs\ecs.c" />
     <ClCompile Include="ArcnumCore\core\ecs\entity\entity.c" />
-    <ClCompile Include="ArcnumCore\core\ecs\entity\uuid.c" />
     <ClCompile Include="ArcnumCore\core\ecs\system\system.c" />
     <ClCompile Include="ArcnumCore\core\events\event.c" />
     <ClCompile Include="ArcnumCore\core\events\sub.c" />

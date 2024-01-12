@@ -20,8 +20,6 @@ __A_CORE_API__ typedef struct
 	float64_t tick_time;
 
 	batcher* batcher;
-
-	ecs* ecs;
 } renderer;
 
 
@@ -37,10 +35,12 @@ __A_CORE_API__ void      renderer_set_tick_time(renderer* renderer);
 __A_CORE_API__ void      renderer_set_delta_time(renderer* renderer);
 __A_CORE_API__ void      renderer_set_fixed_delta_time(renderer* renderer);
 __A_CORE_API__ void      renderer_set_last_frame_time(renderer* renderer);
-__A_CORE_API__ float64_t       calculate_tick_time(void);
-__A_CORE_API__ float64_t       calculate_delta_time(void);
-__A_CORE_API__ float64_t       calculate_fixed_delta_time(void);
-__A_CORE_API__ float64_t       calculate_last_frame_time(void);
+__A_CORE_API__ void      renderer_free(renderer* renderer);
+
+__A_CORE_API__ float64_t calculate_tick_time(void);
+__A_CORE_API__ float64_t calculate_delta_time(void);
+__A_CORE_API__ float64_t calculate_fixed_delta_time(void);
+__A_CORE_API__ float64_t calculate_last_frame_time(void);
 
 //===============================================================================
 

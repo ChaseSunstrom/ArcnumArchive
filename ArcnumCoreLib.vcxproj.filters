@@ -55,9 +55,6 @@
     <ClInclude Include="ArcnumCore\core\ecs\entity\entity.h">
       <Filter>ecs\entity</Filter>
     </ClInclude>
-    <ClInclude Include="ArcnumCore\core\ecs\entity\uuid.h">
-      <Filter>ecs\entity</Filter>
-    </ClInclude>
     <ClInclude Include="ArcnumCore\core\ecs\system\system.h">
       <Filter>ecs\system</Filter>
     </ClInclude>
@@ -149,9 +146,6 @@
       <Filter>ecs</Filter>
     </ClCompile>
     <ClCompile Include="ArcnumCore\core\ecs\entity\entity.c">
-      <Filter>ecs\entity</Filter>
-    </ClCompile>
-    <ClCompile Include="ArcnumCore\core\ecs\entity\uuid.c">
       <Filter>ecs\entity</Filter>
     </ClCompile>
     <ClCompile Include="ArcnumCore\core\ecs\system\system.c">

@@ -42,38 +42,47 @@ __A_CORE_API__ GLFWwindow* window_init_gl(window_data* window_data)
 	return gl_window;
 }
 
-__A_CORE_API__ window* window_new(void)
+__A_CORE_API__ window* window_default()
 {
 	window* _window = ALLOC(window);
-	_window->window_data.title = "Arcnum";
+	_window->window_data.title = "Title";
 	_window->window_data.vsync = false;
-	_window->window_data.width = SCREEN_WIDTH;
-	_window->window_data.height = SCREEN_HEIGHT;
+	_window->window_data.width = 1080;
+	_window->window_data.height = 1080;
 	_window->window_data.event_callback = window_on_event;
 	_window->window = window_init_gl(&_window->window_data);
-	_window->renderer = renderer_new();
 	_window->running = true;
 	return _window;
 }
 
-__A_CORE_API__ window* _window_new(bump_allocator* allocator)
+__A_CORE_API__ window* window_new(c_str title, bool vsync, uint32_t height, uint32_t width)
 {
-	window* _window = bump_allocator_alloc(allocator, sizeof(window));
-	_window->window_data.title = "Arcnum";
-	_window->window_data.vsync = false;
-	_window->window_data.width = SCREEN_WIDTH;
-	_window->window_data.height = SCREEN_HEIGHT;
+	window* _window = ALLOC(window);
+	_window->window_data.title = title;
+	_window->window_data.vsync = vsync;
+	_window->window_data.width = width;
+	_window->window_data.height = height;
 	_window->window_data.event_callback = window_on_event;
 	_window->window = window_init_gl(&_window->window_data);
-	_window->renderer = renderer_new();
+	_window->running = true;
+	return _window;
+}
+
+__A_CORE_API__ window* _window_new(bump_allocator* allocator, c_str title, bool vsync, uint32_t height, uint32_t width)
+{
+	window* _window = bump_allocator_alloc(allocator, sizeof(window));
+	_window->window_data.title = title;
+	_window->window_data.vsync = vsync;
+	_window->window_data.width = width;
+	_window->window_data.height = height;
+	_window->window_data.event_callback = window_on_event;
+	_window->window = window_init_gl(&_window->window_data);
 	_window->running = true;
 	return _window;
 }
 
 __A_CORE_API__ void window_on_update(window* window)
 {
-	renderer_render(window->renderer);
-
 	glfwSwapBuffers(window->window);
 	glfwPollEvents();
 }
@@ -104,6 +113,13 @@ __A_CORE_API__ void window_on_event(generic_event* event)
 }
 
 __A_CORE_API__ generic_event* window_propagate_event(generic_event* event) { return event; }
+
+__A_CORE_API__ void window_free(window* window)
+{
+	window->running = false;
+	glfwDestroyWindow(window->window);
+	free(window);
+}
 
 // ==============================================================================
 

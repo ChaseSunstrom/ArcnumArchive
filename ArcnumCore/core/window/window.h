@@ -18,10 +18,10 @@ __A_CORE_API__ typedef generic_event* (*event_callback)(generic_event*);
 
 __A_CORE_API__ typedef struct
 {
-	c_str title;
-	bool   vsync;
-	uint32_t    width;
-	uint32_t    height;
+	c_str    title;
+	bool     vsync;
+	uint32_t width;
+	uint32_t height;
 
 	// A function that gets called every event
 	event_callback event_callback;
@@ -30,7 +30,6 @@ __A_CORE_API__ typedef struct
 __A_CORE_API__ typedef struct
 {
 	GLFWwindow* window;
-	renderer*   renderer;
 	bool        running;
 	window_data window_data;
 } window;
@@ -40,16 +39,17 @@ __A_CORE_API__ typedef struct
 // ==============================================================================
 // WINDOW FUNCTIONS:
 
-__A_CORE_API__ GLFWwindow*    window_init_gl(window_data* window_data);
-__A_CORE_API__ window*        window_new(void);
-__A_CORE_API__ window*		  _window_new(bump_allocator* allocator);
-__A_CORE_API__ generic_event* window_propagate_event(generic_event* event);
-__A_CORE_API__ void		      window_free(window* window);
-__A_CORE_API__ void           window_on_update(window* window);
-__A_CORE_API__ void           window_vsync(bool vsync);
-__A_CORE_API__ void           window_on_event(window* window, generic_event* event);
-__A_CORE_API__ bool           window_is_running(window* window);
-__A_CORE_API__ bool           window_close_event(window* window);
+__A_CORE_API__ GLFWwindow* window_init_gl(window_data* window_data);
+__A_CORE_API__ window*     window_default();
+__A_CORE_API__ window*     window_new(c_str title, bool vsync, uint64_t height, uint64_t width);
+__A_CORE_API__ window*	   _window_new(bump_allocator* allocator, c_str title, bool vsync, uint64_t height, uint64_t width);
+__A_CORE_API__ void		   window_free(window* window);
+__A_CORE_API__ void        window_on_update(window* window);
+__A_CORE_API__ void        window_vsync(bool vsync);
+__A_CORE_API__ void        window_on_event(window* window, generic_event* event);
+__A_CORE_API__ void        window_free(window* window);
+__A_CORE_API__ bool        window_is_running(window* window);
+__A_CORE_API__ bool        window_close_event(window* window);
 
 // ==============================================================================
 

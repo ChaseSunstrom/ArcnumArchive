@@ -20,7 +20,7 @@ __A_CORE_API__ batcher* batcher_default()
 	return _batcher;
 }
 
-__A_CORE_API__ batcher* batcher_new(vector(entity) entities, uint64_t entity_count)
+__A_CORE_API__ batcher* batcher_new(vector(generic_entity) entities, uint64_t entity_count)
 {
 	batcher* _batcher = ALLOC(batcher);
 	_batcher->VAO = 0;
@@ -47,50 +47,43 @@ __A_CORE_API__ void batcher_bind(batcher* batcher)
 	glBufferData(GL_ARRAY_BUFFER, batcher->vertices->size * sizeof(float64_t), batcher->vertices->data, GL_DYNAMIC_DRAW);
 }
 
-__A_CORE_API__ void batcher_add_entity(batcher* batcher, entity* entity)
+__A_CORE_API__ void batcher_add_entity(batcher* batcher, renderable_entity* entity)
 {
 	batcher->entity_count++;
 
 	vector_push(batcher->entity_ids, entity->entity_id);
 	vector_push(batcher->entities, entity);
 
-	render_component* render_component = entity_get_component(entity, "render_component");
+	render_component render_component = entity->rc;
 
-	if (render_component)
-	{
-		vector_add_vector(batcher->vertices, render_component->mesh->values);
+	vector_add_vector(batcher->vertices, render_component.mesh.values);
 
-		glBindBuffer(GL_ARRAY_BUFFER, batcher->VBO);
-		glBufferSubData(GL_ARRAY_BUFFER, batcher->vertices->size, render_component->mesh->values->size * sizeof(float64_t), render_component->mesh->values);
-	}
+	glBindBuffer(GL_ARRAY_BUFFER, batcher->VBO);
+	glBufferSubData(GL_ARRAY_BUFFER, batcher->vertices->size, render_component.mesh.values->size * sizeof(float64_t), render_component.mesh.values);
 }
-__A_CORE_API__ void batcher_add_entities(batcher* batcher, vector(entity) entities)
+__A_CORE_API__ void batcher_add_entities(batcher* batcher, vector(renderable_entity) entities)
 {
 	iterator* it = iterator_new(entities);
 
 	while (iterator_has_next(it))
 	{
-		entity* entity = iterator_get_current_data(it);
+		generic_entity* entity = iterator_get_current_data(it);
 		batcher_add_entity(batcher, entity);
 	}
 
 	iterator_free(it);
 }
 
-__A_CORE_API__ void batcher_remove(batcher* batcher, entity* entity)
+__A_CORE_API__ void batcher_remove(batcher* batcher, renderable_entity* entity)
 {
-	render_component* render_component = entity_get_component(entity, "render_component");
+	render_component render_component = entity->rc;
 
-	if (!render_component)
-	{
-		return;
-	}
 
 	for (uint64_t i = 0; i < batcher->entity_count; i++)
 	{
 		if ((uint64_t)vector_get(batcher->entity_ids, i) == entity->entity_id)
 		{
-			vector_remove_slice(batcher->vertices, i, render_component->mesh->values->size);
+			vector_remove_slice(batcher->vertices, i, render_component.mesh.values->size);
 			vector_remove(batcher->entity_ids, i);
 			return;
 		}
@@ -104,4 +97,13 @@ __A_CORE_API__ void batcher_render(batcher* batcher)
 
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
+
+__A_CORE_API__ void batcher_free(batcher* batcher)
+{
+	vector_free_d(batcher->vertices);
+	vector_free_d(batcher->entity_ids);
+	vector_free(batcher->entities, entity_free);
+	free(batcher);
+}
+
 // ==============================================================================
