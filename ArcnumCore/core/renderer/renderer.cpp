@@ -4,7 +4,7 @@ namespace ac
 {
 	void renderer::on_update()
 	{
-
+		render();
 	}
 
 	void renderer::on_render()
@@ -15,6 +15,11 @@ namespace ac
 	void renderer::on_event()
 	{
 
+	}
+
+	void renderer::render()
+	{
+		on_render();
 	}
 
 	void renderer::calculate_tick_time()

@@ -24,6 +24,7 @@ namespace ac
 		void on_update();
 		void on_render();
 		void on_event();
+		void render();
 		void calculate_tick_time();
 		void calculate_delta_time();
 		void calculate_last_frame_time();
