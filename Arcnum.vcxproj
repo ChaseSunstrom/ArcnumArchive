@@ -22,7 +22,6 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
-    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -93,14 +92,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\core_include.h" />
-    <ClInclude Include="src\game\arcnum.h" />
-    <ClInclude Include="src\game\voxel\voxel.h" />
+    <ClInclude Include="src\core_include.hpp" />
+    <ClInclude Include="src\game\arcnum.hpp" />
+    <ClInclude Include="src\game\voxel\voxel.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\game\arcnum.c" />
-    <ClCompile Include="src\game\voxel\voxel.c" />
-    <ClCompile Include="src\main.c" />
+    <ClCompile Include="src\game\arcnum.cpp" />
+    <ClCompile Include="src\game\voxel\voxel.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ArcnumCoreLib.vcxproj">

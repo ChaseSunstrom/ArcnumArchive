@@ -9,21 +9,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\core_include.h" />
-    <ClInclude Include="src\game\arcnum.h">
+    <ClInclude Include="src\core_include.hpp" />
+    <ClInclude Include="src\game\arcnum.hpp">
       <Filter>game</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\voxel\voxel.h">
+    <ClInclude Include="src\game\voxel\voxel.hpp">
       <Filter>game\voxel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\game\arcnum.c">
+    <ClCompile Include="src\game\arcnum.cpp">
       <Filter>game</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\voxel\voxel.c">
+    <ClCompile Include="src\game\voxel\voxel.cpp">
       <Filter>game\voxel</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.c" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@ workspace "Arcnum"
 
 project "Arcnum"
    kind "ConsoleApp"
-   language "C"
+   language "C++"
    targetdir "bin/%{cfg.buildcfg}"
 
    dependson { "ArcnumCoreLib" }
@@ -25,7 +25,7 @@ project "Arcnum"
 
 project "ArcnumCoreLib"
    kind "StaticLib"
-   language "C"
+   language "C++"
    targetdir "bin/%{cfg.buildcfg}"
 
    files { "ArcnumCore/core/**.c", "ArcnumCore/core/**.h" }

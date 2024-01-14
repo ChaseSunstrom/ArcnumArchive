@@ -22,7 +22,6 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
-    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -85,66 +84,39 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ArcnumCore\core\core.h" />
-    <ClInclude Include="ArcnumCore\core\ecs\component\color.h" />
-    <ClInclude Include="ArcnumCore\core\ecs\component\component.h" />
-    <ClInclude Include="ArcnumCore\core\ecs\ecs.h" />
-    <ClInclude Include="ArcnumCore\core\ecs\entity\entity.h" />
-    <ClInclude Include="ArcnumCore\core\ecs\system\system.h" />
-    <ClInclude Include="ArcnumCore\core\events\event.h" />
-    <ClInclude Include="ArcnumCore\core\events\sub.h" />
-    <ClInclude Include="ArcnumCore\core\renderer\batcher.h" />
-    <ClInclude Include="ArcnumCore\core\renderer\layer.h" />
-    <ClInclude Include="ArcnumCore\core\renderer\layer_stack.h" />
-    <ClInclude Include="ArcnumCore\core\renderer\renderer.h" />
-    <ClInclude Include="ArcnumCore\core\tests\test.h" />
-    <ClInclude Include="ArcnumCore\core\util\data\collection.h" />
-    <ClInclude Include="ArcnumCore\core\util\data\file.h" />
-    <ClInclude Include="ArcnumCore\core\util\data\hashmap.h" />
-    <ClInclude Include="ArcnumCore\core\util\data\iterator.h" />
-    <ClInclude Include="ArcnumCore\core\util\data\map.h" />
-    <ClInclude Include="ArcnumCore\core\util\data\ptr.h" />
-    <ClInclude Include="ArcnumCore\core\util\data\set.h" />
-    <ClInclude Include="ArcnumCore\core\util\data\str.h" />
-    <ClInclude Include="ArcnumCore\core\util\data\types.h" />
-    <ClInclude Include="ArcnumCore\core\util\data\vector.h" />
-    <ClInclude Include="ArcnumCore\core\util\logging\log.h" />
-    <ClInclude Include="ArcnumCore\core\util\math\mat.h" />
-    <ClInclude Include="ArcnumCore\core\util\math\math.h" />
-    <ClInclude Include="ArcnumCore\core\util\math\radians.h" />
-    <ClInclude Include="ArcnumCore\core\util\math\vec.h" />
-    <ClInclude Include="ArcnumCore\core\util\memory\alloc.h" />
-    <ClInclude Include="ArcnumCore\core\util\memory\bump_allocator.h" />
-    <ClInclude Include="ArcnumCore\core\util\std_include.h" />
-    <ClInclude Include="ArcnumCore\core\window\window.h" />
+    <ClInclude Include="ArcnumCore\core\core.hpp" />
+    <ClInclude Include="ArcnumCore\core\ecs\component\color.hpp" />
+    <ClInclude Include="ArcnumCore\core\ecs\component\component.hpp" />
+    <ClInclude Include="ArcnumCore\core\ecs\ecs.hpp" />
+    <ClInclude Include="ArcnumCore\core\ecs\entity\entity.hpp" />
+    <ClInclude Include="ArcnumCore\core\ecs\entity\entity_type.hpp" />
+    <ClInclude Include="ArcnumCore\core\ecs\system\system.hpp" />
+    <ClInclude Include="ArcnumCore\core\events\event.hpp" />
+    <ClInclude Include="ArcnumCore\core\events\sub.hpp" />
+    <ClInclude Include="ArcnumCore\core\logging\log.hpp" />
+    <ClInclude Include="ArcnumCore\core\renderer\batcher.hpp" />
+    <ClInclude Include="ArcnumCore\core\renderer\layer.hpp" />
+    <ClInclude Include="ArcnumCore\core\renderer\layer_stack.hpp" />
+    <ClInclude Include="ArcnumCore\core\renderer\renderer.hpp" />
+    <ClInclude Include="ArcnumCore\core\std_include.hpp" />
+    <ClInclude Include="ArcnumCore\core\tests\test.hpp" />
+    <ClInclude Include="ArcnumCore\core\types.hpp" />
+    <ClInclude Include="ArcnumCore\core\window\window.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ArcnumCore\core\ecs\component\color.c" />
-    <ClCompile Include="ArcnumCore\core\ecs\component\component.c" />
-    <ClCompile Include="ArcnumCore\core\ecs\ecs.c" />
-    <ClCompile Include="ArcnumCore\core\ecs\entity\entity.c" />
-    <ClCompile Include="ArcnumCore\core\ecs\system\system.c" />
-    <ClCompile Include="ArcnumCore\core\events\event.c" />
-    <ClCompile Include="ArcnumCore\core\events\sub.c" />
-    <ClCompile Include="ArcnumCore\core\renderer\batcher.c" />
-    <ClCompile Include="ArcnumCore\core\renderer\layer.c" />
-    <ClCompile Include="ArcnumCore\core\renderer\layer_stack.c" />
-    <ClCompile Include="ArcnumCore\core\renderer\renderer.c" />
-    <ClCompile Include="ArcnumCore\core\tests\test.c" />
-    <ClCompile Include="ArcnumCore\core\util\data\file.c" />
-    <ClCompile Include="ArcnumCore\core\util\data\hashmap.c" />
-    <ClCompile Include="ArcnumCore\core\util\data\iterator.c" />
-    <ClCompile Include="ArcnumCore\core\util\data\map.c" />
-    <ClCompile Include="ArcnumCore\core\util\data\ptr.c" />
-    <ClCompile Include="ArcnumCore\core\util\data\set.c" />
-    <ClCompile Include="ArcnumCore\core\util\data\str.c" />
-    <ClCompile Include="ArcnumCore\core\util\data\vector.c" />
-    <ClCompile Include="ArcnumCore\core\util\logging\log.c" />
-    <ClCompile Include="ArcnumCore\core\util\math\mat.c" />
-    <ClCompile Include="ArcnumCore\core\util\math\math.c" />
-    <ClCompile Include="ArcnumCore\core\util\math\vec.c" />
-    <ClCompile Include="ArcnumCore\core\util\memory\bump_allocator.c" />
-    <ClCompile Include="ArcnumCore\core\window\window.c" />
+    <ClCompile Include="ArcnumCore\core\ecs\component\color.cpp" />
+    <ClCompile Include="ArcnumCore\core\ecs\component\component.cpp" />
+    <ClCompile Include="ArcnumCore\core\ecs\ecs.cpp" />
+    <ClCompile Include="ArcnumCore\core\ecs\entity\entity.cpp" />
+    <ClCompile Include="ArcnumCore\core\ecs\system\system.cpp" />
+    <ClCompile Include="ArcnumCore\core\events\event.cpp" />
+    <ClCompile Include="ArcnumCore\core\events\sub.cpp" />
+    <ClCompile Include="ArcnumCore\core\renderer\batcher.cpp" />
+    <ClCompile Include="ArcnumCore\core\renderer\layer.cpp" />
+    <ClCompile Include="ArcnumCore\core\renderer\layer_stack.cpp" />
+    <ClCompile Include="ArcnumCore\core\renderer\renderer.cpp" />
+    <ClCompile Include="ArcnumCore\core\tests\test.cpp" />
+    <ClCompile Include="ArcnumCore\core\window\window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
