@@ -9,7 +9,7 @@ namespace arc
 	{
 	public:
 		arcnum();
-		~arcnum();
+		~arcnum() = default;
 
 		void main();
 		void update();

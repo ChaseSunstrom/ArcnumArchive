@@ -13,6 +13,7 @@
 #include <typeindex>
 #include <typeinfo>
 #include <cassert>
+#include <utility>
 
 #include <glew.h>
 #include <glfw3.h>

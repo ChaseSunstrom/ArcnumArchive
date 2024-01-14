@@ -16,61 +16,97 @@
     <Filter Include="events">
       <UniqueIdentifier>{5A9D08FC-463F-33D2-2FFA-46261B3BBA22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="logging">
+      <UniqueIdentifier>{CC00C087-38E0-3E23-41F8-C9F9AD56A584}</UniqueIdentifier>
+    </Filter>
     <Filter Include="renderer">
       <UniqueIdentifier>{9C6AA017-8837-FB22-B150-E9CA9D7C30B1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="tests">
-      <UniqueIdentifier>{78756B10-E489-93C1-AD0B-372119DF8FF2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="util">
-      <UniqueIdentifier>{43339F7C-2F6A-A00D-D856-8610C46C1C0F}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="util\data">
-      <UniqueIdentifier>{ACB6EBCE-1821-A045-615F-51EBCD087E9A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="util\logging">
-      <UniqueIdentifier>{F93ECAD6-E5A1-597B-8E27-92317A6925FE}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="util\math">
-      <UniqueIdentifier>{1CA6F0CE-8810-A545-D14E-56EB3DF8829A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="util\memory">
-      <UniqueIdentifier>{6B55F74D-D70A-7043-60FF-691ACCB36647}</UniqueIdentifier>
+    <Filter Include="window">
+      <UniqueIdentifier>{5DFE1E25-49A0-49FB-325B-5D4F1E9CD04B}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArcnumCore\core\core.hpp" />
-    <ClInclude Include="ArcnumCore\core\ecs\component\color.hpp" />
-    <ClInclude Include="ArcnumCore\core\ecs\component\component.hpp" />
-    <ClInclude Include="ArcnumCore\core\ecs\entity\entity.hpp" />
-    <ClInclude Include="ArcnumCore\core\ecs\system\system.hpp" />
-    <ClInclude Include="ArcnumCore\core\events\event.hpp" />
-    <ClInclude Include="ArcnumCore\core\events\sub.hpp" />
-    <ClInclude Include="ArcnumCore\core\renderer\batcher.hpp" />
-    <ClInclude Include="ArcnumCore\core\renderer\layer.hpp" />
-    <ClInclude Include="ArcnumCore\core\renderer\layer_stack.hpp" />
-    <ClInclude Include="ArcnumCore\core\renderer\renderer.hpp" />
+    <ClInclude Include="ArcnumCore\core\ecs\component\color.hpp">
+      <Filter>ecs\component</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\ecs\component\component.hpp">
+      <Filter>ecs\component</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\ecs\ecs.hpp">
+      <Filter>ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\ecs\entity\entity.hpp">
+      <Filter>ecs\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\ecs\entity\entity_type.hpp">
+      <Filter>ecs\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\ecs\system\system.hpp">
+      <Filter>ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\events\event.hpp">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\events\sub.hpp">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\logging\log.hpp">
+      <Filter>logging</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\renderer\batcher.hpp">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\renderer\layer.hpp">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\renderer\layer_stack.hpp">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\renderer\renderer.hpp">
+      <Filter>renderer</Filter>
+    </ClInclude>
     <ClInclude Include="ArcnumCore\core\std_include.hpp" />
-    <ClInclude Include="ArcnumCore\core\tests\test.hpp" />
     <ClInclude Include="ArcnumCore\core\types.hpp" />
-    <ClInclude Include="ArcnumCore\core\ecs\ecs.hpp" />
-    <ClInclude Include="ArcnumCore\core\ecs\entity\entity_type.hpp" />
-    <ClInclude Include="ArcnumCore\core\window\window.hpp" />
-    <ClInclude Include="ArcnumCore\core\logging\log.hpp" />
+    <ClInclude Include="ArcnumCore\core\window\window.hpp">
+      <Filter>window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ArcnumCore\core\ecs\component\color.cpp" />
-    <ClCompile Include="ArcnumCore\core\ecs\component\component.cpp" />
-    <ClCompile Include="ArcnumCore\core\ecs\entity\entity.cpp" />
-    <ClCompile Include="ArcnumCore\core\ecs\system\system.cpp" />
-    <ClCompile Include="ArcnumCore\core\events\event.cpp" />
-    <ClCompile Include="ArcnumCore\core\events\sub.cpp" />
-    <ClCompile Include="ArcnumCore\core\renderer\batcher.cpp" />
-    <ClCompile Include="ArcnumCore\core\renderer\layer.cpp" />
-    <ClCompile Include="ArcnumCore\core\renderer\layer_stack.cpp" />
-    <ClCompile Include="ArcnumCore\core\renderer\renderer.cpp" />
-    <ClCompile Include="ArcnumCore\core\tests\test.cpp" />
-    <ClCompile Include="ArcnumCore\core\ecs\ecs.cpp" />
-    <ClCompile Include="ArcnumCore\core\window\window.cpp" />
+    <ClCompile Include="ArcnumCore\core\ecs\component\component.cpp">
+      <Filter>ecs\component</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\ecs\ecs.cpp">
+      <Filter>ecs</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\ecs\entity\entity.cpp">
+      <Filter>ecs\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\ecs\system\system.cpp">
+      <Filter>ecs\system</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\events\event.cpp">
+      <Filter>events</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\events\sub.cpp">
+      <Filter>events</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\renderer\batcher.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\renderer\layer.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\renderer\layer_stack.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\renderer\renderer.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\window\window.cpp">
+      <Filter>window</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\logging\log.cpp" />
   </ItemGroup>
 </Project>

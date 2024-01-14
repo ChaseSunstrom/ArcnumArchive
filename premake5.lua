@@ -9,7 +9,7 @@ project "Arcnum"
 
    dependson { "ArcnumCoreLib" }
 
-   files { "src/**.c", "src/**.h" }
+   files { "src/**.cpp", "src/**.hpp" }
 
    includedirs { "ArcnumCore", "ArcnumCore/include/**" } -- Adjusted include directory
    libdirs { "ArcnumCore/lib/**" }
@@ -28,8 +28,16 @@ project "ArcnumCoreLib"
    language "C++"
    targetdir "bin/%{cfg.buildcfg}"
 
-   files { "ArcnumCore/core/**.c", "ArcnumCore/core/**.h" }
+   files { "ArcnumCore/core/**.cpp", "ArcnumCore/core/**.hpp" }
 
    includedirs { "ArcnumCore/include/**" } -- Adjusted include directory
    libdirs { "ArcnumCore/lib/**" }
    links { "glfw3", "glew32", "opengl32.lib"}
+
+   filter "configurations:Debug"
+      defines { "DEBUG" }
+      symbols "On"
+
+   filter "configurations:Release"
+      defines { "NDEBUG" }
+      optimize "On"

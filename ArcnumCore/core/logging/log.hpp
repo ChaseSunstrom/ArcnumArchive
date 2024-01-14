@@ -3,28 +3,17 @@
 
 #include "../core.hpp"
 
+
 namespace ac
 {
 
-// Magic windows color codes
+		// Magic windows color codes
 #define TEXT_COLOR_GREEN  2
 #define TEXT_COLOR_RED    4
 #define TEXT_COLOR_CYAN   11
 #define TEXT_COLOR_YELLOW 14
 
-#ifdef _WIN32
-#include <windows.h>
-
-	__A_CORE_API__ void set_console_color(uint32_t color)
-	{
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-	}
-
-#else
-
-    void set_console_color(u32 color) { }
-
-#endif
+		__A_CORE_API__ void set_console_color(uint32_t color);
 
 #ifdef __A_CORE_TRACE__
 #define A_CORE_TRACE(...) ac::set_console_color(TEXT_COLOR_CYAN); std::cout << __VA_ARGS__;
@@ -45,7 +34,7 @@ namespace ac
 #endif // __A_CORE_WARN__
 
 #ifdef __A_CORE_ERROR__
-#define A_CORE_ERROR( ...) ac::set_console_color(TEXT_COLOR_RED); std::cout << __VA_ARGS__;
+#define A_CORE_ERROR(...) ac::set_console_color(TEXT_COLOR_RED); std::cout << __VA_ARGS__;
 #else
 #define A_CORE_ERROR(_format_, ...)
 #endif // __A_CORE_ERROR__
