@@ -11,7 +11,7 @@ namespace ac
 	{
 	public:
 		entity_manager(std::shared_ptr<component_manager> component_manager) : m_component_manager(component_manager) {}
-		~entity_manager();
+		~entity_manager() = default;
 		entity create_entity();
 		void destroy_entity(entity id);
 	private:

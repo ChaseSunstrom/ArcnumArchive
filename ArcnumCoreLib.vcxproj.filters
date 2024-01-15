@@ -89,9 +89,6 @@
     <ClCompile Include="ArcnumCore\core\events\event.cpp">
       <Filter>events</Filter>
     </ClCompile>
-    <ClCompile Include="ArcnumCore\core\events\sub.cpp">
-      <Filter>events</Filter>
-    </ClCompile>
     <ClCompile Include="ArcnumCore\core\renderer\batcher.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
@@ -108,5 +105,6 @@
       <Filter>window</Filter>
     </ClCompile>
     <ClCompile Include="ArcnumCore\core\logging\log.cpp" />
+    <ClCompile Include="ArcnumCore\core\events\sub.cpp" />
   </ItemGroup>
 </Project>

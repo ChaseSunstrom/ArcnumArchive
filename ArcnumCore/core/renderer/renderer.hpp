@@ -19,7 +19,8 @@ namespace ac
 	class renderer
 	{
 	public:
-		renderer(float64_t fixed_delta_time) : m_fixed_delta_time(fixed_delta_time) {}
+		renderer() = default;
+		renderer(float64_t fixed_delta_time, std::function<void(void)> render_fn) : m_fixed_delta_time(fixed_delta_time), m_render_fn(render_fn) {}
 		~renderer() = default;
 		void on_update();
 		void on_render();
@@ -30,10 +31,12 @@ namespace ac
 		void calculate_last_frame_time();
 	private:
 		float64_t m_delta_time = 0;
-		float64_t m_fixed_delta_time = 0;
+		float64_t m_fixed_delta_time = 0.005;
 		float64_t m_last_frame_time = 0;
 		float64_t m_tick_time = 0;
-		std::unique_ptr<batcher> m_batcher = std::make_unique<batcher>();
+		// User must provide a render function
+		std::function<void(void)> m_render_fn = nullptr;
+		std::unique_ptr<batcher> m_batcher    = std::make_unique<batcher>();
 	};
 }
 

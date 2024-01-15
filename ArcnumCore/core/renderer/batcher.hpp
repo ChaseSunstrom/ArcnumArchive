@@ -1,5 +1,5 @@
-#ifndef CORE_BATCHER_H
-#define CORE_BATCHER_H
+#ifndef CORE_BATCHER_HPP
+#define CORE_BATCHER_HPP
 
 namespace ac
 {

@@ -14,6 +14,8 @@
 #include <typeinfo>
 #include <cassert>
 #include <utility>
+#include <any>
+#include <algorithm>
 
 #include <glew.h>
 #include <glfw3.h>

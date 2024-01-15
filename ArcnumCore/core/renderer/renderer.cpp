@@ -9,7 +9,7 @@ namespace ac
 
 	void renderer::on_render()
 	{
-
+		
 	}
 
 	void renderer::on_event()
@@ -19,6 +19,7 @@ namespace ac
 
 	void renderer::render()
 	{
+		m_render_fn();
 		on_render();
 	}
 

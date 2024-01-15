@@ -1,5 +1,5 @@
-#ifndef CORE_LAYER_STACK_H
-#define CORE_LAYER_STACK_H
+#ifndef CORE_LAYER_STACK_HPP
+#define CORE_LAYER_STACK_HPP
 
 #include "layer.hpp"
 
@@ -15,12 +15,23 @@ namespace ac
 		layer_stack() = default;
 		~layer_stack() = default;
 
-		template<typename T, typename... Args>
-		void push_layer(Args&&... args);
+		template <typename T, typename... Args>
+		void push_layer(Args&&... args)
+		{
+			auto layer = std::make_unique<T>(std::forward<Args>(args)...);
+			layer->on_attach();
+			m_layers.emplace_back(std::move(layer));
+		}
 
-		template<typename T, typename... Args>
-		void push_overlay(Args&&... args);
-		
+
+		template <typename T, typename... Args>
+		void push_overlay(Args&&... args)
+		{
+			auto overlay = std::make_unique<T>(std::forward<Args>(args)...);
+			overlay->on_attach();
+			m_layers.emplace_back(std::move(overlay));
+		}
+
 		void pop_layer();
 		void pop_overlay();
 

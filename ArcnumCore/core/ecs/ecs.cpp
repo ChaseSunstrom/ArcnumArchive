@@ -23,7 +23,7 @@ namespace ac
 	template <typename T>
 	T& ecs::get_component(entity entity)
 	{
-		return m_component_manager->get_component<T>(entity);
+		return m_component_manager[entity];
 	}
 
 	template<typename T, typename... Args>

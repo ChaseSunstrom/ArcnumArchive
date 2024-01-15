@@ -1,5 +1,5 @@
-#ifndef CORE_LAYER_H
-#define CORE_LAYER_H
+#ifndef CORE_LAYER_HPP
+#define CORE_LAYER_HPP
 
 #include "../core.hpp"
 
@@ -7,12 +7,13 @@
 #include "../window/window.hpp"
 #include "renderer.hpp"
 
-// ==============================================================================
-// LAYER:        | Used for organizing related data in the layer stack and application
-// ==============================================================================
 
 namespace ac
 {
+	// ==============================================================================
+	// LAYER:        | Used for organizing related data in the layer stack and application
+	// ==============================================================================
+
 	__A_CORE_API__ class layer
 	{
 	public:
@@ -26,6 +27,8 @@ namespace ac
 	__A_CORE_API__ class renderer_layer : public layer
 	{
 	public:
+		renderer_layer() = default;
+		renderer_layer(float64_t fixed_delta_time, std::function<void(void)> render_fn) { m_renderer = std::make_unique<renderer>(fixed_delta_time, render_fn); }
 		void on_attach() override;
 		void on_detach() override;
 		void on_update() override;
@@ -38,7 +41,7 @@ namespace ac
 	{
 	public:
 		window_layer() = default;
-		window_layer(std::string title, uint64_t height, uint64_t width, bool vsync) { m_window = std::make_unique<window>(title, height, width, vsync); }
+		window_layer(std::string title, uint64_t height, uint64_t width, bool vsync) { m_window = std::make_unique<window>(title, vsync, height, width); }
 		void on_attach() override;
 		void on_detach() override;
 		void on_update() override;
@@ -50,6 +53,7 @@ namespace ac
 	__A_CORE_API__ class ecs_layer : public layer
 	{
 	public:
+		ecs_layer() = default;
 		void on_attach() override;
 		void on_detach() override;
 		void on_update() override;

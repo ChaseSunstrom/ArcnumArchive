@@ -32,7 +32,7 @@ namespace ac
 
 	__A_CORE_API__ struct event
 	{
-		event();
+		event() = default;
 		event(event_type type) : m_type(type) {}
 
 		bool m_handled = false;
@@ -46,7 +46,8 @@ namespace ac
 
 	__A_CORE_API__ struct window_resized_event : event
 	{
-		__A_CORE_API__ window_resized_event(int32_t width, int32_t height) : event(event_type::WINDOW_RESIZED), m_width(width), m_height(height) {}
+		window_resized_event() = default;
+		window_resized_event(int32_t width, int32_t height) : event(event_type::WINDOW_RESIZED), m_width(width), m_height(height) {}
 
 		int32_t m_width;
 		int32_t m_height;
@@ -54,6 +55,7 @@ namespace ac
 
 	__A_CORE_API__ struct window_moved_event : event
 	{
+		window_moved_event() = default;
 		window_moved_event(int32_t x_pos, int32_t y_pos) : event(event_type::WINDOW_MOVED), m_x_pos(x_pos), m_y_pos(y_pos) {}
 
 		int32_t m_x_pos;
@@ -62,6 +64,7 @@ namespace ac
 
 	__A_CORE_API__ struct key_pressed_event : event
 	{
+		key_pressed_event() = default;
 		key_pressed_event(int32_t key_code) : event(event_type::KEY_PRESSED), m_key_code(key_code) {}
 
 		int32_t m_key_code;
@@ -76,6 +79,7 @@ namespace ac
 
 	__A_CORE_API__ struct key_repeat_event : event
 	{
+		key_repeat_event() = default;
 		key_repeat_event(int32_t key_code) : event(event_type::KEY_REPEAT), m_key_code(key_code) {}
 
 		int32_t m_key_code;
@@ -83,6 +87,7 @@ namespace ac
 
 	__A_CORE_API__ struct mouse_pressed_event : event
 	{
+		mouse_pressed_event() = default;
 		mouse_pressed_event(int32_t button) : event(event_type::MOUSE_PRESSED), m_button(button) {}
 
 		int32_t m_button;
@@ -90,6 +95,7 @@ namespace ac
 
 	__A_CORE_API__ struct mouse_released_event : event
 	{
+		mouse_released_event() = default;
 		mouse_released_event(int32_t button) : event(event_type::MOUSE_RELEASED), m_button(button) {}
 
 		int32_t m_button;
@@ -97,6 +103,7 @@ namespace ac
 
 	__A_CORE_API__ struct mouse_moved_event : event
 	{
+		mouse_moved_event() = default;
 		mouse_moved_event(float64_t x_pos, float64_t y_pos) : event(event_type::MOUSE_MOVE), m_x_pos(x_pos), m_y_pos(y_pos) {}
 
 		float64_t m_x_pos;
@@ -105,6 +112,7 @@ namespace ac
 
 	__A_CORE_API__ struct mouse_scrolled_event : event
 	{
+		mouse_scrolled_event() = default;
 		mouse_scrolled_event(float64_t x_offset, float64_t y_offset) : event(event_type::MOUSE_SCROLLED), m_x_offset(x_offset), m_y_offset(y_offset) {}
 
 		float64_t m_x_offset;
@@ -116,12 +124,13 @@ namespace ac
 	__A_CORE_API__ class event_dispatcher
 	{
 	public:
+		event_dispatcher() = default;
 		event_dispatcher(std::shared_ptr<event> event) : m_event(event) {}
 
-		std::shared_ptr<event> m_event;
+		bool dispatch(std::function<bool(std::shared_ptr<event>)> fn);
 
-		template <typename T>
-		bool dispatch(std::function<bool(event)> fn);
+	private:
+		std::shared_ptr<event> m_event;
 	};
 }
 

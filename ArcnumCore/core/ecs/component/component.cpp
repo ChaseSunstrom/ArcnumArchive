@@ -14,14 +14,14 @@ namespace ac
 	template <typename T>
 	void component_array<T>::entity_destroyed(entity entity)
 	{
-		assert(entityId < componentArray.size() && "entity exceeds component array bounds.");
+		assert(entity < m_component_array.size() && "entity exceeds component array bounds.");
 		m_component_array[entity] = T();
 	}
 
 	template <typename T>
 	T& component_array<T>::operator[](entity entity)
 	{
-		assert(entityId < componentArray.size() && "entity exceeds component array bounds.");
+		assert(entity < m_component_array.size() && "entity exceeds component array bounds.");
 		return m_component_array[entity];
 	}
 

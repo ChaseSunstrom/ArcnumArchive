@@ -1,5 +1,5 @@
-#ifndef ARCNUM_APCH_H
-#define ARCNUM_APCH_H
+#ifndef ARCNUM_CORE_INCLUDE_HPP
+#define ARCNUM_CORE_INCLUDE_HPP
 
 #include <core/core.hpp>
 #include <core/ecs/ecs.hpp>

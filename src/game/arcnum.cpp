@@ -1,21 +1,18 @@
-
 #include "arcnum.hpp"
-#include "voxel/voxel.hpp"
-
-// ===============================================================================
-// GAME FUNCTIONS:
 
 namespace arc
 {
 	arcnum::arcnum()
 	{
-		push_layer<ac::renderer_layer>();
-		push_layer<ac::ecs_layer>();
-		push_layer<ac::window_layer>("Arcnum", 1280, 720, false);
+		this->push_layer<ac::renderer_layer>(0.005, render);
+		this->push_layer<ac::ecs_layer>();
+		this->push_layer<ac::window_layer>("Arcnum", 720, 1280, false);
 	}
 
 	void arcnum::main()
 	{
+		auto sub = ac::subscription<ac::event>::create(ac::subscription_topic::WINDOW_EVENT, on_event);
+		
 		while (true)
 		{
 			update();
@@ -33,53 +30,72 @@ namespace arc
 		m_layer_stack->pop_layer();
 	}
 
+	void arcnum::render()
+	{
+		// TODO: implement abstraction for GL calls
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
+
 	void arcnum::update()
 	{
 		for (const auto& layer : m_layer_stack->get_layers())
 			layer->on_update();
 	}
 
-	void arcnum::on_event(std::shared_ptr<ac::event> event)
+	bool arcnum::on_event(std::shared_ptr<ac::event> _event)
 	{
-		ac::event_dispatcher dispatcher(event);
+		ac::event_dispatcher dispatcher(_event);
 
-		for (const auto& layer : m_layer_stack->get_layers())
-			layer->on_event();
+		return dispatcher.dispatch(print_event);
 	}
 
-	bool arcnum::print_event(std::shared_ptr<ac::event> event)
+	bool print_event(std::shared_ptr<ac::event> event)
 	{
-		/*switch (event->m_type)
+		switch (event->m_type)
 		{
 		case ac::event_type::WINDOW_RESIZED:
-			A_CORE_TRACE("[EVENT]: WINDOW RESIZED {X: %d, Y: %d}\n", event->m_width, ((window_resized_event*)event)->height);
+			A_CORE_TRACE("[EVENT]: WINDOW RESIZED X: " 
+				<< std::static_pointer_cast<ac::window_resized_event>(event)->m_width 
+				<< "Y: " << std::static_pointer_cast<ac::window_resized_event>(event)->m_height);
 			return true;
+
 		case ac::event_type::MOUSE_MOVE:
-			A_CORE_TRACE("[EVENT]: MOUSE POSITION {X: %f, Y: %f}", ((mouse_move_event*)event)->x_pos, ((mouse_move_event*)event)->y_pos);
+			A_CORE_TRACE("[EVENT]: MOUSE POSITION X: "
+				<< std::static_pointer_cast<ac::mouse_moved_event>(event)->m_x_pos
+				<< " Y: " << std::static_pointer_cast<ac::mouse_moved_event>(event)->m_y_pos);
 			return true;
+
 		case ac::event_type::MOUSE_SCROLLED:
-			A_CORE_TRACE("[EVENT]: MOUSE SCROLLED \n");
+			A_CORE_TRACE("[EVENT]: MOUSE SCROLLED");
 			return true;
+
 		case ac::event_type::KEY_PRESSED:
-			A_CORE_TRACE("[EVENT]: KEY PRESSED {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
+			A_CORE_TRACE("[EVENT]: KEY PRESSED KEYCODE: "
+				<< std::static_pointer_cast<ac::key_pressed_event>(event)->m_key_code);
 			return true;
+
 		case ac::event_type::KEY_RELEASED:
-			A_CORE_TRACE("[EVENT]: KEY RELEASED {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
+			A_CORE_TRACE("[EVENT]: KEY RELEASED KEYCODE: "
+				<< std::static_pointer_cast<ac::key_pressed_event>(event)->m_key_code);
 			return true;
+
 		case ac::event_type::KEY_REPEAT:
-			A_CORE_TRACE("[EVENT]: KEY HELD {KEYCODE: %d}\n", ((key_pressed_event*)event)->key_code);
+			A_CORE_TRACE("[EVENT]: KEY HELD KEYCODE: "
+				<< std::static_pointer_cast<ac::key_pressed_event>(event)->m_key_code);
 			return true;
+
 		case ac::event_type::MOUSE_PRESSED:
-			A_CORE_TRACE("[EVENT]: MOUSE BUTTON PRESSED {KEYCODE: %d}\n", ((mouse_pressed_event*)event)->button);
+			A_CORE_TRACE("[EVENT]: MOUSE BUTTON PRESSED BUTTON: "
+				<< std::static_pointer_cast<ac::mouse_pressed_event>(event)->m_button);
 			return true;
+
 		case ac::event_type::MOUSE_RELEASED:
-			A_CORE_TRACE("[EVENT]: MOUSE BUTTON RELEASED {KEYCODE: %d}\n", ((mouse_pressed_event*)event)->button);
+			A_CORE_TRACE("[EVENT]: MOUSE BUTTON RELEASED BUTTON: "
+				<< std::static_pointer_cast<ac::mouse_pressed_event>(event)->m_button);
 			return true;
 		}
-		return false;*/
 
-		return true;
+		return false;
 	}
 }
-
-// ============================================================================

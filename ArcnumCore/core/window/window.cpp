@@ -12,17 +12,20 @@ namespace ac
 
 	__A_CORE_API__ void window::init_gl()
 	{
+		glfwSetErrorCallback(glfw_error_callback);
+
 		glfwInit();
 
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		m_window = glfwCreateWindow(m_window_data->m_width, m_window_data->m_height, m_window_data->m_title.c_str(), NULL, NULL);
+		GLFWwindow* window = glfwCreateWindow(m_window_data->m_width, m_window_data->m_height, m_window_data->m_title.c_str(), NULL, NULL);
+
+		m_window = window;
 
 		glfwMakeContextCurrent(m_window);
 		glfwSetFramebufferSizeCallback(m_window, framebuffer_size_callback);
-		glfwSetErrorCallback(glfw_error_callback);
 		glViewport(0, 0, m_window_data->m_width, m_window_data->m_height);
 		glfwSetWindowUserPointer(m_window, m_window_data.get());
 		glEnable(GL_DEPTH_TEST);
@@ -43,14 +46,12 @@ namespace ac
 	__A_CORE_API__ window::window()
 	{
 		m_window_data = std::make_unique<window_data>();
-		glfwSetWindowUserPointer(m_window, this);
 		init_gl();
 	}
 
 	__A_CORE_API__ window::window(std::string title, bool vsync, uint32_t height, uint32_t width)
 	{
 		m_window_data = std::make_unique<window_data>(title, vsync, height, width, window::event_callback);
-		glfwSetWindowUserPointer(m_window, this);
 		init_gl();
 	}
 
@@ -94,7 +95,7 @@ namespace ac
 
 	__A_CORE_API__ void window::event_callback(std::shared_ptr<event> _event)
 	{
-		publish(subscription_topic::WINDOW_EVENT, _event);
+		publish_to_topic(subscription_topic::WINDOW_EVENT, _event);
 	}
 
 	__A_CORE_API__ void window::resized_event_callback(GLFWwindow* window, int32_t width, int32_t height)
@@ -189,7 +190,7 @@ namespace ac
 
 	__A_CORE_API__ void glfw_error_callback(int32_t error, c_str description)
 	{
-		A_CORE_ERROR("GLFW ERROR: %s\n", description);
+		A_CORE_ERROR("GLFW ERROR: " << description);
 	}
 
 	__A_CORE_API__ static void framebuffer_size_callback(GLFWwindow* window, int32_t width, int32_t height)

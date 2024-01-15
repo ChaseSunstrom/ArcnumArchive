@@ -9,7 +9,9 @@ namespace ac
 	__A_CORE_API__ struct window_data
 	{
 		window_data();
-		window_data(std::string title, bool vsync, uint32_t height, uint32_t width, std::function<void(std::unique_ptr<event>)> event_callback);
+		window_data(std::string title, bool vsync, uint32_t height, uint32_t width, std::function<void(std::shared_ptr<event>)> event_callback) 
+			: m_title(title), m_vsync(vsync), m_height(height), m_width(width), m_event_callback(event_callback) {}
+		~window_data() = default;
 
 		std::string m_title = "Title";
 		bool        m_vsync = false;

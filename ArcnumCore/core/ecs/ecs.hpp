@@ -17,7 +17,7 @@ namespace ac
 		// Interface functions for all the managers:
 
 		ecs() = default;
-		~ecs();
+		~ecs() = default;
 
 		template <typename T>
 		void register_component();
