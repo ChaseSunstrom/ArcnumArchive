@@ -22,15 +22,16 @@
     <Filter Include="renderer">
       <UniqueIdentifier>{9C6AA017-8837-FB22-B150-E9CA9D7C30B1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{D3075810-3F1C-80C1-089E-232174717CF2}</UniqueIdentifier>
+    </Filter>
     <Filter Include="window">
       <UniqueIdentifier>{5DFE1E25-49A0-49FB-325B-5D4F1E9CD04B}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArcnumCore\core\core.hpp" />
-    <ClInclude Include="ArcnumCore\core\ecs\component\color.hpp">
-      <Filter>ecs\component</Filter>
-    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\core_start.hpp" />
     <ClInclude Include="ArcnumCore\core\ecs\component\component.hpp">
       <Filter>ecs\component</Filter>
     </ClInclude>
@@ -67,13 +68,20 @@
     <ClInclude Include="ArcnumCore\core\renderer\renderer.hpp">
       <Filter>renderer</Filter>
     </ClInclude>
+    <ClInclude Include="ArcnumCore\core\scene\scene.hpp">
+      <Filter>scene</Filter>
+    </ClInclude>
     <ClInclude Include="ArcnumCore\core\std_include.hpp" />
     <ClInclude Include="ArcnumCore\core\types.hpp" />
     <ClInclude Include="ArcnumCore\core\window\window.hpp">
       <Filter>window</Filter>
     </ClInclude>
+    <ClInclude Include="ArcnumCore\core\ecs\component\shader.hpp" />
+    <ClInclude Include="ArcnumCore\core\util\file.hpp" />
+    <ClInclude Include="ArcnumCore\core\util\wrap.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArcnumCore\core\core_start.cpp" />
     <ClCompile Include="ArcnumCore\core\ecs\component\component.cpp">
       <Filter>ecs\component</Filter>
     </ClCompile>
@@ -89,6 +97,12 @@
     <ClCompile Include="ArcnumCore\core\events\event.cpp">
       <Filter>events</Filter>
     </ClCompile>
+    <ClCompile Include="ArcnumCore\core\events\sub.cpp">
+      <Filter>events</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\logging\log.cpp">
+      <Filter>logging</Filter>
+    </ClCompile>
     <ClCompile Include="ArcnumCore\core\renderer\batcher.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
@@ -101,10 +115,14 @@
     <ClCompile Include="ArcnumCore\core\renderer\renderer.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
+    <ClCompile Include="ArcnumCore\core\scene\scene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
     <ClCompile Include="ArcnumCore\core\window\window.cpp">
       <Filter>window</Filter>
     </ClCompile>
-    <ClCompile Include="ArcnumCore\core\logging\log.cpp" />
-    <ClCompile Include="ArcnumCore\core\events\sub.cpp" />
+    <ClCompile Include="ArcnumCore\core\util\file.cpp" />
+    <ClCompile Include="ArcnumCore\core\ecs\component\shader.cpp" />
+    <ClCompile Include="ArcnumCore\core\util\wrap.cpp" />
   </ItemGroup>
 </Project>

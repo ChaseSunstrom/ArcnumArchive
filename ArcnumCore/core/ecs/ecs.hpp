@@ -9,7 +9,7 @@
 
 namespace ac
 {
-	class ecs
+	__A_CORE_API__ class ecs
 	{
 	public:
 
@@ -31,6 +31,12 @@ namespace ac
 		template <typename T>
 		T& get_component(entity entity);
 
+		template <typename T>
+		bool has_component(entity entity);
+
+		template <typename T>
+		component_array<T>& get_component_array();
+
 		template<typename T, typename... Args>
 		std::shared_ptr<T> register_update_system(Args&&... systems);
 
@@ -46,7 +52,7 @@ namespace ac
 
 		entity create_entity();
 		void destroy_entity(entity entity);
-
+		
 		// ==============================================================================
 	
 	private:

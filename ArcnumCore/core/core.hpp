@@ -4,6 +4,8 @@
 #define __A_CORE_API__
 #define __A_CORE_TEST__
 
+#define __A_CORE_DEBUG__
+
 #define __A_CORE_TRACE__
 #define __A_CORE_INFO__
 #define __A_CORE_WARN__

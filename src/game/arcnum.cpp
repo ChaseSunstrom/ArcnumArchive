@@ -4,7 +4,7 @@ namespace arc
 {
 	arcnum::arcnum()
 	{
-		this->push_layer<ac::renderer_layer>(0.005, render);
+		this->push_layer<ac::renderer_layer>(0.005);
 		this->push_layer<ac::ecs_layer>();
 		this->push_layer<ac::window_layer>("Arcnum", 720, 1280, false);
 	}

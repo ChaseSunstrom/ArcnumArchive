@@ -2,8 +2,6 @@
 
 namespace ac
 {
-	
-
 	__A_CORE_API__ void layer_stack::pop_layer()
 	{
 		m_layers.pop_back();
