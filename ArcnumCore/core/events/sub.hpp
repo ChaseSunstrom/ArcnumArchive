@@ -30,17 +30,15 @@ namespace ac
 		subscription_topic m_topic;
 	};
 
-	__A_CORE_API__ static std::vector<std::shared_ptr<base_subscription>> subscriptions = std::vector<std::shared_ptr<base_subscription>>();
+	__A_CORE_API__ inline std::vector<std::shared_ptr<base_subscription>> subscriptions = std::vector<std::shared_ptr<base_subscription>>();
 
 	template <typename T>
 	__A_CORE_API__ struct subscription : base_subscription
 	{
-		std::function<void(std::shared_ptr<T>)> callback;
-
 		static std::shared_ptr<subscription<T>> create(subscription_topic topic, std::function<void(std::shared_ptr<T>)> cb)
 		{
 			auto sub = std::shared_ptr<subscription<T>>(new subscription(topic, cb));
-			subscriptions.push_back(sub);
+			subscriptions.push_back(std::static_pointer_cast<base_subscription>(sub));
 			return sub;
 		}
 
@@ -69,6 +67,8 @@ namespace ac
 
 			return false; // Subscription not found
 		}
+
+		std::function<void(std::shared_ptr<T>)> callback;
 
 	private:
 		// Make the constructor private to force usage of the factory method
