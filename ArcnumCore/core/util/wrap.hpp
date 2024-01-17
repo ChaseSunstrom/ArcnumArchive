@@ -9,7 +9,7 @@
 
 namespace ac
 {
-	__A_CORE_API__ __A_CORE_INLINE__ void check_gl_error(const std::string& type);
+	__A_CORE_API__ void check_gl_error(const std::string& type);
 
 	__A_CORE_API__ void set_background_color(float64_t r, float64_t g, float64_t b, float64_t a);
 

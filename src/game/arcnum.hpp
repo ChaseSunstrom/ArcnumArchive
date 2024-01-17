@@ -14,7 +14,6 @@ namespace arc
 		void main();
 		void update();
 
-		static void render();
 		static bool on_event(std::shared_ptr<ac::event> event);
 
 		template <typename T, typename... Args>

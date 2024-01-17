@@ -18,10 +18,11 @@ project "Arcnum"
    filter "configurations:Debug"
       defines { "DEBUG" }
       symbols "On"
+      optimize "On"
 
    filter "configurations:Release"
       defines { "NDEBUG" }
-      optimize "On"
+      optimize "Full"
 
 project "ArcnumCoreLib"
    kind "StaticLib"
@@ -37,7 +38,8 @@ project "ArcnumCoreLib"
    filter "configurations:Debug"
       defines { "DEBUG" }
       symbols "On"
+      optimize "On"
 
    filter "configurations:Release"
       defines { "NDEBUG" }
-      optimize "On"
+      optimize "Full"

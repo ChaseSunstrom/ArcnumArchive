@@ -30,11 +30,6 @@ namespace arc
 		m_layer_stack->pop_layer();
 	}
 
-	void arcnum::render()
-	{
-
-	}
-
 	void arcnum::update()
 	{
 		for (const auto& layer : m_layer_stack->get_layers())

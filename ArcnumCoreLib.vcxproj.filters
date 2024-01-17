@@ -25,6 +25,9 @@
     <Filter Include="scene">
       <UniqueIdentifier>{D3075810-3F1C-80C1-089E-232174717CF2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{43339F7C-2F6A-A00D-D856-8610C46C1C0F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="window">
       <UniqueIdentifier>{5DFE1E25-49A0-49FB-325B-5D4F1E9CD04B}</UniqueIdentifier>
     </Filter>
@@ -33,6 +36,9 @@
     <ClInclude Include="ArcnumCore\core\core.hpp" />
     <ClInclude Include="ArcnumCore\core\core_start.hpp" />
     <ClInclude Include="ArcnumCore\core\ecs\component\component.hpp">
+      <Filter>ecs\component</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\ecs\component\shader.hpp">
       <Filter>ecs\component</Filter>
     </ClInclude>
     <ClInclude Include="ArcnumCore\core\ecs\ecs.hpp">
@@ -73,16 +79,22 @@
     </ClInclude>
     <ClInclude Include="ArcnumCore\core\std_include.hpp" />
     <ClInclude Include="ArcnumCore\core\types.hpp" />
+    <ClInclude Include="ArcnumCore\core\util\file.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcnumCore\core\util\wrap.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
     <ClInclude Include="ArcnumCore\core\window\window.hpp">
       <Filter>window</Filter>
     </ClInclude>
-    <ClInclude Include="ArcnumCore\core\ecs\component\shader.hpp" />
-    <ClInclude Include="ArcnumCore\core\util\file.hpp" />
-    <ClInclude Include="ArcnumCore\core\util\wrap.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArcnumCore\core\core_start.cpp" />
     <ClCompile Include="ArcnumCore\core\ecs\component\component.cpp">
+      <Filter>ecs\component</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\ecs\component\shader.cpp">
       <Filter>ecs\component</Filter>
     </ClCompile>
     <ClCompile Include="ArcnumCore\core\ecs\ecs.cpp">
@@ -118,11 +130,14 @@
     <ClCompile Include="ArcnumCore\core\scene\scene.cpp">
       <Filter>scene</Filter>
     </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\file.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcnumCore\core\util\wrap.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
     <ClCompile Include="ArcnumCore\core\window\window.cpp">
       <Filter>window</Filter>
     </ClCompile>
-    <ClCompile Include="ArcnumCore\core\util\file.cpp" />
-    <ClCompile Include="ArcnumCore\core\ecs\component\shader.cpp" />
-    <ClCompile Include="ArcnumCore\core\util\wrap.cpp" />
   </ItemGroup>
 </Project>

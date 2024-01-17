@@ -4,7 +4,7 @@
 
 int main()
 {
-	//A_CORE_TRACE("[COMPILED AT]: %s\n", __DATE__ " " __TIME__);
+	A_CORE_INFO("[COMPILED AT]: " << __DATE__ << " " << __TIME__ << "\n");
 
 #ifndef UNIT_TESTS
 	arc::arcnum arcnum;

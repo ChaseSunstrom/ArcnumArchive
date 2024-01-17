@@ -7,7 +7,7 @@ namespace ac
 
 #ifdef __A_CORE_DEBUG__
 
-	__A_CORE_API__ __A_CORE_INLINE__ void check_gl_error(const std::string& type)
+	__A_CORE_API__ void check_gl_error(const std::string& type)
 	{
 		GLenum err;
 		while ((err = glGetError()) != GL_NO_ERROR)

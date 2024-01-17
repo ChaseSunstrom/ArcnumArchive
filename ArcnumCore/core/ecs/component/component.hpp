@@ -89,7 +89,7 @@ namespace ac
 	__A_CORE_API__ struct mesh_component
 	{
 		mesh_component() = default;
-		mesh_component(const std::shared_ptr<mesh>& mesh) : m_mesh(std::move(mesh)) {}
+		mesh_component(std::shared_ptr<mesh>& mesh) : m_mesh(std::move(mesh)) {}
 		~mesh_component() = default;
 
 		std::shared_ptr<mesh> m_mesh = nullptr;

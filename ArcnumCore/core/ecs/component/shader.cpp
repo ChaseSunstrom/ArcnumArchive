@@ -5,6 +5,12 @@
 
 namespace ac
 {
+	shader_manager::~shader_manager()
+	{
+		for (auto& it : m_shaders)
+			delete_program(it.second);
+	}
+
 	GLuint shader_manager::load_shader(const std::string& vertex_path, const std::string& fragment_path)
 	{
 		std::string vertex_code = read_file(vertex_path);
