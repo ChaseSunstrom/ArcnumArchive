@@ -1,6 +1,8 @@
 #include "game/arcnum.hpp"
 
-//#define UNIT_TESTS
+#include <core/tests/test.hpp>
+
+#define UNIT_TESTS
 
 int main()
 {
@@ -10,6 +12,7 @@ int main()
 	arc::arcnum arcnum;
 	arcnum.main();
 #else
-	core_test_main();
+	ac::test::core_test_main();
 #endif
+
 }

@@ -88,6 +88,7 @@
     <ClInclude Include="ArcnumCore\core\window\window.hpp">
       <Filter>window</Filter>
     </ClInclude>
+    <ClInclude Include="ArcnumCore\core\tests\test.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArcnumCore\core\core_start.cpp" />
@@ -139,5 +140,6 @@
     <ClCompile Include="ArcnumCore\core\window\window.cpp">
       <Filter>window</Filter>
     </ClCompile>
+    <ClCompile Include="ArcnumCore\core\tests\test.cpp" />
   </ItemGroup>
 </Project>
