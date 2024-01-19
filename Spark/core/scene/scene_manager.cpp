@@ -1,10 +1,13 @@
-#include "scene.hpp"
+#include "scene_manager.hpp"
 
 namespace ac
 {
-	void scene_manager::add_scene(std::string name, std::unique_ptr<scene> scene)
+	void scene_manager::add_scene(const std::string& name, std::unique_ptr<scene> scene)
 	{
 		m_scenes[name] = std::move(scene);
+
+		if (m_scenes.size() == 1)
+			m_current_scene = m_scenes[name].get();
 	}
 
 	void scene_manager::remove_scene(const std::string& name)
@@ -29,16 +32,6 @@ namespace ac
 
 	void scene_manager::update_current_scene(float64_t time_step)
 	{
-
-	}
-
-	void scene_manager::render_current_scene()
-	{
-		component_array<render_component>& render_components = m_current_scene->get_ecs()->get_component_array<render_component>();
-
-		for (auto& render_component : render_components.get_array())
-		{
-
-		}
+		m_renderer->render(m_current_scene);
 	}
 }

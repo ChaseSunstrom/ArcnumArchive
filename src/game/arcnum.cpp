@@ -5,8 +5,11 @@ namespace arc
 	arcnum::arcnum()
 	{
 		this->push_layer<ac::renderer_layer>(0.005);
-		this->push_layer<ac::ecs_layer>();
 		this->push_layer<ac::window_layer>("Arcnum", 720, 1280, false);
+
+		m_scene_manager->add_scene("Main Scene", 
+			std::make_unique<ac::scene>(
+				std::make_shared<ac::scene_config>(glm::vec4(0.2f, 0.3f, 0.3f, 1.0f))));
 	}
 
 	void arcnum::main()
@@ -34,6 +37,8 @@ namespace arc
 	{
 		for (const auto& layer : m_layer_stack->get_layers())
 			layer->on_update();
+
+		m_scene_manager->update_current_scene(0.005);
 	}
 
 	bool arcnum::on_event(std::shared_ptr<ac::event> _event)

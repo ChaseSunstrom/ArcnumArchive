@@ -3,13 +3,28 @@
 
 #include "../core.hpp"
 
+#include "../logging/log.hpp"
+
 // ===============================================================================
 // MAIN FILE FOR WRAPPING OPENGL CALLS
 // ===============================================================================
 
 namespace ac
 {
-	__A_CORE_API__ void check_gl_error(const std::string& type);
+
+#ifdef __A_CORE_DEBUG__
+
+#define check_gl_error(_type) \
+	do { \
+		GLenum err; \
+			while ((err = glGetError()) != GL_NO_ERROR) \
+				A_CORE_ERROR("[" << _type << "]:  OpenGL error - " << glewGetErrorString(err)); \
+	} while (0)
+#else
+
+#define check_gl_error(_type)
+
+#endif
 
 	__A_CORE_API__ void set_background_color(float64_t r, float64_t g, float64_t b, float64_t a);
 
@@ -73,7 +88,7 @@ namespace ac
 		bind_vertex_buffer(vbo);
 		glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(T), data.data(), GL_DYNAMIC_DRAW);
 
-		check_gl_error("Vertex data in buffer");
+		check_gl_error("Buffer vertex data");
 	}
 }
 

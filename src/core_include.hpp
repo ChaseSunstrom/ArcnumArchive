@@ -13,5 +13,6 @@
 #include <core/window/window.hpp>
 #include <core/util/file.hpp>
 #include <core/util/wrap.hpp>
+#include <core/scene/scene_manager.hpp>
 
 #endif

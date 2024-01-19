@@ -1,6 +1,6 @@
-
 #include "../logging/log.hpp"
 #include "renderer.hpp"
+#include "../util/wrap.hpp"
 
 namespace ac
 {
@@ -9,13 +9,15 @@ namespace ac
 		calculate_delta_time();
 		calculate_last_frame_time();
 		calculate_total_time();
-
-		render();
 	}
 
-	void renderer::render()
+	void renderer::render(const scene* scene)
 	{
+		glm::vec4 color = scene->get_scene_config()->get_background_color();
 
+		set_background_color(color.r, color.g, color.b, color.a);
+		
+		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
 	void renderer::calculate_total_time()
@@ -35,6 +37,4 @@ namespace ac
 	{
 		m_last_frame_time = m_delta_time * 1000.0; // Convert seconds to milliseconds
 	}
-
-	
 }
