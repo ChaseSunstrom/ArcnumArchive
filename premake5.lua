@@ -7,13 +7,13 @@ project "Arcnum"
    language "C++"
    targetdir "bin/%{cfg.buildcfg}"
 
-   dependson { "ArcnumCoreLib" }
+   dependson { "Spark" }
 
    files { "src/**.cpp", "src/**.hpp" }
 
-   includedirs { "ArcnumCore", "ArcnumCore/include/**" } -- Adjusted include directory
-   libdirs { "ArcnumCore/lib/**" }
-   links { "ArcnumCoreLib", "glfw3", "glew32", "opengl32.lib" }
+   includedirs { "Spark", "Spark/include/**" } -- Adjusted include directory
+   libdirs { "Spark/lib/**" }
+   links { "Spark", "glfw3", "glew32", "opengl32.lib" }
 
    filter "configurations:Debug"
       defines { "DEBUG" }
@@ -24,15 +24,15 @@ project "Arcnum"
       defines { "NDEBUG" }
       optimize "Full"
 
-project "ArcnumCoreLib"
+project "Spark"
    kind "StaticLib"
    language "C++"
    targetdir "bin/%{cfg.buildcfg}"
 
-   files { "ArcnumCore/core/**.cpp", "ArcnumCore/core/**.hpp" }
+   files { "Spark/core/**.cpp", "Spark/core/**.hpp" }
 
-   includedirs { "ArcnumCore/include/**" } -- Adjusted include directory
-   libdirs { "ArcnumCore/lib/**" }
+   includedirs { "Spark/include/**" } -- Adjusted include directory
+   libdirs { "Spark/lib/**" }
    links { "glfw3", "glew32", "opengl32.lib"}
 
    filter "configurations:Debug"

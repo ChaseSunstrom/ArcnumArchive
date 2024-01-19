@@ -3,6 +3,7 @@
 
 #include "../core.hpp"
 
+#include "../scene/scene.hpp"
 #include "../events/event.hpp"
 #include "../ecs/ecs.hpp"
 #include "batcher.hpp"
@@ -22,7 +23,7 @@ namespace ac
 		renderer(float64_t fixed_delta_time, uint64_t tick_speed) : m_fixed_delta_time(fixed_delta_time), m_tick_speed(tick_speed) {}
 		~renderer() = default;
 		void on_update();
-		void render();
+		void render(const scene* scene);
 		void calculate_total_time();
 		void calculate_delta_time();
 		void calculate_last_frame_time();
@@ -33,7 +34,7 @@ namespace ac
 		float64_t m_total_time = 0;
 		uint64_t  m_tick_speed = 60;
 	
-		std::unique_ptr<batcher> m_batcher    = std::make_unique<batcher>();
+		std::unique_ptr<batcher> m_batcher = std::make_unique<batcher>();
 
 		// Time when renderer was constructed (used for time calculations)
 		std::chrono::time_point<std::chrono::high_resolution_clock> m_start_time = std::chrono::high_resolution_clock::now();

@@ -119,6 +119,7 @@
     <ClInclude Include="ArcnumCore\core\renderer\layer_stack.hpp" />
     <ClInclude Include="ArcnumCore\core\renderer\renderer.hpp" />
     <ClInclude Include="ArcnumCore\core\scene\scene.hpp" />
+    <ClInclude Include="ArcnumCore\core\scene\scene_manager.hpp" />
     <ClInclude Include="ArcnumCore\core\std_include.hpp" />
     <ClInclude Include="ArcnumCore\core\tests\test.hpp" />
     <ClInclude Include="ArcnumCore\core\types.hpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="ArcnumCore\core\renderer\renderer.cpp" />
     <ClCompile Include="ArcnumCore\core\scene\scene.cpp" />
     <ClCompile Include="ArcnumCore\core\tests\test.cpp" />
+    <ClCompile Include="ArcnumCore\core\scene\scene_manager.cpp" />
     <ClCompile Include="ArcnumCore\core\util\file.cpp" />
     <ClCompile Include="ArcnumCore\core\util\wrap.cpp" />
     <ClCompile Include="ArcnumCore\core\window\window.cpp" />

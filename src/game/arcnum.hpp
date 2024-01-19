@@ -22,6 +22,7 @@ namespace arc
 		void pop_layer();
 	private:
 		std::unique_ptr<ac::layer_stack> m_layer_stack = std::make_unique<ac::layer_stack>();
+		std::unique_ptr<ac::scene_manager> m_scene_manager = std::make_unique<ac::scene_manager>();
 	};
 
 	bool print_event(std::shared_ptr<ac::event> event);
