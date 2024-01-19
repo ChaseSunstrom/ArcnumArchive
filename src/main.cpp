@@ -2,7 +2,7 @@
 
 #include <core/tests/test.hpp>
 
-#define UNIT_TESTS
+//#define UNIT_TESTS
 
 int main()
 {

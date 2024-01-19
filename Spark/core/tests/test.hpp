@@ -39,13 +39,13 @@ namespace ac
 
 #define TEST(name) \
              bool name(); \
-            namespace { \
+             namespace { \
                 struct CONCAT(test_register_, name) { \
                     CONCAT(test_register_, name)() { \
                         test_register::add_test(#name, name); \
                     } \
                 } CONCAT(test_register_instance_, name); \
-            } \
+             } \
              bool name()
 
         bool core_test_main();

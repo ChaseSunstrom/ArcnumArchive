@@ -13,11 +13,20 @@ namespace ac
 
 	void renderer::render(const scene* scene)
 	{
+		clear_screen();
+
 		glm::vec4 color = scene->get_scene_config()->get_background_color();
 
 		set_background_color(color.r, color.g, color.b, color.a);
 		
-		glClear(GL_COLOR_BUFFER_BIT);
+		component_array<render_component>& render_components = 
+			scene->get_ecs()->get_component_array<render_component>();
+
+		for (const auto& rc : render_components.get_array())
+		{
+			// place holder for now
+			A_CORE_WARN("rc");
+		}
 	}
 
 	void renderer::calculate_total_time()

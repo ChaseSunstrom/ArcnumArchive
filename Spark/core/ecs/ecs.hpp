@@ -20,31 +20,58 @@ namespace ac
 		~ecs() = default;
 
 		template <typename T>
-		void register_component();
+		void register_component()
+		{
+			m_component_manager->register_component<T>();
+		}
 
 		template <typename... components>
-		void register_components();
+		void register_components()
+		{
+			m_component_manager->register_components<components...>();
+		}
 
 		template <typename T>
-		void add_component(entity entity, T component);
+		void add_component(entity entity, T component)
+		{
+			m_component_manager->add_component<T>(entity, component);
+		}
 
 		template <typename T>
-		T& get_component(entity entity);
+		T& get_component(entity entity)
+		{
+			return m_component_manager[entity];
+		}
 
 		template <typename T>
-		bool has_component(entity entity);
+		component_array<T>& get_component_array()
+		{
+			return m_component_manager->get_component_array<T>();
+		}
 
 		template <typename T>
-		component_array<T>& get_component_array();
+		bool has_component(entity entity)
+		{
+			return m_component_manager->has_component<T>(entity);
+		}
 
 		template<typename T, typename... Args>
-		std::shared_ptr<T> register_update_system(Args&&... systems);
+		std::shared_ptr<T> register_update_system(Args&&... systems)
+		{
+			return m_system_manager->register_update_system<T>(std::forward<Args>(systems)...);
+		}
 
 		template<typename T, typename... Args>
-		std::shared_ptr<T> register_start_system(Args&&... systems);
+		std::shared_ptr<T> register_start_system(Args&&... systems)
+		{
+			return m_system_manager->register_start_system<T>(std::forward<Args>(systems)...);
+		}
 
 		template<typename T, typename... Args>
-		std::shared_ptr<T> register_shutdown_system(Args&&... systems);
+		std::shared_ptr<T> register_shutdown_system(Args&&... systems)
+		{
+			return m_system_manager->register_shutdown_system<T>(std::forward<Args>(systems)...);
+		}
 
 		void start_systems();
 		void update_systems(float64_t delta_time);

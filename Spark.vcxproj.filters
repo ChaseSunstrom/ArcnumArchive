@@ -91,6 +91,7 @@
     <ClInclude Include="Spark\core\window\window.hpp">
       <Filter>window</Filter>
     </ClInclude>
+    <ClInclude Include="Spark\core\tests\test.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Spark\core\core_start.cpp" />
@@ -145,5 +146,6 @@
     <ClCompile Include="Spark\core\window\window.cpp">
       <Filter>window</Filter>
     </ClCompile>
+    <ClCompile Include="Spark\core\tests\test.cpp" />
   </ItemGroup>
 </Project>

@@ -16,6 +16,14 @@ namespace arc
 	{
 		auto sub = ac::subscription<ac::event>::create(ac::subscription_topic::WINDOW_EVENT, on_event);
 		
+		std::shared_ptr<ac::ecs> ecs = m_scene_manager->get_current_scene()->get_ecs();
+
+		ac::entity e = ecs->create_entity();
+
+		ecs->register_component<ac::render_component>();
+
+		ecs->add_component<ac::render_component>(e, ac::render_component());
+
 		while (true)
 		{
 			update();

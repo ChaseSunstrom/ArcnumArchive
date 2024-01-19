@@ -121,6 +121,7 @@
     <ClInclude Include="Spark\core\scene\scene.hpp" />
     <ClInclude Include="Spark\core\scene\scene_manager.hpp" />
     <ClInclude Include="Spark\core\std_include.hpp" />
+    <ClInclude Include="Spark\core\tests\test.hpp" />
     <ClInclude Include="Spark\core\types.hpp" />
     <ClInclude Include="Spark\core\util\file.hpp" />
     <ClInclude Include="Spark\core\util\wrap.hpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="Spark\core\renderer\renderer.cpp" />
     <ClCompile Include="Spark\core\scene\scene.cpp" />
     <ClCompile Include="Spark\core\scene\scene_manager.cpp" />
+    <ClCompile Include="Spark\core\tests\test.cpp" />
     <ClCompile Include="Spark\core\util\file.cpp" />
     <ClCompile Include="Spark\core\util\wrap.cpp" />
     <ClCompile Include="Spark\core\window\window.cpp" />

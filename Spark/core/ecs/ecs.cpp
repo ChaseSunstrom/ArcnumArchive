@@ -2,59 +2,7 @@
 
 namespace ac
 {
-	template <typename T>
-	__A_CORE_API__ void ecs::register_component()
-	{
-		m_component_manager->register_component<T>();
-	}
-
-	template <typename... components>
-	__A_CORE_API__ void ecs::register_components()
-	{
-		m_component_manager->register_components<components...>();
-	}
-
-	template <typename T>
-	__A_CORE_API__ void ecs::add_component(entity entity, T component)
-	{
-		m_component_manager->add_component<T>(entity, component);
-	}
-
-	template <typename T>
-	__A_CORE_API__ T& ecs::get_component(entity entity)
-	{
-		return m_component_manager[entity];
-	}
-
-	template <typename T>
-	__A_CORE_API__ component_array<T>& ecs::get_component_array()
-	{
-		return m_component_manager->get_component_array<T>();
-	}
-
-	template <typename T>
-	__A_CORE_API__ bool ecs::has_component(entity entity)
-	{
-		return m_component_manager->has_component<T>(entity);
-	}
-
-	template<typename T, typename... Args>
-	__A_CORE_API__ std::shared_ptr<T> ecs::register_update_system(Args&&... systems)
-	{
-		return m_system_manager->register_update_system<T>(std::forward<Args>(systems)...);
-	}
-
-	template<typename T, typename... Args>
-	__A_CORE_API__ std::shared_ptr<T> ecs::register_start_system(Args&&... systems)
-	{
-		return m_system_manager->register_start_system<T>(std::forward<Args>(systems)...);
-	}
-
-	template<typename T, typename... Args>
-	__A_CORE_API__ std::shared_ptr<T> ecs::register_shutdown_system(Args&&... systems)
-	{
-		return m_system_manager->register_shutdown_system<T>(std::forward<Args>(systems)...);
-	}
+	
 
 	__A_CORE_API__ void ecs::start_systems()
 	{
