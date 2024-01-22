@@ -4,14 +4,17 @@
 
 namespace ac
 {
-	void renderer::on_update()
+	float64_t renderer::s_fixed_delta_time = 0.0;
+	uint64_t renderer::s_tick_speed = 0;
+
+	__A_CORE_API__ void renderer::on_update()
 	{
 		calculate_delta_time();
 		calculate_last_frame_time();
 		calculate_total_time();
 	}
 
-	void renderer::render(const scene* scene)
+	__A_CORE_API__ void renderer::render(const scene* scene)
 	{
 		clear_screen();
 
@@ -19,22 +22,22 @@ namespace ac
 
 		set_background_color(color.r, color.g, color.b, color.a);
 		
-		component_array<render_component>& render_components = 
-			scene->get_ecs()->get_component_array<render_component>();
+		//component_array<render_component>& render_components = 
+		//	scene->get_ecs()->get_component_array<render_component>();
 
-		for (const auto& rc : render_components.get_array())
-		{
-			// place holder for now
-			A_CORE_WARN("rc");
-		}
+		//for (const auto& rc : render_components.get_array())
+		//{
+		//	// place holder for now
+		//	A_CORE_WARN("rc");
+		//}
 	}
 
-	void renderer::calculate_total_time()
+	__A_CORE_API__ void renderer::calculate_total_time()
 	{
 		m_total_time += m_delta_time;
 	}
 
-	void renderer::calculate_delta_time()
+	__A_CORE_API__ void renderer::calculate_delta_time()
 	{
 		auto now = std::chrono::high_resolution_clock::now();
 		std::chrono::duration<float64_t> elapsed = now - m_last_frame_time_point;
@@ -42,7 +45,7 @@ namespace ac
 		m_last_frame_time_point = now;
 	}
 
-	void renderer::calculate_last_frame_time()
+	__A_CORE_API__ void renderer::calculate_last_frame_time()
 	{
 		m_last_frame_time = m_delta_time * 1000.0; // Convert seconds to milliseconds
 	}

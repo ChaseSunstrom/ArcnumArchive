@@ -103,8 +103,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Spark\core\app\app.hpp" />
+    <ClInclude Include="Spark\core\app\app_interface.hpp" />
     <ClInclude Include="Spark\core\core.hpp" />
-    <ClInclude Include="Spark\core\core_start.hpp" />
+    <ClInclude Include="Spark\core\core_main.hpp" />
     <ClInclude Include="Spark\core\ecs\component\component.hpp" />
     <ClInclude Include="Spark\core\ecs\component\shader.hpp" />
     <ClInclude Include="Spark\core\ecs\ecs.hpp" />
@@ -128,7 +130,9 @@
     <ClInclude Include="Spark\core\window\window.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Spark\core\core_start.cpp" />
+    <ClCompile Include="Spark\core\app\app.cpp" />
+    <ClCompile Include="Spark\core\app\app_interface.cpp" />
+    <ClCompile Include="Spark\core\core_main.cpp" />
     <ClCompile Include="Spark\core\ecs\component\component.cpp" />
     <ClCompile Include="Spark\core\ecs\component\shader.cpp" />
     <ClCompile Include="Spark\core\ecs\ecs.cpp" />

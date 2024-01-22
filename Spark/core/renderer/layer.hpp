@@ -28,9 +28,6 @@ namespace ac
 	{
 	public:
 		renderer_layer() = default;
-		renderer_layer(float64_t fixed_delta_time) { m_renderer = std::make_shared<renderer>(fixed_delta_time); }
-		renderer_layer(uint64_t tick_speed) { m_renderer = std::make_shared<renderer>(tick_speed); }
-		renderer_layer(float64_t fixed_delta_time, uint64_t tick_speed) { m_renderer = std::make_shared<renderer>(fixed_delta_time, tick_speed); }
 		void on_attach() override;
 		void on_detach() override;
 		void on_update() override;

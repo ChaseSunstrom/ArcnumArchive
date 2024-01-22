@@ -6,7 +6,6 @@
 
 namespace ac
 {
-
 	static uint64_t subscription_count = 0;
 
 	__A_CORE_API__ enum class subscription_topic 
@@ -16,6 +15,7 @@ namespace ac
 		RENDERER_EVENT,
 		APP_EVENT,
 		INPUT_EVENT,
+		EVERY_EVENT,
 	};
 
 	__A_CORE_API__ struct base_subscription

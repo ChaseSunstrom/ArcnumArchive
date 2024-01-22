@@ -7,12 +7,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core_include.hpp" />
-    <ClInclude Include="src\game\arcnum.hpp">
-      <Filter>game</Filter>
-    </ClInclude>
+    <ClInclude Include="src\arcnum.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\game\arcnum.cpp">
+    <ClCompile Include="src\arcnum.cpp">
       <Filter>game</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp" />

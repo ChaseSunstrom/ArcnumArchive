@@ -14,5 +14,7 @@
 #include <core/util/file.hpp>
 #include <core/util/wrap.hpp>
 #include <core/scene/scene_manager.hpp>
+#include <core/app/app.hpp>
+#include <core/app/app_interface.hpp>
 
 #endif

@@ -101,11 +101,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\arcnum.hpp" />
     <ClInclude Include="src\core_include.hpp" />
-    <ClInclude Include="src\game\arcnum.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\game\arcnum.cpp" />
+    <ClCompile Include="src\arcnum.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>

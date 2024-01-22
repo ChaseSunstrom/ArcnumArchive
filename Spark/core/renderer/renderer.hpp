@@ -18,21 +18,19 @@ namespace ac
 	{
 	public:
 		renderer() = default;
-		renderer(float64_t fixed_delta_time) : m_fixed_delta_time(fixed_delta_time) {}
-		renderer(uint64_t tick_speed) : m_tick_speed(tick_speed) {}
-		renderer(float64_t fixed_delta_time, uint64_t tick_speed) : m_fixed_delta_time(fixed_delta_time), m_tick_speed(tick_speed) {}
 		~renderer() = default;
 		void on_update();
 		void render(const scene* scene);
 		void calculate_total_time();
 		void calculate_delta_time();
 		void calculate_last_frame_time();
+	public:
+		static float64_t s_fixed_delta_time;
+		static uint64_t s_tick_speed;
 	private:
 		float64_t m_delta_time = 0;
-		float64_t m_fixed_delta_time = 0.005;
 		float64_t m_last_frame_time = 0;
 		float64_t m_total_time = 0;
-		uint64_t  m_tick_speed = 60;
 	
 		std::unique_ptr<batcher> m_batcher = std::make_unique<batcher>();
 

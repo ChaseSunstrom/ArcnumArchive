@@ -34,7 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Spark\core\core.hpp" />
-    <ClInclude Include="Spark\core\core_start.hpp" />
+    <ClInclude Include="Spark\core\core_main.hpp" />
     <ClInclude Include="Spark\core\ecs\component\component.hpp">
       <Filter>ecs\component</Filter>
     </ClInclude>
@@ -92,9 +92,10 @@
       <Filter>window</Filter>
     </ClInclude>
     <ClInclude Include="Spark\core\tests\test.hpp" />
+    <ClInclude Include="Spark\core\app\app.hpp" />
+    <ClInclude Include="Spark\core\app\app_interface.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Spark\core\core_start.cpp" />
     <ClCompile Include="Spark\core\ecs\component\component.cpp">
       <Filter>ecs\component</Filter>
     </ClCompile>
@@ -147,5 +148,8 @@
       <Filter>window</Filter>
     </ClCompile>
     <ClCompile Include="Spark\core\tests\test.cpp" />
+    <ClCompile Include="Spark\core\app\app.cpp" />
+    <ClCompile Include="Spark\core\app\app_interface.cpp" />
+    <ClCompile Include="Spark\core\core_main.cpp" />
   </ItemGroup>
 </Project>
